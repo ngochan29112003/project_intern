@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NhanVienController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.main');
-});
-Route::get('/dashboard', [DashboardController::class, 'getView'])->name('get-view-dashboard');
+Route::get('/', [DashboardController::class, 'getView'])->name('index-dashboard');
+Route::get('/nhanvien', [NhanVienController::class, 'getView'])->name('index-nhanvien');
 
 
 
