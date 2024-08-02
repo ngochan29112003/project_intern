@@ -27,7 +27,7 @@
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- ======= JS thì dán vào đây ======= -->
     <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
@@ -40,6 +40,8 @@
     <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/datatables.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 </head>
 
 <body>
@@ -142,7 +144,7 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">N. Han</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{\Illuminate\Support\Facades\Request::session()->get(App\StaticString::ACCOUNT_ID)}}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -185,7 +187,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('logout')}}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
