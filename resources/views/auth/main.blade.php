@@ -17,6 +17,7 @@
         rel="stylesheet">
 
     <!-- ======= CSS thì dán vào đây ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
@@ -25,6 +26,7 @@
     <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
 
 
     <!-- ======= JS thì dán vào đây ======= -->
@@ -37,6 +39,7 @@
     <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
     <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.js')}}"></script>
 </head>
 
 <body>
