@@ -3,7 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\NhanVienController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +28,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/account', [AccountController::class, 'getView'])->name('index-account');
     Route::post('/account/add', [AccountController::class, 'add'])->name('add-account');
 
-    Route::get('/employees', [NhanVienController::class, 'getView'])->name('index-employees');
+    //EMPLOYEE
+    Route::get('/employees', [EmployeeController::class, 'getView'])->name('index-employees');
+    Route::post('/employees/add', [EmployeeController::class, 'add'])->name('add-employees');
 
 });
 

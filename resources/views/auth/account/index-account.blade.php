@@ -86,7 +86,6 @@
         </table>
     </div>
 @endsection
-
 @section('scripts')
     <script>
         var table = $('#accountTable').DataTable();
