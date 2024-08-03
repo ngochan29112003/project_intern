@@ -25,7 +25,7 @@ Route::post('/account/add', [AccountController::class, 'add'])->name('add-accoun
 
 
 Route::get('/dashboard', [DashboardController::class, 'getView'])->name('index-dashboard');
-Route::get('/nhanvien', [NhanVienController::class, 'getView'])->name('index-nhanvien');
+Route::get('/employees', [NhanVienController::class, 'getView'])->name('index-employees');
 
 
 

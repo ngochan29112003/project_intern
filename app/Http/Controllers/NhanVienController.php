@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class NhanVienController extends Controller
 {
     function getView(){
-        return view('auth.nhanvien.index-nhanvien');
+        return view('auth.employees.index-employees');
     }
 }

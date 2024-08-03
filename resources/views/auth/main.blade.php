@@ -48,7 +48,6 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
     <div class="d-flex align-items-center justify-content-between">
         <a href="" class="logo d-flex align-items-center">
             <img src="{{asset('assets/img/logo.png')}}" alt="">
@@ -220,14 +219,7 @@
             </a>
             <ul id="thong-ke-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>Add new account</span>
-                    </a>
-                </li>
-            </ul>
-            <ul id="thong-ke-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="">
+                    <a href="{{route('index-account')}}">
                         <i class="bi bi-circle"></i><span>Account list</span>
                     </a>
                 </li>
@@ -249,21 +241,21 @@
             </ul>
             <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="{{route('index-nhanvien')}}">
+                    <a href="{{route('index-employees')}}">
                         <i class="bi bi-circle"></i><span>Employee list</span>
                     </a>
                 </li>
             </ul>
             <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="{{route('index-nhanvien')}}">
+                    <a href="{{route('index-employees')}}">
                         <i class="bi bi-circle"></i><span>Rewards</span>
                     </a>
                 </li>
             </ul>
             <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="{{route('index-nhanvien')}}">
+                    <a href="{{route('index-employees')}}">
                         <i class="bi bi-circle"></i><span>Discipline</span>
                     </a>
                 </li>
@@ -306,26 +298,6 @@
                 </li>
             </ul>
         </li>
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" data-bs-target="#thietbi-nav" data-bs-toggle="collapse" href="#"--}}
-{{--               aria-expanded="false">--}}
-{{--                <i class="bi bi-currency-dollar"></i><span>Tài sản thiết bị</span><i--}}
-{{--                    class="bi bi-chevron-down ms-auto"></i>--}}
-{{--            </a>--}}
-{{--            <ul id="thietbi-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="">--}}
-{{--                        <i class="bi bi-circle"></i><span>Danh sách thiết bị</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="">--}}
-{{--                        <i class="bi bi-circle"></i><span>Lịch sử</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#du-an-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-bar-chart"></i><span>Project management</span><i class="bi bi-chevron-down ms-auto"></i>
