@@ -15,17 +15,23 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', [LoginController::class, 'getView'])->name('index-login');
 Route::get('/login', [LoginController::class, 'getView'])->name('index-login');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('post-login');
 Route::get('/logout', [LoginController::class, 'logOut'])->name('logout');
 
-//ACCOUNT
-Route::get('/account', [AccountController::class, 'getView'])->name('index-account');
-Route::post('/account/add', [AccountController::class, 'add'])->name('add-account');
+Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
+    //DASHBOARD
+    Route::get('/dashboard', [DashboardController::class, 'getView'])->name('index-dashboard');
 
+    //ACCOUNT
+    Route::get('/account', [AccountController::class, 'getView'])->name('index-account');
+    Route::post('/account/add', [AccountController::class, 'add'])->name('add-account');
 
-Route::get('/dashboard', [DashboardController::class, 'getView'])->name('index-dashboard');
-Route::get('/employees', [NhanVienController::class, 'getView'])->name('index-employees');
+    Route::get('/employees', [NhanVienController::class, 'getView'])->name('index-employees');
+
+});
+
 
 
 
