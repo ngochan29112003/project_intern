@@ -207,45 +207,99 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('index-dashboard')}}">
                 <i class="bi bi-house"></i>
-                <span>Thống kê dữ liệu</span>
+                <span>Dashboard</span>
             </a>
         </li>
+
+
         <li class="nav-item">
-            <a class="nav-link" data-bs-target="#qlnv-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person"></i><span>Quản lý nhân viên</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#thong-ke-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people"></i><span>Account management</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <ul id="thong-ke-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{route('index-nhanvien')}}">
-                        <i class="bi bi-circle"></i><span>Danh sách nhân viên</span>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Add new account</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="thong-ke-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Account list</span>
                     </a>
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#qlnv-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-person"></i><span>Employee management</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Add new employee</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-nhanvien')}}">
+                        <i class="bi bi-circle"></i><span>Employee list</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-nhanvien')}}">
+                        <i class="bi bi-circle"></i><span>Rewards</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-nhanvien')}}">
+                        <i class="bi bi-circle"></i><span>Discipline</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#pb-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-journal-text"></i><span>Phòng ban</span><i
+                <i class="bi bi-journal-text"></i><span>Department</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="pb-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="forms-elements.html">
-                        <i class="bi bi-circle"></i><span>Danh sách phòng ban </span>
+                        <i class="bi bi-circle"></i><span>Add new department</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="pb-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="forms-elements.html">
+                        <i class="bi bi-circle"></i><span>Department list</span>
                     </a>
                 </li>
             </ul>
         </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý khách hàng</span><i
+                <i class="bi bi-layout-text-window-reverse"></i><span>Customer management</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="tables-general.html">
-                        <i class="bi bi-circle"></i><span>Danh sách khách hàng</span>
+                        <i class="bi bi-circle"></i><span>Customer list</span>
                     </a>
                 </li>
             </ul>
@@ -272,12 +326,12 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#du-an-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>Quản lý dự án</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-bar-chart"></i><span>Project management</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="du-an-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>Danh sách dự án</span>
+                        <i class="bi bi-circle"></i><span>Project list</span>
                     </a>
                 </li>
             </ul>
@@ -286,42 +340,67 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#phanquyen-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-key"></i><span>Quản lý phân quyền</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-key"></i><span>Permission management</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="phanquyen-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
-                        <i class="bi bi-circle"></i><span>Danh sách quyền</span>
+                        <i class="bi bi-circle"></i><span>Permission list</span>
                     </a>
                 </li>
             </ul>
         </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#luong-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-bank"></i><span>Quản lý lương</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-bank"></i><span>Payroll management</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="luong-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
-                        <i class="bi bi-circle"></i><span>Danh sách lương</span>
+                        <i class="bi bi-circle"></i><span>Payroll list</span>
                     </a>
                 </li>
             </ul>
         </li>
+
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#du-an1-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#chuc-vu-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-book"></i><span>Dự án</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-clipboard2-fill"></i><span>Position</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="du-an1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="chuc-vu-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
-                        <i class="bi bi-circle"></i><span>Danh sách dự án</span>
+                        <i class="bi bi-circle"></i><span>List of positions</span>
                     </a>
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#cong-tac-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-book-fill"></i><span>Task management</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="cong-tac-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="forms-elements.html">
+                        <i class="bi bi-circle"></i><span>Create task</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="cong-tac-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="forms-elements.html">
+                        <i class="bi bi-circle"></i><span>Task list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 </aside>
 <main id="main" class="main">
