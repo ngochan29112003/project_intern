@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 03, 2024 lúc 09:29 AM
+-- Thời gian đã tạo: Th8 03, 2024 lúc 11:37 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -29,12 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
-  `username` text NOT NULL,
-  `pwd` text NOT NULL,
-  `phone_number` varchar(15) NOT NULL,
-  `img` varchar(255) NOT NULL,
-  `role` enum('Supper Admin','Admin','User') NOT NULL
+  `username` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `permission` int(11) DEFAULT NULL,
+  `id_employee` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
+(2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,14 +96,14 @@ CREATE TABLE `disciplines` (
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `gender` enum('Male','Female') NOT NULL,
-  `birth_date` date NOT NULL,
-  `birth_place` varchar(100) NOT NULL,
-  `id_card_number` varchar(20) NOT NULL,
-  `education_level` enum('University','College','High School','Secondary School') NOT NULL,
-  `education_description` varchar(255) NOT NULL,
-  `status` enum('Working','Retired') NOT NULL
+  `name` text DEFAULT NULL,
+  `img` text DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `birth_place` text DEFAULT NULL,
+  `id_card_number` int(20) DEFAULT NULL,
+  `education_level` text DEFAULT NULL,
+  `status` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -265,7 +271,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT cho bảng `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `clients`
