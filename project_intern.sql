@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 03, 2024 lúc 11:37 AM
+-- Thời gian đã tạo: Th8 03, 2024 lúc 07:33 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.1.25
+-- Phiên bản PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,6 +105,15 @@ CREATE TABLE `employees` (
   `education_level` text DEFAULT NULL,
   `status` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level`, `status`) VALUES
+(1, 'abc', 'aab', 0, '2024-08-14', 'RG', 1, '1', 'bac'),
+(2, 'áđâsd', 'sẤD', 1, '2024-08-21', '1ÁDÁ', 112, 'ÁDÁ', 'ÁDÁ'),
+(7, '123', NULL, 123, '2024-08-02', '123', 123, '123', '123');
 
 -- --------------------------------------------------------
 
@@ -295,7 +304,7 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT cho bảng `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `payroll`
