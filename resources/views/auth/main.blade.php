@@ -247,7 +247,7 @@ $token = 'position';
             </a>
             <ul id="pb-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-department')}}">
                         <i class="bi bi-building-fill"></i></i><span>Add new department</span>
                     </a>
                 </li>

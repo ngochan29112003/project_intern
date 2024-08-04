@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/employees', [EmployeeController::class, 'getView'])->name('index-employees');
     Route::post('/employees/add', [EmployeeController::class, 'add'])->name('add-employees');
 
+    //DEPARTMENT
+    Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');
+    Route::post('/departments/add', [DepartmentController::class, 'add'])->name('add-department');
 });
 
 
