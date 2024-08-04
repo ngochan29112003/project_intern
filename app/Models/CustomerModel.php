@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class CustomerModel extends Model
 {
     use HasFactory;
-    protected $table = 'customer';
+    protected $table = 'clients';
 
     public $timestamps = false;
    protected $primaryKey = 'client_id';

@@ -17,7 +17,6 @@ class CustomerController extends Controller
 
     function add(Request $request){
         $validated = $request->validate([
-            'add_customer_code'=>'required|string',
             'add_customer_name'=>'required|string',
             'add_phone_number'=>'required|string',
             'add_email'=>'required|string',

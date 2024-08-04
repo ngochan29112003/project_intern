@@ -41,7 +41,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="edit_customer_name" class="form-label">	Customer name</label>
-                            <input type="text" class="form-control" id="add_customer_code" name="add_customer_code"
+                            <input type="text" class="form-control" id="add_customer_name" name="add_customer_name"
                                    required>
                         </div>
                         <div class="mb-3">
