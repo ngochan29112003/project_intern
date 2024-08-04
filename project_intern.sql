@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 03, 2024 lúc 07:33 PM
+-- Thời gian đã tạo: Th8 04, 2024 lúc 10:32 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.12
 
@@ -65,14 +65,16 @@ CREATE TABLE `clients` (
 
 CREATE TABLE `departments` (
   `department_id` int(11) NOT NULL,
-  `department_code` varchar(50) NOT NULL,
-  `department_name` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `created_date` date NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `updated_date` date NOT NULL
+  `department_code` text DEFAULT NULL,
+  `department_name` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `departments`
+--
+
+INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
+(5, 'NE', 'Network Engineering');
 
 -- --------------------------------------------------------
 
@@ -292,7 +294,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT cho bảng `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `disciplines`
