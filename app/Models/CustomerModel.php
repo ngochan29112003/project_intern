@@ -15,7 +15,6 @@ class CustomerModel extends Model
     public $timestamps = false;
    protected $primaryKey = 'client_id';
     protected $fillable = [
-        'client_id',
         'client_name',
         'phone_number',
         'email',

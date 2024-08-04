@@ -15,7 +15,7 @@ class CustomerController extends Controller
         return view('auth.customer.index-customer', compact('customer_list'));
     }
 
-    function addView(Request $request){
+    function add(Request $request){
         $validated = $request->validate([
             'add_customer_code'=>'required|string',
             'add_customer_name'=>'required|string',
