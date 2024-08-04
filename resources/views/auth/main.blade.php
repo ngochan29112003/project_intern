@@ -205,10 +205,10 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#thong-ke-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-fill-gear"></i></i><span>Account management</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-fill-gear"></i></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="thong-ke-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <ul id="account-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{route('index-account')}}">
                         <i class="bi bi-circle"></i><span>Account list</span>
@@ -218,19 +218,26 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#qlnv-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-person-fill"></i><span>Employee management</span><i
+                <i class="bi bi-person-fill"></i><span>Employee</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-employees')}}">
                         <i class="bi bi-circle"></i><span>Employee list</span>
                     </a>
                 </li>
             </ul>
-            <ul id="qlnv-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Reward</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Discipline</span>
@@ -240,12 +247,12 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#pb-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-building-fill"></i><span>Department</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="pb-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-department')}}">
                         <i class="bi bi-circle"></i><span>Department list</span>
@@ -254,25 +261,25 @@ $token = 'position';
             </ul>
         </li>
 
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"--}}
+{{--               aria-expanded="false">--}}
+{{--                <i class="bi bi-person-check-fill"></i></i><span>Customer management</span><i--}}
+{{--                    class="bi bi-chevron-down ms-auto"></i>--}}
+{{--            </a>--}}
+{{--            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('index-customer')}}">--}}
+{{--                        <i class="bi bi-circle"></i><span>Customer list</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-person-check-fill"></i></i><span>Customer management</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#project-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-calendar2"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-customer')}}">
-                        <i class="bi bi-circle"></i><span>Customer list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#du-an-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>Project management</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="du-an-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="project-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="charts-chartjs.html">
                         <i class="bi bi-circle"></i><span>Project list</span>
@@ -282,11 +289,11 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#phanquyen-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-key"></i><span>Permission management</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="phanquyen-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Permission list</span>
@@ -296,11 +303,11 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#luong-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#payroll-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-bank"></i><span>Payroll management</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-bank"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="luong-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Payroll list</span>
@@ -310,11 +317,11 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#chuc-vu-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#position-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-clipboard2-fill"></i><span>Position</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="chuc-vu-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>List of positions</span>
@@ -324,19 +331,12 @@ $token = 'position';
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#cong-tac-nav" data-bs-toggle="collapse" href="#"
+            <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-book-fill"></i><span>Task management</span><i
+                <i class="bi bi-book-fill"></i><span>Task</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="cong-tac-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="forms-elements.html">
-                        <i class="bi bi-circle"></i><span>Create task</span>
-                    </a>
-                </li>
-            </ul>
-            <ul id="cong-tac-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+            <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="forms-elements.html">
                         <i class="bi bi-circle"></i><span>Task list</span>
