@@ -38,14 +38,16 @@ class EmployeeController extends Controller
         }
 
         EmployeeModel::create([
-            'employee_name'   => $validated['add_employee_name'],
-            'img'             => $imagePath,
-            'gender'          => $validated['add_gender'],
-            'birth_date'      => $validated['add_birthday'],
-            'birth_place'     => $validated['add_birthplace'],
-            'id_card_number'  => $validated['add_idcard'],
-            'education_level' => $validated['add_edu'],
-            'status'          => $validated['add_status'],
+            'employee_name'      => $validated['add_employee_name'],
+            'img'                => $imagePath,
+            'gender'             => $validated['add_gender'],
+            'birth_date'         => $validated['add_birthday'],
+            'birth_place'        => $validated['add_birthplace'],
+            'id_card_number'     => $validated['add_idcard'],
+            'education_level_id' => $validated['add_edu'],
+            'status'             => $validated['add_status'],
+            'type_employee_id' => null,
+            'job_position_id' => null,
         ]);
 
         return response()->json([

@@ -18,8 +18,10 @@ class EmployeeModel extends Model
         'birth_date',
         'birth_place',
         'id_card_number',
-        'education_level',
+        'education_level_id',
         'status',
+        'type_employee_id',
+        'job_position_id'
     ];
     public $timestamps = false;
 
