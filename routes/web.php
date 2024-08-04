@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //DEPARTMENT
     Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');
     Route::post('/departments/add', [DepartmentController::class, 'add'])->name('add-department');
+
+    //CUSTOMER
+    Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
+    Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
 });
 
 

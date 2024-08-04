@@ -262,7 +262,7 @@ $token = 'position';
             </a>
             <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.html">
+                    <a href="{{route('index-customer')}}">
                         <i class="bi bi-circle"></i><span>Customer list</span>
                     </a>
                 </li>
