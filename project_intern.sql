@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 04, 2024 lúc 06:17 PM
+-- Thời gian đã tạo: Th8 04, 2024 lúc 06:35 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.1.12
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,30 +32,15 @@ CREATE TABLE `accounts` (
   `username` text DEFAULT NULL,
   `password` text DEFAULT NULL,
   `permission` int(11) DEFAULT NULL,
-  `employee_id` int(11) DEFAULT NULL
+  `id_employee` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `employee_id`) VALUES
+INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
 (2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `clients`
---
-
-CREATE TABLE `clients` (
-  `client_id` int(11) NOT NULL,
-  `client_name` varchar(100) NOT NULL,
-  `phone_number` varchar(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `address` text NOT NULL,
-  `project` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -74,8 +59,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(5, 'NE', 'Network Engineering'),
-(6, 'IT', 'Information Technology');
+(5, 'NE', 'Network Engineering');
 
 -- --------------------------------------------------------
 
@@ -88,7 +72,18 @@ CREATE TABLE `disciplines` (
   `discipline_code` varchar(50) NOT NULL,
   `discipline_name` varchar(100) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `description` text NOT NULL
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `education_level`
+--
+
+CREATE TABLE `education_level` (
+  `education_level_id` int(11) NOT NULL,
+  `education_level_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -99,26 +94,39 @@ CREATE TABLE `disciplines` (
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `employee_name` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
   `img` text DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `birth_place` text DEFAULT NULL,
   `id_card_number` int(20) DEFAULT NULL,
-  `education_level` text DEFAULT NULL,
-  `status` text DEFAULT NULL
+  `education_level_id` int(11) NOT NULL,
+  `status` text DEFAULT NULL,
+  `type_employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level`, `status`) VALUES
-(45, '123', 'avt.png', 123, '2024-08-09', '123', 123, '123', '123'),
-(46, 'Bảo thắng iêu', '1722787769_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-20', '123', 123, '123', '123'),
-(48, '123123123', '1722788116_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-22', '123', 123, '123', '123'),
-(49, '123123123', '1722788121_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-22', '123', 123, '123', '123'),
-(50, '3123', '1722788200_jichangwook_1618310272_2550893909509181281_550618621.jpg', 1, '2024-08-22', '123', 123, '123', '123');
+INSERT INTO `employees` (`employee_id`, `name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`) VALUES
+(1, 'abc', 'aab', 0, '2024-08-14', 'RG', 1, 1, 'bac', 0),
+(2, 'áđâsd', 'sẤD', 1, '2024-08-21', '1ÁDÁ', 112, 0, 'ÁDÁ', 0),
+(7, '123', NULL, 123, '2024-08-02', '123', 123, 123, '123', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `job_positions`
+--
+
+CREATE TABLE `job_positions` (
+  `job_position_id` int(11) NOT NULL,
+  `job_position_code` varchar(50) NOT NULL,
+  `job_position_name` varchar(100) NOT NULL,
+  `job_position_salary` text NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -150,20 +158,6 @@ CREATE TABLE `permissions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `positions`
---
-
-CREATE TABLE `positions` (
-  `position_id` int(11) NOT NULL,
-  `position_code` varchar(50) NOT NULL,
-  `position_name` varchar(100) NOT NULL,
-  `position_salary` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `rewards`
 --
 
@@ -172,7 +166,7 @@ CREATE TABLE `rewards` (
   `reward_code` varchar(50) NOT NULL,
   `reward_name` varchar(100) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `description` text NOT NULL
+  `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -207,6 +201,18 @@ CREATE TABLE `tasks` (
   `purpose` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `type_employees`
+--
+
+CREATE TABLE `type_employees` (
+  `type_employee_id` int(11) NOT NULL,
+  `type_employee_code` text NOT NULL,
+  `type_employee_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -216,12 +222,6 @@ CREATE TABLE `tasks` (
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`client_id`);
 
 --
 -- Chỉ mục cho bảng `departments`
@@ -236,10 +236,22 @@ ALTER TABLE `disciplines`
   ADD PRIMARY KEY (`discipline_id`);
 
 --
+-- Chỉ mục cho bảng `education_level`
+--
+ALTER TABLE `education_level`
+  ADD PRIMARY KEY (`education_level_id`);
+
+--
 -- Chỉ mục cho bảng `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`);
+
+--
+-- Chỉ mục cho bảng `job_positions`
+--
+ALTER TABLE `job_positions`
+  ADD PRIMARY KEY (`job_position_id`);
 
 --
 -- Chỉ mục cho bảng `payroll`
@@ -252,12 +264,6 @@ ALTER TABLE `payroll`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permission_id`);
-
---
--- Chỉ mục cho bảng `positions`
---
-ALTER TABLE `positions`
-  ADD PRIMARY KEY (`position_id`);
 
 --
 -- Chỉ mục cho bảng `rewards`
@@ -278,6 +284,12 @@ ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id_task`);
 
 --
+-- Chỉ mục cho bảng `type_employees`
+--
+ALTER TABLE `type_employees`
+  ADD PRIMARY KEY (`type_employee_id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -288,16 +300,10 @@ ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `clients`
---
-ALTER TABLE `clients`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `disciplines`
@@ -306,10 +312,22 @@ ALTER TABLE `disciplines`
   MODIFY `discipline_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `education_level`
+--
+ALTER TABLE `education_level`
+  MODIFY `education_level_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT cho bảng `job_positions`
+--
+ALTER TABLE `job_positions`
+  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `payroll`
@@ -322,12 +340,6 @@ ALTER TABLE `payroll`
 --
 ALTER TABLE `permissions`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `positions`
---
-ALTER TABLE `positions`
-  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `rewards`
@@ -346,6 +358,12 @@ ALTER TABLE `salary_calculation`
 --
 ALTER TABLE `tasks`
   MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `type_employees`
+--
+ALTER TABLE `type_employees`
+  MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
