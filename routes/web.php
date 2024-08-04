@@ -32,6 +32,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //EMPLOYEE
     Route::get('/employees', [EmployeeController::class, 'getView'])->name('index-employees');
     Route::post('/employees/add', [EmployeeController::class, 'add'])->name('add-employees');
+    Route::delete('/employees/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
 
     //DEPARTMENT
     Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');

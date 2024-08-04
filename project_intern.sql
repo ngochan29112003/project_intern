@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 04, 2024 lúc 10:32 AM
+-- Thời gian đã tạo: Th8 04, 2024 lúc 06:17 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.12
 
@@ -32,14 +32,14 @@ CREATE TABLE `accounts` (
   `username` text DEFAULT NULL,
   `password` text DEFAULT NULL,
   `permission` int(11) DEFAULT NULL,
-  `id_employee` int(11) DEFAULT NULL
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
+INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `employee_id`) VALUES
 (2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL);
 
 -- --------------------------------------------------------
@@ -74,7 +74,8 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(5, 'NE', 'Network Engineering');
+(5, 'NE', 'Network Engineering'),
+(6, 'IT', 'Information Technology');
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,7 @@ CREATE TABLE `disciplines` (
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `name` text DEFAULT NULL,
+  `employee_name` text DEFAULT NULL,
   `img` text DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
@@ -112,10 +113,12 @@ CREATE TABLE `employees` (
 -- Đang đổ dữ liệu cho bảng `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level`, `status`) VALUES
-(1, 'abc', 'aab', 0, '2024-08-14', 'RG', 1, '1', 'bac'),
-(2, 'áđâsd', 'sẤD', 1, '2024-08-21', '1ÁDÁ', 112, 'ÁDÁ', 'ÁDÁ'),
-(7, '123', NULL, 123, '2024-08-02', '123', 123, '123', '123');
+INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level`, `status`) VALUES
+(45, '123', 'avt.png', 123, '2024-08-09', '123', 123, '123', '123'),
+(46, 'Bảo thắng iêu', '1722787769_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-20', '123', 123, '123', '123'),
+(48, '123123123', '1722788116_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-22', '123', 123, '123', '123'),
+(49, '123123123', '1722788121_jichangwook_1618310272_2550893909509181281_550618621.jpg', 123, '2024-08-22', '123', 123, '123', '123'),
+(50, '3123', '1722788200_jichangwook_1618310272_2550893909509181281_550618621.jpg', 1, '2024-08-22', '123', 123, '123', '123');
 
 -- --------------------------------------------------------
 
@@ -294,7 +297,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT cho bảng `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `disciplines`
@@ -306,7 +309,7 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT cho bảng `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT cho bảng `payroll`

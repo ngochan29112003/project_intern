@@ -12,7 +12,7 @@ class EmployeeModel extends Model
     protected $table = 'employees';
     protected $primaryKey = 'employee_id';
     protected $fillable = [
-        'name',
+        'employee_name',
         'img',
         'gender',
         'birth_date',
@@ -22,6 +22,7 @@ class EmployeeModel extends Model
         'status',
     ];
     public $timestamps = false;
+
     function getEmployee()
     {
         return DB::table('employees')->get();

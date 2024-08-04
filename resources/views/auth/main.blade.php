@@ -36,7 +36,7 @@ $token = 'position';
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     @yield('head')
 </head>
@@ -247,7 +247,7 @@ $token = 'position';
             </a>
             <ul id="pb-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="forms-elements.html">
+                    <a href="{{route('index-department')}}">
                         <i class="bi bi-circle"></i><span>Department list</span>
                     </a>
                 </li>
@@ -366,6 +366,7 @@ $token = 'position';
 <script src="{{asset('assets/js/datatables.js')}}"></script>
 <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </html>
 @yield('scripts')
