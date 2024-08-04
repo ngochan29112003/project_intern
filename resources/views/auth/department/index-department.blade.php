@@ -40,32 +40,14 @@
                     <form id="addDepartmentForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="department_code" class="form-label">Department code</label>
-                            <input type="text" class="form-control" id="add_department_code" name="add_department_code">
+                            <label for="edit_department_name" class="form-label">Department Code</label>
+                            <input type="text" class="form-control" id="add_department_code" name="add_department_code"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Department name</label>
-                            <input type="text" class="form-control" id="add_department_name" name="add_department_name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="add_description" name="add_description">
-                        </div>
-                        <div class="mb-3">
-                            <label for="created_by" class="form-label">Created by</label>
-                            <input type="text" class="form-control" id="add_created_by" name="add_created_by">
-                        </div>
-                        <div class="mb-3">
-                            <label for="created_date" class="form-label">Created date</label>
-                            <input type="date" class="form-control" id="add_created_date" name="add_created_date">
-                        </div>
-                        <div class="mb-3">
-                            <label for="updated_by" class="form-label">Updated by</label>
-                            <input type="text" class="form-control" id="add_updated_by" name="add_updated_by">
-                        </div>
-                        <div class="mb-3">
-                            <label for="updated_date" class="form-label">Updated date</label>
-                            <input type="date" class="form-control" id="add_updated_date" name="add_updated_date">
+                            <label for="edit_department_name" class="form-label">Department Name</label>
+                            <input type="text" class="form-control" id="add_department_name" name="add_department_name"
+                                   required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -81,27 +63,31 @@
             <thead class="table-light">
             <tr>
                 <th>No</th>
-                <th>Department code</th>
-                <th>Department name</th>
-                <th>Description</th>
-                <th>Crated by</th>
-                <th>Created date</th>
-                <th>Updated by</th>
-                <th>Updated date</th>
+                <th>Department Code</th>
+                <th>Department Name</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody id="departmentTableBody">
             @php($stt = 0)
-            @foreach($department_list as $item)
+            @foreach ($department_list as $item)
                 <tr>
-                    <td>{{$stt++}}</td>
-                    <td>{{$item->department_code}}</td>
-                    <td>{{$item->department_name}}</td>
-                    <td>{{$item->description}}</td>
-                    <td>{{$item->created_by}}</td>
-                    <td>{{$item->created_date}}</td>
-                    <td>{{$item->updated_by}}</td>
-                    <td>{{$item->updated_date}}</td>
+                    <td>{{ $stt++ }}</td>
+                    <td>{{ $item->department_code }}</td>
+                    <td>{{ $item->department_name }}</td>
+                    <td>
+                        <button
+                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                            data-id="{{ $item->department_id }}">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        |
+                        <button
+                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                            data-id="{{ $item->department_id }}">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
