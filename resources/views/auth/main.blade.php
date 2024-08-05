@@ -143,7 +143,8 @@ $token = 'position';
 
                 @endphp
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle">
+                    <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle object-fit-cover"
+                    >
                     <span
                         class="d-none d-md-block dropdown-toggle ps-2">{{$data->employee_name}}</span>
                 </a><!-- End Profile Iamge Icon -->
