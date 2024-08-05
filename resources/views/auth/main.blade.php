@@ -261,20 +261,21 @@ $token = 'position';
             </ul>
         </li>
 
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"--}}
-{{--               aria-expanded="false">--}}
-{{--                <i class="bi bi-person-check-fill"></i></i><span>Customer management</span><i--}}
-{{--                    class="bi bi-chevron-down ms-auto"></i>--}}
-{{--            </a>--}}
-{{--            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('index-customer')}}">--}}
-{{--                        <i class="bi bi-circle"></i><span>Customer list</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-person-check-fill"></i></i><span>Customer management</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('index-customer')}}">
+                        <i class="bi bi-circle"></i><span>Customer list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#project-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-calendar2"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -295,7 +296,7 @@ $token = 'position';
             </a>
             <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-permission')}}">
                         <i class="bi bi-circle"></i><span>Permission list</span>
                     </a>
                 </li>

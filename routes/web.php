@@ -7,6 +7,7 @@ use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //DISCIPLINE
     Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
     Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
+
+    //PERMISSION
+    Route::get('/permission', [PermissionController::class, 'getView'])->name('index-permission');
+    Route::post('/permission/add', [PermissionController::class, 'add'])->name('add-permission');
 });
 
 
