@@ -25,8 +25,25 @@ class EmployeeModel extends Model
     ];
     public $timestamps = false;
 
-    function getEmployee()
+    function getEdulevel()
     {
-        return DB::table('employees')->get();
+        return DB::table('education_level')->get();
     }
+    function getTypeEmployees()
+    {
+        return DB::table('type_employees')->get();
+    }
+    function getPosition()
+    {
+        return DB::table('job_positions')->get();
+    }
+    function getEmployeeInfo()
+    {
+        return DB::table('employees')
+            ->join('education_level','employees.education_level_id','=','education_level.education_level_id')
+            ->join('type_employees','employees.type_employee_id','=','type_employees.type_employee_id')
+            ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
+            ->get();
+    }
+
 }

@@ -10,9 +10,13 @@ class EmployeeController extends Controller
     public function getView()
     {
         $model = new EmployeeModel();
-        $employee_list = $model->getEmployee();
+        $employee_list = $model->getEmployeeInfo();
+        $position_list = $model->getPosition();
+        $edu_level_list = $model->getEdulevel();
+        $type_employee_list = $model->getTypeEmployees();
 //        dd($employee_list);
-        return view('auth.employees.index-employee', compact('employee_list'));
+        return view('auth.employees.index-employee',
+            compact('employee_list', 'position_list', 'edu_level_list', 'type_employee_list'));
     }
 
     public function add(Request $request)
@@ -25,14 +29,15 @@ class EmployeeController extends Controller
             'add_birthday'      => 'required|date',
             'add_birthplace'    => 'required|string',
             'add_idcard'        => 'required|string',
-            'add_edu'           => 'required|string',
-            'add_status'        => 'required|string',
+            'add_edu'           => 'int',
+            'add_status'        => 'int',
+            'add_employee_type' => 'int',
+            'add_job_position'  => 'int',
         ]);
 
         $imagePath = 'avt.png';
         if ($request->hasFile('add_img')) {
             $file = $request->file('add_img');
-//            $imagePath = asset('assets/employee_img') . time() . '_' . $file->getClientOriginalName();
             $imagePath = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/employee_img/'), $imagePath);
         }
@@ -46,8 +51,8 @@ class EmployeeController extends Controller
             'id_card_number'     => $validated['add_idcard'],
             'education_level_id' => $validated['add_edu'],
             'status'             => $validated['add_status'],
-            'type_employee_id' => null,
-            'job_position_id' => null,
+            'type_employee_id'   => $validated['add_employee_type'],
+            'job_position_id'    => $validated['add_job_position'],
         ]);
 
         return response()->json([

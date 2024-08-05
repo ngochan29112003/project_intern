@@ -39,21 +39,35 @@
                     <form id="addAccountForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Username</label>
+                            <label for="employee_name" class="form-label">Employee name</label>
+                            <select class="form-select" aria-label="Default" name="id_employee" id="id_employee">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password</label>
                             <input type="text" class="form-control" id="password" name="password">
                         </div>
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Re-password</label>
+                            <label for="repassword" class="form-label">Re-password</label>
                             <input type="text" class="form-control" id="repassword" name="repassword">
                         </div>
+
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Permission</label>
-                            <input type="text" class="form-control" id="permission" name="permission">
+                            <label for="permission" class="form-label">Permission</label>
+                            <select class="form-select" aria-label="Default" name="permission" id="permission">
+                                @foreach ($permis_list as $item)
+                                    <option value="{{ $item->permission_id }}">{{ $item->permission_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
@@ -90,25 +104,25 @@
     <script>
         var table = $('#accountTable').DataTable();
 
-        $('#addAccountForm').submit(function(e) {
+        $('#addAccountForm').submit(function (e) {
             e.preventDefault();
 
             $.ajax({
                 url: '{{ route('add-account') }}',
                 method: 'POST',
                 data: $(this).serialize(),
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         $('#addAccountModal').modal('hide');
                         toastr.success(response.message, "Successful");
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload()
                         }, 500);
                     } else {
                         toastr.error(response.message, "Error");
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     toastr.error(response.message, "Error");
                     if (xhr.status === 400) {
                         var response = xhr.responseJSON;

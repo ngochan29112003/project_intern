@@ -29,7 +29,7 @@
     </div>
 
     <div class="modal fade" id="addEmployeeModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add employee</h4>
@@ -39,15 +39,19 @@
                         @csrf
                         <div class="mb-3">
                             <label for="add_employee_name" class="form-label">Employee name</label>
-                            <input type="text" class="form-control" id="add_employee_name" name="add_employee_name" required>
+                            <input type="text" class="form-control" id="add_employee_name" name="add_employee_name"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="add_img" class="form-label">ImaIge</label>
+                            <label for="add_img" class="form-label">Image</label>
                             <input type="file" class="form-control" id="add_img" name="add_img">
                         </div>
                         <div class="mb-3">
                             <label for="add_gender" class="form-label">Gender</label>
-                            <input type="text" class="form-control" id="add_gender" name="add_gender" required>
+                            <select class="form-select" aria-label="Default" name="add_gender" id="add_gender">
+                                <option value="0">Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="add_birthday" class="form-label">Birth day</label>
@@ -63,11 +67,34 @@
                         </div>
                         <div class="mb-3">
                             <label for="add_edu" class="form-label">Education level</label>
-                            <input type="text" class="form-control" id="add_edu" name="add_edu" required>
+                            <select class="form-select" aria-label="Default" name="add_edu" id="add_edu">
+                                @foreach ($edu_level_list as $item)
+                                    <option value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="add_status" class="form-label">Status</label>
-                            <input type="text" class="form-control" id="add_status" name="add_status" required>
+                            <select class="form-select" aria-label="Default" name="add_status" id="add_status">
+                                <option value="0">Đã nghỉ việc</option>
+                                <option value="1">Đang đi làm</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="add_employee_type" class="form-label">Employee type</label>
+                            <select class="form-select" aria-label="Default" name="add_employee_type" id="add_employee_type">
+                                @foreach ($type_employee_list as $item)
+                                    <option value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="add_job_position" class="form-label">Job position</label>
+                            <select class="form-select" aria-label="Default" name="add_job_position" id="add_job_position">
+                                @foreach ($position_list as $item)
+                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -90,6 +117,8 @@
                 <th>Id card number</th>
                 <th>Education</th>
                 <th>Status</th>
+                <th>Employee type</th>
+                <th>Job position</th>
                 <th class="text-center">Action</th>
             </tr>
             </thead>
@@ -99,13 +128,21 @@
                 <tr>
                     <td>{{$stt++}}</td>
                     <td>{{$item->employee_name}}</td>
-                    <td class="text-center"><img class="rounded-pill object-fit-cover" src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75" height="75"></td>
+                    <td class="text-center"><img class="rounded-pill object-fit-cover"
+                                                 src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75"
+                                                 height="75"></td>
                     <td>{{$item->gender}}</td>
                     <td>{{$item->birth_date}}</td>
                     <td>{{$item->birth_place}}</td>
                     <td>{{$item->id_card_number}}</td>
-                    <td>{{$item->education_level_id}}</td>
-                    <td>{{$item->status}}</td>
+                    <td>{{$item->education_level_name}}</td></td>
+                    @if($item->status == 1)
+                        <td>Đang đi làm</td>
+                    @else
+                        <td>Đã nghỉ việc</td>
+                    @endif
+                    <td>{{$item->type_employee_name}}</td>
+                    <td>{{$item->job_position_name}}</td>
                     <td class="text-center">
                         <button
                             class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -131,7 +168,7 @@
         var table = $('#employeeTable').DataTable();
 
         // JS Add employee
-        $('#addEmployeeForm').submit(function(e) {
+        $('#addEmployeeForm').submit(function (e) {
             e.preventDefault();
 
             var formData = new FormData(this);
@@ -142,18 +179,18 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         $('#addEmployeeModal').modal('hide');
                         toastr.success(response.message, "Successful");
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload();
                         }, 500);
                     } else {
                         toastr.error(response.message, "Error");
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     if (xhr.status === 400) {
                         var response = xhr.responseJSON;
                         toastr.error(response.message, "Error");
@@ -165,7 +202,7 @@
         });
 
         //JS Delete employee
-        $('#employeeTableBody').on('click', '.delete-btn', function() {
+        $('#employeeTableBody').on('click', '.delete-btn', function () {
             var employeeId = $(this).data('id');
             var row = $(this).closest('tr');
 
@@ -185,7 +222,7 @@
                         data: {
                             _token: '{{ csrf_token() }}'
                         },
-                        success: function(response) {
+                        success: function (response) {
                             if (response.success) {
                                 table.row(row).remove().draw();
                                 toastr.success(response.message, "Deleted successfully");
@@ -194,7 +231,7 @@
                                     "Operation Failed");
                             }
                         },
-                        error: function(xhr) {
+                        error: function (xhr) {
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
