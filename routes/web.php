@@ -8,6 +8,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\RewardController;
+use App\Http\Controllers\PositionCotroller;
+use App\Http\Controllers\SalaryCalculationController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +50,22 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
     Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
 
+    //REWARD
+    Route::get('/reward', [RewardController::class, 'getView'])->name('index-reward');
+    Route::post('/reward/add', [RewardController::class, 'add'])->name('add-reward');
+
+    //PAYROLL
+    Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
+    Route::post('/payroll/add', [PayrollController::class, 'add'])->name('add-payroll');
+
+    //POSITION
+    Route::get('/position', [PositionCotroller::class, 'getView'])->name('index-position');
+    Route::post('/position/add', [PositionCotroller::class, 'add'])->name('add-position');
+
+    //SALARY CALCULATION
+    Route::get('/salary-calculation', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
+    Route::post('/salary-calculation/add', [PositionCotroller::class, 'add'])->name('add-salary-calculation');
+
     //DISCIPLINE
     Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
     Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
@@ -52,6 +73,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //PERMISSION
     Route::get('/permission', [PermissionController::class, 'getView'])->name('index-permission');
     Route::post('/permission/add', [PermissionController::class, 'add'])->name('add-permission');
+
 });
 
 
