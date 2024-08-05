@@ -7,6 +7,8 @@ use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PositionCotroller;
+use App\Http\Controllers\SalaryCalculationController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +46,18 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
     Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
 
+    //POSITION
+    Route::get('/position', [PositionCotroller::class, 'getView'])->name('index-position');
+    Route::post('/position/add', [PositionCotroller::class, 'add'])->name('add-position');
+
+    //SALARY CALCULATION
+    Route::get('/payroll', [SalaryCalculationController::class, 'getView'])->name('index-salarycalculation');
+    Route::post('/payroll/add', [PositionCotroller::class, 'add'])->name('add-salarycalculation');
+
     //DISCIPLINE
     Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
     Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
+
 });
 
 
