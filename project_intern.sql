@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 05, 2024 at 12:06 AM
+-- Generation Time: Aug 05, 2024 at 11:40 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.12
 
@@ -40,7 +40,9 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL);
+(2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL),
+(4, 'admindt', '$2y$10$brX2LMOYrEUiyX4oZlsiBukDELfme0qz/vQYUFaLlmp07F0JTMCxC', 1, 4),
+(5, 'tuananh', '$2y$10$8De1cXl/xP/57bwzEyyNreRB.KHGNejngp1OZDpV15ARu/.xm4ary', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -86,6 +88,19 @@ CREATE TABLE `education_level` (
   `education_level_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `education_level`
+--
+
+INSERT INTO `education_level` (`education_level_id`, `education_level_name`) VALUES
+(1, 'Cao đẳng'),
+(2, 'Đại học'),
+(3, 'Cao đẳng'),
+(4, 'Đại học'),
+(5, 'Tiểu học'),
+(6, 'Trung học'),
+(7, 'THPT');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +121,15 @@ CREATE TABLE `employees` (
   `job_position_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
+(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, '1', 2, 3),
+(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, '1', 3, 3),
+(5, 'Tuan anh', '1722875202_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2024-08-15', '1', 1, 2, '1', 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +143,15 @@ CREATE TABLE `job_positions` (
   `job_position_salary` text NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `job_positions`
+--
+
+INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `job_position_salary`, `description`) VALUES
+(1, 'SA', 'System Analyst', '100000', 'không có'),
+(2, 'SD', 'Software Developer', '100000', 'không có'),
+(3, 'NIS', 'Network Infrastructure Specialist', '100999', 'không có');
 
 -- --------------------------------------------------------
 
@@ -146,6 +179,15 @@ CREATE TABLE `permissions` (
   `permission_id` int(11) NOT NULL,
   `permission_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`permission_id`, `permission_name`) VALUES
+(1, 'Super Admin'),
+(2, 'Admin'),
+(3, 'User');
 
 -- --------------------------------------------------------
 
@@ -201,9 +243,17 @@ CREATE TABLE `tasks` (
 
 CREATE TABLE `type_employees` (
   `type_employee_id` int(11) NOT NULL,
-  `type_employee_code` text NOT NULL,
   `type_employee_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `type_employees`
+--
+
+INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
+(1, 'Part time'),
+(2, 'Intern'),
+(3, 'official staff');
 
 --
 -- Indexes for dumped tables
@@ -289,7 +339,7 @@ ALTER TABLE `type_employees`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -307,19 +357,19 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT for table `education_level`
 --
 ALTER TABLE `education_level`
-  MODIFY `education_level_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `education_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `job_positions`
 --
 ALTER TABLE `job_positions`
-  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payroll`
@@ -331,7 +381,7 @@ ALTER TABLE `payroll`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rewards`
@@ -355,7 +405,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `type_employees`
 --
 ALTER TABLE `type_employees`
-  MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
