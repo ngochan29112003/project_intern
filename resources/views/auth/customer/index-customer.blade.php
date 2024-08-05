@@ -76,41 +76,41 @@
         <h3 class="text-left mb-4">Customer</h3>
         <table id="CustomerTable" class="table table-hover table-borderless">
             <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Customer Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Project</th>
-            </tr>
+{{--            <tr>--}}
+{{--                <th>No</th>--}}
+{{--                <th>Customer Name</th>--}}
+{{--                <th>Phone Number</th>--}}
+{{--                <th>Email</th>--}}
+{{--                <th>Address</th>--}}
+{{--                <th>Project</th>--}}
+{{--            </tr>--}}
             </thead>
             <tbody id="customerTableBody">
             @php($stt = 0)
-            @foreach ($customer_list as $item)
-                <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->client_name}}</td>
-                    <td>{{ $item->phone_number}}</td>
-                    <td>{{ $item->email}}</td>
-                    <td>{{ $item->address}}</td>
-                    <td>{{ $item->project}}</td>
+{{--            @foreach ($customer_list as $item)--}}
+{{--                <tr>--}}
+{{--                    <td>{{ $stt++ }}</td>--}}
+{{--                    <td>{{ $item->client_name}}</td>--}}
+{{--                    <td>{{ $item->phone_number}}</td>--}}
+{{--                    <td>{{ $item->email}}</td>--}}
+{{--                    <td>{{ $item->address}}</td>--}}
+{{--                    <td>{{ $item->project}}</td>--}}
 
-                    <td>
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->client_id}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->client_id}}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
+{{--                    <td>--}}
+{{--                        <button--}}
+{{--                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"--}}
+{{--                            data-id="{{ $item->client_id}}">--}}
+{{--                            <i class="bi bi-pencil-square"></i>--}}
+{{--                        </button>--}}
+{{--                        |--}}
+{{--                        <button--}}
+{{--                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"--}}
+{{--                            data-id="{{ $item->client_id}}">--}}
+{{--                            <i class="bi bi-trash3"></i>--}}
+{{--                        </button>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
             </tbody>
 
         </table>

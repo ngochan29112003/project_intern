@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
@@ -52,6 +53,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //SALARY CALCULATION
     Route::get('/payroll', [SalaryCalculationController::class, 'getView'])->name('index-salarycalculation');
     Route::post('/payroll/add', [PositionCotroller::class, 'add'])->name('add-salarycalculation');
+
+    //DISCIPLINE
+    Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
+    Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
 
 });
 
