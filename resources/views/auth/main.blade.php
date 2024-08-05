@@ -317,7 +317,7 @@ $token = 'position';
             </ul>
             <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{route('index-salarycalculation')}}">
+                    <a href="{{route('index-salary-calculation')}}">
                         <i class="bi bi-circle"></i><span>Salary calculation</span>
                     </a>
                 </li>

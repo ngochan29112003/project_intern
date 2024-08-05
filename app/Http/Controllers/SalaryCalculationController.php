@@ -12,7 +12,7 @@ class SalaryCalculationController extends Controller
         $model = new SalaryCalculationModel();
         $salarycalculation_list = $model->getSalaryCalculation();
 //        dd($salarycalculation_list);
-        return view('auth.payroll.index-salarycalculation', compact('salarycalculation_list'));
+        return view('auth.payroll.index-salary-calculation', compact('salarycalculation_list'));
     }
 
     public function add(Request $request)

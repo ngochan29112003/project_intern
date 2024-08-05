@@ -104,7 +104,7 @@
                     <td>{{$item->birth_date}}</td>
                     <td>{{$item->birth_place}}</td>
                     <td>{{$item->id_card_number}}</td>
-                    <td>{{$item->education_level}}</td>
+                    <td>{{$item->education_level_id}}</td>
                     <td>{{$item->status}}</td>
                     <td class="text-center">
                         <button

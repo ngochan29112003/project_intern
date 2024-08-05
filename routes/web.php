@@ -55,14 +55,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //PAYROLL
     Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
     Route::post('/payroll/add', [PayrollController::class, 'add'])->name('add-payroll');
-  
+
     //POSITION
     Route::get('/position', [PositionCotroller::class, 'getView'])->name('index-position');
     Route::post('/position/add', [PositionCotroller::class, 'add'])->name('add-position');
 
     //SALARY CALCULATION
-    Route::get('/payroll', [SalaryCalculationController::class, 'getView'])->name('index-salarycalculation');
-    Route::post('/payroll/add', [PositionCotroller::class, 'add'])->name('add-salarycalculation');
+    Route::get('/salary-calculation', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
+    Route::post('/salary-calculation/add', [PositionCotroller::class, 'add'])->name('add-salary-calculation');
 
     //DISCIPLINE
     Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');

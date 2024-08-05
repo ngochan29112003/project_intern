@@ -127,7 +127,7 @@
             var formData = new FormData(this);
 
             $.ajax({
-                url: '{{ route('add-salarycalculation') }}',
+                url: '{{ route('add-salary-calculation') }}',
                 method: 'POST',
                 data: formData,
                 contentType: false,
