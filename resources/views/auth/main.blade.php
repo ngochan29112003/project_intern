@@ -232,7 +232,7 @@ $token = 'position';
             </ul>
             <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-reward')}}">
                         <i class="bi bi-circle"></i><span>Reward</span>
                     </a>
                 </li>
