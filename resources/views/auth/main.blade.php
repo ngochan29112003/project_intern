@@ -239,7 +239,7 @@ $token = 'position';
             </ul>
             <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-discipline')}}">
                         <i class="bi bi-circle"></i><span>Discipline</span>
                     </a>
                 </li>
@@ -314,6 +314,13 @@ $token = 'position';
                     </a>
                 </li>
             </ul>
+            <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('index-salarycalculation')}}">
+                        <i class="bi bi-circle"></i><span>Salary calculation</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="nav-item">
@@ -323,7 +330,7 @@ $token = 'position';
             </a>
             <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-position')}}">
                         <i class="bi bi-circle"></i><span>List of positions</span>
                     </a>
                 </li>
