@@ -7,6 +7,7 @@ use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
@@ -51,6 +52,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/reward', [RewardController::class, 'getView'])->name('index-reward');
     Route::post('/reward/add', [RewardController::class, 'add'])->name('add-reward');
 
+    //PAYROLL
+    Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
+    Route::post('/payroll/add', [PayrollController::class, 'add'])->name('add-payroll');
+  
     //POSITION
     Route::get('/position', [PositionCotroller::class, 'getView'])->name('index-position');
     Route::post('/position/add', [PositionCotroller::class, 'add'])->name('add-position');
@@ -62,6 +67,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //DISCIPLINE
     Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
     Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
+
 
 
 });
