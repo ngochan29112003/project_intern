@@ -296,7 +296,7 @@ $token = 'position';
             </a>
             <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-permission')}}">
                         <i class="bi bi-circle"></i><span>Permission list</span>
                     </a>
                 </li>
