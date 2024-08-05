@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
@@ -42,6 +43,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //CUSTOMER
     Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
     Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
+
+    //DISCIPLINE
+    Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
+    Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
 });
 
 
