@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\RewardController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -47,6 +48,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //REWARD
     Route::get('/reward', [RewardController::class, 'getView'])->name('index-reward');
     Route::post('/reward/add', [RewardController::class, 'add'])->name('add-reward');
+
+    //PAYROLL
+    Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
+    Route::post('/payroll/add', [PayrollController::class, 'add'])->name('add-payroll');
 
 
 });
