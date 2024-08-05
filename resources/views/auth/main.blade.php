@@ -136,6 +136,7 @@ $token = 'position';
                 @php
                     $data = \Illuminate\Support\Facades\DB::table('employees')
                             ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
+                            ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
                             ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(App\StaticString::ACCOUNT_ID))
                             ->first();
 //                    dd($data);
@@ -149,8 +150,8 @@ $token = 'position';
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Ngoc Han</h6>
-                        <span>Web Designer</span>
+                        <h6>{{$data->employee_name}}</h6>
+                        <span>{{$data->job_position_name}}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
