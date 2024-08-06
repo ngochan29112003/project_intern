@@ -277,7 +277,7 @@ $token = 'position';
             </a>
             <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="forms-elements.html">
+                    <a href="{{route('index-task')}}">
                         <i class="bi bi-circle"></i><span>Task list</span>
                     </a>
                 </li>

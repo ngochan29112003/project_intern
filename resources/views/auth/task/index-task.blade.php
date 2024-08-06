@@ -40,36 +40,31 @@
                     <form id="addTaskForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">Task code</label>
+                            <label for="edit_task_code" class="form-label">Task code</label>
                             <input type="text" class="form-control" id="add_task_code" name="add_task_code"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">Employee id</label>
+                            <label for="edit_employee_id" class="form-label">Employee name</label>
                             <input type="text" class="form-control" id="add_employee_id" name="add_employee_id"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">	Start_date</label>
-                            <input type="text" class="form-control" id="add_start_date" name="add_start_date"
-                                   required>
+                            <label for="edit_start_date" class="form-label">Start date</label>
+                            <input type="date" class="form-control" id="add_start_date" name="add_start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">End_date</label>
-                            <input type="text" class="form-control" id="add_end_date" name="add_end_date"
-                                   required>
+                            <label for="edit_end_date" class="form-label">End date</label>
+                            <input type="date" class="form-control" id="add_end_date" name="add_end_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="add_location" name="add_location"
-                                   required>
+                            <label for="edit_location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="add_location" name="add_location" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_task_name" class="form-label">Purpose</label>
-                            <input type="text" class="form-control" id="add_purpose" name="add_purpose"
-                                   required>
+                            <label for="edit_purpose" class="form-label">Purpose</label>
+                            <input type="text" class="form-control" id="add_purpose" name="add_purpose" required>
                         </div>
-
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
@@ -86,16 +81,16 @@
                 <tr>
                     <th>No</th>
                     <th>Task code</th>
-                    <th>Employee id</th>
+                    <th>Employee name</th>
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Location</th>
                     <th>Purpose</th>
                 </tr>
                 </thead>
-                <tbody id="TaskTableBody">
+                <tbody id="taskTableBody">
                 @php($stt = 0)
-                @foreach ($Task_list as $item)
+                @foreach ($task_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
                         <td>{{ $item->task_code}}</td>
@@ -133,7 +128,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('add-Task') }}',
+                url: '{{ route('add-task') }}',
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {

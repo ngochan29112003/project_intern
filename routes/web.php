@@ -13,6 +13,7 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/permission', [PermissionController::class, 'getView'])->name('index-permission');
     Route::post('/permission/add', [PermissionController::class, 'add'])->name('add-permission');
 
+    //TASK
+    Route::get('/task', [TaskController::class, 'getView'])->name('index-task');
+    Route::post('/task/add', [TaskController::class, 'add'])->name('add-task');
 });
 
 
