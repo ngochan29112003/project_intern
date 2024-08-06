@@ -10,20 +10,21 @@ use Illuminate\Support\Facades\DB;
 class CustomerModel extends Model
 {
     use HasFactory;
-    protected $table = 'clients';
+    protected $table = 'customers';
 
     public $timestamps = false;
-   protected $primaryKey = 'client_id';
+   protected $primaryKey = 'customer_id';
     protected $fillable = [
-        'client_name',
+        'customer_name',
         'phone_number',
         'email',
+        'employee_id',
         'address',
-        'project'
+        'project',
     ];
 
     function getCustomer()
     {
-        return DB::table('clients')->get();
+        return DB::table('customers')->get();
     }
 }

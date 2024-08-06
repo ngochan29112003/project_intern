@@ -20,14 +20,16 @@ class CustomerController extends Controller
             'add_customer_name'=>'required|string',
             'add_phone_number'=>'required|string',
             'add_email'=>'required|string',
+            'add_employee_id'=>'required|string',
             'add_address'=>'required|string',
             'add_project'=>'required|string',
         ]);
 
         CustomerModel::create([
-            'client_name' =>$validated['add_customer_name'],
+            'customer_name' =>$validated['add_customer_name'],
             'phone_number' =>$validated['add_phone_number'],
-            'email' =>$validated['aadd_emil'],
+            'email' =>$validated['add_email'],
+            'employee_id' =>$validated['add_employee_id'],
             'address' =>$validated['add_address'],
             'project' =>$validated['add_project'],
         ]);
