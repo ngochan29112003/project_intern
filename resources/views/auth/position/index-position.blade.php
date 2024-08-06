@@ -5,7 +5,7 @@
         <h1>Position</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Position</li>
             </ol>
         </nav>
@@ -64,43 +64,45 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Position</h3>
-        <table id="positionTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Job Position Code</th>
-                <th>Job Position Name</th>
-                <th>Job Position Salary</th>
-                <th>Description</th>
-                <th class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody id="positionTableBody">
-            @php($stt = 0)
-            @foreach($position_list as $item)
+        <div class="table-responsive">
+            <table id="positionTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{$stt++}}</td>
-                    <td>{{$item->job_position_code}}</td>
-                    <td>{{$item->job_position_name}}</td>
-                    <td>{{$item->job_position_salary}}</td>
-                    <td>{{$item->description}}</td>
-                    <td class="text-center">
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->job_position_id }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->job_position_id }}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Job Position Code</th>
+                    <th>Job Position Name</th>
+                    <th>Job Position Salary</th>
+                    <th>Description</th>
+                    <th class="text-center">Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="positionTableBody">
+                @php($stt = 0)
+                @foreach($position_list as $item)
+                    <tr>
+                        <td>{{$stt++}}</td>
+                        <td>{{$item->job_position_code}}</td>
+                        <td>{{$item->job_position_name}}</td>
+                        <td>{{$item->job_position_salary}}</td>
+                        <td>{{$item->description}}</td>
+                        <td class="text-center">
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->job_position_id }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->job_position_id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

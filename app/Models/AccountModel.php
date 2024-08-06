@@ -12,9 +12,13 @@ class AccountModel extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    function getPermis()
+    function getAccountInfo()
     {
+        return DB::table('accounts')
+            ->join('permissions','permissions.permission_id','=','accounts.permission')
+            ->get();
+    }
+    function getPermis(){
         return DB::table('permissions')->get();
     }
-
 }

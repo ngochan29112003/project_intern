@@ -4,7 +4,7 @@
         <h1>Account</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">System</a></li>
                 <li class="breadcrumb-item active">Account</li>
             </ol>
         </nav>
@@ -78,26 +78,43 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Account</h3>
-        <table id="accountTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Username</th>
-                <th>Pass</th>
-            </tr>
-            </thead>
-            <tbody id="proposalTableBody">
-            @php($stt = 0)
-            @foreach($account as $item)
+        <div class="table-responsive">
+            <table id="accountTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{$stt++}}</td>
-                    <td>{{$item->username}}</td>
-                    <td>{{$item->password}}</td>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Pass</th>
+                    <th>Permission</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-
-        </table>
+                </thead>
+                <tbody id="proposalTableBody">
+                @php($stt = 0)
+                @foreach($account_list as $item)
+                    <tr>
+                        <td>{{$stt++}}</td>
+                        <td>{{$item->username}}</td>
+                        <td>{{$item->password}}</td>
+                        <td>{{$item->permission_name}}</td>
+                        <td class="text-center">
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->id }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 @section('scripts')

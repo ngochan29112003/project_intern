@@ -34,13 +34,19 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'getView'])->name('index-dashboard');
 
     //ACCOUNT
-    Route::get('/account', [AccountController::class, 'getView'])->name('index-account');
-    Route::post('/account/add', [AccountController::class, 'add'])->name('add-account');
+    Route::group(['prefix' => '/account'], function () {
+        Route::get('/index', [AccountController::class, 'getView'])->name('index-account');
+        Route::post('/add', [AccountController::class, 'add'])->name('add-account');
+    });
 
     //EMPLOYEE
-    Route::get('/employees', [EmployeeController::class, 'getView'])->name('index-employees');
-    Route::post('/employees/add', [EmployeeController::class, 'add'])->name('add-employees');
-    Route::delete('/employees/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
+    Route::group(['prefix' => '/employees'], function () {
+        Route::get('/index', [EmployeeController::class, 'getView'])->name('index-employees');
+        Route::post('/add', [EmployeeController::class, 'add'])->name('add-employees');
+        Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
+        Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('edit-employees');
+        Route::put('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
+    });
 
     //DEPARTMENT
     Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');

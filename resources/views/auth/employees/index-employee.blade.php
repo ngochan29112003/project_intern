@@ -5,7 +5,7 @@
         <h1>Employee</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Employee</li>
             </ol>
         </nav>
@@ -28,6 +28,7 @@
         </div>
     </div>
 
+    <!-- ======= Add Model  ======= -->
     <div class="modal fade" id="addEmployeeModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -103,70 +104,145 @@
         </div>
     </div>
 
+    <!-- ======= Edit Model  ======= -->
+    <div class="modal fade" id="editEmployeeModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit employee</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editEmployeeForm" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="edit_employee_name" class="form-label">Employee name</label>
+                            <input type="text" class="form-control" id="edit_employee_name" name="edit_employee_name"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_img" class="form-label">Image</label>
+                            <div class="row">
+                                <div class="col-lg-2 ">
+                                    <img class="border rounded-pill object-fit-cover" width="100px" height="100px" id="profileImage" src="">
+                                </div>
+                                <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                                    <input type="file" class="form-control" id="edit_img" name="edit_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_gender" class="form-label">Gender</label>
+                            <select class="form-select" aria-label="Default" name="edit_gender" id="edit_gender">
+                                <option value="0">Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_birthday" class="form-label">Birth day</label>
+                            <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_birthplace" class="form-label">Birth place</label>
+                            <input type="text" class="form-control" id="edit_birthplace" name="edit_birthplace" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_idcard" class="form-label">ID CARD</label>
+                            <input type="text" class="form-control" id="edit_idcard" name="edit_idcard" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_edu" class="form-label">Education level</label>
+                            <select class="form-select" aria-label="Default" name="edit_edu" id="edit_edu">
+                                @foreach ($edu_level_list as $item)
+                                    <option value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_status" class="form-label">Status</label>
+                            <select class="form-select" aria-label="Default" name="edit_status" id="edit_status">
+                                <option value="0">Đã nghỉ việc</option>
+                                <option value="1">Đang đi làm</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_employee_type" class="form-label">Employee type</label>
+                            <select class="form-select" aria-label="Default" name="edit_employee_type" id="edit_employee_type">
+                                @foreach ($type_employee_list as $item)
+                                    <option value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_job_position" class="form-label">Job position</label>
+                            <select class="form-select" aria-label="Default" name="edit_job_position" id="edit_job_position">
+                                @foreach ($position_list as $item)
+                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Employee</h3>
-        <table id="employeeTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Employee name</th>
-                <th>img</th>
-                <th>Gender</th>
-                <th>Birth Day</th>
-                <th>Birth place</th>
-                <th>Id card number</th>
-                <th>Education</th>
-                <th>Status</th>
-                <th>Employee type</th>
-                <th>Job position</th>
-                <th class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody id="employeeTableBody">
-            @php($stt = 0)
-            @foreach($employee_list as $item)
+        <div class="table-responsive">
+            <table id="employeeTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{$stt++}}</td>
-                    <td>{{$item->employee_name}}</td>
-                    <td class="text-center"><img class="rounded-pill object-fit-cover"
-                                                 src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75"
-                                                 height="75"></td>
-                    <td>{{$item->gender}}</td>
-                    <td>{{$item->birth_date}}</td>
-                    <td>{{$item->birth_place}}</td>
-                    <td>{{$item->id_card_number}}</td>
-                    <td>{{$item->education_level_name}}</td></td>
-                    @if($item->status == 1)
-                        <td>Đang đi làm</td>
-                    @else
-                        <td>Đã nghỉ việc</td>
-                    @endif
-                    <td>{{$item->type_employee_name}}</td>
-                    <td>{{$item->job_position_name}}</td>
-                    <td class="text-center">
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->employee_id }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->employee_id }}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Employee name</th>
+                    <th>img</th>
+                    <th>Gender</th>
+                    <th>Birth Day</th>
+                    <th>Id card number</th>
+                    <th>Education</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="employeeTableBody">
+                @php($stt = 0)
+                @foreach($employee_list as $item)
+                    <tr>
+                        <td>{{$stt++}}</td>
+                        <td>{{$item->employee_name}}</td>
+                        <td class="text-center"><img class="rounded-pill object-fit-cover"
+                                                     src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75"
+                                                     height="75"></td>
+                        <td>{{ $item->gender === 0 ? 'Nam' : 'Nữ' }}</td>
+                        <td>{{$item->birth_date}}</td>
+                        <td>{{$item->id_card_number}}</td>
+                        <td>{{$item->education_level_name}}</td>
+                        <td>{{$item->status === 1 ? 'Đang đi làm' : 'Đã nghỉ việc' }}</td>
+                        <td class="text-center">
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->employee_id }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->employee_id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+
 @endsection
 
 @section('scripts')
     <script>
         var table = $('#employeeTable').DataTable();
-
         // JS Add employee
         $('#addEmployeeForm').submit(function (e) {
             e.preventDefault();
@@ -197,6 +273,60 @@
                     } else {
                         toastr.error("An error occurred", "Error");
                     }
+                }
+            });
+        });
+
+        //Fill dữ liệu lên Modal edit
+        $('#employeeTable').on('click', '.edit-btn', function () {
+            var employee_id = $(this).data('id'); //Id này được nhận khi bấm btn chỉnh sửa
+
+            $('#editEmployeeForm').data('id', employee_id);
+            var url = "{{ route('edit-employees', ':id') }}";
+            url = url.replace(':id', employee_id);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.leave_app;
+                    // $('#edit_employee_id').val(data.employee_id);
+                    // $('#edit_pin').val(data.employee.employee_code);
+                    // $('#edit_leave_type').val(data.leave_type.leave_type_id);
+                    // $('#edit_apply_date').val(data.apply_date);
+                    // $('#edit_start_date').val(data.start_date);
+                    // $('#edit_end_date').val(data.end_date);
+                    // $('#edit_duration').val(data.duration);
+                    // $('#edit_leave_status').val(data.leave_status);
+                    $('#editEmployeeModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+
+        $('#editApplicationForm').submit(function (e) {
+            e.preventDefault();
+            var applicationID = $(this).data('id'); // Lấy ID từ form
+            var url = "{{ route('update-employees', ':id') }}";
+            url = url.replace(':id', applicationID);
+
+            $.ajax({
+                url: url,
+                method: 'PUT',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        $('#editApplicationModal').modal('hide');
+                        $('#successModal').modal('show');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

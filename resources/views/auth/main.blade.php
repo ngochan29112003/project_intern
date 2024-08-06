@@ -33,8 +33,10 @@ $token = 'position';
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
+{{--    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 
     @yield('head')
 </head>
@@ -51,87 +53,11 @@ $token = 'position';
     </div>
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-
             <li class="nav-item d-block d-lg-none">
                 <a class="nav-link nav-icon search-bar-toggle " href="#">
                     <i class="bi bi-search"></i>
                 </a>
-            </li><!-- End Search Icon-->
-
-{{--            <li class="nav-item dropdown">--}}
-
-{{--                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">--}}
-{{--                    <i class="bi bi-bell"></i>--}}
-{{--                    <span class="badge bg-primary badge-number">4</span>--}}
-{{--                </a><!-- End Notification Icon -->--}}
-
-{{--                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">--}}
-{{--                    <li class="dropdown-header">--}}
-{{--                        You have 4 new notifications--}}
-{{--                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <hr class="dropdown-divider">--}}
-{{--                    </li>--}}
-
-{{--                    <li class="notification-item">--}}
-{{--                        <i class="bi bi-exclamation-circle text-warning"></i>--}}
-{{--                        <div>--}}
-{{--                            <h4>Lorem Ipsum</h4>--}}
-{{--                            <p>Quae dolorem earum veritatis oditseno</p>--}}
-{{--                            <p>30 min. ago</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
-{{--                    <li>--}}
-{{--                        <hr class="dropdown-divider">--}}
-{{--                    </li>--}}
-
-{{--                    <li class="notification-item">--}}
-{{--                        <i class="bi bi-x-circle text-danger"></i>--}}
-{{--                        <div>--}}
-{{--                            <h4>Atque rerum nesciunt</h4>--}}
-{{--                            <p>Quae dolorem earum veritatis oditseno</p>--}}
-{{--                            <p>1 hr. ago</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
-{{--                    <li>--}}
-{{--                        <hr class="dropdown-divider">--}}
-{{--                    </li>--}}
-
-{{--                    <li class="notification-item">--}}
-{{--                        <i class="bi bi-check-circle text-success"></i>--}}
-{{--                        <div>--}}
-{{--                            <h4>Sit rerum fuga</h4>--}}
-{{--                            <p>Quae dolorem earum veritatis oditseno</p>--}}
-{{--                            <p>2 hrs. ago</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
-{{--                    <li>--}}
-{{--                        <hr class="dropdown-divider">--}}
-{{--                    </li>--}}
-
-{{--                    <li class="notification-item">--}}
-{{--                        <i class="bi bi-info-circle text-primary"></i>--}}
-{{--                        <div>--}}
-{{--                            <h4>Dicta reprehenderit</h4>--}}
-{{--                            <p>Quae dolorem earum veritatis oditseno</p>--}}
-{{--                            <p>4 hrs. ago</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
-{{--                    <li>--}}
-{{--                        <hr class="dropdown-divider">--}}
-{{--                    </li>--}}
-{{--                    <li class="dropdown-footer">--}}
-{{--                        <a href="#">Show all notifications</a>--}}
-{{--                    </li>--}}
-
-{{--                </ul><!-- End Notification Dropdown Items -->--}}
-
-{{--            </li>--}}
+            </li>
             <li class="nav-item dropdown pe-3">
                 @php
                     $data = \Illuminate\Support\Facades\DB::table('employees')
@@ -139,8 +65,6 @@ $token = 'position';
                             ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
                             ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(App\StaticString::ACCOUNT_ID))
                             ->first();
-//                    dd($data);
-
                 @endphp
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle object-fit-cover"
@@ -204,13 +128,14 @@ $token = 'position';
 
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-heading">Home</li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('index-dashboard')}}">
                 <i class="bi bi-house"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-
+        <li class="nav-heading">System</li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-person-fill-gear"></i></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -223,7 +148,20 @@ $token = 'position';
                 </li>
             </ul>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('index-permission')}}">
+                        <i class="bi bi-circle"></i><span>Permission list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-heading">Management</li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
@@ -252,22 +190,6 @@ $token = 'position';
                 </li>
             </ul>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-building-fill"></i><span>Department</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-department')}}">
-                        <i class="bi bi-circle"></i><span>Department list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
@@ -278,6 +200,20 @@ $token = 'position';
                 <li>
                     <a href="{{route('index-customer')}}">
                         <i class="bi bi-circle"></i><span>Customer list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-building-fill"></i><span>Department</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-department')}}">
+                        <i class="bi bi-circle"></i><span>Department list</span>
                     </a>
                 </li>
             </ul>
@@ -296,19 +232,7 @@ $token = 'position';
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-permission')}}">
-                        <i class="bi bi-circle"></i><span>Permission list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#payroll-nav" data-bs-toggle="collapse" href="#"
@@ -379,7 +303,7 @@ $token = 'position';
 <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
 <script src="{{asset('assets/js/datatables.js')}}"></script>
-<script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+<script src="{{asset('assets/js/toastr.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

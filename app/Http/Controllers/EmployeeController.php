@@ -80,4 +80,9 @@ class EmployeeController extends Controller
             'message' => 'Proposal application deleted successfully'
         ]);
     }
+
+    public function edit($id)
+    {
+//        dd($id);
+    }
 }

@@ -5,7 +5,7 @@
         <h1>Salary Calculation</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Salary Calculation</li>
             </ol>
         </nav>
@@ -72,47 +72,49 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Salary calculation</h3>
-        <table id="salarycalculationTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Payroll code</th>
-                <th>Employee</th>
-                <th>Work day</th>
-                <th>Allowance</th>
-                <th>Advance</th>
-                <th>Description</th>
-                <th class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody id="salarycalculationTableBody">
-            @php($stt = 0)
-            @foreach($salarycalculation_list as $item)
+        <div class="table-responsive">
+            <table id="salarycalculationTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{$stt++}}</td>
-                    <td>{{$item->payroll_code}}</td>
-                    <td>{{$item->employee_id}}</td>
-                    <td>{{$item->work_days}}</td>
-                    <td>{{$item->allowance}}</td>
-                    <td>{{$item->advance}}</td>
-                    <td>{{$item->description}}</td>
-                    <td class="text-center">
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->salary_calculation_id}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->salary_calculation_id}}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Payroll code</th>
+                    <th>Employee</th>
+                    <th>Work day</th>
+                    <th>Allowance</th>
+                    <th>Advance</th>
+                    <th>Description</th>
+                    <th class="text-center">Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="salarycalculationTableBody">
+                @php($stt = 0)
+                @foreach($salarycalculation_list as $item)
+                    <tr>
+                        <td>{{$stt++}}</td>
+                        <td>{{$item->payroll_code}}</td>
+                        <td>{{$item->employee_id}}</td>
+                        <td>{{$item->work_days}}</td>
+                        <td>{{$item->allowance}}</td>
+                        <td>{{$item->advance}}</td>
+                        <td>{{$item->description}}</td>
+                        <td class="text-center">
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->salary_calculation_id}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->salary_calculation_id}}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

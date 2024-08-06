@@ -5,7 +5,7 @@
         <h1>Reward</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Reward</li>
             </ol>
         </nav>
@@ -67,43 +67,44 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Reward</h3>
-        <table id="RewardTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Reward code</th>
-                <th>Reward name</th>
-                <th>Employee</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody id="rewardTableBody">
-            @php($stt = 0)
-            @foreach ($reward_list as $item)
+        <div class="table-responsive">
+            <table id="RewardTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->reward_code}}</td>
-                    <td>{{ $item->reward_name}}</td>
-                    <td>{{ $item->employee_id}}</td>
-                    <td>{{ $item->description}}</td>
-                    <td>
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->rewards_id}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->rewards_id}}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Reward code</th>
+                    <th>Reward name</th>
+                    <th>Employee</th>
+                    <th>Description</th>
                 </tr>
-            @endforeach
-            </tbody>
-
-        </table>
+                </thead>
+                <tbody id="rewardTableBody">
+                @php($stt = 0)
+                @foreach ($reward_list as $item)
+                    <tr>
+                        <td>{{ $stt++ }}</td>
+                        <td>{{ $item->reward_code}}</td>
+                        <td>{{ $item->reward_name}}</td>
+                        <td>{{ $item->employee_id}}</td>
+                        <td>{{ $item->description}}</td>
+                        <td>
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->rewards_id}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->rewards_id}}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

@@ -5,7 +5,7 @@
         <h1>Customer</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Customer</li>
             </ol>
         </nav>
@@ -73,48 +73,49 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Customer</h3>
-        <table id="CustomerTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Customer Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Employee Name</th>
-                <th>Address</th>
-                <th>Project</th>
-            </tr>
-            </thead>
-            <tbody id="customerTableBody">
-            @php($stt = 1)
-            @foreach ($customer_list as $item)
+        <div class="table-responsive">
+            <table id="CustomerTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->customer_name}}</td>
-                    <td>{{ $item->phone_number}}</td>
-                    <td>{{ $item->email}}</td>
-                    <td>{{ $item->employee_id}}</td>
-                    <td>{{ $item->address}}</td>
-                    <td>{{ $item->project}}</td>
-
-                    <td>
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->customer_id}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->customer_id}}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Employee Name</th>
+                    <th>Address</th>
+                    <th>Project</th>
                 </tr>
-            @endforeach
-            </tbody>
+                </thead>
+                <tbody id="customerTableBody">
+                @php($stt = 1)
+                @foreach ($customer_list as $item)
+                    <tr>
+                        <td>{{ $stt++ }}</td>
+                        <td>{{ $item->customer_name}}</td>
+                        <td>{{ $item->phone_number}}</td>
+                        <td>{{ $item->email}}</td>
+                        <td>{{ $item->employee_id}}</td>
+                        <td>{{ $item->address}}</td>
+                        <td>{{ $item->project}}</td>
 
-        </table>
+                        <td>
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->customer_id}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->customer_id}}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

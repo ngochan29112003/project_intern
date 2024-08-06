@@ -5,7 +5,7 @@
         <h1>Payroll</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Payroll</li>
             </ol>
         </nav>
@@ -75,47 +75,48 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Payroll</h3>
-        <table id="PayrollTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Payroll code</th>
-                <th>Employee id</th>
-                <th>Position id</th>
-                <th>Monthly salary</th>
-                <th>Work days</th>
-                <th>Net salary</th>
-            </tr>
-            </thead>
-            <tbody id="payrollTableBody">
-            @php($stt = 0)
-            @foreach ($payroll_list as $item)
+        <div class="table-responsive">
+            <table id="PayrollTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->payroll_code}}</td>
-                    <td>{{ $item->employee_id}}</td>
-                    <td>{{ $item->position_id}}</td>
-                    <td>{{ $item->monthly_salary}}</td>
-                    <td>{{ $item->work_days}}</td>
-                    <td>{{ $item->net_salary}}</td>
-                    <td>
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->payroll_id }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->payroll_id }}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Payroll code</th>
+                    <th>Employee id</th>
+                    <th>Position id</th>
+                    <th>Monthly salary</th>
+                    <th>Work days</th>
+                    <th>Net salary</th>
                 </tr>
-            @endforeach
-            </tbody>
-
-        </table>
+                </thead>
+                <tbody id="payrollTableBody">
+                @php($stt = 0)
+                @foreach ($payroll_list as $item)
+                    <tr>
+                        <td>{{ $stt++ }}</td>
+                        <td>{{ $item->payroll_code}}</td>
+                        <td>{{ $item->employee_id}}</td>
+                        <td>{{ $item->position_id}}</td>
+                        <td>{{ $item->monthly_salary}}</td>
+                        <td>{{ $item->work_days}}</td>
+                        <td>{{ $item->net_salary}}</td>
+                        <td>
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->payroll_id }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->payroll_id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 

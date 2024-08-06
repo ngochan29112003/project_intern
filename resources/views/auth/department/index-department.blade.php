@@ -5,7 +5,7 @@
         <h1>Department</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Management</a></li>
                 <li class="breadcrumb-item active">Department</li>
             </ol>
         </nav>
@@ -59,40 +59,41 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Department</h3>
-        <table id="departmentTable" class="table table-hover table-borderless">
-            <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Department Code</th>
-                <th>Department Name</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody id="departmentTableBody">
-            @php($stt = 0)
-            @foreach ($department_list as $item)
+        <div class="table-responsive">
+            <table id="departmentTable" class="table table-hover table-borderless">
+                <thead class="table-light">
                 <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->department_code }}</td>
-                    <td>{{ $item->department_name }}</td>
-                    <td>
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->department_id }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->department_id }}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
+                    <th>No</th>
+                    <th>Department Code</th>
+                    <th>Department Name</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-
-        </table>
+                </thead>
+                <tbody id="departmentTableBody">
+                @php($stt = 0)
+                @foreach ($department_list as $item)
+                    <tr>
+                        <td>{{ $stt++ }}</td>
+                        <td>{{ $item->department_code }}</td>
+                        <td>{{ $item->department_name }}</td>
+                        <td>
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                data-id="{{ $item->department_id }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            |
+                            <button
+                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                data-id="{{ $item->department_id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 
