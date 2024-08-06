@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
@@ -73,6 +74,11 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //PERMISSION
     Route::get('/permission', [PermissionController::class, 'getView'])->name('index-permission');
     Route::post('/permission/add', [PermissionController::class, 'add'])->name('add-permission');
+
+    //PROJECT
+    Route::get('/project', [ProjectController::class, 'getView'])->name('index-project');
+    Route::post('/project/add', [ProjectController::class, 'add'])->name('add-project');
+
 
 });
 
