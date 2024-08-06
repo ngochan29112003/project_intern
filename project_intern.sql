@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 05, 2024 at 11:40 PM
+-- Generation Time: Aug 06, 2024 at 07:39 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,6 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(2, 'admin', '$2y$10$rLIFArOIERUMbkAwnpOzPOILKiZOCHhpChlJRcvnzDcayZ2kTFYpK', 0, NULL),
 (4, 'admindt', '$2y$10$brX2LMOYrEUiyX4oZlsiBukDELfme0qz/vQYUFaLlmp07F0JTMCxC', 1, 4),
 (5, 'tuananh', '$2y$10$8De1cXl/xP/57bwzEyyNreRB.KHGNejngp1OZDpV15ARu/.xm4ary', 1, 5);
 
@@ -116,7 +115,7 @@ CREATE TABLE `employees` (
   `birth_place` text,
   `id_card_number` int(20) DEFAULT NULL,
   `education_level_id` int(11) NOT NULL,
-  `status` text,
+  `status` int(9) DEFAULT NULL,
   `type_employee_id` int(11) DEFAULT NULL,
   `job_position_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -126,9 +125,9 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
-(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, '1', 2, 3),
-(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, '1', 3, 3),
-(5, 'Tuan anh', '1722875202_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2024-08-15', '1', 1, 2, '1', 2, 1);
+(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, 1, 2, 3),
+(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, 1, 3, 3),
+(5, 'Tuan anh', '1722875202_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2024-08-15', '1', 1, 2, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -363,7 +362,7 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `job_positions`
