@@ -68,7 +68,7 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Reward</h3>
         <div class="table-responsive">
-            <table id="RewardTable" class="table table-hover table-borderless">
+            <table id="rewardTable" class="table table-hover table-borderless">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
@@ -111,6 +111,7 @@
 
 @section('scripts')
     <script>
+
         var table = $('#rewardTable').DataTable();
 
         $('#addRewardForm').submit(function(e) {

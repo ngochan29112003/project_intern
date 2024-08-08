@@ -89,7 +89,7 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody id="proposalTableBody">
+                <tbody id="accountTableBody">
                 @php($stt = 0)
                 @foreach($account_list as $item)
                     <tr>
@@ -100,13 +100,13 @@
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                data-id="{{ $item->id }}">
+                                data-id="{{ $item->id}}">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                             |
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                data-id="{{ $item->id }}">
+                                data-id="{{ $item->id}}">
                                 <i class="bi bi-trash3"></i>
                             </button>
                         </td>
@@ -147,6 +147,46 @@
                     } else {
                         toastr.error("An error occurred", "Error");
                     }
+                }
+            });
+        });
+
+        $('#accountTableBody').on('click', '.delete-btn', function () {
+            var accountId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this account ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-account', ':id') }}'.replace(':id', accountId),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                table.row(row).remove().draw();
+                                toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Failed to delete the account.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
                 }
             });
         });

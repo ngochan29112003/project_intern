@@ -40,4 +40,16 @@ class TaskController extends Controller
             'message' => 'Task added successfully',
         ]);
     }
+
+    public function delete($id)
+    {
+        $task = TaskModel::findOrFail($id);
+
+        $task->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Task deleted successfully'
+        ]);
+    }
 }

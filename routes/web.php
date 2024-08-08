@@ -39,6 +39,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/account'], function () {
         Route::get('/index', [AccountController::class, 'getView'])->name('index-account');
         Route::post('/add', [AccountController::class, 'add'])->name('add-account');
+        Route::delete('/delete/{id}', [AccountController::class, 'delete'])->name('delete-account');
     });
 
     //EMPLOYEE

@@ -33,4 +33,16 @@ class DepartmentController extends Controller
            'message' => 'Department added successfully',
        ]);
    }
+
+    public function delete($id)
+    {
+        $department = DepartmentModel::findOrFail($id);
+
+        $department->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reward deleted successfully'
+        ]);
+    }
 }

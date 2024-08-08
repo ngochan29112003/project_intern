@@ -28,8 +28,8 @@ class PayrollController extends Controller
         PayrollModel::create([
             'payroll_code' =>$validated['add_payroll_code'],
             'employee_id' =>$validated['add_employee_id'],
-            'position_id' =>$validated['add_employee_id'],
-            'monthly_salary' =>$validated['add_position_id'],
+            'position_id' =>$validated['add_position_id'],
+            'monthly_salary' =>$validated['add_monthly_salary'],
             'work_days' =>$validated['add_work_days'],
             'net_salary' =>$validated['add_net_salary'],
         ]);
@@ -37,7 +37,19 @@ class PayrollController extends Controller
         return response()->json([
             'success' => true,
             'status' => 200,
-            'message' => 'Reward added successfully',
+            'message' => 'Payroll added successfully',
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $payroll = PayrollModel::findOrFail($id);
+
+        $payroll->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Payroll deleted successfully'
         ]);
     }
 }

@@ -29,4 +29,16 @@ class PermissionController extends Controller
             'message' => 'permission added successfully',
         ]);
     }
+
+    public function delete($id)
+    {
+        $permission = PermissionModel::findOrFail($id);
+
+        $permission->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reward deleted successfully'
+        ]);
+    }
 }

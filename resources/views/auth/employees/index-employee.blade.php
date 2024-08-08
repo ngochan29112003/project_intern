@@ -213,11 +213,11 @@
                         <td class="text-center"><img class="rounded-pill object-fit-cover"
                                                      src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75"
                                                      height="75"></td>
-                        <td>{{ $item->gender === 0 ? 'Nam' : 'Nữ' }}</td>
+                        <td>{{ $item->gender === 0 ? 'Male' : 'Female' }}</td>
                         <td>{{$item->birth_date}}</td>
                         <td>{{$item->id_card_number}}</td>
                         <td>{{$item->education_level_name}}</td>
-                        <td>{{$item->status === 1 ? 'Đang đi làm' : 'Đã nghỉ việc' }}</td>
+                        <td>{{$item->status === 1 ? 'Currently employed' : 'Currently employed' }}</td>
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"

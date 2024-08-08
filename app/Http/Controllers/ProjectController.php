@@ -43,5 +43,17 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function delete($id)
+    {
+        $project = ProjectModel::findOrFail($id);
+
+        $project->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Project deleted successfully'
+        ]);
+    }
+
 
 }

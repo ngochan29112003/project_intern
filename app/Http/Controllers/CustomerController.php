@@ -40,4 +40,16 @@ class CustomerController extends Controller
             'message' => 'Customer added successfully',
         ]);
     }
+
+    public function delete($id)
+    {
+        $reward = CustomerModel::findOrFail($id);
+
+        $reward->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Customer deleted successfully'
+        ]);
+    }
 }

@@ -122,5 +122,45 @@
                 }
             });
         });
+
+        $('#permissionTableBody').on('click', '.delete-btn', function () {
+            var permissionId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this permission ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-permission', ':id') }}'.replace(':id', permissionId),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                table.row(row).remove().draw();
+                                toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Failed to delete the reward.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

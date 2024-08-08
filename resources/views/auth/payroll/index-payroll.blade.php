@@ -81,8 +81,8 @@
                 <tr>
                     <th>No</th>
                     <th>Payroll code</th>
-                    <th>Employee id</th>
-                    <th>Position id</th>
+                    <th>Employee name</th>
+                    <th>Position name</th>
                     <th>Monthly salary</th>
                     <th>Work days</th>
                     <th>Net salary</th>
@@ -150,6 +150,47 @@
                     } else {
                         toastr.error("An error occurred", "Error");
                     }
+                }
+            });
+        });
+
+
+        $('#payrollTableBody').on('click', '.delete-btn', function () {
+            var payrollId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this payroll ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-payroll', ':id') }}'.replace(':id', payrollId),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                table.row(row).remove().draw();
+                                toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Failed to delete the payroll.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
                 }
             });
         });

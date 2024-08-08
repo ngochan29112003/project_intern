@@ -52,4 +52,16 @@ class AccountController extends Controller
             'status' => 200,
             'message' => 'Account added successfully']);
     }
+
+    public function delete($id)
+    {
+        $account = AccountModel::findOrFail($id);
+
+        $account->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Account deleted successfully'
+        ]);
+    }
 }
