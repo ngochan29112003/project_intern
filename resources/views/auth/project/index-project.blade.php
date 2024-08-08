@@ -51,15 +51,27 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Status</label>
-                            <input type="text" class="form-control" id="add_status" name="add_status" required>
+                            <select class="form-select" aria-label="Default" name="edit_status" id="edit_status">
+                                <option value="0">Incomplete</option>
+                                <option value="1">Completed</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="edit_customer" class="form-label">Customer name</label>
-                            <input type="text" class="form-control" id="add_customer" name="add_customer" required>
+                            <select class="form-select" aria-label="Default" name="add_customer" id="add_customer">
+                                @foreach ($project_list as $item)
+                                    <option value="{{ $item->customer_id }}">{{ $item->customer_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="edit_employee_id" class="form-label">Employee name</label>
                             <input type="text" class="form-control" id="add_employee_id" name="add_employee_id" required>
+{{--                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">--}}
+{{--                                @foreach ($employee_list as $item)--}}
+{{--                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
                         </div>
                         <div class="mb-3">
                             <label for="edit_start_date" class="form-label">Start date</label>
@@ -101,7 +113,7 @@
                     <td>{{ $item->project_code}}</td>
                     <td>{{ $item->project_name}}</td>
                     <td>{{ $item->status}}</td>
-                    <td>{{ $item->customer_id}}</td>
+                    <td>{{ $item->customer_name}}</td>
                     <td>{{ $item->emloyee_id}}</td>
                     <td>{{ $item->start_date}}</td>
                     <td>{{ $item->end_date}}</td>

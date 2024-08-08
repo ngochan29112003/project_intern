@@ -12,8 +12,10 @@ class DisciplineController extends Controller
     {
         $model = new DisciplineModel();
         $discipline_list = $model->getDiscipline();
+        $employee_list = $model->getEmployee();
 //        dd($discipline_list);
-        return view('auth.discipline.index-discipline', compact('discipline_list'));
+        return view('auth.discipline.index-discipline',
+            compact('discipline_list', 'employee_list'));
     }
 
     function add(Request $request){

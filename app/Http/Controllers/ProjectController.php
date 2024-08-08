@@ -11,7 +11,10 @@ class ProjectController extends Controller
     {
         $model = new ProjectModel();
         $project_list = $model->getProject();
-        return view('auth.project.index-project', compact('project_list'));
+//        $employee_list = $model->getEmployee();
+        $customer_list = $model->getCustomer();
+        return view('auth.project.index-project',
+            compact('project_list','customer_list'));
     }
 
     public function add(Request $request)
@@ -19,8 +22,8 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'add_project_code' => 'required|string',
             'add_project_name' => 'required|string',
-            'add_status' => 'required|string',
-            'add_customer' => 'required|string',
+            'edit_status' => 'int',
+            'add_customer' => 'int',
             'add_employee_id' => 'required|string',
             'add_start_date' => 'required|string',
             'add_end_date' => 'required|string',

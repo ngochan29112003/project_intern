@@ -50,12 +50,16 @@
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee id</label>
-                            <input type="text" class="form-control" id="add_employee_id" name="add_employee_id" required>
+                            <label for="edit_employee_id" class="form-label">Employee name</label>
+                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_discription" class="form-label">Discription</label>
-                            <input type="text" class="form-control" id="add_discription" name="add_discription" required>
+                            <label for="edit_description" class="form-label">Discription</label>
+                            <input type="text" class="form-control" id="add_description" name="add_description" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -86,7 +90,7 @@
                         <td>{{ $stt++ }}</td>
                         <td>{{ $item->reward_code}}</td>
                         <td>{{ $item->reward_name}}</td>
-                        <td>{{ $item->employee_id}}</td>
+                        <td>{{ $item->employee_name}}</td>
                         <td>{{ $item->description}}</td>
                         <td class="text-center">
                             <button

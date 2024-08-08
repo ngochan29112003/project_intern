@@ -50,8 +50,8 @@
                         <div class="mb-3">
                             <label for="add_gender" class="form-label">Gender</label>
                             <select class="form-select" aria-label="Default" name="add_gender" id="add_gender">
-                                <option value="0">Nam</option>
-                                <option value="1">Nữ</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -77,8 +77,8 @@
                         <div class="mb-3">
                             <label for="add_status" class="form-label">Status</label>
                             <select class="form-select" aria-label="Default" name="add_status" id="add_status">
-                                <option value="0">Đã nghỉ việc</option>
-                                <option value="1">Đang đi làm</option>
+                                <option value="0">No longer employed</option>
+                                <option value="1">Currently employed</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -134,8 +134,8 @@
                         <div class="mb-3">
                             <label for="edit_gender" class="form-label">Gender</label>
                             <select class="form-select" aria-label="Default" name="edit_gender" id="edit_gender">
-                                <option value="0">Nam</option>
-                                <option value="1">Nữ</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -161,8 +161,8 @@
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Status</label>
                             <select class="form-select" aria-label="Default" name="edit_status" id="edit_status">
-                                <option value="0">Đã nghỉ việc</option>
-                                <option value="1">Đang đi làm</option>
+                                <option value="0">No longer employed</option>
+                                <option value="1">Currently employed</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -217,7 +217,7 @@
                         <td>{{$item->birth_date}}</td>
                         <td>{{$item->id_card_number}}</td>
                         <td>{{$item->education_level_name}}</td>
-                        <td>{{$item->status === 1 ? 'Currently employed' : 'Currently employed' }}</td>
+                        <td>{{$item->status === 1 ? 'No longer employed' : 'Currently employed' }}</td>
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"

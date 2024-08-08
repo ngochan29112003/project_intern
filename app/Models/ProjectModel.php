@@ -22,8 +22,21 @@ class ProjectModel extends Model
     ];
     public $timestamps = false;
 
+//    function getEmployee()
+//    {
+//        return DB::table('employees')->get();
+//    }
+
+    function getCustomer()
+    {
+        return DB::table('customers')->get();
+    }
+
     function getProject()
     {
-        return DB::table('projects')->get();
+        return DB::table('projects')
+//            ->join('employees','employees.employee_id','=','projects.employee_id')
+            ->join('customers','customers.customer_id','=','projects.customer_id')
+            ->get();
     }
 }

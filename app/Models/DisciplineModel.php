@@ -20,8 +20,14 @@ class DisciplineModel extends Model
     ];
     public $timestamps = false;
 
+    function getEmployee()
+    {
+        return DB::table('employees')->get();
+    }
     function getDiscipline()
     {
-        return DB::table('disciplines')->get();
+        return DB::table('disciplines')
+            ->join('employees','employees.employee_id','=','disciplines.employee_id')
+            ->get();
     }
 }

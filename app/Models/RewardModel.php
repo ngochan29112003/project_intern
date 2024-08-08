@@ -21,8 +21,17 @@ class RewardModel extends Model
     ];
     public $timestamps = false;
 
+    function getEmployee()
+    {
+        return DB::table('employees')->get();
+    }
+
     function getReward()
     {
-        return DB::table('rewards')->get();
+        return DB::table('rewards')
+            ->join('employees','employees.employee_id','=','rewards.employee_id')
+            ->get();
     }
+
+
 }

@@ -44,24 +44,32 @@
                             <input type="text" class="form-control" id="add_customer_name" name="add_customer_name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer_name" class="form-label">Phone number</label>
+                            <label for="edit_phone_number" class="form-label">Phone number</label>
                             <input type="text" class="form-control" id="add_phone_number" name="add_phone_number" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer_name" class="form-label">Email</label>
+                            <label for="edit_email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="add_email" name="add_email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer_name" class="form-label">Employee id</label>
-                            <input type="text" class="form-control" id="add_employee_id" name="add_employee_id" required>
+                            <label for="edit_employee_id" class="form-label">Employee id</label>
+                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer_name" class="form-label">Address</label>
+                            <label for="edit_address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="add_address" name="add_address" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer_name" class="form-label">Project</label>
-                            <input type="text" class="form-control" id="add_project" name="add_project" required>
+                            <label for="edit_project" class="form-label">Project name</label>
+                            <select class="form-select" aria-label="Default" name="add_project" id="add_project">
+                                @foreach ($project_list as $item)
+                                    <option value="{{ $item->project_id }}">{{ $item->project_code . ' - ' . $item->project_name		}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -94,9 +102,9 @@
                         <td>{{ $item->customer_name}}</td>
                         <td>{{ $item->phone_number}}</td>
                         <td>{{ $item->email}}</td>
-                        <td>{{ $item->employee_id}}</td>
+                        <td>{{ $item->employee_name}}</td>
                         <td>{{ $item->address}}</td>
-                        <td>{{ $item->project}}</td>
+                        <td>{{ $item->project_name}}</td>
 
                         <td>
                             <button

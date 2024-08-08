@@ -11,7 +11,10 @@ class RewardController extends Controller
     {
         $model = new RewardModel();
         $reward_list = $model->getReward();
-        return view('auth.reward.index-reward', compact('reward_list'));
+        $employee_list = $model->getEmployee();
+//        dd($reward_list);
+        return view('auth.reward.index-reward',
+            compact('reward_list', 'employee_list'));
     }
 
     public function add(Request $request)
@@ -19,15 +22,15 @@ class RewardController extends Controller
         $validated = $request->validate([
             'add_reward_code' => 'required|string',
             'add_reward_name' => 'required|string',
-            'add_employee_id' => 'required|string',
-            'add_discription' => 'required|string',
+            'add_employee_id' => 'int',
+            'add_description' => 'required|string',
         ]);
 
        RewardModel::create([
             'reward_code' =>$validated['add_reward_code'],
             'reward_name' =>$validated['add_reward_name'],
             'employee_id' =>$validated['add_employee_id'],
-            'discription' =>$validated['add_discription'],
+            'add_description' =>$validated['add_description'],
         ]);
 
         return response()->json([

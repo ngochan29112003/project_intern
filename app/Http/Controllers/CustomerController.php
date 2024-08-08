@@ -11,8 +11,13 @@ class CustomerController extends Controller
     {
         $model = new CustomerModel();
         $customer_list = $model->getCustomer();
+        $employee_list = $model->getEmployee();
+        $project_list = $model->getProject();
 //        dd($customer_list);
-        return view('auth.customer.index-customer', compact('customer_list'));
+        return view('auth.customer.index-customer',
+            compact('customer_list',
+                    'employee_list',
+                            'project_list'));
     }
 
     function add(Request $request){
@@ -20,9 +25,9 @@ class CustomerController extends Controller
             'add_customer_name'=>'required|string',
             'add_phone_number'=>'required|string',
             'add_email'=>'required|string',
-            'add_employee_id'=>'required|string',
+            'add_employee_id'=>'int',
             'add_address'=>'required|string',
-            'add_project'=>'required|string',
+            'add_project'=>'int',
         ]);
 
         CustomerModel::create([
@@ -31,7 +36,7 @@ class CustomerController extends Controller
             'email' =>$validated['add_email'],
             'employee_id' =>$validated['add_employee_id'],
             'address' =>$validated['add_address'],
-            'project' =>$validated['add_project'],
+            'project_id' =>$validated['add_project'],
         ]);
 
         return response()->json([
@@ -43,9 +48,9 @@ class CustomerController extends Controller
 
     public function delete($id)
     {
-        $reward = CustomerModel::findOrFail($id);
+        $customer = CustomerModel::findOrFail($id);
 
-        $reward->delete();
+        $customer->delete();
 
         return response()->json([
             'success' => true,
