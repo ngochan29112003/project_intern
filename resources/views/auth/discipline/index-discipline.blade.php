@@ -144,5 +144,46 @@
                 }
             });
         });
+
+
+        $('#disciplineTableBody').on('click', '.delete-btn', function () {
+            var disciplineId = $(this).data('id');
+            var row = $(this).closest('tr');
+            // console.log(disciplineId)
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this discipline ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-discipline', ':id') }}'.replace(':id', disciplineId),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                table.row(row).remove().draw();
+                                toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Failed to delete the discipline.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

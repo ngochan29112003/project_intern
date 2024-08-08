@@ -11,8 +11,6 @@ class DisciplineModel extends Model
 {
     use HasFactory;
     protected $table = 'disciplines';
-
-    public $timestamps = false;
     protected $primaryKey = 'discipline_id';
     protected $fillable = [
         'discipline_code',
@@ -20,6 +18,7 @@ class DisciplineModel extends Model
         'employee_id',
         'description',
     ];
+    public $timestamps = false;
 
     function getDiscipline()
     {

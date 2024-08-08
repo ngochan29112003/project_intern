@@ -37,4 +37,15 @@ class DisciplineController extends Controller
             'message' => 'Discipline added successfully',
         ]);
     }
+
+    function delete($id)
+    {
+//        dd($id);
+        $discipline = DisciplineModel::findOrFail($id);
+        $discipline->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Discipline deleted successfully'
+        ]);
+    }
 }

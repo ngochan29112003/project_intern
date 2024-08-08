@@ -54,11 +54,15 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/departments'], function () {
         Route::get('/index', [DepartmentController::class, 'getView'])->name('index-department');
         Route::post('/add', [DepartmentController::class, 'add'])->name('add-department');
+        Route::delete('/delete/{id}', [DepartmentController::class, 'delete'])->name('delete-department');
     });
 
     //CUSTOMER
-    Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
-    Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
+    Route::group(['prefix' => '/customers'], function () {
+        Route::get('/index', [CustomerController::class, 'getView'])->name('index-customer');
+        Route::post('/add', [CustomerController::class, 'add'])->name('add-customer');
+        Route::delete('/delete/{id}', [CustomerController::class, 'delete'])->name('delete-customer');
+    });
 
     //REWARD
     Route::group(['prefix' => '/reward'], function () {
@@ -68,32 +72,59 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     });
 
     //PAYROLL
-    Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
-    Route::post('/payroll/add', [PayrollController::class, 'add'])->name('add-payroll');
+    Route::group(['prefix' => '/payroll'], function () {
+        Route::get('/index', [PayrollController::class, 'getView'])->name('index-payroll');
+        Route::post('/add', [PayrollController::class, 'add'])->name('add-payroll');
+        Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete-payroll');
+    });
 
     //POSITION
-    Route::get('/position', [PositionCotroller::class, 'getView'])->name('index-position');
-    Route::post('/position/add', [PositionCotroller::class, 'add'])->name('add-position');
+    Route::group(['prefix' => '/position'], function () {
+        Route::get('/index', [PositionCotroller::class, 'getView'])->name('index-position');
+        Route::post('/add', [PositionCotroller::class, 'add'])->name('add-position');
+        Route::delete('/delete/{id}', [PositionCotroller::class, 'delete'])->name('delete-position');
+    });
 
     //SALARY CALCULATION
-    Route::get('/salary-calculation', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
-    Route::post('/salary-calculation/add', [PositionCotroller::class, 'add'])->name('add-salary-calculation');
+    Route::group(['prefix' => '/salary-calculation'], function () {
+        Route::get('/index', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
+        Route::post('/add', [SalaryCalculationController::class, 'add'])->name('add-salary-calculation');
+        Route::delete('/delete/{id}', [SalaryCalculationController::class, 'delete'])->name('delete-salary-calculation');
+    });
+
 
     //DISCIPLINE
-    Route::get('/discipline', [DisciplineController::class, 'getView'])->name('index-discipline');
-    Route::post('/discipline/add', [DisciplineController::class, 'add'])->name('add-discipline');
+    Route::group(['prefix' => '/discipline'], function () {
+        Route::get('/index', [DisciplineController::class, 'getView'])->name('index-discipline');
+        Route::post('/add', [DisciplineController::class, 'add'])->name('add-discipline');
+        Route::delete('/delete/{id}', [DisciplineController::class, 'delete'])->name('delete-discipline');
+    });
+
 
     //PERMISSION
-    Route::get('/permission', [PermissionController::class, 'getView'])->name('index-permission');
-    Route::post('/permission/add', [PermissionController::class, 'add'])->name('add-permission');
+    Route::group(['prefix' => '/permission'], function () {
+        Route::get('/index', [PermissionController::class, 'getView'])->name('index-permission');
+        Route::post('/add', [PermissionController::class, 'add'])->name('add-permission');
+        Route::delete('/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+    });
+
 
     //TASK
-    Route::get('/task', [TaskController::class, 'getView'])->name('index-task');
-    Route::post('/task/add', [TaskController::class, 'add'])->name('add-task');
+    Route::group(['prefix' => '/task'], function () {
+        Route::get('/index', [TaskController::class, 'getView'])->name('index-task');
+        Route::post('/add', [TaskController::class, 'add'])->name('add-task');
+        Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
+    });
+
 
     //PROJECT
-    Route::get('/project', [ProjectController::class, 'getView'])->name('index-project');
-    Route::post('/project/add', [ProjectController::class, 'add'])->name('add-project');
+    Route::group(['prefix' => '/project'], function () {
+        Route::get('/index', [ProjectController::class, 'getView'])->name('index-project');
+        Route::post('/add', [ProjectController::class, 'add'])->name('add-project');
+        Route::delete('/delete/{id}', [ProjectController::class, 'delete'])->name('delete-project');
+    });
+
+
 });
 
 
