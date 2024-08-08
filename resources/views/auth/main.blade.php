@@ -225,7 +225,7 @@ $token = 'position';
             </a>
             <ul id="project-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="charts-chartjs.html">
+                    <a href="{{route('index-project')}}">
                         <i class="bi bi-circle"></i><span>Project list</span>
                     </a>
                 </li>

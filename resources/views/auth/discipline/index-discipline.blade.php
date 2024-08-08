@@ -78,6 +78,7 @@
                     <th>Discipline name</th>
                     <th>Employee id</th>
                     <th>Description</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody id="disciplineTableBody">
@@ -89,8 +90,7 @@
                         <td>{{ $item->discipline_name}}</td>
                         <td>{{ $item->employee_id}}</td>
                         <td>{{ $item->description}}</td>
-
-                        <td>
+                        <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                                 data-id="{{ $item->discipline_id}}">
@@ -124,7 +124,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#addDisciplineModalModal').modal('hide');
+                        $('#addDisciplineModal').modal('hide');
                         toastr.success(response.messMEage, "Successful");
                         setTimeout(function() {
                             location.reload()

@@ -36,4 +36,16 @@ class RewardController extends Controller
             'message' => 'Reward added successfully',
         ]);
     }
+
+    public function delete($id)
+    {
+        $reward = RewardModel::findOrFail($id);
+
+        $reward->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reward deleted successfully'
+        ]);
+    }
 }

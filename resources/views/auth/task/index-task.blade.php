@@ -86,6 +86,7 @@
                     <th>End date</th>
                     <th>Location</th>
                     <th>Purpose</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody id="taskTableBody">
@@ -99,7 +100,7 @@
                         <td>{{ $item->end_date}}</td>
                         <td>{{ $item->location}}</td>
                         <td>{{ $item->purpose}}</td>
-                        <td>
+                        <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                                 data-id="{{ $item->id_task}}">

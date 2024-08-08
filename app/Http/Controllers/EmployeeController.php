@@ -77,7 +77,7 @@ class EmployeeController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Proposal application deleted successfully'
+            'message' => 'Employee deleted successfully'
         ]);
     }
 

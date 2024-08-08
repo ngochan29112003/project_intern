@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
@@ -50,16 +51,21 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     });
 
     //DEPARTMENT
-    Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');
-    Route::post('/departments/add', [DepartmentController::class, 'add'])->name('add-department');
+    Route::group(['prefix' => '/departments'], function () {
+        Route::get('/index', [DepartmentController::class, 'getView'])->name('index-department');
+        Route::post('/add', [DepartmentController::class, 'add'])->name('add-department');
+    });
 
     //CUSTOMER
     Route::get('/customer', [CustomerController::class, 'getView'])->name('index-customer');
     Route::post('/customer/add', [CustomerController::class, 'add'])->name('add-customer');
 
     //REWARD
-    Route::get('/reward', [RewardController::class, 'getView'])->name('index-reward');
-    Route::post('/reward/add', [RewardController::class, 'add'])->name('add-reward');
+    Route::group(['prefix' => '/reward'], function () {
+        Route::get('/index', [RewardController::class, 'getView'])->name('index-reward');
+        Route::post('/add', [RewardController::class, 'add'])->name('add-reward');
+        Route::delete('/delete/{id}', [RewardController::class, 'delete'])->name('delete-reward');
+    });
 
     //PAYROLL
     Route::get('/payroll', [PayrollController::class, 'getView'])->name('index-payroll');
@@ -84,6 +90,10 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //TASK
     Route::get('/task', [TaskController::class, 'getView'])->name('index-task');
     Route::post('/task/add', [TaskController::class, 'add'])->name('add-task');
+
+    //PROJECT
+    Route::get('/project', [ProjectController::class, 'getView'])->name('index-project');
+    Route::post('/project/add', [ProjectController::class, 'add'])->name('add-project');
 });
 
 

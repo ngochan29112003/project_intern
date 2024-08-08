@@ -76,6 +76,7 @@
                     <th>Reward name</th>
                     <th>Employee</th>
                     <th>Description</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody id="rewardTableBody">
@@ -87,7 +88,7 @@
                         <td>{{ $item->reward_name}}</td>
                         <td>{{ $item->employee_id}}</td>
                         <td>{{ $item->description}}</td>
-                        <td>
+                        <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                                 data-id="{{ $item->rewards_id}}">
@@ -121,7 +122,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#addRewardModalModal').modal('hide');
+                        $('#addRewardModal').modal('hide');
                         toastr.success(response.messMEage, "Successful");
                         setTimeout(function() {
                             location.reload()
@@ -138,6 +139,47 @@
                     } else {
                         toastr.error("An error occurred", "Error");
                     }
+                }
+            });
+        });
+
+
+        $('#rewardTableBody').on('click', '.delete-btn', function () {
+            var rewardId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this reward ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('delete-reward', ':id') }}'.replace(':id', rewardId),
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                table.row(row).remove().draw();
+                                toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
+                            } else {
+                                toastr.error("Failed to delete the reward.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
                 }
             });
         });

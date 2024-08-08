@@ -110,7 +110,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#addDepartmentModalModal').modal('hide');
+                        $('#addDepartmentModal').modal('hide');
                         toastr.success(response.message, "Successful");
                         setTimeout(function() {
                             location.reload()

@@ -356,6 +356,9 @@
                             if (response.success) {
                                 table.row(row).remove().draw();
                                 toastr.success(response.message, "Deleted successfully");
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500);
                             } else {
                                 toastr.error("Failed to delete the employee.",
                                     "Operation Failed");

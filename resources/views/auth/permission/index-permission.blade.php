@@ -59,6 +59,7 @@
             <tr>
                 <th>No</th>
                 <th>Permission name</th>
+                <th class="text-center">Action</th>
             </tr>
             </thead>
             <tbody id="permissionTableBody">
@@ -67,7 +68,7 @@
                 <tr>
                     <td>{{ $stt++ }}</td>
                     <td>{{ $item->permission_name}}</td>
-                    <td>
+                    <td class="text-center">
                         <button
                             class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                             data-id="{{ $item->permission_id}}">
