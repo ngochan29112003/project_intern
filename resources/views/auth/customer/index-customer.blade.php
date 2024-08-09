@@ -67,7 +67,7 @@
                             <label for="edit_project" class="form-label">Project name</label>
                             <select class="form-select" aria-label="Default" name="add_project" id="add_project">
                                 @foreach ($project_list as $item)
-                                    <option value="{{ $item->project_id }}">{{ $item->project_code . ' - ' . $item->project_name		}}</option>
+                                    <option value="{{ $item->project_id }}">{{ $item->project_code . ' - ' . $item->project_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -92,6 +92,7 @@
                     <th>Employee Name</th>
                     <th>Address</th>
                     <th>Project</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody id="customerTableBody">

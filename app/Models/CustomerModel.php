@@ -11,9 +11,7 @@ class CustomerModel extends Model
 {
     use HasFactory;
     protected $table = 'customers';
-
-    public $timestamps = false;
-   protected $primaryKey = 'customer_id';
+    protected $primaryKey = 'customer_id';
     protected $fillable = [
         'customer_name',
         'phone_number',
@@ -22,6 +20,7 @@ class CustomerModel extends Model
         'address',
         'project_id',
     ];
+    public $timestamps = false;
 
     function getEmployee()
     {

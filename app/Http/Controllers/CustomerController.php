@@ -13,10 +13,10 @@ class CustomerController extends Controller
         $customer_list = $model->getCustomer();
         $employee_list = $model->getEmployee();
         $project_list = $model->getProject();
-//        dd($customer_list);
+        dd($customer_list);
         return view('auth.customer.index-customer',
             compact('customer_list',
-                    'employee_list',
+                 'employee_list',
                             'project_list'));
     }
 
@@ -48,10 +48,9 @@ class CustomerController extends Controller
 
     public function delete($id)
     {
+//        dd($id);
         $customer = CustomerModel::findOrFail($id);
-
         $customer->delete();
-
         return response()->json([
             'success' => true,
             'message' => 'Customer deleted successfully'

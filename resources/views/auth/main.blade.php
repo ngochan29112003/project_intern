@@ -1,8 +1,10 @@
 <?php
+
 use App\StaticString;
+
 $token = 'position';
 ?>
-    <!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,8 +21,8 @@ $token = 'position';
     <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
 
     <!-- ======= CSS thì dán vào đây ======= -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -33,7 +35,7 @@ $token = 'position';
     <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">
-{{--    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">--}}
+    {{--    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -70,7 +72,7 @@ $token = 'position';
                     <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle object-fit-cover"
                     >
                     <span
-                        class="d-none d-md-block dropdown-toggle ps-2">{{$data->employee_name}}</span>
+                            class="d-none d-md-block dropdown-toggle ps-2">{{$data->employee_name}}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -83,7 +85,7 @@ $token = 'position';
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('index-profile')}}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -166,7 +168,7 @@ $token = 'position';
             <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-person-fill"></i><span>Employee</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                        class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
@@ -190,25 +192,25 @@ $token = 'position';
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-person-check-fill"></i></i><span>Customer management</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-customer')}}">
-                        <i class="bi bi-circle"></i><span>Customer list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"--}}
+{{--               aria-expanded="false">--}}
+{{--                <i class="bi bi-person-check-fill"></i></i><span>Customer</span><i--}}
+{{--                        class="bi bi-chevron-down ms-auto"></i>--}}
+{{--            </a>--}}
+{{--            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('index-customer')}}">--}}
+{{--                        <i class="bi bi-circle"></i><span>Customer list</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-building-fill"></i><span>Department</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                        class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
@@ -219,19 +221,18 @@ $token = 'position';
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#project-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-calendar2"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="project-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-project')}}">
-                        <i class="bi bi-circle"></i><span>Project list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" data-bs-target="#project-nav" data-bs-toggle="collapse" href="#">--}}
+{{--                <i class="bi bi-calendar2"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>--}}
+{{--            </a>--}}
+{{--            <ul id="project-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('index-project')}}">--}}
+{{--                        <i class="bi bi-circle"></i><span>Project list</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </li>--}}
 
 
         <li class="nav-item">
@@ -273,7 +274,7 @@ $token = 'position';
             <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-book-fill"></i><span>Task</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
+                        class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
