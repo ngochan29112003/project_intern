@@ -6,14 +6,12 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
-
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -117,7 +115,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
     });
 
-
     //PROJECT
     Route::group(['prefix' => '/project'], function () {
         Route::get('/index', [ProjectController::class, 'getView'])->name('index-project');
@@ -125,7 +122,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [ProjectController::class, 'delete'])->name('delete-project');
     });
 
-
+    Route::get('/departments', [DepartmentController::class, 'getView'])->name('index-department');
+    Route::post('/departments/add', [DepartmentController::class, 'add'])->name('add-department');
+    Route::get('/projects', [ProjectController::class, 'getView'])->name('index-project');
 });
 
 

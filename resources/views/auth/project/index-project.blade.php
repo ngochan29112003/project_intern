@@ -14,7 +14,7 @@
     <!-- ======= Các button chức năng ======= -->
     <div class="row gx-3 my-3">
         <div class="col-md-6 m-0">
-            <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addProject">
+            <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addProjectModal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
                     Add a new project
@@ -30,7 +30,7 @@
     </div>
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
-    <div class="modal fade" id="addProject">
+    <div class="modal fade" id="addProjectModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -40,46 +40,39 @@
                     <form id="addProjectForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_project_code" class="form-label">Project code</label>
+                            <label for="edit_project_name" class="form-label">Project Code</label>
                             <input type="text" class="form-control" id="add_project_code" name="add_project_code"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_project_name" class="form-label">Project name</label>
+                            <label for="edit_project_name" class="form-label">Project Name</label>
                             <input type="text" class="form-control" id="add_project_name" name="add_project_name"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Status</label>
-                            <select class="form-select" aria-label="Default" name="edit_status" id="edit_status">
-                                <option value="0">Incomplete</option>
-                                <option value="1">Completed</option>
-                            </select>
+                            <label for="edit_project_name" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="add_status" name="add_status"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_customer" class="form-label">Customer name</label>
-                            <select class="form-select" aria-label="Default" name="add_customer" id="add_customer">
-                                @foreach ($project_list as $item)
-                                    <option value="{{ $item->customer_id }}">{{ $item->customer_name}}</option>
-                                @endforeach
-                            </select>
+                            <label for="edit_project_name" class="form-label">Client id</label>
+                            <input type="text" class="form-control" id="add_client_id" name="add_client_id"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee name</label>
-                            <input type="text" class="form-control" id="add_employee_id" name="add_employee_id" required>
-{{--                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">--}}
-{{--                                @foreach ($employee_list as $item)--}}
-{{--                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
+                            <label for="edit_project_name" class="form-label">Employee id</label>
+                            <input type="text" class="form-control" id="add_employee" name="add_employee"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_start_date" class="form-label">Start date</label>
-                            <input type="date" class="form-control" id="add_start_date" name="add_start_date" required>
+                            <label for="edit_project_name" class="form-label">Start date</label>
+                            <input type="text" class="form-control" id="add_start_date" name="add_start_date"
+                                   required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_end_date" class="form-label">End date</label>
-                            <input type="date" class="form-control" id="add_end_date" name="add_end_date" required>
+                            <label for="edit_project_name" class="form-label">End date</label>
+                            <input type="text" class="form-control" id="add_end_date" name="add_end_date"
+                                   required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -90,48 +83,38 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Project</h3>
-        <table id="ProjectTable" class="table table-hover table-borderless">
+        <h3 class="text-left mb-4">project</h3>
+        <table id="projectTable" class="table table-hover table-borderless">
             <thead class="table-light">
-            <tr>
-                <th>No</th>
-                <th>Project code</th>
-                <th>Project name</th>
-                <th>Status</th>
-                <th>Customer name</th>
-                <th>Employee name</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>Action</th>
-            </tr>
+{{--            <tr>--}}
+{{--                <th>No</th>--}}
+{{--                <th>project Code</th>--}}
+{{--                <th>project Name</th>--}}
+{{--                <th>Action</th>--}}
+{{--            </tr>--}}
             </thead>
             <tbody id="projectTableBody">
             @php($stt = 0)
-            @foreach ($project_list as $item)
-                <tr>
-                    <td>{{ $stt++ }}</td>
-                    <td>{{ $item->project_code}}</td>
-                    <td>{{ $item->project_name}}</td>
-                    <td>{{ $item->status}}</td>
-                    <td>{{ $item->customer_name}}</td>
-                    <td>{{ $item->emloyee_id}}</td>
-                    <td>{{ $item->start_date}}</td>
-                    <td>{{ $item->end_date}}</td>
-                    <td class="text-center">
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                            data-id="{{ $item->project_id}}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        |
-                        <button
-                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                            data-id="{{ $item->project_id}}">
-                            <i class="bi bi-trash3"></i>
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
+{{--            @foreach ($project_list as $item)--}}
+{{--                <tr>--}}
+{{--                    <td>{{ $stt++ }}</td>--}}
+{{--                    <td>{{ $item->project_code }}</td>--}}
+{{--                    <td>{{ $item->project_name }}</td>--}}
+{{--                    <td>--}}
+{{--                        <button--}}
+{{--                            class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"--}}
+{{--                            data-id="{{ $item->project_id }}">--}}
+{{--                            <i class="bi bi-pencil-square"></i>--}}
+{{--                        </button>--}}
+{{--                        |--}}
+{{--                        <button--}}
+{{--                            class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"--}}
+{{--                            data-id="{{ $item->project_id }}">--}}
+{{--                            <i class="bi bi-trash3"></i>--}}
+{{--                        </button>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
             </tbody>
 
         </table>
@@ -151,8 +134,8 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#addProjectModal').modal('hide');
-                        toastr.success(response.messMEage, "Successful");
+                        $('#addProjectModalModal').modal('hide');
+                        toastr.success(response.message, "Successful");
                         setTimeout(function() {
                             location.reload()
                         }, 500);
@@ -168,47 +151,6 @@
                     } else {
                         toastr.error("An error occurred", "Error");
                     }
-                }
-            });
-        });
-
-
-        $('#projectTableBody').on('click', '.delete-btn', function () {
-            var projectId = $(this).data('id');
-            var row = $(this).closest('tr');
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to delete this project ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '{{ route('delete-project', ':id') }}'.replace(':id', projectId),
-                        method: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                table.row(row).remove().draw();
-                                toastr.success(response.message, "Deleted successfully");
-                                setTimeout(function () {
-                                    location.reload()
-                                }, 500);
-                            } else {
-                                toastr.error("Failed to delete the project.",
-                                    "Operation Failed");
-                            }
-                        },
-                        error: function (xhr) {
-                            toastr.error("An error occurred.", "Operation Failed");
-                        }
-                    });
                 }
             });
         });
