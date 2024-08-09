@@ -11,15 +11,18 @@ class PayrollController extends Controller
     {
         $model = new PayrollModel();
         $payroll_list = $model->getPayroll();
-        return view('auth.payroll.index-payroll', compact('payroll_list'));
+        $employee_list = $model->getEmployee();
+        $position_list = $model->getPosition();
+        return view('auth.payroll.index-payroll',
+            compact('payroll_list','employee_list','position_list'));
     }
 
     public function add(Request $request)
     {
         $validated = $request->validate([
             'add_payroll_code' => 'required|string',
-            'add_employee_id' => 'required|string',
-            'add_position_id' => 'required|string',
+            'add_employee_id' => 'int',
+            'add_position_id' => 'int',
             'add_monthly_salary' => 'required|string',
             'add_work_days' => 'required|string',
             'add_net_salary' => 'required|string',
@@ -28,7 +31,7 @@ class PayrollController extends Controller
         PayrollModel::create([
             'payroll_code' =>$validated['add_payroll_code'],
             'employee_id' =>$validated['add_employee_id'],
-            'position_id' =>$validated['add_position_id'],
+            'job_position_id' =>$validated['add_position_id'],
             'monthly_salary' =>$validated['add_monthly_salary'],
             'work_days' =>$validated['add_work_days'],
             'net_salary' =>$validated['add_net_salary'],

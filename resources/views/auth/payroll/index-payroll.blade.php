@@ -45,13 +45,20 @@
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee id</label>
-                            <input type="text" class="form-control" id="add_employee_id" name="add_employee_id"
-                                   required>
+                            <label for="edit_employee_id" class="form-label">Employee name</label>
+                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_position_id" class="form-label">Position id</label>
-                            <input type="text" class="form-control" id="add_position_id" name="add_position_id" required>
+                            <label for="edit_position_id" class="form-label">Position name</label>
+                            <select class="form-select" aria-label="Default" name="add_position_id" id="add_position_id">
+                                @foreach ($position_list as $item)
+                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="edit_monthly_salary" class="form-label">Monthly salary</label>
@@ -95,8 +102,8 @@
                     <tr>
                         <td>{{ $stt++ }}</td>
                         <td>{{ $item->payroll_code}}</td>
-                        <td>{{ $item->employee_id}}</td>
-                        <td>{{ $item->position_id}}</td>
+                        <td>{{ $item->employee_name}}</td>
+                        <td>{{ $item->job_position_name}}</td>
                         <td>{{ $item->monthly_salary}}</td>
                         <td>{{ $item->work_days}}</td>
                         <td>{{ $item->net_salary}}</td>

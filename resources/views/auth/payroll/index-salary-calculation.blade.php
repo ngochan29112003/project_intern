@@ -42,8 +42,12 @@
                             <input type="text" class="form-control" id="add_payroll_code" name="add_payroll_code" required>
                         </div>
                         <div class="mb-3">
-                            <label for="add_employee_id" class="form-label">Employee Id</label>
-                            <input type="text" class="form-control" id="add_employee_id" name="add_employee_id" required>
+                            <label for="add_employee_id" class="form-label">Employee Name</label>
+                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -52,11 +56,17 @@
                         </div>
                         <div class="mb-3">
                             <label for="add_allowance" class="form-label">Allowance</label>
-                            <input type="text" class="form-control" id="add_allowance" name="add_allowance" required>
+                            <select class="form-select" aria-label="Default" name="add_allowance" id="add_allowance">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="add_advance" class="form-label">Advance</label>
-                            <input type="text" class="form-control" id="add_advance" name="add_advance" required>
+                            <select class="form-select" aria-label="Default" name="add_advance" id="add_advance">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="add_description" class="form-label">Description</label>
@@ -78,7 +88,7 @@
                 <tr>
                     <th>No</th>
                     <th>Payroll code</th>
-                    <th>Employee</th>
+                    <th>Employee name</th>
                     <th>Work day</th>
                     <th>Allowance</th>
                     <th>Advance</th>
@@ -92,10 +102,10 @@
                     <tr>
                         <td>{{$stt++}}</td>
                         <td>{{$item->payroll_code}}</td>
-                        <td>{{$item->employee_id}}</td>
+                        <td>{{$item->employee_name}}</td>
                         <td>{{$item->work_days}}</td>
-                        <td>{{$item->allowance}}</td>
-                        <td>{{$item->advance}}</td>
+                        <td>{{$item->allowance === 0 ? 'Yes' : 'No'}}</td>
+                        <td>{{$item->advance === 0 ? 'Yes' : 'No'}}</td>
                         <td>{{$item->description}}</td>
                         <td class="text-center">
                             <button

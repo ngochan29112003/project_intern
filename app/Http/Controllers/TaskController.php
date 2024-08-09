@@ -11,14 +11,16 @@ class TaskController extends Controller
     {
         $model = new TaskModel();
         $task_list = $model->getTask();
-        return view('auth.task.index-task', compact('task_list'));
+        $employee_list = $model->getEmployee();
+        return view('auth.task.index-task',
+            compact('task_list','employee_list'));
     }
 
     public function add(Request $request)
     {
         $validated = $request->validate([
             'add_task_code' => 'required|string',
-            'add_employee_id' => 'required|string',
+            'add_employee_id' => 'int',
             'add_start_date' => 'required|string',
             'add_end_date' => 'required|string',
             'add_location' => 'required|string',
