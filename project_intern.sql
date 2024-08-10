@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 09, 2024 at 07:04 PM
+-- Generation Time: Aug 09, 2024 at 08:10 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,8 +40,6 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(4, 'admindt', '$2y$10$brX2LMOYrEUiyX4oZlsiBukDELfme0qz/vQYUFaLlmp07F0JTMCxC', 1, 4),
-(5, 'tuananh', '$2y$10$8De1cXl/xP/57bwzEyyNreRB.KHGNejngp1OZDpV15ARu/.xm4ary', 1, 5),
 (6, 'ngochan', '$2y$10$iRR0RHFnkm.3K1R5FO3ZDeC6iygS0fjNYXW1hLv0Wf9.GJCtuv3Z.', 1, 6);
 
 -- --------------------------------------------------------
@@ -60,15 +58,6 @@ CREATE TABLE `customers` (
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`customer_id`, `customer_name`, `phone_number`, `email`, `employee_id`, `address`, `project_id`) VALUES
-(1, 'hana', '543', 'dasds', 1, 'dfsdf', 0),
-(4, '231', '543', 'dasds', 3, 'dfsdf', 1),
-(5, '231', '312', '3213', 3, 'dfsdf', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -86,7 +75,8 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(5, 'NE', 'Network Engineering');
+(5, 'NE', 'Network Engineering'),
+(6, 'HR', 'Human Resource');
 
 -- --------------------------------------------------------
 
@@ -149,18 +139,16 @@ CREATE TABLE `employees` (
   `education_level_id` int(11) NOT NULL,
   `status` text,
   `type_employee_id` int(11) DEFAULT NULL,
-  `job_position_id` int(11) DEFAULT NULL
+  `job_position_id` int(11) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
-(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, '1', 2, 3),
-(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, '1', 3, 3),
-(6, 'Hanaa Nhe', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', 4444, 2, '1', 3, 3),
-(7, 'ewqew', 'avt.png', 1, '2024-08-16', 'ewqe', 43243, 3, '1', 1, 4);
+INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`) VALUES
+(6, 'Hanaa Nhe', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', 4444, 2, '1', 3, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,14 +234,6 @@ CREATE TABLE `projects` (
   `start_date` text NOT NULL,
   `end_date` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`project_id`, `project_code`, `project_name`, `status`, `customer_id`, `emloyee_id`, `start_date`, `end_date`) VALUES
-(2, 'dsa', 'dsa', 'dsa', 2, 3, '23/1/2024', '3/10/2024'),
-(3, '2e322', '23423', '342', 1, 1, '2024-08-09', '2024-08-31');
 
 -- --------------------------------------------------------
 
@@ -438,13 +418,13 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
