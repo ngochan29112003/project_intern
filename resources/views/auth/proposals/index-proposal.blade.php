@@ -60,8 +60,8 @@
                             <input type="date" class="form-control" id="add_proposal_date" name="add_proposal_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">End date</label>
-                            <input type="date" class="form-control" id="add_status" name="add_status" required>
+                            <label for="edit_status" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="add_status" name="add_status" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
