@@ -98,7 +98,7 @@
                 </tr>
                 </thead>
                 <tbody id="departmentTableBody">
-                @php($stt = 0)
+                @php($stt = 1)
                 @foreach ($department_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>

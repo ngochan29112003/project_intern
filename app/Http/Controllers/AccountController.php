@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountModel;
+use App\Models\DepartmentModel;
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -62,6 +63,31 @@ class AccountController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Account deleted successfully'
+        ]);
+    }
+    public function edit($id)
+    {
+        $account = AccountModel::findOrFail($id);
+        return response()->json([
+            'account' => $account
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'username' => 'string',
+            'password' => 'string',
+            'permission' => 'string',
+            'id_employee' => 'string',
+        ]);
+        $account = AccountModel::findOrFail($id);
+        $account->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'account' => $account,
         ]);
     }
 }
