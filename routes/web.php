@@ -56,6 +56,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [DepartmentController::class, 'getView'])->name('index-department');
         Route::post('/add', [DepartmentController::class, 'add'])->name('add-department');
         Route::delete('/delete/{id}', [DepartmentController::class, 'delete'])->name('delete-department');
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit-department');
+        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('update-department');
     });
 
     //CUSTOMER

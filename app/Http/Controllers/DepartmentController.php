@@ -45,4 +45,28 @@ class DepartmentController extends Controller
             'message' => 'Reward deleted successfully'
         ]);
     }
+
+    public function edit($id)
+    {
+        $department = DepartmentModel::findOrFail($id);
+        return response()->json([
+            'department' => $department
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'department_code' => 'string',
+            'department_name' => 'string',
+        ]);
+        $department = DepartmentModel::findOrFail($id);
+        $department->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'department' => $department,
+        ]);
+    }
 }

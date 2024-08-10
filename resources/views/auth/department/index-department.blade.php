@@ -57,6 +57,34 @@
         </div>
     </div>
 
+    <!-- ======= Modal sửa ======= -->
+    <div class="modal fade" id="editDepartmentModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit department</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editDepartmentForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="department_code" class="form-label">Department Code</label>
+                            <input type="text" class="form-control" id="department_code" name="department_code"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="department_name" class="form-label">Department Name</label>
+                            <input type="text" class="form-control" id="department_name" name="department_name"
+                                   required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Department</h3>
         <div class="table-responsive">
@@ -167,6 +195,55 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#departmentTableBody').on('click', '.edit-btn', function () {
+            var departmentId = $(this).data('id');
+
+            $('#editDepartmentForm').data('id', departmentId);
+            var url = "{{ route('edit-department', ':id') }}";
+            url = url.replace(':id', departmentId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.department;
+                    $('#department_code').val(data.department_code);
+                    $('#department_name').val(data.department_name);
+                    $('#editDepartmentModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editDepartmentForm').submit(function (e) {
+            e.preventDefault();
+            var departmentId = $(this).data('id');
+            var url = "{{ route('update-department', ':id') }}";
+            url = url.replace(':id', departmentId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editDepartmentModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });
