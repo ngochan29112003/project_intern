@@ -14,15 +14,28 @@ class PayrollModel extends Model
     protected $fillable=[
         'payroll_code',
         'employee_id',
-        'position_id',
+        'job_position_id',
         'monthly_salary',
         'work_days',
         'net_salary',
     ];
     public $timestamps = false;
 
+    function getEmployee()
+    {
+        return DB::table('employees')->get();
+    }
+
+    function getPosition()
+    {
+        return DB::table('job_positions')->get();
+    }
+
     function getPayroll()
     {
-        return DB::table('payroll')->get();
+        return DB::table('payroll')
+            ->join('employees','employees.employee_id','=','payroll.employee_id')
+            ->join('job_positions','job_positions.job_position_id','=','payroll.job_position_id')
+            ->get();
     }
 }

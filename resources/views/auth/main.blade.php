@@ -177,20 +177,6 @@ $token = 'position';
                     </a>
                 </li>
             </ul>
-            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-reward')}}">
-                        <i class="bi bi-circle"></i><span>Reward</span>
-                    </a>
-                </li>
-            </ul>
-            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-discipline')}}">
-                        <i class="bi bi-circle"></i><span>Discipline</span>
-                    </a>
-                </li>
-            </ul>
         </li>
 {{--        <li class="nav-item">--}}
 {{--            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"--}}
@@ -280,6 +266,28 @@ $token = 'position';
                 <li>
                     <a href="{{route('index-task')}}">
                         <i class="bi bi-circle"></i><span>Task list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#other-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-star-fill"></i><span>Reward & Discipline</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="other-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-reward')}}">
+                        <i class="bi bi-circle"></i><span>Reward</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="other-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="{{route('index-discipline')}}">
+                        <i class="bi bi-circle"></i><span>Discipline</span>
                     </a>
                 </li>
             </ul>

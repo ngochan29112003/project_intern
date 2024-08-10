@@ -23,9 +23,15 @@ class TaskModel extends Model
 
     public $timestamps = false;
 
+    function getEmployee()
+    {
+        return DB::table('employees')->get();
+    }
     function getTask()
     {
-        return DB::table('tasks')->get();
+        return DB::table('tasks')
+            ->join('employees','employees.employee_id','=','tasks.employee_id')
+            ->get();
     }
 
 }

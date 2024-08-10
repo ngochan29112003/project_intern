@@ -21,9 +21,16 @@ class SalaryCalculationModel extends Model
         'description',
     ];
 
+    function getEmployee()
+    {
+        return DB::table('employees')->get();
+    }
+
     function getSalaryCalculation()
     {
-        return DB::table('salary_calculation')->get();
+        return DB::table('salary_calculation')
+            ->join('employees','employees.employee_id','=','salary_calculation.employee_id')
+            ->get();
     }
 
 }
