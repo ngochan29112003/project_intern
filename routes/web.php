@@ -40,6 +40,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [AccountController::class, 'getView'])->name('index-account');
         Route::post('/add', [AccountController::class, 'add'])->name('add-account');
         Route::delete('/delete/{id}', [AccountController::class, 'delete'])->name('delete-account');
+        Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('edit-account');
+        Route::post('/update/{id}', [AccountController::class, 'update'])->name('update-account');
     });
 
     //EMPLOYEE
@@ -133,6 +135,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     Route::group(['prefix' => '/profile'], function () {
         Route::get('', [ProfileController::class, 'getView'])->name('index-profile');
     });
+
+    //
 });
 
 
