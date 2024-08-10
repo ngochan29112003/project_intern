@@ -5,12 +5,14 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DisciplineController;
+use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
@@ -120,16 +122,25 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
     });
 
-    //PROJECT
-    Route::group(['prefix' => '/project'], function () {
-        Route::get('/index', [ProjectController::class, 'getView'])->name('index-project');
-        Route::post('/add', [ProjectController::class, 'add'])->name('add-project');
-        Route::delete('/delete/{id}', [ProjectController::class, 'delete'])->name('delete-project');
-    });
 
+    //DEPARTMENT
     Route::group(['prefix' => '/departments'], function () {
         Route::get('/', [DepartmentController::class, 'getView'])->name('index-department');
         Route::post('//add', [DepartmentController::class, 'add'])->name('add-department');
+    });
+
+    //PROPOSAL
+    Route::group(['prefix' => '/proposal'], function () {
+        Route::get('/index', [ProposalController::class, 'getView'])->name('index-proposal');
+        Route::post('/add', [ProposalController::class, 'add'])->name('add-proposal');
+        Route::delete('/delete/{id}', [ProposalController::class, 'delete'])->name('delete-proposal');
+    });
+
+    //LEAVE APPLICATION
+    Route::group(['prefix' => '/leave-application'], function () {
+        Route::get('/index', [LeaveApplicationController::class, 'getView'])->name('index-leave-application');
+        Route::post('/add', [LeaveApplicationController::class, 'add'])->name('add-leave-application');
+        Route::delete('/delete/{id}', [LeaveApplicationController::class, 'delete'])->name('delete-leave-application');
     });
 
     Route::group(['prefix' => '/profile'], function () {
