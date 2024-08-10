@@ -293,6 +293,36 @@ $token = 'position';
             </ul>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#proposal-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-mailbox"></i><span>Proposals</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Proposal list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#leave-application-nav" data-bs-toggle="collapse" href="#"
+               aria-expanded="false">
+                <i class="bi bi-envelope-exclamation"></i><span>Leave Application</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Leave Application list</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 
 </aside>
