@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 09, 2024 at 08:10 PM
+-- Generation Time: Aug 10, 2024 at 09:46 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,6 +40,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
+(4, 'admindt', '$2y$10$brX2LMOYrEUiyX4oZlsiBukDELfme0qz/vQYUFaLlmp07F0JTMCxC', 1, 4),
+(5, 'tuananh', '$2y$10$8De1cXl/xP/57bwzEyyNreRB.KHGNejngp1OZDpV15ARu/.xm4ary', 1, 5),
 (6, 'ngochan', '$2y$10$iRR0RHFnkm.3K1R5FO3ZDeC6iygS0fjNYXW1hLv0Wf9.GJCtuv3Z.', 1, 6);
 
 -- --------------------------------------------------------
@@ -58,6 +60,15 @@ CREATE TABLE `customers` (
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `customer_name`, `phone_number`, `email`, `employee_id`, `address`, `project_id`) VALUES
+(1, 'hana', '543', 'dasds', 1, 'dfsdf', 0),
+(4, '231', '543', 'dasds', 3, 'dfsdf', 1),
+(5, '231', '312', '3213', 3, 'dfsdf', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -75,8 +86,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(5, 'NE', 'Network Engineering'),
-(6, 'HR', 'Human Resource');
+(5, 'NE', 'Network Engineering');
 
 -- --------------------------------------------------------
 
@@ -89,6 +99,7 @@ CREATE TABLE `disciplines` (
   `discipline_code` varchar(50) NOT NULL,
   `discipline_name` varchar(100) NOT NULL,
   `employee_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -96,9 +107,9 @@ CREATE TABLE `disciplines` (
 -- Dumping data for table `disciplines`
 --
 
-INSERT INTO `disciplines` (`discipline_id`, `discipline_code`, `discipline_name`, `employee_id`, `description`) VALUES
-(1, '2132', '3213', 231, ''),
-(2, '4', '3213', 7, 'rew');
+INSERT INTO `disciplines` (`discipline_id`, `discipline_code`, `discipline_name`, `employee_id`, `action_id`, `description`) VALUES
+(1, '2132', '3213', 231, 0, ''),
+(2, '4', '3213', 7, 0, 'rew');
 
 -- --------------------------------------------------------
 
@@ -139,16 +150,18 @@ CREATE TABLE `employees` (
   `education_level_id` int(11) NOT NULL,
   `status` text,
   `type_employee_id` int(11) DEFAULT NULL,
-  `job_position_id` int(11) DEFAULT NULL,
-  `department_id` int(11) DEFAULT NULL
+  `job_position_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`) VALUES
-(6, 'Hanaa Nhe', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', 4444, 2, '1', 3, 3, NULL);
+INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
+(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, '1', 2, 3),
+(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, '1', 3, 3),
+(6, 'Hanaa Nhe', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', 4444, 2, '1', 3, 3),
+(7, 'ewqew', 'avt.png', 1, '2024-08-16', 'ewqe', 43243, 3, '1', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -176,6 +189,21 @@ INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_positi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `leave_application`
+--
+
+CREATE TABLE `leave_application` (
+  `application_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `leave_type` text NOT NULL,
+  `start_date` text NOT NULL,
+  `status` text NOT NULL,
+  `reason` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payroll`
 --
 
@@ -183,7 +211,7 @@ CREATE TABLE `payroll` (
   `payroll_id` int(11) NOT NULL,
   `payroll_code` varchar(50) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `position_id` int(11) NOT NULL,
+  `job_position_id` int(11) NOT NULL,
   `monthly_salary` text NOT NULL,
   `work_days` int(11) NOT NULL,
   `net_salary` text NOT NULL
@@ -193,10 +221,11 @@ CREATE TABLE `payroll` (
 -- Dumping data for table `payroll`
 --
 
-INSERT INTO `payroll` (`payroll_id`, `payroll_code`, `employee_id`, `position_id`, `monthly_salary`, `work_days`, `net_salary`) VALUES
+INSERT INTO `payroll` (`payroll_id`, `payroll_code`, `employee_id`, `job_position_id`, `monthly_salary`, `work_days`, `net_salary`) VALUES
 (2, '321', 3213, 32131, '321312', 321312, '321'),
 (3, '2', 321, 231, '2', 2, 'dsad'),
-(4, 'rewr', 12, 3213, '213', 3213, 'dsadas');
+(4, 'rewr', 12, 3213, '213', 3213, 'dsadas'),
+(5, '5', 3, 3, '3', 3, 'sdư');
 
 -- --------------------------------------------------------
 
@@ -235,6 +264,28 @@ CREATE TABLE `projects` (
   `end_date` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`project_id`, `project_code`, `project_name`, `status`, `customer_id`, `emloyee_id`, `start_date`, `end_date`) VALUES
+(2, 'dsa', 'dsa', 'dsa', 2, 3, '23/1/2024', '3/10/2024'),
+(3, '2e322', '23423', '342', 1, 1, '2024-08-09', '2024-08-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `proposals`
+--
+
+CREATE TABLE `proposals` (
+  `proposal_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `type_proposal_id` int(11) NOT NULL,
+  `proposal_date` text NOT NULL,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -254,7 +305,8 @@ CREATE TABLE `rewards` (
 --
 
 INSERT INTO `rewards` (`rewards_id`, `reward_code`, `reward_name`, `employee_id`, `description`) VALUES
-(1, '213', '2231', 231, NULL);
+(1, '213', '2231', 231, NULL),
+(2, 'thuong tien', 'tiennnn', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,6 +323,13 @@ CREATE TABLE `salary_calculation` (
   `advance` text NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `salary_calculation`
+--
+
+INSERT INTO `salary_calculation` (`salary_calculation_id`, `payroll_code`, `employee_id`, `work_days`, `allowance`, `advance`, `description`) VALUES
+(1, '1', 7, 30, '1', '1', 'ưq');
 
 -- --------------------------------------------------------
 
@@ -294,7 +353,30 @@ CREATE TABLE `tasks` (
 
 INSERT INTO `tasks` (`id_task`, `task_code`, `employee_id`, `start_date`, `end_date`, `location`, `purpose`) VALUES
 (2, '32312', 3213, '2024-08-15', '2024-08-21', '3213', '21323'),
-(3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe');
+(3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe'),
+(4, '1', 4, '2024-08-16', '2024-08-31', 'dsa', 'fdsfasd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_disciplines`
+--
+
+CREATE TABLE `type_disciplines` (
+  `action_id` int(11) NOT NULL,
+  `disciplinary_action` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `type_disciplines`
+--
+
+INSERT INTO `type_disciplines` (`action_id`, `disciplinary_action`) VALUES
+(1, 'Warning'),
+(2, 'Reprimand'),
+(3, 'Suspension'),
+(4, 'Demotion'),
+(5, 'Termination');
 
 -- --------------------------------------------------------
 
@@ -315,6 +397,71 @@ INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
 (1, 'Part time'),
 (2, 'Intern'),
 (3, 'official staff');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_leaves`
+--
+
+CREATE TABLE `type_leaves` (
+  `type_leave_id` int(11) NOT NULL,
+  `type_leave_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `type_leaves`
+--
+
+INSERT INTO `type_leaves` (`type_leave_id`, `type_leave_name`) VALUES
+(1, 'Sick Leave'),
+(2, 'Casual Leave'),
+(3, 'Maternity Leave'),
+(4, 'Paternity Leave'),
+(5, 'Unpaid Leave'),
+(6, 'Other');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_proposals`
+--
+
+CREATE TABLE `type_proposals` (
+  `type_proposal_id` int(11) NOT NULL,
+  `proposal_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `type_proposals`
+--
+
+INSERT INTO `type_proposals` (`type_proposal_id`, `proposal_name`) VALUES
+(1, 'Leave Request'),
+(2, 'Salary Increase'),
+(3, 'Position Change');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type_rewards`
+--
+
+CREATE TABLE `type_rewards` (
+  `type_reward_id` int(11) NOT NULL,
+  `type_reward_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `type_rewards`
+--
+
+INSERT INTO `type_rewards` (`type_reward_id`, `type_reward_name`) VALUES
+(1, 'Employee of the Month'),
+(2, 'Outstanding Performance'),
+(3, 'Team Achievement'),
+(4, 'Long Service'),
+(5, 'Innovation Award');
 
 --
 -- Indexes for dumped tables
@@ -363,6 +510,12 @@ ALTER TABLE `job_positions`
   ADD PRIMARY KEY (`job_position_id`);
 
 --
+-- Indexes for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  ADD PRIMARY KEY (`application_id`);
+
+--
 -- Indexes for table `payroll`
 --
 ALTER TABLE `payroll`
@@ -379,6 +532,12 @@ ALTER TABLE `permissions`
 --
 ALTER TABLE `projects`
   ADD PRIMARY KEY (`project_id`);
+
+--
+-- Indexes for table `proposals`
+--
+ALTER TABLE `proposals`
+  ADD PRIMARY KEY (`proposal_id`);
 
 --
 -- Indexes for table `rewards`
@@ -399,10 +558,34 @@ ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id_task`);
 
 --
+-- Indexes for table `type_disciplines`
+--
+ALTER TABLE `type_disciplines`
+  ADD PRIMARY KEY (`action_id`);
+
+--
 -- Indexes for table `type_employees`
 --
 ALTER TABLE `type_employees`
   ADD PRIMARY KEY (`type_employee_id`);
+
+--
+-- Indexes for table `type_leaves`
+--
+ALTER TABLE `type_leaves`
+  ADD PRIMARY KEY (`type_leave_id`);
+
+--
+-- Indexes for table `type_proposals`
+--
+ALTER TABLE `type_proposals`
+  ADD PRIMARY KEY (`type_proposal_id`);
+
+--
+-- Indexes for table `type_rewards`
+--
+ALTER TABLE `type_rewards`
+  ADD PRIMARY KEY (`type_reward_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -418,13 +601,13 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
@@ -451,10 +634,16 @@ ALTER TABLE `job_positions`
   MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `payroll`
 --
 ALTER TABLE `payroll`
-  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -469,28 +658,58 @@ ALTER TABLE `projects`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `proposals`
+--
+ALTER TABLE `proposals`
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `rewards`
 --
 ALTER TABLE `rewards`
-  MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
 --
 ALTER TABLE `salary_calculation`
-  MODIFY `salary_calculation_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `salary_calculation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `type_disciplines`
+--
+ALTER TABLE `type_disciplines`
+  MODIFY `action_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `type_employees`
 --
 ALTER TABLE `type_employees`
   MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `type_leaves`
+--
+ALTER TABLE `type_leaves`
+  MODIFY `type_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `type_proposals`
+--
+ALTER TABLE `type_proposals`
+  MODIFY `type_proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `type_rewards`
+--
+ALTER TABLE `type_rewards`
+  MODIFY `type_reward_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
