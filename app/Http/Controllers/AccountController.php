@@ -65,29 +65,29 @@ class AccountController extends Controller
             'message' => 'Account deleted successfully'
         ]);
     }
-    public function edit($id)
-    {
-        $account = AccountModel::findOrFail($id);
-        return response()->json([
-            'account' => $account
-        ]);
-
-    }
-
-    public function update(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'username' => 'string',
-            'password' => 'string',
-            'permission' => 'string',
-            'id_employee' => 'string',
-        ]);
-        $account = AccountModel::findOrFail($id);
-        $account->update($validated);
-
-        return response()->json([
-            'success' => true,
-            'account' => $account,
-        ]);
-    }
+//    public function edit($id)
+//    {
+//        $account = AccountModel::findOrFail($id);
+//        return response()->json([
+//            'account' => $account
+//        ]);
+//
+//    }
+//
+//    public function update(Request $request, $id)
+//    {
+//        $validated = $request->validate([
+//            'username' => 'string',
+//            'password' => 'string',
+//            'permission' => 'string',
+//            'id_employee' => 'string',
+//        ]);
+//        $account = AccountModel::findOrFail($id);
+//        $account->update($validated);
+//
+//        return response()->json([
+//            'success' => true,
+//            'account' => $account,
+//        ]);
+//    }
 }

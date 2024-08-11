@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
-<<<<<<< Updated upstream
--- Generation Time: Aug 10, 2024 at 09:46 PM
-=======
--- Generation Time: Aug 09, 2024 at 07:04 PM
->>>>>>> Stashed changes
+-- Generation Time: Aug 11, 2024 at 04:40 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.25
 
@@ -51,31 +47,6 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `customer_id` int(11) NOT NULL,
-  `customer_name` text NOT NULL,
-  `phone_number` text NOT NULL,
-  `email` text NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `address` text NOT NULL,
-  `project_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`customer_id`, `customer_name`, `phone_number`, `email`, `employee_id`, `address`, `project_id`) VALUES
-(1, 'hana', '543', 'dasds', 1, 'dfsdf', 0),
-(4, '231', '543', 'dasds', 3, 'dfsdf', 1),
-(5, '231', '312', '3213', 3, 'dfsdf', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `departments`
 --
 
@@ -103,10 +74,7 @@ CREATE TABLE `disciplines` (
   `discipline_code` varchar(50) NOT NULL,
   `discipline_name` varchar(100) NOT NULL,
   `employee_id` int(11) NOT NULL,
-<<<<<<< Updated upstream
   `action_id` int(11) NOT NULL,
-=======
->>>>>>> Stashed changes
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -114,15 +82,9 @@ CREATE TABLE `disciplines` (
 -- Dumping data for table `disciplines`
 --
 
-<<<<<<< Updated upstream
 INSERT INTO `disciplines` (`discipline_id`, `discipline_code`, `discipline_name`, `employee_id`, `action_id`, `description`) VALUES
 (1, '2132', '3213', 231, 0, ''),
 (2, '4', '3213', 7, 0, 'rew');
-=======
-INSERT INTO `disciplines` (`discipline_id`, `discipline_code`, `discipline_name`, `employee_id`, `description`) VALUES
-(1, '2132', '3213', 231, ''),
-(2, '4', '3213', 7, 'rew');
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -198,7 +160,6 @@ INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_positi
 (3, 'NIS', 'Network Infrastructure Specialist', '100999', 'không có'),
 (4, '3213', '231', '213', '231'),
 (5, 'rewrew', '2312', '32132', 'ewqew');
-<<<<<<< Updated upstream
 
 -- --------------------------------------------------------
 
@@ -214,8 +175,6 @@ CREATE TABLE `leave_application` (
   `status` text NOT NULL,
   `reason` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-=======
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -237,18 +196,11 @@ CREATE TABLE `payroll` (
 -- Dumping data for table `payroll`
 --
 
-<<<<<<< Updated upstream
 INSERT INTO `payroll` (`payroll_id`, `payroll_code`, `employee_id`, `job_position_id`, `monthly_salary`, `work_days`, `net_salary`) VALUES
 (2, '321', 3213, 32131, '321312', 321312, '321'),
 (3, '2', 321, 231, '2', 2, 'dsad'),
 (4, 'rewr', 12, 3213, '213', 3213, 'dsadas'),
 (5, '5', 3, 3, '3', 3, 'sdư');
-=======
-INSERT INTO `payroll` (`payroll_id`, `payroll_code`, `employee_id`, `position_id`, `monthly_salary`, `work_days`, `net_salary`) VALUES
-(2, '321', 3213, 32131, '321312', 321312, '321'),
-(3, '2', 321, 231, '2', 2, 'dsad'),
-(4, 'rewr', 12, 3213, '213', 3213, 'dsadas');
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -273,32 +225,6 @@ INSERT INTO `permissions` (`permission_id`, `permission_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projects`
---
-
-CREATE TABLE `projects` (
-  `project_id` int(11) NOT NULL,
-  `project_code` text NOT NULL,
-  `project_name` text NOT NULL,
-  `status` text NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `emloyee_id` int(11) NOT NULL,
-  `start_date` text NOT NULL,
-  `end_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`project_id`, `project_code`, `project_name`, `status`, `customer_id`, `emloyee_id`, `start_date`, `end_date`) VALUES
-(2, 'dsa', 'dsa', 'dsa', 2, 3, '23/1/2024', '3/10/2024'),
-(3, '2e322', '23423', '342', 1, 1, '2024-08-09', '2024-08-31');
-
--- --------------------------------------------------------
-
---
-<<<<<<< Updated upstream
 -- Table structure for table `proposals`
 --
 
@@ -310,11 +236,18 @@ CREATE TABLE `proposals` (
   `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `proposals`
+--
+
+INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_date`, `status`) VALUES
+(1, 4, 2, '2024-08-12', '2024-08-31'),
+(2, 6, 2, '2024-08-02', '2024-08-30'),
+(4, 3, 1, '2024-08-08', 'fas');
+
 -- --------------------------------------------------------
 
 --
-=======
->>>>>>> Stashed changes
 -- Table structure for table `rewards`
 --
 
@@ -331,12 +264,8 @@ CREATE TABLE `rewards` (
 --
 
 INSERT INTO `rewards` (`rewards_id`, `reward_code`, `reward_name`, `employee_id`, `description`) VALUES
-<<<<<<< Updated upstream
 (1, '213', '2231', 231, NULL),
 (2, 'thuong tien', 'tiennnn', 6, NULL);
-=======
-(1, '213', '2231', 231, NULL);
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -383,7 +312,6 @@ CREATE TABLE `tasks` (
 
 INSERT INTO `tasks` (`id_task`, `task_code`, `employee_id`, `start_date`, `end_date`, `location`, `purpose`) VALUES
 (2, '32312', 3213, '2024-08-15', '2024-08-21', '3213', '21323'),
-<<<<<<< Updated upstream
 (3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe'),
 (4, '1', 4, '2024-08-16', '2024-08-31', 'dsa', 'fdsfasd');
 
@@ -408,9 +336,6 @@ INSERT INTO `type_disciplines` (`action_id`, `disciplinary_action`) VALUES
 (3, 'Suspension'),
 (4, 'Demotion'),
 (5, 'Termination');
-=======
-(3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe');
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -508,12 +433,6 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`customer_id`);
-
---
 -- Indexes for table `departments`
 --
 ALTER TABLE `departments`
@@ -562,21 +481,12 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`permission_id`);
 
 --
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`project_id`);
-
---
-<<<<<<< Updated upstream
 -- Indexes for table `proposals`
 --
 ALTER TABLE `proposals`
   ADD PRIMARY KEY (`proposal_id`);
 
 --
-=======
->>>>>>> Stashed changes
 -- Indexes for table `rewards`
 --
 ALTER TABLE `rewards`
@@ -635,12 +545,6 @@ ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
@@ -669,25 +573,18 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `job_positions`
   MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-<<<<<<< Updated upstream
 
 --
 -- AUTO_INCREMENT for table `leave_application`
 --
 ALTER TABLE `leave_application`
   MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT;
-=======
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT for table `payroll`
 --
 ALTER TABLE `payroll`
-<<<<<<< Updated upstream
   MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
-  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -696,29 +593,16 @@ ALTER TABLE `permissions`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
-<<<<<<< Updated upstream
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rewards`
 --
 ALTER TABLE `rewards`
   MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-=======
--- AUTO_INCREMENT for table `rewards`
---
-ALTER TABLE `rewards`
-  MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
@@ -730,7 +614,6 @@ ALTER TABLE `salary_calculation`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-<<<<<<< Updated upstream
   MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -738,9 +621,6 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `type_disciplines`
   MODIFY `action_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
-  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT for table `type_employees`
