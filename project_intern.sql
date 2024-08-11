@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 11, 2024 at 07:25 PM
+-- Generation Time: Aug 11, 2024 at 09:04 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.12
 
@@ -136,8 +136,8 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
-(6, 'Ngọc Hân', 'Lê', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', NULL, NULL, NULL, 4444, 2, 1, 3, 3),
-(8, 'Admin', 'Account ', 'avt.png', 0, '2003-09-24', '213', NULL, NULL, NULL, 123, 2, 1, 1, 3),
+(6, 'Ngọc Hân', 'Lê', '1723383903_z4267405085287_894fee42d649fcc4dd0057af55628d87.jpg', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 0, 1, 3),
+(8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3),
 (10, 'anh', 'tuấn', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3);
 
 -- --------------------------------------------------------
