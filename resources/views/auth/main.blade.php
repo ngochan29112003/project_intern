@@ -77,7 +77,7 @@ $token = 'position';
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>{{$data->first_name.' '.$data->last_name}}</h6>
+                        <h6>{{$data->first_name.' '.$data->last_name}}  </h6>
                         <span>{{$data->job_position_name}}</span>
                     </li>
                     <li>

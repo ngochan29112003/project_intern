@@ -20,7 +20,7 @@ class EmployeeModel extends Model
         'cic_number',
         'birth_date',
         'birth_place',
-        'place_of_residencs',
+        'place_of_resident',
         'permanent_address',
         'education_level_id',
         'status',

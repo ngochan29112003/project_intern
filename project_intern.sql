@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 11, 2024 at 04:40 PM
+-- Generation Time: Aug 11, 2024 at 07:25 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,9 +40,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(4, 'admindt', '$2y$10$brX2LMOYrEUiyX4oZlsiBukDELfme0qz/vQYUFaLlmp07F0JTMCxC', 1, 4),
-(5, 'tuananh', '$2y$10$8De1cXl/xP/57bwzEyyNreRB.KHGNejngp1OZDpV15ARu/.xm4ary', 1, 5),
-(6, 'ngochan', '$2y$10$iRR0RHFnkm.3K1R5FO3ZDeC6iygS0fjNYXW1hLv0Wf9.GJCtuv3Z.', 1, 6);
+(6, 'ngochan', '$2y$10$iRR0RHFnkm.3K1R5FO3ZDeC6iygS0fjNYXW1hLv0Wf9.GJCtuv3Z.', 1, 6),
+(7, 'admin', '$2y$10$5BulCzwUQ0IJX2H7OPZBi.H5nIPT7.AVVZVhE18QXTBweDhndtaoO', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -116,14 +115,18 @@ INSERT INTO `education_level` (`education_level_id`, `education_level_name`) VAL
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `employee_name` text,
+  `last_name` text,
+  `first_name` text,
   `img` text,
   `gender` int(11) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `birth_place` text,
-  `id_card_number` int(20) DEFAULT NULL,
+  `place_of_resident` text,
+  `email` text,
+  `permanent_address` text,
+  `cic_number` int(20) DEFAULT NULL,
   `education_level_id` int(11) NOT NULL,
-  `status` text,
+  `status` int(11) DEFAULT NULL,
   `type_employee_id` int(11) DEFAULT NULL,
   `job_position_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -132,11 +135,10 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee_name`, `img`, `gender`, `birth_date`, `birth_place`, `id_card_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
-(3, 'abc', 'avt.png', 0, '2024-08-02', '123', 1233, 4, '1', 2, 3),
-(4, 'admin dep trai', 'avt.png', 0, '2024-08-18', '1', 1, 4, '1', 3, 3),
-(6, 'Hanaa Nhe', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', 4444, 2, '1', 3, 3),
-(7, 'ewqew', 'avt.png', 1, '2024-08-16', 'ewqe', 43243, 3, '1', 1, 4);
+INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
+(6, 'Ngọc Hân', 'Lê', '1722879167_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'BVDK VL', NULL, NULL, NULL, 4444, 2, 1, 3, 3),
+(8, 'Admin', 'Account ', 'avt.png', 0, '2003-09-24', '213', NULL, NULL, NULL, 123, 2, 1, 1, 3),
+(10, 'anh', 'tuấn', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -542,7 +544,7 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -566,7 +568,7 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `job_positions`

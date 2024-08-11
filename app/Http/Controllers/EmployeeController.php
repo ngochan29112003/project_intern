@@ -78,5 +78,9 @@ class EmployeeController extends Controller
     public function edit($id)
     {
 //        dd($id);
+        $employee = EmployeeModel::findOrFail($id);
+        return response()->json([
+           'employee' =>  $employee
+        ]);
     }
 }

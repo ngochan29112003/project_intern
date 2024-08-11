@@ -190,91 +190,159 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit employee</h4>
+                    <h5 class="modal-title fw-bold">Edit employee</h5>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editEmployeeForm" method="post" enctype="multipart/form-data">
+                    <form id="editEmployeeForm" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="mb-3">
-                            <label for="edit_employee_name" class="form-label">Employee name</label>
-                            <input type="text" class="form-control" id="edit_employee_name" name="edit_employee_name"
-                                   required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="add_employee_name" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="edit_first_name"
+                                           name="first_name"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="add_employee_name" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="edit_last_name"
+                                           name="last_name"
+                                           required>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mb-3">
-                            <label for="edit_img" class="form-label">Image</label>
                             <div class="row">
-                                <div class="col-lg-2 ">
-                                    <img class="border rounded-pill object-fit-cover" width="100px" height="100px"
-                                         id="profileImage" src="">
+                                <div class="col-4">
+                                    <label for="current_img" class="form-label">Current Image</label>
+                                    <div class="col-lg-2 text-center">
+                                        <img class="border rounded-pill object-fit-cover" width="50px" height="50px" id="current_img" src="" alt="Profile">
+                                    </div>
                                 </div>
-                                <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                                    <input type="file" class="form-control" id="edit_img" name="edit_img">
+                                <div class="col-4">
+                                    <label for="img" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="img" name="img" text>
+                                </div>
+                                <div class="col-4">
+                                    <fieldset class="row">
+                                        <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                        <div class="d-flex">
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                       value="0" checked>
+                                                <label class="form-check-label" for="male">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                       value="1">
+                                                <label class="form-check-label" for="female">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_gender" class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default" name="edit_gender" id="edit_gender">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_birthday" class="form-label">Birth day</label>
-                            <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_birthplace" class="form-label">Birth place</label>
-                            <input type="text" class="form-control" id="edit_birthplace" name="edit_birthplace"
-                                   required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="col-6">
+                                    <label for="add_idcard" class="form-label">Citizen identity Card Number</label>
+                                    <input type="number" class="form-control" id="cic_number" name="cic_number"
+                                           required>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="mb-3">
-                            <label for="edit_idcard" class="form-label">ID CARD</label>
-                            <input type="text" class="form-control" id="edit_idcard" name="edit_idcard" required>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="birth_date" class="form-label">Birth day</label>
+                                    <input type="date" class="form-control" id="birth_date" name="birth_date"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="birth_place" class="form-label">Birth place</label>
+                                    <select class="form-select" aria-label="Default" name="birth_place"
+                                            id="birth_place">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_edu" class="form-label">Education level</label>
-                            <select class="form-select" aria-label="Default" name="edit_edu" id="edit_edu">
-                                @foreach ($edu_level_list as $item)
-                                    <option
-                                        value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="place_of_residencs" class="form-label">Place of Residence</label>
+                                    <input type="text" class="form-control" id="place_of_residencs"
+                                           name="place_of_residencs" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="permanent_address" class="form-label">Permanent Address</label>
+                                    <input type="text" class="form-control" id="permanent_address"
+                                           name="permanent_address" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Status</label>
-                            <select class="form-select" aria-label="Default" name="edit_status" id="edit_status">
-                                <option value="0">No longer employed</option>
-                                <option value="1">Currently employed</option>
-                            </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="education_level_id" class="form-label">Education level</label>
+                                    <select class="form-select" aria-label="Default" name="education_level_id" id="education_level_id">
+                                        @foreach ($edu_level_list as $item)
+                                            <option
+                                                value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="job_position_id" class="form-label">Job position</label>
+                                    <select class="form-select" aria-label="Default" name="job_position_id"
+                                            id="job_position_id">
+                                        @foreach ($position_list as $item)
+                                            <option
+                                                value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_employee_type" class="form-label">Employee type</label>
-                            <select class="form-select" aria-label="Default" name="edit_employee_type"
-                                    id="edit_employee_type">
-                                @foreach ($type_employee_list as $item)
-                                    <option value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select" aria-label="Default" name="status" id="status">
+                                        <option value="0">No longer employed</option>
+                                        <option value="1">Currently employed</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="type_employee_id" class="form-label">Employee type</label>
+                                    <select class="form-select" aria-label="Default" name="type_employee_id"
+                                            id="type_employee_id">
+                                        @foreach ($type_employee_list as $item)
+                                            <option
+                                                value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_job_position" class="form-label">Job position</label>
-                            <select class="form-select" aria-label="Default" name="edit_job_position"
-                                    id="edit_job_position">
-                                @foreach ($position_list as $item)
-                                    <option
-                                        value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Employee</h3>
         <div class="table-responsive">
@@ -304,7 +372,17 @@
                                                      height="75"></td>
                         <td>{{ $item->gender === 0 ? 'Male' : 'Female' }}</td>
                         <td>{{$item->birth_date}}</td>
-                        <td>{{$item->status === 1 ? 'No longer employed' : 'Currently employed' }}</td>
+                        <td>
+                            @if($item->status === 0)
+                                <span class="badge rounded-pill bg-danger">
+                                    No longer employed
+                                </span>
+                            @else
+                                <span class="badge rounded-pill bg-success">
+                                    Currently employed
+                                </span>
+                            @endif
+                        </td>
                         <td>
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -394,8 +472,13 @@
                 url: url,
                 method: 'GET',
                 success: function (response) {
-                    var data = response.leave_app;
-                    // $('#edit_employee_id').val(data.employee_id);
+                    var data = response.employee;
+                    $('#edit_first_name').val(data.first_name);
+                    $('#edit_last_name').val(data.last_name);
+                    if (data.img) {
+                        var imagePath = '{{asset('assets/employee_img')}}' + '/' + data.img;
+                        $('#current_img').attr('src', imagePath)
+                    }
                     // $('#edit_pin').val(data.employee.employee_code);
                     // $('#edit_leave_type').val(data.leave_type.leave_type_id);
                     // $('#edit_apply_date').val(data.apply_date);
