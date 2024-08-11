@@ -110,6 +110,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PermissionController::class, 'getView'])->name('index-permission');
         Route::post('/add', [PermissionController::class, 'add'])->name('add-permission');
         Route::delete('/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+        Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('edit-permission');
+        Route::post('/update/{id}', [PermissionController::class, 'update'])->name('update-permission');
     });
 
 

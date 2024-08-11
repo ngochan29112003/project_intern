@@ -41,4 +41,26 @@ class PermissionController extends Controller
             'message' => 'Reward deleted successfully'
         ]);
     }
+    public function edit($id)
+    {
+        $permission = PermissionModel::findOrFail($id);
+        return response()->json([
+            'permission' => $permission
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'permission_name' => 'string',
+        ]);
+        $permission = PermissionModel::findOrFail($id);
+        $permission->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'permission' => $permission,
+        ]);
+    }
 }

@@ -87,23 +87,23 @@
                     <form id="editAccountForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
+                            <label for="edit_username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="edit_username" name="edit_username"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="text" class="form-control" id="password" name="password"
+                            <label for="edit_password" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="edit_password" name="edit_password"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="permission" class="form-label">Permission</label>
-                            <input type="text" class="form-control" id="permission" name="permission"
+                            <label for="edit_permission" class="form-label">Permission</label>
+                            <input type="text" class="form-control" id="edit_permission" name="edit_permission"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="id_employee" class="form-label">Id employee</label>
-                            <input type="text" class="form-control" id="id_employee" name="id_employee"
+                            <label for="edit_id_employee" class="form-label">Id employee</label>
+                            <input type="text" class="form-control" id="edit_id_employee" name="edit_id_employee"
                                    required>
                         </div>
 
