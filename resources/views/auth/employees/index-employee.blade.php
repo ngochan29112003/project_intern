@@ -1,6 +1,11 @@
 @extends('auth.main')
 
 @section('contents')
+    <style>
+        #employeeTable th, td {
+            text-align: left !important;
+        }
+    </style>
     <div class="pagetitle">
         <h1>Employee</h1>
         <nav>
@@ -33,69 +38,145 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add employee</h4>
+                    <h5 class="modal-title fw-bold">Add employee</h5>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form id="addEmployeeForm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="add_employee_name" class="form-label">Employee name</label>
-                            <input type="text" class="form-control" id="add_employee_name" name="add_employee_name"
-                                   required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="add_employee_name" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="first_name"
+                                           name="first_name"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="add_employee_name" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="last_name"
+                                           name="last_name"
+                                           required>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mb-3">
-                            <label for="add_img" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="add_img" name="add_img">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="img" class="form-label">Image</label>
+                                    <input type="file" class="form-control" id="img" name="img">
+                                </div>
+                                <div class="col-6">
+                                    <fieldset class="row">
+                                        <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                        <div class="d-flex">
+                                            <div class="form-check me-3">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                       value="0" checked>
+                                                <label class="form-check-label" for="male">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                       value="1">
+                                                <label class="form-check-label" for="female">
+                                                    Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="add_gender" class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default" name="add_gender" id="add_gender">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="col-6">
+                                    <label for="add_idcard" class="form-label">Citizen identity Card Number</label>
+                                    <input type="number" class="form-control" id="cic_number" name="cic_number"
+                                           required>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mb-3">
-                            <label for="add_birthday" class="form-label">Birth day</label>
-                            <input type="date" class="form-control" id="add_birthday" name="add_birthday" required>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="birth_date" class="form-label">Birth day</label>
+                                    <input type="date" class="form-control" id="birth_date" name="birth_date"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="birth_place" class="form-label">Birth place</label>
+                                    <select class="form-select" aria-label="Default" name="birth_place"
+                                            id="birth_place">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="add_birthplace" class="form-label">Birth place</label>
-                            <input type="text" class="form-control" id="add_birthplace" name="add_birthplace" required>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <label for="place_of_residencs" class="form-label">Place of Residence</label>
+                                    <input type="text" class="form-control" id="place_of_residencs"
+                                           name="place_of_residencs" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="permanent_address" class="form-label">Permanent Address</label>
+                                    <input type="text" class="form-control" id="permanent_address"
+                                           name="permanent_address" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="add_idcard" class="form-label">ID CARD</label>
-                            <input type="text" class="form-control" id="add_idcard" name="add_idcard" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="education_level_id" class="form-label">Education level</label>
+                                    <select class="form-select" aria-label="Default" name="education_level_id" id="education_level_id">
+                                        @foreach ($edu_level_list as $item)
+                                            <option
+                                                value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="job_position_id" class="form-label">Job position</label>
+                                    <select class="form-select" aria-label="Default" name="job_position_id"
+                                            id="job_position_id">
+                                        @foreach ($position_list as $item)
+                                            <option
+                                                value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="add_edu" class="form-label">Education level</label>
-                            <select class="form-select" aria-label="Default" name="add_edu" id="add_edu">
-                                @foreach ($edu_level_list as $item)
-                                    <option value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="add_status" class="form-label">Status</label>
-                            <select class="form-select" aria-label="Default" name="add_status" id="add_status">
-                                <option value="0">No longer employed</option>
-                                <option value="1">Currently employed</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="add_employee_type" class="form-label">Employee type</label>
-                            <select class="form-select" aria-label="Default" name="add_employee_type" id="add_employee_type">
-                                @foreach ($type_employee_list as $item)
-                                    <option value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="add_job_position" class="form-label">Job position</label>
-                            <select class="form-select" aria-label="Default" name="add_job_position" id="add_job_position">
-                                @foreach ($position_list as $item)
-                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
-                                @endforeach
-                            </select>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select" aria-label="Default" name="status" id="status">
+                                        <option value="0">No longer employed</option>
+                                        <option value="1">Currently employed</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="type_employee_id" class="form-label">Employee type</label>
+                                    <select class="form-select" aria-label="Default" name="type_employee_id"
+                                            id="type_employee_id">
+                                        @foreach ($type_employee_list as $item)
+                                            <option
+                                                value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -124,7 +205,8 @@
                             <label for="edit_img" class="form-label">Image</label>
                             <div class="row">
                                 <div class="col-lg-2 ">
-                                    <img class="border rounded-pill object-fit-cover" width="100px" height="100px" id="profileImage" src="">
+                                    <img class="border rounded-pill object-fit-cover" width="100px" height="100px"
+                                         id="profileImage" src="">
                                 </div>
                                 <div class="col-lg-4 d-flex justify-content-center align-items-center">
                                     <input type="file" class="form-control" id="edit_img" name="edit_img">
@@ -144,7 +226,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_birthplace" class="form-label">Birth place</label>
-                            <input type="text" class="form-control" id="edit_birthplace" name="edit_birthplace" required>
+                            <input type="text" class="form-control" id="edit_birthplace" name="edit_birthplace"
+                                   required>
+
                         </div>
                         <div class="mb-3">
                             <label for="edit_idcard" class="form-label">ID CARD</label>
@@ -154,7 +238,8 @@
                             <label for="edit_edu" class="form-label">Education level</label>
                             <select class="form-select" aria-label="Default" name="edit_edu" id="edit_edu">
                                 @foreach ($edu_level_list as $item)
-                                    <option value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                    <option
+                                        value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -167,7 +252,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_employee_type" class="form-label">Employee type</label>
-                            <select class="form-select" aria-label="Default" name="edit_employee_type" id="edit_employee_type">
+                            <select class="form-select" aria-label="Default" name="edit_employee_type"
+                                    id="edit_employee_type">
                                 @foreach ($type_employee_list as $item)
                                     <option value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
                                 @endforeach
@@ -175,9 +261,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_job_position" class="form-label">Job position</label>
-                            <select class="form-select" aria-label="Default" name="edit_job_position" id="edit_job_position">
+                            <select class="form-select" aria-label="Default" name="edit_job_position"
+                                    id="edit_job_position">
                                 @foreach ($position_list as $item)
-                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                    <option
+                                        value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -194,12 +282,11 @@
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
-                    <th>Employee name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>img</th>
                     <th>Gender</th>
                     <th>Birth Day</th>
-                    <th>Id card number</th>
-                    <th>Education</th>
                     <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -209,16 +296,16 @@
                 @foreach($employee_list as $item)
                     <tr>
                         <td>{{$stt++}}</td>
-                        <td>{{$item->employee_name}}</td>
+                        <td>{{$item->first_name}}</td>
+                        <td>{{$item->last_name}}</td>
                         <td class="text-center"><img class="rounded-pill object-fit-cover"
-                                                     src="{{asset('assets/employee_img/'.$item->img)}}" alt="" width="75"
+                                                     src="{{asset('assets/employee_img/'.$item->img)}}" alt=""
+                                                     width="75"
                                                      height="75"></td>
                         <td>{{ $item->gender === 0 ? 'Male' : 'Female' }}</td>
                         <td>{{$item->birth_date}}</td>
-                        <td>{{$item->id_card_number}}</td>
-                        <td>{{$item->education_level_name}}</td>
                         <td>{{$item->status === 1 ? 'No longer employed' : 'Currently employed' }}</td>
-                        <td class="text-center">
+                        <td>
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
                                 data-id="{{ $item->employee_id }}">
@@ -243,6 +330,25 @@
 @section('scripts')
     <script>
         var table = $('#employeeTable').DataTable();
+
+        $.ajax({
+            url: 'https://esgoo.net/api-tinhthanh/1/0.htm',
+            method: 'GET',
+            success: function (response) {
+                if (response.error === 0) {
+                    var provinces = response.data;
+                    $.each(provinces, function (index, province) {
+                        $('#birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
+                    });
+                } else {
+                    console.log('Không thể tải dữ liệu tỉnh thành.');
+                }
+            },
+            error: function () {
+                console.log('Có lỗi xảy ra khi gọi API.');
+            }
+        });
+
         // JS Add employee
         $('#addEmployeeForm').submit(function (e) {
             e.preventDefault();
@@ -371,5 +477,7 @@
                 }
             });
         });
+
+
     </script>
 @endsection

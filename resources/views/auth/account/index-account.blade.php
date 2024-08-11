@@ -123,9 +123,8 @@
                 <tr>
                     <th>No</th>
                     <th>Username</th>
-                    <th>Pass</th>
                     <th>Permission</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody id="accountTableBody">
@@ -134,7 +133,6 @@
                     <tr>
                         <td>{{$stt++}}</td>
                         <td>{{$item->username}}</td>
-                        <td>{{$item->password}}</td>
                         <td>{{$item->permission_name}}</td>
                         <td class="text-center">
                             <button

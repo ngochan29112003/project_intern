@@ -72,12 +72,12 @@ $token = 'position';
                     <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle object-fit-cover"
                     >
                     <span
-                            class="d-none d-md-block dropdown-toggle ps-2">{{$data->employee_name}}</span>
+                            class="d-none d-md-block dropdown-toggle ps-2">{{$data->first_name.' '.$data->last_name}}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>{{$data->employee_name}}</h6>
+                        <h6>{{$data->first_name.' '.$data->last_name}}</h6>
                         <span>{{$data->job_position_name}}</span>
                     </li>
                     <li>
