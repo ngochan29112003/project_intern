@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DepartmentModel;
 use App\Models\TaskModel;
 use Illuminate\Http\Request;
 
@@ -52,6 +53,33 @@ class TaskController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Task deleted successfully'
+        ]);
+    }
+    public function edit($id)
+    {
+        $task = TaskModel::findOrFail($id);
+        return response()->json([
+            'task' => $task
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'task_code' => 'string',
+            'employee_id' => 'string',
+            'start_date' => 'string',
+            'end_date' => 'string',
+            'location' => 'string',
+            'purpose' => 'string',
+        ]);
+        $task = TaskModel::findOrFail($id);
+        $task->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'task' => $task,
         ]);
     }
 }

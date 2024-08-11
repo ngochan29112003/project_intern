@@ -75,7 +75,53 @@
             </div>
         </div>
     </div>
+    <!-- ======= Modal sửa ======= -->
+    <div class="modal fade" id="editTaskModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit task</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editTaskForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="task_code" class="form-label">Task Code</label>
+                            <input type="text" class="form-control" id="task_code" name="task_code"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">Employee Id</label>
+                            <input type="text" class="form-control" id="employee_id" name="employee_id"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="text" class="form-control" id="start_date" name="start_date"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="text" class="form-control" id="end_date" name="end_date"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" name="location"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purpose" class="form-label">Purpose</label>
+                            <input type="text" class="form-control" id="purpose" name="purpose"
+                                   required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
 
+            </div>
+        </div>
+    </div>
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Task</h3>
         <div class="table-responsive">
@@ -93,7 +139,7 @@
                 </tr>
                 </thead>
                 <tbody id="taskTableBody">
-                @php($stt = 0)
+                @php($stt = 1)
                 @foreach ($task_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
@@ -194,6 +240,58 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+        //Hiện chi tiết của dữ liệu
+        $('#taskTableBody').on('click', '.edit-btn', function () {
+            var taskId = $(this).data('id');
+
+            $('#editTaskForm').data('id', taskId);
+            var url = "{{ route('edit-task', ':id') }}";
+            url = url.replace(':id', taskId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.task;
+                    $('#task_code').val(data.task_code);
+                    $('#employee_id').val(data.employee_id);
+                    $('#start_date').val(data.start_date);
+                    $('#end_date').val(data.end_date);
+                    $('#location').val(data.location);
+                    $('#purpose').val(data.purpose);
+                    $('#editTaskModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editTaskForm').submit(function (e) {
+            e.preventDefault();
+            var taskId = $(this).data('id');
+            var url = "{{ route('update-task', ':id') }}";
+            url = url.replace(':id', taskId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editTaskModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

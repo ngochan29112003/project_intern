@@ -120,6 +120,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [TaskController::class, 'getView'])->name('index-task');
         Route::post('/add', [TaskController::class, 'add'])->name('add-task');
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit-task');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('update-task');
     });
 
     //PROJECT

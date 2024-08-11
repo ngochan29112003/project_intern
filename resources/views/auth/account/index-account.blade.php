@@ -87,23 +87,23 @@
                     <form id="editAccountForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="edit_username" name="edit_username"
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_password" class="form-label">Password</label>
-                            <input type="text" class="form-control" id="edit_password" name="edit_password"
+                            <label for="password" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="password" name="password"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_permission" class="form-label">Permission</label>
-                            <input type="text" class="form-control" id="edit_permission" name="edit_permission"
+                            <label for="permission" class="form-label">Permission</label>
+                            <input type="text" class="form-control" id="permission" name="permission"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_id_employee" class="form-label">Id employee</label>
-                            <input type="text" class="form-control" id="edit_id_employee" name="edit_id_employee"
+                            <label for="id_employee" class="form-label">Id Employee</label>
+                            <input type="text" class="form-control" id="id_employee" name="id_employee"
                                    required>
                         </div>
 
@@ -118,14 +118,14 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Account</h3>
         <div class="table-responsive">
-            <table id="accountTable" class="table table-hover table-borderless">
+            <table id="AccountTable" class="table table-hover table-borderless">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
                     <th>Username</th>
-                    <th>Pass</th>
+                    <th>Password</th>
                     <th>Permission</th>
-                    <th>Action</th>
+                    <th>Id Employee</th>
                 </tr>
                 </thead>
                 <tbody id="accountTableBody">
@@ -135,7 +135,8 @@
                         <td>{{$stt++}}</td>
                         <td>{{$item->username}}</td>
                         <td>{{$item->password}}</td>
-                        <td>{{$item->permission_name}}</td>
+                        <td>{{$item->permission}}</td>
+                        <td>{{$item->id_employee}}</td>
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -230,7 +231,7 @@
             });
         });
         //Hiện chi tiết của dữ liệu
-        $('#AccountTableBody').on('click', '.edit-btn', function () {
+        $('#accountTableBody').on('click', '.edit-btn', function () {
             var accountId = $(this).data('id');
 
             $('#editAccountForm').data('id', accountId);
@@ -255,7 +256,7 @@
         //Lưu lại dữ liệu khi chỉnh sửa
         $('#editAccountForm').submit(function (e) {
             e.preventDefault();
-            var AccountId = $(this).data('id');
+            var accountId = $(this).data('id');
             var url = "{{ route('update-account', ':id') }}";
             url = url.replace(':id', accountId);
             var formData = new FormData(this);
