@@ -138,7 +138,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="education_level_id" class="form-label">Education level</label>
-                                    <select class="form-select" aria-label="Default" name="education_level_id" id="education_level_id">
+                                    <select class="form-select" aria-label="Default" name="education_level_id"
+                                            id="education_level_id">
                                         @foreach ($edu_level_list as $item)
                                             <option
                                                 value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
@@ -195,85 +196,95 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editEmployeeForm" enctype="multipart/form-data">
+                    <form id="editEmployeeForm" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3">
+                        <div class="">
                             <div class="row">
-                                <div class="col-6">
-                                    <label for="add_employee_name" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="edit_first_name"
-                                           name="first_name"
-                                           required>
+                                <div class="col-3">
+                                    <img class="border rounded-pill object-fit-cover" width="125px" height="125px"
+                                         id="current_img" src="">
                                 </div>
-                                <div class="col-6">
-                                    <label for="add_employee_name" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="edit_last_name"
-                                           name="last_name"
-                                           required>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <div class="col-4">
-                                    <label for="current_img" class="form-label">Current Image</label>
-                                    <div class="col-lg-2 text-center">
-                                        <img class="border rounded-pill object-fit-cover" width="50px" height="50px" id="current_img" src="" alt="Profile">
+                                <div class="col-9">
+                                    <div class="row mb-3">
+                                        <div class="col-3">
+                                            <label for="add_employee_name" class="form-label">First Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" class="form-control" id="edit_first_name"
+                                                   name="first_name"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-3">
+                                            <label for="add_employee_name" class="form-label">Last Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" class="form-control" id="edit_last_name"
+                                                   name="last_name"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <fieldset class="row">
+                                            <div class="col-3">
+                                                <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="d-flex">
+                                                    <div class="form-check me-3">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                               id="male"
+                                                               value="0" checked>
+                                                        <label class="form-check-label" for="male">
+                                                            Male
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                               id="female"
+                                                               value="1">
+                                                        <label class="form-check-label" for="female">
+                                                            Female
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <label for="img" class="form-label">Image</label>
-                                    <input type="file" class="form-control" id="img" name="img" text>
-                                </div>
-                                <div class="col-4">
-                                    <fieldset class="row">
-                                        <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
-                                        <div class="d-flex">
-                                            <div class="form-check me-3">
-                                                <input class="form-check-input" type="radio" name="gender" id="male"
-                                                       value="0" checked>
-                                                <label class="form-check-label" for="male">
-                                                    Male
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="female"
-                                                       value="1">
-                                                <label class="form-check-label" for="female">
-                                                    Female
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <input type="file" id="edit_img" name="img" class="d-none">
+                                <label for="edit_img" class="btn btn-primary">
+                                    <i class="bi bi-upload"></i> New image
+                                </label>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email">
+                                    <input type="email" class="form-control" id="edit_email" name="email">
                                 </div>
                                 <div class="col-6">
                                     <label for="add_idcard" class="form-label">Citizen identity Card Number</label>
-                                    <input type="number" class="form-control" id="cic_number" name="cic_number"
-                                           required>
+                                    <input type="number" class="form-control" id="edit_cic_number" name="cic_number">
                                 </div>
                             </div>
-
                         </div>
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
                                     <label for="birth_date" class="form-label">Birth day</label>
-                                    <input type="date" class="form-control" id="birth_date" name="birth_date"
-                                           required>
+                                    <input type="date" class="form-control" id="edit_birth_date" name="birth_date">
                                 </div>
                                 <div class="col-6">
                                     <label for="birth_place" class="form-label">Birth place</label>
-                                    <select class="form-select" aria-label="Default" name="birth_place"
-                                            id="birth_place">
+                                    <select class="form-select" aria-label="Default" id="edit_birth_place"
+                                            name="birth_place">
                                     </select>
                                 </div>
                             </div>
@@ -281,14 +292,14 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="place_of_residencs" class="form-label">Place of Residence</label>
-                                    <input type="text" class="form-control" id="place_of_residencs"
-                                           name="place_of_residencs" required>
+                                    <label for="place_of_resident" class="form-label">Place of Residence</label>
+                                    <input type="text" class="form-control" id="edit_place_of_resident"
+                                           name="place_of_resident">
                                 </div>
                                 <div class="col-6">
                                     <label for="permanent_address" class="form-label">Permanent Address</label>
-                                    <input type="text" class="form-control" id="permanent_address"
-                                           name="permanent_address" required>
+                                    <input type="text" class="form-control" id="edit_permanent_address"
+                                           name="permanent_address">
                                 </div>
                             </div>
                         </div>
@@ -296,20 +307,21 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="education_level_id" class="form-label">Education level</label>
-                                    <select class="form-select" aria-label="Default" name="education_level_id" id="education_level_id">
+                                    <select class="form-select" aria-label="Default" name="education_level_id"
+                                            id="edit_education_level_id">
                                         @foreach ($edu_level_list as $item)
                                             <option
-                                                value="{{ $item->education_level_id}}">{{ $item->education_level_name }}</option>
+                                                value="{{ $item->education_level_id }}">{{ $item->education_level_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-6">
                                     <label for="job_position_id" class="form-label">Job position</label>
                                     <select class="form-select" aria-label="Default" name="job_position_id"
-                                            id="job_position_id">
+                                            id="edit_job_position_id">
                                         @foreach ($position_list as $item)
                                             <option
-                                                value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                                value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -319,7 +331,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="status" class="form-label">Status</label>
-                                    <select class="form-select" aria-label="Default" name="status" id="status">
+                                    <select class="form-select" aria-label="Default" name="status" id="edit_status">
                                         <option value="0">No longer employed</option>
                                         <option value="1">Currently employed</option>
                                     </select>
@@ -327,10 +339,10 @@
                                 <div class="col-6">
                                     <label for="type_employee_id" class="form-label">Employee type</label>
                                     <select class="form-select" aria-label="Default" name="type_employee_id"
-                                            id="type_employee_id">
+                                            id="edit_type_employee_id">
                                         @foreach ($type_employee_list as $item)
                                             <option
-                                                value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                                value="{{ $item->type_employee_id }}">{{ $item->type_employee_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -341,6 +353,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
@@ -417,6 +431,7 @@
                     var provinces = response.data;
                     $.each(provinces, function (index, province) {
                         $('#birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
+                        $('#edit_birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
                     });
                 } else {
                     console.log('Không thể tải dữ liệu tỉnh thành.');
@@ -479,13 +494,17 @@
                         var imagePath = '{{asset('assets/employee_img')}}' + '/' + data.img;
                         $('#current_img').attr('src', imagePath)
                     }
-                    // $('#edit_pin').val(data.employee.employee_code);
-                    // $('#edit_leave_type').val(data.leave_type.leave_type_id);
-                    // $('#edit_apply_date').val(data.apply_date);
-                    // $('#edit_start_date').val(data.start_date);
-                    // $('#edit_end_date').val(data.end_date);
-                    // $('#edit_duration').val(data.duration);
-                    // $('#edit_leave_status').val(data.leave_status);
+                    $('input[name="gender"][value="' + data.gender + '"]').prop('checked', true);
+                    $('#edit_email').val(data.email);
+                    $('#edit_cic_number').val(data.cic_number);
+                    $('#edit_birth_date').val(data.birth_date);
+                    $('#edit_birth_place').val(data.birth_place);
+                    $('#edit_place_of_resident').val(data.place_of_resident);
+                    $('#edit_permanent_address').val(data.permanent_address);
+                    $('#edit_education_level_id').val(data.education_level_id);
+                    $('#edit_job_position_id').val(data.job_position_id);
+                    $('#edit_status').val(data.status);
+                    $('#edit_type_employee_id').val(data.type_employee_id);
                     $('#editEmployeeModal').modal('show');
                 },
                 error: function (xhr) {
@@ -493,21 +512,22 @@
             });
         });
 
-
-        $('#editApplicationForm').submit(function (e) {
+        $('#editEmployeeForm').submit(function (e) {
             e.preventDefault();
-            var applicationID = $(this).data('id'); // Lấy ID từ form
+            var employee_id = $(this).data('id'); // Lấy ID từ form
             var url = "{{ route('update-employees', ':id') }}";
-            url = url.replace(':id', applicationID);
-
+            url = url.replace(':id', employee_id);
+            var formData = new FormData(this);
+            console.log(formData.get('img'));
             $.ajax({
                 url: url,
-                method: 'PUT',
-                data: $(this).serialize(),
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: function (response) {
                     if (response.success) {
-                        $('#editApplicationModal').modal('hide');
-                        $('#successModal').modal('show');
+                        $('#editEmployeeModal').modal('hide');
                         toastr.success(response.response, "Edit successful");
                         setTimeout(function () {
                             location.reload()

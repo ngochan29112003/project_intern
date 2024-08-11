@@ -50,4 +50,11 @@ class EmployeeModel extends Model
             ->get();
     }
 
+    function getImageOld($id)
+    {
+        return DB::table('employees')
+            ->where('employee_id', $id)
+            ->value('img');
+    }
+
 }

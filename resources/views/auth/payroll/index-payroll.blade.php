@@ -48,7 +48,8 @@
                             <label for="edit_employee_id" class="form-label">Employee name</label>
                             <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
                                 @foreach ($employee_list as $item)
-                                    <option value="{{ $item->employee_id}}">{{ $item->employee_name}}</option>
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

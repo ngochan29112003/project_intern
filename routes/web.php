@@ -52,7 +52,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/add', [EmployeeController::class, 'add'])->name('add-employees');
         Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('edit-employees');
-        Route::put('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
+        Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
     });
 
     //DEPARTMENT
