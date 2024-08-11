@@ -62,6 +62,40 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editPositionModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit position</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editPositionForm" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="job_position_code" class="form-label">Job Position Code</label>
+                            <input type="text" class="form-control" id="job_position_code" name="job_position_code" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="job_position_name" class="form-label">Job Position Name</label>
+                            <input type="text" class="form-control" id="job_position_name" name="job_position_name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="job_position_salary" class="form-label">Job Position Salary</label>
+                            <input type="text" class="form-control" id="job_position_salary" name="job_position_salary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Position</h3>
         <div class="table-responsive">
@@ -77,7 +111,7 @@
                 </tr>
                 </thead>
                 <tbody id="positionTableBody">
-                @php($stt = 0)
+                @php($stt = 1)
                 @foreach($position_list as $item)
                     <tr>
                         <td>{{$stt++}}</td>
@@ -160,7 +194,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('delete-employees', ':id') }}'.replace(':id', positionId),
+                        url: '{{ route('delete-position', ':id') }}'.replace(':id', positionId),
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -178,6 +212,57 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#positionTableBody').on('click', '.edit-btn', function () {
+            var positionId = $(this).data('id');
+
+            $('#editPositionForm').data('id', positionId);
+            var url = "{{ route('edit-position', ':id') }}";
+            url = url.replace(':id', positionId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.position;
+                    $('#job_position_code').val(data.job_position_code);
+                    $('#job_position_name').val(data.job_position_name);
+                    $('#job_position_salary').val(data.job_position_salary);
+                    $('#description').val(data.description);
+                    $('#editPositionModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editPositionForm').submit(function (e) {
+            e.preventDefault();
+            var positionId = $(this).data('id');
+            var url = "{{ route('update-position', ':id') }}";
+            url = url.replace(':id', positionId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editPositionModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

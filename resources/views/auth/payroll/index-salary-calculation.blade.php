@@ -81,6 +81,58 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editSalaryCalculationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add salary salculation</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editSalaryCalculationForm" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="payroll_code" class="form-label">Payroll Code</label>
+                            <input type="text" class="form-control" id="payroll_code" name="payroll_code" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">Employee Name</label>
+                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="work_day" class="form-label">Work days</label>
+                            <input type="text" class="form-control" id="work_day" name="work_day" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="allowance" class="form-label">Allowance</label>
+                            <select class="form-select" aria-label="Default" name="allowance" id="allowance">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="advance" class="form-label">Advance</label>
+                            <select class="form-select" aria-label="Default" name="advance" id="advance">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Salary calculation</h3>
         <div class="table-responsive">
@@ -98,7 +150,7 @@
                 </tr>
                 </thead>
                 <tbody id="salarycalculationTableBody">
-                @php($stt = 0)
+                @php($stt = 1)
                 @foreach($salarycalculation_list as $item)
                     <tr>
                         <td>{{$stt++}}</td>
@@ -169,12 +221,12 @@
 
         //JS Delete position
         $('#salarycalculationTableBody').on('click', '.delete-btn', function() {
-            var positionId = $(this).data('id');
+            var salary_calculation = $(this).data('id');
             var row = $(this).closest('tr');
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Do you want to delete this position ?",
+                text: "Do you want to delete this salary calculation?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -183,7 +235,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('delete-employees', ':id') }}'.replace(':id', positionId),
+                        url: '{{ route('delete-salary-calculation', ':id') }}'.replace(':id', salary_calculation),
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -201,6 +253,58 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#salarycalculationTableBody').on('click', '.edit-btn', function () {
+            var salary_calculation = $(this).data('id');
+
+            $('#editSalaryCalculationForm').data('id', salary_calculation);
+            var url = "{{ route('edit-salary-calculation', ':id') }}";
+            url = url.replace(':id', salary_calculation);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.salary_calculation;
+                    $('#payroll_code').val(data.payroll_code);
+                    $('#employee_id').val(data.employee_id);
+                    $('#work_day').val(data.work_days);
+                    $('#allowance').val(data.allowance);
+                    $('#description').val(data.description);
+                    $('#editSalaryCalculationModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editSalaryCalculationForm').submit(function (e) {
+            e.preventDefault();
+            var salary_calculation = $(this).data('id');
+            var url = "{{ route('update-salary-calculation', ':id') }}";
+            url = url.replace(':id', salary_calculation);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editSalaryCalculationModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

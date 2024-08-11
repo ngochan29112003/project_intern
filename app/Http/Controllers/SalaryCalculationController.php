@@ -46,14 +46,42 @@ class SalaryCalculationController extends Controller
 
     public function delete($id)
     {
-        $position = SalaryCalculationModel::findOrFail($id);
+        $salary_calculation = SalaryCalculationModel::findOrFail($id);
 
-        $position->delete();
+        $salary_calculation->delete();
 
         return response()->json([
             'success' => true,
             'status' => 200,
             'message' => 'Proposal application deleted successfully'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $salary_calculation = SalaryCalculationModel::findOrFail($id);
+        return response()->json([
+            'salary_calculation' => $salary_calculation
+        ]);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'payroll_code' => 'required|string',
+            'employee_id' => 'int',
+            'work_day' => 'required|string',
+            'allowance' => 'int',
+            'advance' => 'int',
+            'description' => 'required|string',
+        ]);
+        $salary_calculation = SalaryCalculationModel::findOrFail($id);
+        $salary_calculation->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'salary_calculation' => $salary_calculation,
         ]);
     }
 }
