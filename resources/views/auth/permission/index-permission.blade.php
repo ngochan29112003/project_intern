@@ -52,6 +52,27 @@
         </div>
     </div>
 
+    <!-- ======= Modal sửa ======= -->
+    <div class="modal fade" id="editPermissionModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit permission</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editPermissionForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="permission_name" class="form-label">Permission Name</label>
+                            <input type="text" class="form-control" id="permission_name" name="permission_name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Permission</h3>
         <table id="PermissionTable" class="table table-hover table-borderless">
@@ -162,5 +183,54 @@
                 }
             });
         });
+
+        //Hiện chi tiết của dữ liệu
+        $('#permissionTableBody').on('click', '.edit-btn', function () {
+            var permissionId = $(this).data('id');
+
+            $('#editPermissionForm').data('id', permissionId);
+            var url = "{{ route('edit-permission', ':id') }}";
+            url = url.replace(':id', permissionId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.permission;
+                    $('#permission_name').val(data.permission_name);
+                    $('#editPermissionModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editPermissionForm').submit(function (e) {
+            e.preventDefault();
+            var permissionId = $(this).data('id');
+            var url = "{{ route('update-permission', ':id') }}";
+            url = url.replace(':id', permissionId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editPermissionModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
+                }
+            });
+        });
+
     </script>
 @endsection

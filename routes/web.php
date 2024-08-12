@@ -121,6 +121,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PermissionController::class, 'getView'])->name('index-permission');
         Route::post('/add', [PermissionController::class, 'add'])->name('add-permission');
         Route::delete('/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+        Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('edit-permission');
+        Route::post('/update/{id}', [PermissionController::class, 'update'])->name('update-permission');
     });
 
 
@@ -129,12 +131,16 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [TaskController::class, 'getView'])->name('index-task');
         Route::post('/add', [TaskController::class, 'add'])->name('add-task');
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit-task');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('update-task');
     });
 
     //DEPARTMENT
     Route::group(['prefix' => '/departments'], function () {
         Route::get('/', [DepartmentController::class, 'getView'])->name('index-department');
         Route::post('//add', [DepartmentController::class, 'add'])->name('add-department');
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit-department');
+        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('update-department');
     });
 
     //PROPOSAL
