@@ -75,11 +75,19 @@
                         @csrf
                         <div class="mb-3">
                             <label for="action_id" class="form-label">Action id</label>
-                            <input type="text" class="form-control" id="action_id" name="action_id" required>
+                            <select class="form-select" aria-label="Default" name="action_id" id="action_id">
+                                @foreach ($type_discipline_list as $item)
+                                    <option value="{{$item->action_id}}">{{$item->disciplinary_action}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee id</label>
-                            <input type="text" class="form-control" id="employee_id" name="employee_id" required>
+                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Save change</button>
                     </form>

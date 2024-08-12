@@ -53,4 +53,32 @@ class LeaveApplicationController extends Controller
             'message' => 'Leave application deleted successfully'
         ]);
     }
+
+    public function edit($id)
+    {
+        $leaveapplication = LeaveApplicationModel::findOrFail($id);
+        return response()->json([
+            'leaveapplication' => $leaveapplication
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'employee_id'=> 'int',
+            'type_leave_id'=> 'required|string',
+            'start_date'=> 'required|string',
+            'end_date'=> 'required|string',
+            'status'=> 'int',
+        ]);
+//        $leaveapplication = LeaveApplicationModel::ModelfindOrFail($id);
+        $leaveapplication = LeaveApplicationModel::findOrFail($id);
+        $leaveapplication->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'leaveapplication' => $leaveapplication,
+        ]);
+    }
 }

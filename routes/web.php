@@ -142,6 +142,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [ProposalController::class, 'getView'])->name('index-proposal');
         Route::post('/add', [ProposalController::class, 'add'])->name('add-proposal');
         Route::delete('/delete/{id}', [ProposalController::class, 'delete'])->name('delete-proposal');
+        Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('edit-proposal');
+        Route::post('/update/{id}', [ProposalController::class, 'update'])->name('update-proposal');
     });
 
     //LEAVE APPLICATION
@@ -149,6 +151,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [LeaveApplicationController::class, 'getView'])->name('index-leave-application');
         Route::post('/add', [LeaveApplicationController::class, 'add'])->name('add-leave-application');
         Route::delete('/delete/{id}', [LeaveApplicationController::class, 'delete'])->name('delete-leave-application');
+        Route::get('/edit/{id}', [LeaveApplicationController::class, 'edit'])->name('edit-leave-application');
+        Route::post('/update/{id}', [LeaveApplicationController::class, 'update'])->name('update-leave-application');
     });
 
     Route::group(['prefix' => '/profile'], function () {
