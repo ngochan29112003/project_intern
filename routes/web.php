@@ -76,6 +76,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [RewardController::class, 'getView'])->name('index-reward');
         Route::post('/add', [RewardController::class, 'add'])->name('add-reward');
         Route::delete('/delete/{id}', [RewardController::class, 'delete'])->name('delete-reward');
+        Route::get('/edit/{id}', [RewardController::class, 'edit'])->name('edit-reward');
+        Route::post('/update/{id}', [RewardController::class, 'update'])->name('update-reward');
     });
 
     //PAYROLL
@@ -105,6 +107,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [DisciplineController::class, 'getView'])->name('index-discipline');
         Route::post('/add', [DisciplineController::class, 'add'])->name('add-discipline');
         Route::delete('/delete/{id}', [DisciplineController::class, 'delete'])->name('delete-discipline');
+        Route::get('/edit/{id}', [DisciplineController::class, 'edit'])->name('edit-discipline');
+        Route::post('/update/{id}', [DisciplineController::class, 'update'])->name('update-discipline');
     });
 
     //PERMISSION

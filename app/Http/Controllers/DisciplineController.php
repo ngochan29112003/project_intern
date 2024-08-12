@@ -13,24 +13,21 @@ class DisciplineController extends Controller
         $model = new DisciplineModel();
         $discipline_list = $model->getDiscipline();
         $employee_list = $model->getEmployee();
+        $type_discipline_list = $model->getTypeDiscipline();
 //        dd($discipline_list);
         return view('auth.discipline.index-discipline',
-            compact('discipline_list', 'employee_list'));
+            compact('discipline_list', 'employee_list','type_discipline_list'));
     }
 
     function add(Request $request){
         $validated = $request->validate([
-            'add_discipline_code'=>'required|string',
-            'add_discipline_name'=>'required|string',
-            'add_employee_id'=>'required|string',
-            'add_description'=>'required|string',
+            'add_action_id'=>'int',
+            'add_employee_id'=>'int',
         ]);
 
         DisciplineModel::create([
-            'discipline_code' =>$validated['add_discipline_code'],
-            'discipline_name' =>$validated['add_discipline_name'],
+            'action_id' =>$validated['add_action_id'],
             'employee_id' =>$validated['add_employee_id'],
-            'description' =>$validated['add_description'],
         ]);
 
         return response()->json([
@@ -44,10 +41,36 @@ class DisciplineController extends Controller
     {
 //        dd($id);
         $discipline = DisciplineModel::findOrFail($id);
+
         $discipline->delete();
+
         return response()->json([
             'success' => true,
             'message' => 'Discipline deleted successfully'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $discipline = DisciplineModel::findOrFail($id);
+        return response()->json([
+            'discipline' => $discipline
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'action_id' => 'int',
+            'employee_id' => 'int',
+        ]);
+        $discipline = DisciplineModel::findOrFail($id);
+        $discipline->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'discipline' => $discipline,
         ]);
     }
 }

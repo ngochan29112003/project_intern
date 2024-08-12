@@ -91,7 +91,7 @@
 
 @section('scripts')
     <script>
-        var table = $('#permissionTable').DataTable();
+        var table = $('#PermissionTable').DataTable();
 
         $('#addPermissionForm').submit(function(e) {
             e.preventDefault();

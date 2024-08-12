@@ -13,10 +13,8 @@ class DisciplineModel extends Model
     protected $table = 'disciplines';
     protected $primaryKey = 'discipline_id';
     protected $fillable = [
-        'discipline_code',
-        'discipline_name',
+        'action_id',
         'employee_id',
-        'description',
     ];
     public $timestamps = false;
 
@@ -24,10 +22,16 @@ class DisciplineModel extends Model
     {
         return DB::table('employees')->get();
     }
+
+    function getTypeDiscipline()
+    {
+        return DB::table('type_disciplines')->get();
+    }
     function getDiscipline()
     {
         return DB::table('disciplines')
             ->join('employees','employees.employee_id','=','disciplines.employee_id')
+            ->join('type_disciplines','type_disciplines.action_id','=','disciplines.action_id')
             ->get();
     }
 }

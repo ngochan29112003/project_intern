@@ -14,10 +14,8 @@ class RewardModel extends Model
     protected $table = 'rewards';
     protected $primaryKey = 'rewards_id';
     protected $fillable=[
-        'reward_code',
-        'reward_name',
+        'type_reward_id',
         'employee_id',
-        'description',
     ];
     public $timestamps = false;
 
@@ -26,12 +24,16 @@ class RewardModel extends Model
         return DB::table('employees')->get();
     }
 
+    function getRewardType()
+    {
+        return DB::table('type_rewards')->get();
+    }
+
     function getReward()
     {
         return DB::table('rewards')
             ->join('employees','employees.employee_id','=','rewards.employee_id')
+            ->join('type_rewards','type_rewards.type_reward_id','=','rewards.type_reward_id')
             ->get();
     }
-
-
 }

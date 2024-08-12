@@ -103,7 +103,7 @@
                     <tr>
                         <td>{{ $stt++ }}</td>
                         <td>{{ $item->payroll_code}}</td>
-                        <td>{{ $item->employee_name}}</td>
+                        <td>{{$item->first_name.' '.$item->last_name}}</td>
                         <td>{{ $item->job_position_name}}</td>
                         <td>{{ $item->monthly_salary}}</td>
                         <td>{{ $item->work_days}}</td>
@@ -130,7 +130,7 @@
 
 @section('scripts')
     <script>
-        var table = $('#payrollTable').DataTable();
+        var table = $('#PayrollTable').DataTable();
 
         $('#addPayrollForm').submit(function(e) {
             e.preventDefault();

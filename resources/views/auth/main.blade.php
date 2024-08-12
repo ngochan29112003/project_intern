@@ -316,7 +316,7 @@ $token = 'position';
             </a>
             <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-leave-application')}}">
                         <i class="bi bi-circle"></i><span>Leave Application list</span>
                     </a>
                 </li>

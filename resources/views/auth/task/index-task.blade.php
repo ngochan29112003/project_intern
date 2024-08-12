@@ -127,7 +127,7 @@
 
 @section('scripts')
     <script>
-        var table = $('#taskTable').DataTable();
+        var table = $('#TaskTable').DataTable();
 
         $('#addTaskForm').submit(function(e) {
             e.preventDefault();
