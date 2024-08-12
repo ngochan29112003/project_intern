@@ -81,6 +81,57 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editPayroll">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit payroll</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editPayrollForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="payroll_code" class="form-label">Payroll code</label>
+                            <input type="text" class="form-control" id="payroll_code" name="payroll_code"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">Employee name</label>
+                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="position_id" class="form-label">Position name</label>
+                            <select class="form-select" aria-label="Default" name="position_id" id="position_id">
+                                @foreach ($position_list as $item)
+                                    <option value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="monthly_salary" class="form-label">Monthly salary</label>
+                            <input type="text" class="form-control" id="monthly_salary" name="monthly_salary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="work_days" class="form-label">Work days</label>
+                            <input type="text" class="form-control" id="work_days" name="work_days" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="net_salary" class="form-label">Net salary</label>
+                            <input type="text" class="form-control" id="net_salary" name="net_salary" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Payroll</h3>
         <div class="table-responsive">
@@ -98,7 +149,7 @@
                 </tr>
                 </thead>
                 <tbody id="payrollTableBody">
-                @php($stt = 0)
+                @php($stt = 1)
                 @foreach ($payroll_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
@@ -199,6 +250,59 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#payrollTableBody').on('click', '.edit-btn', function () {
+            var payrollId = $(this).data('id');
+
+            $('#editPayrollForm').data('id', payrollId);
+            var url = "{{ route('edit-payroll', ':id') }}";
+            url = url.replace(':id', payrollId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.payroll;
+                    $('#payroll_code').val(data.payroll_code);
+                    $('#employee_id').val(data.employee_id);
+                    $('#position_id').val(data.job_position_id);
+                    $('#monthly_salary').val(data.monthly_salary);
+                    $('#work_days').val(data.work_days);
+                    $('#net_salary').val(data.net_salary);
+                    $('#editPayroll').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editPayrollForm').submit(function (e) {
+            e.preventDefault();
+            var payrollId = $(this).data('id');
+            var url = "{{ route('update-payroll', ':id') }}";
+            url = url.replace(':id', payrollId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editPayroll').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

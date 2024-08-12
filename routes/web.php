@@ -85,6 +85,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PayrollController::class, 'getView'])->name('index-payroll');
         Route::post('/add', [PayrollController::class, 'add'])->name('add-payroll');
         Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete-payroll');
+        Route::get('/edit/{id}', [PayrollController::class, 'edit'])->name('edit-payroll');
+        Route::post('/update/{id}', [PayrollController::class, 'update'])->name('update-payroll');
     });
 
     //POSITION
@@ -92,6 +94,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PositionCotroller::class, 'getView'])->name('index-position');
         Route::post('/add', [PositionCotroller::class, 'add'])->name('add-position');
         Route::delete('/delete/{id}', [PositionCotroller::class, 'delete'])->name('delete-position');
+        Route::get('/edit/{id}', [PositionCotroller::class, 'edit'])->name('edit-position');
+        Route::post('/update/{id}', [PositionCotroller::class, 'update'])->name('update-position');
     });
 
     //SALARY CALCULATION
@@ -99,8 +103,9 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
         Route::post('/add', [SalaryCalculationController::class, 'add'])->name('add-salary-calculation');
         Route::delete('/delete/{id}', [SalaryCalculationController::class, 'delete'])->name('delete-salary-calculation');
+        Route::get('/edit/{id}', [SalaryCalculationController::class, 'edit'])->name('edit-salary-calculation');
+        Route::post('/update/{id}', [SalaryCalculationController::class, 'update'])->name('update-salary-calculation');
     });
-
 
     //DISCIPLINE
     Route::group(['prefix' => '/discipline'], function () {
@@ -125,7 +130,6 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/add', [TaskController::class, 'add'])->name('add-task');
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
     });
-
 
     //DEPARTMENT
     Route::group(['prefix' => '/departments'], function () {
