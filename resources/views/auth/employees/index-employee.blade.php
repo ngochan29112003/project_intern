@@ -123,9 +123,9 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="place_of_residencs" class="form-label">Place of Residence</label>
-                                    <input type="text" class="form-control" id="place_of_residencs"
-                                           name="place_of_residencs" required>
+                                    <label for="place_of_resident" class="form-label">Place of Residence</label>
+                                    <input type="text" class="form-control" id="place_of_resident"
+                                           name="place_of_resident" required>
                                 </div>
                                 <div class="col-6">
                                     <label for="permanent_address" class="form-label">Permanent Address</label>
@@ -270,7 +270,7 @@
                                     <input type="email" class="form-control" id="edit_email" name="email">
                                 </div>
                                 <div class="col-6">
-                                    <label for="add_idcard" class="form-label">Citizen identity Card Number</label>
+                                    <label for="edit_cic_number" class="form-label">Citizen identity Card Number</label>
                                     <input type="number" class="form-control" id="edit_cic_number" name="cic_number">
                                 </div>
                             </div>
