@@ -44,7 +44,6 @@ $token = 'position';
 </head>
 
 <body>
-
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
         <a href="" class="logo d-flex align-items-center">
@@ -245,7 +244,7 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#position-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-clipboard2-fill"></i><span>Position</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-clipboard2-fill"></i><span>Job position</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -316,7 +315,7 @@ $token = 'position';
             </a>
             <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
-                    <a href="">
+                    <a href="{{route('index-leave-application')}}">
                         <i class="bi bi-circle"></i><span>Leave Application list</span>
                     </a>
                 </li>

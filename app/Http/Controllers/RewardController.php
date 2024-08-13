@@ -11,26 +11,23 @@ class RewardController extends Controller
     {
         $model = new RewardModel();
         $reward_list = $model->getReward();
+        $reward_type_list = $model->getRewardType();
         $employee_list = $model->getEmployee();
 //        dd($reward_list);
         return view('auth.reward.index-reward',
-            compact('reward_list', 'employee_list'));
+            compact('reward_list', 'employee_list', 'reward_type_list'));
     }
 
     public function add(Request $request)
     {
         $validated = $request->validate([
-            'add_reward_code' => 'required|string',
-            'add_reward_name' => 'required|string',
+            'add_reward_type' => 'int',
             'add_employee_id' => 'int',
-            'add_description' => 'required|string',
         ]);
 
        RewardModel::create([
-            'reward_code' =>$validated['add_reward_code'],
-            'reward_name' =>$validated['add_reward_name'],
+            'type_reward_id' =>$validated['add_reward_type'],
             'employee_id' =>$validated['add_employee_id'],
-            'add_description' =>$validated['add_description'],
         ]);
 
         return response()->json([
@@ -49,6 +46,30 @@ class RewardController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Reward deleted successfully'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $reward = RewardModel::findOrFail($id);
+        return response()->json([
+            'reward' => $reward
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'type_reward_id' => 'int',
+            'employee_id' => 'int',
+        ]);
+        $reward = RewardModel::findOrFail($id);
+        $reward->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'reward' => $reward,
         ]);
     }
 }

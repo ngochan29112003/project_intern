@@ -55,4 +55,32 @@ class PayrollController extends Controller
             'message' => 'Payroll deleted successfully'
         ]);
     }
+
+    public function edit($id)
+    {
+        $payroll = PayrollModel::findOrFail($id);
+        return response()->json([
+            'payroll' => $payroll
+        ]);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'payroll_code' => 'required|string',
+            'employee_id' => 'int',
+            'position_id' => 'int',
+            'monthly_salary' => 'required|string',
+            'work_days' => 'required|string',
+            'net_salary' => 'required|string',
+        ]);
+        $payroll = PayrollModel::findOrFail($id);
+        $payroll->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'payroll' => $payroll,
+        ]);
+    }
 }

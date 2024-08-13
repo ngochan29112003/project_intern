@@ -40,14 +40,12 @@
                     <form id="addRewardForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_reward_code" class="form-label">Reward code</label>
-                            <input type="text" class="form-control" id="add_reward_code" name="add_reward_code"
-                                   required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_reward_name" class="form-label">Reward name</label>
-                            <input type="text" class="form-control" id="add_reward_name" name="add_reward_name"
-                                   required>
+                            <label for="edit_reward_type" class="form-label">Reward type</label>
+                            <select class="form-select" aria-label="Default" name="add_reward_type" id="add_reward_type">
+                                @foreach ($reward_type_list as $item)
+                                    <option value="{{$item->type_reward_id}}">{{$item->type_reward_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="edit_employee_id" class="form-label">Employee name</label>
@@ -58,14 +56,46 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_description" class="form-label">Discription</label>
-                            <input type="text" class="form-control" id="add_description" name="add_description" required>
-                        </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Modal sửa ======= -->
+    <div class="modal fade" id="editRewardModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit reward</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editRewardForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="type_reward_id" class="form-label">Reward type</label>
+{{--                            <input type="text" class="form-control" id="type_reward_id" name="type_reward_id"--}}
+{{--                                   required>--}}
+                            <select class="form-select" aria-label="Default" name="type_reward_id" id="type_reward_id">
+                                @foreach ($reward_type_list as $item)
+                                    <option value="{{$item->type_reward_id}}">{{$item->type_reward_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">Employee name</label>
+                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -77,10 +107,8 @@
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
-                    <th>Reward code</th>
-                    <th>Reward name</th>
+                    <th>Reward type</th>
                     <th>Employee</th>
-                    <th>Description</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -89,10 +117,8 @@
                 @foreach ($reward_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
-                        <td>{{ $item->reward_code}}</td>
-                        <td>{{ $item->reward_name}}</td>
+                        <td>{{ $item->type_reward_name}}</td>
                         <td>{{$item->first_name.' '.$item->last_name}}</td>
-                        <td>{{ $item->description}}</td>
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -186,6 +212,55 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#rewardTable').on('click', '.edit-btn', function () {
+            var rewardId = $(this).data('id');
+            console.log(rewardId)
+            $('#editRewardForm').data('id', rewardId);
+            var url = "{{ route('edit-reward', ':id') }}";
+            url = url.replace(':id', rewardId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.reward;
+                    $('#type_reward_id').val(data.type_reward_id);
+                    $('#employee_id').val(data.employee_id);
+                    $('#editRewardModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editRewardForm').submit(function (e) {
+            e.preventDefault();
+            var rewardId = $(this).data('id');
+            var url = "{{ route('update-reward', ':id') }}";
+            url = url.replace(':id', rewardId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editRewardModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

@@ -48,4 +48,30 @@ class PositionCotroller extends Controller
             'message' => 'Proposal application deleted successfully'
         ]);
     }
+
+    public function edit($id)
+    {
+        $position = PositionModel::findOrFail($id);
+        return response()->json([
+            'position' => $position
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'job_position_code' => 'required|string',
+            'job_position_name' => 'required|string',
+            'job_position_salary' => 'required|string',
+            'description' => 'required|string',
+        ]);
+        $position = PositionModel::findOrFail($id);
+        $position->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'position' => $position,
+        ]);
+    }
+
 }

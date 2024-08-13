@@ -40,14 +40,12 @@
                     <form id="addDisciplineForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_discipline_name" class="form-label">Discipline code</label>
-                            <input type="text" class="form-control" id="add_discipline_code" name="add_discipline_code"
-                                   required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_discipline_name" class="form-label">Discipline name</label>
-                            <input type="text" class="form-control" id="add_discipline_name" name="add_discipline_name"
-                                   required>
+                            <label for="edit_discipline_name" class="form-label">Disciplinary action name</label>
+                            <select class="form-select" aria-label="Default" name="add_action_id" id="add_action_id">
+                                @foreach ($type_discipline_list as $item)
+                                    <option value="{{$item->action_id}}">{{$item->disciplinary_action}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="edit_employee_id" class="form-label">Employee id</label>
@@ -57,11 +55,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_discipline_name" class="form-label">	Description</label>
-                            <input type="text" class="form-control" id="add_description" name="add_description"
-                                   required>
-                        </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
@@ -70,6 +63,41 @@
         </div>
     </div>
 
+    <!-- ======= Modal sửa ======= -->
+    <div class="modal fade" id="editDisciplineModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Discipline</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="editDisciplineForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="action_id" class="form-label">Action id</label>
+                            <select class="form-select" aria-label="Default" name="action_id" id="action_id">
+                                @foreach ($type_discipline_list as $item)
+                                    <option value="{{$item->action_id}}">{{$item->disciplinary_action}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employee_id" class="form-label">Employee id</label>
+                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                @foreach ($employee_list as $item)
+                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save change</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Discipline</h3>
         <div class="table-responsive">
@@ -77,11 +105,9 @@
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
-                    <th>Discipline code</th>
-                    <th>Discipline name</th>
+                    <th>Disciplinary type</th>
                     <th>Employee id</th>
-                    <th>Description</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody id="disciplineTableBody">
@@ -89,10 +115,8 @@
                 @foreach ($discipline_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
-                        <td>{{ $item->discipline_code}}</td>
+                        <td>{{ $item->disciplinary_action}}</td>
                         <td>{{$item->first_name.' '.$item->last_name}}</td>
-                        <td>{{ $item->employee_name}}</td>
-                        <td>{{ $item->description}}</td>
                         <td class="text-center">
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
@@ -116,7 +140,7 @@
 
 @section('scripts')
     <script>
-        var table = $('#disciplineTable').DataTable();
+        var table = $('#DisciplineTable').DataTable();
 
         $('#addDisciplineForm').submit(function(e) {
             e.preventDefault();
@@ -185,6 +209,55 @@
                             toastr.error("An error occurred.", "Operation Failed");
                         }
                     });
+                }
+            });
+        });
+
+        //Hiện chi tiết của dữ liệu
+        $('#disciplineTableBody').on('click', '.edit-btn', function () {
+            var disciplineId = $(this).data('id');
+
+            $('#editDisciplineForm').data('id', disciplineId);
+            var url = "{{ route('edit-discipline', ':id') }}";
+            url = url.replace(':id', disciplineId);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    var data = response.discipline;
+                    $('#action_id').val(data.action_id);
+                    $('#employee_id').val(data.employee_id);
+                    $('#editDisciplineModal').modal('show');
+                },
+                error: function (xhr) {
+                }
+            });
+        });
+
+        //Lưu lại dữ liệu khi chỉnh sửa
+        $('#editDisciplineForm').submit(function (e) {
+            e.preventDefault();
+            var disciplineId = $(this).data('id');
+            var url = "{{ route('update-discipline', ':id') }}";
+            url = url.replace(':id', disciplineId);
+            var formData = new FormData(this);
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#editDisciplineModal').modal('hide');
+                        toastr.success(response.response, "Edit successful");
+                        setTimeout(function () {
+                            location.reload()
+                        }, 500);
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("Error");
                 }
             });
         });

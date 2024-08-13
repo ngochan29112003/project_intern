@@ -76,6 +76,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [RewardController::class, 'getView'])->name('index-reward');
         Route::post('/add', [RewardController::class, 'add'])->name('add-reward');
         Route::delete('/delete/{id}', [RewardController::class, 'delete'])->name('delete-reward');
+        Route::get('/edit/{id}', [RewardController::class, 'edit'])->name('edit-reward');
+        Route::post('/update/{id}', [RewardController::class, 'update'])->name('update-reward');
     });
 
     //PAYROLL
@@ -83,6 +85,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PayrollController::class, 'getView'])->name('index-payroll');
         Route::post('/add', [PayrollController::class, 'add'])->name('add-payroll');
         Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete-payroll');
+        Route::get('/edit/{id}', [PayrollController::class, 'edit'])->name('edit-payroll');
+        Route::post('/update/{id}', [PayrollController::class, 'update'])->name('update-payroll');
     });
 
     //POSITION
@@ -90,6 +94,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PositionCotroller::class, 'getView'])->name('index-position');
         Route::post('/add', [PositionCotroller::class, 'add'])->name('add-position');
         Route::delete('/delete/{id}', [PositionCotroller::class, 'delete'])->name('delete-position');
+        Route::get('/edit/{id}', [PositionCotroller::class, 'edit'])->name('edit-position');
+        Route::post('/update/{id}', [PositionCotroller::class, 'update'])->name('update-position');
     });
 
     //SALARY CALCULATION
@@ -97,14 +103,17 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
         Route::post('/add', [SalaryCalculationController::class, 'add'])->name('add-salary-calculation');
         Route::delete('/delete/{id}', [SalaryCalculationController::class, 'delete'])->name('delete-salary-calculation');
+        Route::get('/edit/{id}', [SalaryCalculationController::class, 'edit'])->name('edit-salary-calculation');
+        Route::post('/update/{id}', [SalaryCalculationController::class, 'update'])->name('update-salary-calculation');
     });
-
 
     //DISCIPLINE
     Route::group(['prefix' => '/discipline'], function () {
         Route::get('/index', [DisciplineController::class, 'getView'])->name('index-discipline');
         Route::post('/add', [DisciplineController::class, 'add'])->name('add-discipline');
         Route::delete('/delete/{id}', [DisciplineController::class, 'delete'])->name('delete-discipline');
+        Route::get('/edit/{id}', [DisciplineController::class, 'edit'])->name('edit-discipline');
+        Route::post('/update/{id}', [DisciplineController::class, 'update'])->name('update-discipline');
     });
 
     //PERMISSION
@@ -112,6 +121,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [PermissionController::class, 'getView'])->name('index-permission');
         Route::post('/add', [PermissionController::class, 'add'])->name('add-permission');
         Route::delete('/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+        Route::get('/edit/{id}', [PermissionController::class, 'edit'])->name('edit-permission');
+        Route::post('/update/{id}', [PermissionController::class, 'update'])->name('update-permission');
     });
 
 
@@ -120,13 +131,16 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [TaskController::class, 'getView'])->name('index-task');
         Route::post('/add', [TaskController::class, 'add'])->name('add-task');
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
+        Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit-task');
+        Route::post('/update/{id}', [TaskController::class, 'update'])->name('update-task');
     });
-
 
     //DEPARTMENT
     Route::group(['prefix' => '/departments'], function () {
         Route::get('/', [DepartmentController::class, 'getView'])->name('index-department');
         Route::post('//add', [DepartmentController::class, 'add'])->name('add-department');
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit-department');
+        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('update-department');
     });
 
     //PROPOSAL
@@ -134,6 +148,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [ProposalController::class, 'getView'])->name('index-proposal');
         Route::post('/add', [ProposalController::class, 'add'])->name('add-proposal');
         Route::delete('/delete/{id}', [ProposalController::class, 'delete'])->name('delete-proposal');
+        Route::get('/edit/{id}', [ProposalController::class, 'edit'])->name('edit-proposal');
+        Route::post('/update/{id}', [ProposalController::class, 'update'])->name('update-proposal');
     });
 
     //LEAVE APPLICATION
@@ -141,6 +157,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/index', [LeaveApplicationController::class, 'getView'])->name('index-leave-application');
         Route::post('/add', [LeaveApplicationController::class, 'add'])->name('add-leave-application');
         Route::delete('/delete/{id}', [LeaveApplicationController::class, 'delete'])->name('delete-leave-application');
+        Route::get('/edit/{id}', [LeaveApplicationController::class, 'edit'])->name('edit-leave-application');
+        Route::post('/update/{id}', [LeaveApplicationController::class, 'update'])->name('update-leave-application');
     });
 
     Route::group(['prefix' => '/profile'], function () {
