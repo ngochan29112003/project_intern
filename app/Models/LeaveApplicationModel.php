@@ -16,7 +16,8 @@ class LeaveApplicationModel extends Model
         'type_leave_id',
         'start_date',
         'end_date',
-        'status',
+        'duration',
+        'leave_status',
     ];
 
     public $timestamps = false;
@@ -31,7 +32,16 @@ class LeaveApplicationModel extends Model
         return DB::table('type_leaves')->get();
     }
 
-    function getLeaveApplication()
+    function getLeaveApplication($id)
+    {
+        return DB::table('leave_application')
+            ->join('employees','employees.employee_id','=','leave_application.employee_id')
+            ->join('type_leaves','type_leaves.type_leave_id','=','leave_application.type_leave_id')
+            ->where('leave_application.employee_id', $id)
+            ->get();
+    }
+
+    function getAllLeaveAppReport()
     {
         return DB::table('leave_application')
             ->join('employees','employees.employee_id','=','leave_application.employee_id')

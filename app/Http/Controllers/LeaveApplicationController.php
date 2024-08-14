@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountModel;
+use App\Models\EmployeeModel;
 use App\Models\LeaveApplicationModel;
 use Illuminate\Http\Request;
+use App\StaticString;
 
 class LeaveApplicationController extends Controller
 {
     function getView()
     {
+        $account_id = \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID);
         $model = new LeaveApplicationModel();
-        $leave_application_list = $model->getLeaveApplication();
+        $model_account = new AccountModel();
+        $model_employee = new EmployeeModel();
+        $employee_id = $model_account->getIdEmployee($account_id);
+        $current_employee = $model_employee->getOneEmployee($employee_id);
+        $leave_application_list = $model->getLeaveApplication($employee_id);
         $leave_types = $model->getLeaveTypes();
         $employee_list = $model->getEmployee();
+//        dd($leave_application_list);
         return view('auth.leave_application.index-leave-application',
-            compact('leave_application_list', 'employee_list','leave_types'));
+            compact('leave_application_list', 'employee_list','leave_types','current_employee'));
     }
 
     public function add(Request $request)
@@ -22,8 +31,9 @@ class LeaveApplicationController extends Controller
         $validated = $request->validate([
             'add_employee_id' => 'int',
             'add_leave_type' => 'int',
-            'add_start_date' => 'required|string',
-            'add_end_date' => 'required|string',
+            'add_start_date' => 'date',
+            'add_end_date' => 'date',
+            'duration' => 'int',
         ]);
 
         $validated['add_status'] = 0;
@@ -32,7 +42,8 @@ class LeaveApplicationController extends Controller
             'type_leave_id' =>$validated['add_leave_type'],
             'start_date' =>$validated['add_start_date'],
             'end_date' =>$validated['add_end_date'],
-            'status' =>$validated['add_status'],
+            'duration' =>$validated['duration'],
+            'leave_status' =>$validated['add_status'],
         ]);
 
         return response()->json([
@@ -67,18 +78,37 @@ class LeaveApplicationController extends Controller
     {
         $validated = $request->validate([
             'employee_id'=> 'int',
-            'type_leave_id'=> 'required|string',
-            'start_date'=> 'required|string',
-            'end_date'=> 'required|string',
+            'type_leave_id'=> 'int',
+            'start_date'=> 'date',
+            'end_date'=> 'date',
+            'duration' => 'int',
             'status'=> 'int',
         ]);
-//        $leaveapplication = LeaveApplicationModel::ModelfindOrFail($id);
         $leaveapplication = LeaveApplicationModel::findOrFail($id);
         $leaveapplication->update($validated);
 
         return response()->json([
             'success' => true,
             'leaveapplication' => $leaveapplication,
+        ]);
+    }
+
+    public function getViewReport()
+    {
+        $model = new LeaveApplicationModel();
+        $leaveReport = $model->getAllLeaveAppReport();
+        return view('auth.leave_application.report-leave-application', compact('leaveReport'));
+    }
+
+    public function approve($id)
+    {
+        $leaveReport = LeaveApplicationModel::findOrFail($id);
+        $leaveReport->leave_status = 1;
+        $leaveReport->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Leave application approved successfully'
         ]);
     }
 }

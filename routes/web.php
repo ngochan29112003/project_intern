@@ -159,6 +159,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [LeaveApplicationController::class, 'delete'])->name('delete-leave-application');
         Route::get('/edit/{id}', [LeaveApplicationController::class, 'edit'])->name('edit-leave-application');
         Route::post('/update/{id}', [LeaveApplicationController::class, 'update'])->name('update-leave-application');
+        Route::get('/report', [LeaveApplicationController::class, 'getViewReport'])->name('report-leave-application');
+        Route::post('/approve/{id}', [LeaveApplicationController::class, 'approve'])->name('approve-leave-application');
     });
 
     Route::group(['prefix' => '/profile'], function () {

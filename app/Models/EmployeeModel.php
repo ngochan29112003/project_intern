@@ -57,4 +57,10 @@ class EmployeeModel extends Model
             ->value('img');
     }
 
+    function getOneEmployee($id)
+    {
+        return DB::table('employees')
+            ->where('employee_id', $id)
+            ->first();
+    }
 }

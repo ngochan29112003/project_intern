@@ -21,4 +21,11 @@ class AccountModel extends Model
     function getPermis(){
         return DB::table('permissions')->get();
     }
+
+    function getIdEmployee($id)
+    {
+        return DB::table('accounts')
+            ->where('id', $id)
+            ->value('id_employee');
+    }
 }

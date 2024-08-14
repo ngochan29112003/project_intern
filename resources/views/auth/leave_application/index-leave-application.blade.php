@@ -41,11 +41,11 @@
                         @csrf
                         <div class="mb-3">
                             <label for="edit_employee_id" class="form-label">Employee name</label>
-                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
-                                @foreach ($employee_list as $item)
-                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
-                                    </option>
-                                @endforeach
+                            <select class="form-select" aria-label="Default" name="add_employee_id"
+                                    id="add_employee_id">
+                                <option
+                                    value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -57,16 +57,21 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_start_date" class="form-label">Start date</label>
-                            <input type="date" class="form-control" id="add_start_date" name="add_start_date" required>
+                            <label for="start_date" class="form-label">Start date</label>
+                            <input type="date" class="form-control" id="start_date" name="add_start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_end_date" class="form-label">End date</label>
-                            <input type="date" class="form-control" id="add_end_date" name="add_end_date" required>
+                            <label for="end_date" class="form-label">End date</label>
+                            <input type="date" class="form-control" id="end_date" name="add_end_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration" style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="edit_status" class="form-label">Status</label>
-                            <input type="text" class="form-control" id="add_status" name="add_status"  style="color: #6c757d; background-color: #e9ecef;" readonly>
+                            <input type="text" class="form-control" id="add_status" name="add_status"
+                                   style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add</button>
@@ -89,9 +94,8 @@
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee id</label>
                             <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
-                                @foreach ($employee_list as $item)
-                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
-                                @endforeach
+                                <option
+                                    value="{{ $current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -103,19 +107,22 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="start_date" class="form-label">Start date</label>
-                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                            <label for="edit_start_date" class="form-label">Start date</label>
+                            <input type="date" class="form-control" id="edit_start_date" name="start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="end_date" class="form-label">End date</label>
-                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                            <label for="edit_end_date" class="form-label">End date</label>
+                            <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
                         </div>
-                        <div class="col-6">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" aria-label="Default" name="status" id="status">
-                                <option value="0">No approved</option>
-                                <option value="1">Approved</option>
-                            </select>
+                        <div class="mb-3">
+                            <label for="edit_duration" class="form-label">Duration</label>
+                            <input type="text" class="form-control" id="edit_duration" name="duration"
+                                   style="color: #6c757d; background-color: #e9ecef;" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_status" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="edit_status" name="status"
+                                   style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
                         <button type="submit" class="btn btn-primary">Save change</button>
                     </form>
@@ -126,7 +133,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Leave application</h3>
+        <h3 class="text-left mb-4">Your leave application</h3>
         <div class="table-responsive">
             <table id="LeaveApplicationTable" class="table table-hover table-borderless">
                 <thead class="table-light">
@@ -145,14 +152,14 @@
                 @foreach ($leave_application_list as $item)
                     <tr>
                         <td>{{ $stt++ }}</td>
-                        <td>{{$item->first_name.' '.$item->last_name}}</td>
+                        <td>{{ $item->first_name.' '.$item->last_name }}</td>
                         <td>{{ $item->type_leave_name}}</td>
                         <td>{{ $item->start_date}}</td>
                         <td>{{ $item->end_date}}</td>
                         <td>
-                            @if($item->status === 0)
+                            @if($item->leave_status === 0)
                                 <span class="badge rounded-pill bg-danger">
-                                    No approved
+                                    Not approved
                                 </span>
                             @else
                                 <span class="badge rounded-pill bg-success">
@@ -161,17 +168,19 @@
                             @endif
                         </td>
                         <td class="text-center">
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                data-id="{{ $item->application_id }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            |
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                data-id="{{ $item->application_id }}">
-                                <i class="bi bi-trash3"></i>
-                            </button>
+                            @if($item->leave_status === 0)
+                                <button
+                                    class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                    data-id="{{ $item->application_id }}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                |
+                                <button
+                                    class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                    data-id="{{ $item->application_id }}">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -186,25 +195,25 @@
 
         var table = $('#LeaveApplicationTable').DataTable();
 
-        $('#addLeaveApplicationForm').submit(function(e) {
+        $('#addLeaveApplicationForm').submit(function (e) {
             e.preventDefault();
 
             $.ajax({
                 url: '{{ route('add-leave-application') }}',
                 method: 'POST',
                 data: $(this).serialize(),
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         $('#addLeaveApplication').modal('hide');
                         toastr.success(response.messMEage, "Successful");
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload()
                         }, 500);
                     } else {
                         toastr.error(response.message, "Error");
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     toastr.error(response.message, "Error");
                     if (xhr.status === 400) {
                         var response = xhr.responseJSON;
@@ -269,11 +278,17 @@
                 method: 'GET',
                 success: function (response) {
                     var data = response.leaveapplication;
+                    console.log(data)
                     $('#employee_id').val(data.employee_id);
                     $('#type_leave_id').val(data.type_leave_id);
-                    $('#start_date').val(data.start_date);
-                    $('#end_date').val(data.end_date);
-                    $('#status').val(data.status);
+                    $('#edit_start_date').val(data.start_date);
+                    $('#edit_end_date').val(data.end_date);
+                    $('#edit_duration').val(data.duration);
+                    if(data.leave_status === 0){
+                        $('#edit_status').val("Not approved");
+                    }else{
+                        $('#edit_status').val("Approved");
+                    }
                     $('#editLeaveApplicationModal').modal('show');
                 },
                 error: function (xhr) {
@@ -308,5 +323,62 @@
                 }
             });
         });
+
+        function addDateValidation(startDateInput, endDateInput, daysInput) {
+            function calculateDays() {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+
+                if (startDate && endDate && startDate <= endDate) {
+                    const timeDiff = endDate.getTime() - startDate.getTime();
+                    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
+                    daysInput.value = daysDiff;
+
+                    endDateInput.setAttribute('min', startDateInput.value);
+                } else {
+                    daysInput.value = '';
+                    endDateInput.removeAttribute('min');
+                }
+            }
+
+            function validateDates() {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // Set time to midnight for accurate comparison
+
+                if (startDate < today) {
+                    toastr.error("Start date cannot be before today", "Error");
+                    startDateInput.value = '';
+                    daysInput.value = '';
+                    endDateInput.removeAttribute('min');
+                    return;
+                }
+
+                if (endDate < startDate) {
+                    endDateInput.value = startDateInput.value;
+                }
+
+                calculateDays();
+            }
+
+            startDateInput.addEventListener('change', validateDates);
+            endDateInput.addEventListener('change', validateDates);
+
+            startDateInput.addEventListener('input', validateDates);
+            endDateInput.addEventListener('input', validateDates);
+        }
+
+        addDateValidation(
+            document.getElementById('start_date'),
+            document.getElementById('end_date'),
+            document.getElementById('duration')
+        );
+
+        addDateValidation(
+            document.getElementById('edit_start_date'),
+            document.getElementById('edit_end_date'),
+            document.getElementById('edit_duration')
+        );
     </script>
 @endsection
