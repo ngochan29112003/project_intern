@@ -31,7 +31,7 @@
 
     <!-- ======= Modal thêm (tìm hiểu Modal này trên BS5) ======= -->
     <div class="modal fade" id="addProposal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add proposal</h4>
@@ -39,26 +39,39 @@
                 <div class="modal-body">
                     <form id="addProposalForm" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee name</label>
-                            <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
-                                @foreach ($employee_list as $item)
-                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_employee_id" class="form-label">Employee name</label>
+                                    <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                        <option
+                                            value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_type_proposal_id" class="form-label">Type proposal</label>
+                                    <select class="form-select" aria-label="Default" name="type_proposal_id" id="type_proposal_id">
+                                        @foreach ($type_proposal_list as $item)
+                                            <option value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_type_proposal_id" class="form-label">Type proposal</label>
-                            <select class="form-select" aria-label="Default" name="add_type_proposal_id" id="add_type_proposal_id">
-                                @foreach ($type_proposal_list as $item)
-                                    <option value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
-                                @endforeach
-                            </select>
+                            <label for="proposal_description" class="form-label">Description</label>
+                            <textarea class="form-control" placeholder="Proposal a description here" id="add_proposal_description"
+                                      name="proposal_description" style="height: 200px"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_proposal_date" class="form-label">Proposal date</label>
-                            <input type="date" class="form-control" id="add_proposal_date" name="add_proposal_date" required>
+                            <label for="file" class="form-label">Upload your files</label>
+                            <input class="form-control" type="file" id="file" name="files[]" multiple>
+                            <ul id="fileList" class="list-unstyled mt-2"></ul>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
@@ -80,9 +93,9 @@
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee id</label>
                             <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
-                                @foreach ($employee_list as $item)
-                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
-                                @endforeach
+                                <option
+                                    value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -121,7 +134,7 @@
                     <th>No</th>
                     <th>Employee name</th>
                     <th>Type proposal</th>
-                    <th>proposal date</th>
+                    <th>Description</th>
                     <th>Status</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -133,11 +146,11 @@
                         <td>{{ $stt++ }}</td>
                         <td>{{$item->first_name.' '.$item->last_name}}</td>
                         <td>{{ $item->proposal_name}}</td>
-                        <td>{{ $item->proposal_date}}</td>
+                        <td>{{ $item->proposal_description}}</td>
                         <td>
-                            @if($item->status === 0)
+                            @if($item->proposal_status === 0)
                                 <span class="badge rounded-pill bg-danger">
-                                    No approved
+                                    Not approved
                                 </span>
                             @else
                                 <span class="badge rounded-pill bg-success">
@@ -170,17 +183,76 @@
     <script>
         var table = $('#ProposalTable').DataTable();
 
+        const fileArray = [];
+        const input = document.getElementById('file');
+
+        input.addEventListener('change', function(event) {
+            const fileList = document.getElementById('fileList');
+
+            for (let i = 0; i < input.files.length; i++) {
+                fileArray.push(input.files[i]);
+            }
+
+            updateFileList();
+        });
+
+        function updateFileList() {
+            const dataTransfer = new DataTransfer();
+            fileArray.forEach(file => dataTransfer.items.add(file));
+            input.files = dataTransfer.files;
+
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            fileArray.forEach((file, index) => {
+                const li = document.createElement('li');
+                li.className =
+                    'mb-3 d-flex justify-content-between align-items-center text-truncate file-list-item';
+                let displayName = file.name;
+                const extension = displayName.split('.').pop();
+                const baseName = displayName.substring(0, displayName.lastIndexOf('.'));
+
+                if (baseName.length > 30) {
+                    displayName = baseName.substring(0, 25) + '...' + '.' + extension;
+                } else {
+                    displayName = baseName + '.' + extension;
+                }
+
+                li.textContent = displayName + ' ';
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
+                removeBtn.onclick = function() {
+                    fileArray.splice(index, 1);
+                    updateFileList();
+                };
+
+                li.appendChild(removeBtn);
+                fileList.appendChild(li);
+            });
+        }
+
+
+
         $('#addProposalForm').submit(function(e) {
             e.preventDefault();
+
+            var formData = new FormData(this);
+
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ": " + pair[1]);
+            }
 
             $.ajax({
                 url: '{{ route('add-proposal') }}',
                 method: 'POST',
-                data: $(this).serialize(),
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: function(response) {
                     if (response.success) {
                         $('#addModal').modal('hide');
-                        toastr.success(response.messMEage, "Successful");
+                        toastr.success(response.message, "Successful");
                         setTimeout(function() {
                             location.reload()
                         }, 500);

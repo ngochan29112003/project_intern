@@ -37,6 +37,7 @@ class EmployeeController extends Controller
             'status'             => 'int',
             'type_employee_id'   => 'int',
             'job_position_id'    => 'int',
+            'department_id'      => 'int',
         ]);
 
         $imagePath = 'avt.png';

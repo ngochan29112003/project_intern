@@ -44,6 +44,13 @@ $token = 'position';
 </head>
 
 <body>
+@php
+    $data = \Illuminate\Support\Facades\DB::table('employees')
+            ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
+            ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
+            ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID))
+            ->first();
+@endphp
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
         <a href="" class="logo d-flex align-items-center">
@@ -60,13 +67,6 @@ $token = 'position';
                 </a>
             </li>
             <li class="nav-item dropdown pe-3">
-                @php
-                    $data = \Illuminate\Support\Facades\DB::table('employees')
-                            ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
-                            ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
-                            ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(App\StaticString::ACCOUNT_ID))
-                            ->first();
-                @endphp
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{asset('assets/employee_img/'.$data->img)}}" alt="Profile" class="rounded-circle object-fit-cover" width="36" height="36"
                     >
@@ -136,32 +136,35 @@ $token = 'position';
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-heading">System</li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-fill-gear"></i></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="account-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-account')}}">
-                        <i class="bi bi-circle"></i><span>Account list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-permission')}}">
-                        <i class="bi bi-circle"></i><span>Permission list</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if(($data->permission === 2 && $data->job_position_id === 8) || $data->permission === 1)
+            <!-- ======= Chỉ có super admin và người quản lý nhân sự mới truy cập được system ======= -->
+            <li class="nav-heading">System</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-person-fill-gear"></i></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="account-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{route('index-account')}}">
+                            <i class="bi bi-circle"></i><span>Account list</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
+                   aria-expanded="false">
+                    <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{route('index-permission')}}">
+                            <i class="bi bi-circle"></i><span>Permission list</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
         <li class="nav-heading">Management</li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
@@ -177,20 +180,6 @@ $token = 'position';
                 </li>
             </ul>
         </li>
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" data-bs-target="#khachhang-nav" data-bs-toggle="collapse" href="#"--}}
-{{--               aria-expanded="false">--}}
-{{--                <i class="bi bi-person-check-fill"></i></i><span>Customer</span><i--}}
-{{--                        class="bi bi-chevron-down ms-auto"></i>--}}
-{{--            </a>--}}
-{{--            <ul id="khachhang-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('index-customer')}}">--}}
-{{--                        <i class="bi bi-circle"></i><span>Customer list</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
@@ -205,21 +194,6 @@ $token = 'position';
                 </li>
             </ul>
         </li>
-
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" data-bs-target="#project-nav" data-bs-toggle="collapse" href="#">--}}
-{{--                <i class="bi bi-calendar2"></i><span>Project</span><i class="bi bi-chevron-down ms-auto"></i>--}}
-{{--            </a>--}}
-{{--            <ul id="project-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('index-project')}}">--}}
-{{--                        <i class="bi bi-circle"></i><span>Project list</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
-
-
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#payroll-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
@@ -313,13 +287,23 @@ $token = 'position';
                 <i class="bi bi-envelope-exclamation"></i><span>Leave Application</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-leave-application')}}">
-                        <i class="bi bi-circle"></i><span>Leave Application list</span>
-                    </a>
-                </li>
-            </ul>
+            @if(($data->permission === 2 && $data->job_position_id === 8))
+                <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('report-leave-application')}}">
+                            <i class="bi bi-circle"></i><span>Leave Application Report</span>
+                        </a>
+                    </li>
+                </ul>
+            @else
+                <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-leave-application')}}">
+                            <i class="bi bi-circle"></i><span>Leave Application list</span>
+                        </a>
+                    </li>
+                </ul>
+            @endif
         </li>
 
     </ul>
