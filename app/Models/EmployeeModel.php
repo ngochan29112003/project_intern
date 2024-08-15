@@ -25,7 +25,8 @@ class EmployeeModel extends Model
         'education_level_id',
         'status',
         'type_employee_id',
-        'job_position_id'
+        'job_position_id',
+        'department_id'
     ];
     public $timestamps = false;
 

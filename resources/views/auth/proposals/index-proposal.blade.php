@@ -125,9 +125,6 @@
         </div>
     </div>
 
-    <!-- permission = 3 -> nhân viên bth-->
-    <!-- permission = 2 và job_position_id = 6 -> DM truong phong -->
-    <!-- permission = 2 và job_position_id = 7 -> Dir giam doc -->
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Proposal</h3>
         <div class="table-responsive">

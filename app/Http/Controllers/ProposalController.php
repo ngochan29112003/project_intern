@@ -12,11 +12,11 @@ class ProposalController extends Controller
 {
     function getView()
     {
-        $account_id = \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID);
+        $account_id = \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID); //get account_id from session
         $model = new ProposalModel();
         $model_account = new AccountModel();
         $model_employee = new EmployeeModel();
-        $employee_id = $model_account->getIdEmployee($account_id);
+        $employee_id = $model_account->getIdEmployee($account_id); //Get employee_id
         $current_employee = $model_employee->getOneEmployee($employee_id);
         $type_proposal_list = $model->getTypeProposal();
         return view('auth.proposals.index-proposal',
