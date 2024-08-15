@@ -14,10 +14,14 @@ class EmployeeController extends Controller
         $position_list = $model->getPosition();
         $edu_level_list = $model->getEdulevel();
         $type_employee_list = $model->getTypeEmployees();
+        $department_list = $model->getDepartment();
 //        dd($employee_list);
         return view('auth.employees.index-employee',
-            compact('employee_list', 'position_list', 'edu_level_list',
-                'type_employee_list'));
+            compact('employee_list',
+                'position_list',
+                'edu_level_list',
+                'type_employee_list',
+                'department_list'));
     }
 
     public function add(Request $request)

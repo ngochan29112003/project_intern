@@ -272,13 +272,24 @@ $token = 'position';
                 <i class="bi bi-mailbox"></i><span>Proposals</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-proposal')}}">
-                        <i class="bi bi-circle"></i><span>Proposal list</span>
-                    </a>
-                </li>
-            </ul>
+            @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+                <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-proposal')}}">
+                            <i class="bi bi-circle"></i><span>Proposal report</span>
+                        </a>
+                    </li>
+                </ul>
+            @else
+                <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-proposal')}}">
+                            <i class="bi bi-circle"></i><span>Proposal list</span>
+                        </a>
+                    </li>
+                </ul>
+            @endif
+
         </li>
 
         <li class="nav-item">

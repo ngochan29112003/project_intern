@@ -1,12 +1,23 @@
 @extends('auth.main')
 
 @section('contents')
+    @php
+        $data = \Illuminate\Support\Facades\DB::table('employees')
+                ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
+                ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
+                ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID))
+                ->first();
+    @endphp
     <div class="pagetitle">
         <h1>Proposal</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Proposal</li>
+                @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+                    <li class="breadcrumb-item active">Proposal report</li>
+                @else
+                    <li class="breadcrumb-item active">Proposal list</li>
+                @endif
             </ol>
         </nav>
     </div>
@@ -20,12 +31,14 @@
                     Add a new proposal
                 </div>
             </div>
-            <div class="btn btn-success mx-2 btn-export">
-                <a href="" class="d-flex align-items-center text-white">
-                    <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
-                </a>
-            </div>
+            @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+                <div class="btn btn-success mx-2 btn-export">
+                    <a href="" class="d-flex align-items-center text-white">
+                        <i class="bi bi-file-earmark-arrow-down pe-2"></i>
+                        Export file excel
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -43,7 +56,8 @@
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label for="add_employee_id" class="form-label">Employee name</label>
-                                    <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
+                                    <select class="form-select" aria-label="Default" name="employee_id"
+                                            id="employee_id">
                                         <option
                                             value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
                                         </option>
@@ -53,9 +67,11 @@
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label for="add_type_proposal_id" class="form-label">Type proposal</label>
-                                    <select class="form-select" aria-label="Default" name="type_proposal_id" id="type_proposal_id">
+                                    <select class="form-select" aria-label="Default" name="type_proposal_id"
+                                            id="type_proposal_id">
                                         @foreach ($type_proposal_list as $item)
-                                            <option value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
+                                            <option
+                                                value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -63,7 +79,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="proposal_description" class="form-label">Description</label>
-                            <textarea class="form-control" placeholder="Proposal a description here" id="add_proposal_description"
+                            <textarea class="form-control" placeholder="Proposal a description here"
+                                      id="add_proposal_description"
                                       name="proposal_description" style="height: 200px"></textarea>
                         </div>
                         <div class="mb-3">
@@ -75,7 +92,6 @@
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -90,33 +106,61 @@
                 <div class="modal-body">
                     <form id="editProposalForm" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee id</label>
-                            <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
-                                <option
-                                    value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
-                                </option>
-                            </select>
+                        @method('PUT')
+                        <div class="row">
+                            <input type="hidden" id="edit_proposal_id" name="proposal_id">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="edit_employee_id" class="form-label">Employee name</label>
+                                    <select class="form-select" aria-label="Default" name="employee_id"
+                                            id="edit_employee_id">
+                                        <option
+                                            value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="edit_type_proposal_id" class="form-label">Type proposal</label>
+                                    <select class="form-select" aria-label="Default" name="type_proposal_id"
+                                            id="edit_type_proposal_id">
+                                        @foreach ($type_proposal_list as $item)
+                                            <option
+                                                value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="type_proposal_id" class="form-label">Type proposal</label>
-                            <select class="form-select" aria-label="Default" name="type_proposal_id" id="type_proposal_id">
-                                @foreach ($type_proposal_list as $item)
-                                    <option value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
-                                @endforeach
-                            </select>
+                            <label for="edit_proposal_description" class="form-label">Description</label>
+                            <textarea class="form-control" placeholder="Proposal a description here"
+                                      id="edit_proposal_description"
+                                      name="proposal_description" style="height: 200px"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="proposal_date" class="form-label">Proposal date</label>
-                            <input type="date" class="form-control" id="proposal_date" name="proposal_date" required>
+                            <label for="proposal_files">Proposal File Uploaded</label>
+                            <div class="mb-3 table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Proposal File Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="overflow-y-scroll">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_files" class="form-label">Add more files</label>
+                                <input class="form-control" type="file" id="edit_files" name="files[]" multiple>
+                                <ul id="editFileList" class="list-unstyled mt-2"></ul>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" aria-label="Default" name="status" id="status">
-                                <option value="0">No approved</option>
-                                <option value="1">Approved</option>
-                            </select>
-                        </div>
+
                         <button type="submit" class="btn btn-primary">Save change</button>
                     </form>
                 </div>
@@ -126,7 +170,11 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Proposal</h3>
+        @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+            <h3 class="text-left mb-4">Proposal report</h3>
+        @else
+            <h3 class="text-left mb-4">Your proposal</h3>
+        @endif
         <div class="table-responsive">
             <table id="ProposalTable" class="table table-hover table-borderless">
                 <thead class="table-light">
@@ -136,6 +184,13 @@
                     <th>Type proposal</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th>
+                        @if(($data->permission === 2 && $data->job_position_id === 6))
+                            Direct Manager
+                        @elseif(($data->permission === 2 && $data->job_position_id === 7))
+                            Director
+                        @endif
+                    </th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -147,33 +202,103 @@
                         <td>{{$item->first_name.' '.$item->last_name}}</td>
                         <td>{{ $item->proposal_name}}</td>
                         <td>{{ $item->proposal_description}}</td>
+                        <td class="w-25">
+                            <div class="progress">
+                                @if ($item->proposal_status === 0)
+                                    <div class="progress-bar bg-danger text-white fw-bold" role="progressbar"
+                                         style="width: 33%;"
+                                         aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
+                                        Not approved
+                                    </div>
+                                @elseif($item->proposal_status === 1)
+                                    <div class="progress-bar bg-warning text-white fw-bold" role="progressbar"
+                                         style="width: 66%;"
+                                         aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+                                        Direct Manager approved
+                                    </div>
+                                @elseif($item->proposal_status === 2)
+                                    <div class="progress-bar bg-success text-white fw-bold" role="progressbar"
+                                         style="width: 100%;"
+                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                        Director approved
+                                    </div>
+                                @endif
+                            </div>
+                        </td>
                         <td>
-                            @if($item->proposal_status === 0)
-                                <span class="badge rounded-pill bg-danger">
-                                    Not approved
-                                </span>
-                            @else
-                                <span class="badge rounded-pill bg-success">
-                                    Approved
-                                </span>
+                            @if(($data->permission === 2 && $data->job_position_id === 6))
+                                @if ( $item->proposal_status === 0)
+                                    <button
+                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                        data-id="{{ $item->proposal_id }}"
+                                        data-permission="{{$data->permission}}"
+                                        data-position="{{$data->job_position_id}}">
+                                        <i class="bi bi-check-circle"></i>
+                                        Not approved
+                                    </button>
+                                @elseif($item->proposal_status === 1)
+                                    <button
+                                        class="text-warning btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none"
+                                        data-id="{{ $item->proposal_id }}" disabled>
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        Direct Manager approved
+                                    </button>
+                                @elseif($item->proposal_status === 2)
+                                    <button
+                                        class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                        data-id="{{ $item->proposal_id }}"
+                                        disabled>
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        Done
+                                    </button>
+                                @endif
+                            @elseif(($data->permission === 2 && $data->job_position_id === 7))
+                                @if ( $item->proposal_status === 0)
+                                    <button
+                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                        data-id="{{ $item->proposal_id }}" disabled>
+                                        <i class="bi bi-check-circle"></i>
+                                        Direct Manager not approve
+                                    </button>
+                                @elseif($item->proposal_status === 1)
+                                    <button
+                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                        data-id="{{ $item->proposal_id }}"
+                                        data-permission="{{$data->permission}}"
+                                        data-position="{{$data->job_position_id}}">
+                                        <i class="bi bi-check-circle"></i>
+                                        Not approve
+                                    </button>
+                                @elseif($item->proposal_status === 2)
+                                    <button
+                                        class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                        data-id="{{ $item->proposal_id }}"
+                                        disabled>
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        Done
+                                    </button>
+                                @endif
                             @endif
                         </td>
                         <td class="text-center">
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                data-id="{{ $item->proposal_id}}">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            |
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                data-id="{{ $item->proposal_id}}">
-                                <i class="bi bi-trash3"></i>
-                            </button>
+                            @if ($item->proposal_status === 0)
+                                <button
+                                    class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                    data-id="{{ $item->proposal_id}}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                |
+                                <button
+                                    class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                    data-id="{{ $item->proposal_id}}">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
+
             </table>
         </div>
     </div>
@@ -186,7 +311,7 @@
         const fileArray = [];
         const input = document.getElementById('file');
 
-        input.addEventListener('change', function(event) {
+        input.addEventListener('change', function (event) {
             const fileList = document.getElementById('fileList');
 
             for (let i = 0; i < input.files.length; i++) {
@@ -222,7 +347,7 @@
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = 'Remove';
                 removeBtn.className = 'text-right btn btn-danger btn-sm ms-2';
-                removeBtn.onclick = function() {
+                removeBtn.onclick = function () {
                     fileArray.splice(index, 1);
                     updateFileList();
                 };
@@ -233,8 +358,7 @@
         }
 
 
-
-        $('#addProposalForm').submit(function(e) {
+        $('#addProposalForm').submit(function (e) {
             e.preventDefault();
 
             var formData = new FormData(this);
@@ -249,18 +373,18 @@
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         $('#addModal').modal('hide');
                         toastr.success(response.message, "Successful");
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload()
                         }, 500);
                     } else {
                         toastr.error(response.message, "Error");
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     toastr.error(response.message, "Error");
                     if (xhr.status === 400) {
                         var response = xhr.responseJSON;
@@ -313,8 +437,38 @@
         });
 
 
+        const EditfileArray = [];
+        const editInput = document.getElementById('edit_files');
+
+        editInput.addEventListener('change', function (event) {
+            for (let i = 0; i < editInput.files.length; i++) {
+                EditfileArray.push(editInput.files[i]);
+            }
+            updateEditFileList();
+        });
+
+        function updateEditFileList() {
+            const fileList = document.getElementById('editFileList');
+            fileList.innerHTML = '';
+
+            EditfileArray.forEach((file, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'mb-3 d-flex justify-content-between align-items-center text-truncate';
+                listItem.textContent = file.name;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-2');
+                removeButton.onclick = () => {
+                    EditfileArray.splice(index, 1);
+                    updateEditFileList();
+                };
+                listItem.appendChild(removeButton);
+                fileList.appendChild(listItem);
+            });
+        }
+
         //Hiện chi tiết của dữ liệu
-        $('#proposalTableBody').on('click', '.edit-btn', function () {
+        $('#ProposalTable').on('click', '.edit-btn', function () {
             var proposalId = $(this).data('id');
 
             $('#editProposalForm').data('id', proposalId);
@@ -325,13 +479,49 @@
                 method: 'GET',
                 success: function (response) {
                     var data = response.proposal;
-                    $('#employee_id').val(data.employee_id);
-                    $('#type_proposal_id').val(data.type_proposal_id);
-                    $('#proposal_date').val(data.proposal_date);
-                    $('#status').val(data.status);
+                    $('#edit_proposal_id').val(data.proposal_id);
+                    $('#edit_employee_id').val(data.employee_id);
+                    $('#edit_type_proposal_id').val(data.type_proposal_id);
+                    $('#edit_proposal_description').val(data.proposal_description);
+                    let fileListHtml = '';
+                    if (data.files) {
+                        data.files.forEach(function (file, index) {
+                            fileListHtml +=
+                                `<tr>
+                                    <td>${index + 1}</td>
+                                    <td><a href="{{ asset('proposal_files') }}/${data.employee_id}/${file.proposal_file_name}" download>${file.proposal_file_name}</a></td>
+                                    <td><button type="button" class="btn btn-danger btn-sm remove-file" data-id="${file.proposal_file_id}">Remove</button></td>
+                                </tr>`;
+                        });
+                    } else {
+                        console.error('No files in response');
+                    }
+                    $('#editProposalModal table tbody').html(fileListHtml);
                     $('#editProposalModal').modal('show');
                 },
                 error: function (xhr) {
+                }
+            });
+        });
+
+        $(document).on('click', '.remove-file', function () {
+            var fileId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            $.ajax({
+                url: '{{ route('removeFile-proposal', ':id') }}'.replace(':id', fileId),
+                method: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    if (response.success) {
+                        row.remove();
+                        toastr.success(response.message, "File Removed");
+                    }
+                },
+                error: function (xhr) {
+                    toastr.error("An error occurred.", "Error");
                 }
             });
         });
@@ -351,8 +541,8 @@
                 processData: false,
                 success: function (response) {
                     if (response.success) {
+                        toastr.success(response.response, "Update successful");
                         $('#editProposalModal').modal('hide');
-                        toastr.success(response.response, "Edit successful");
                         setTimeout(function () {
                             location.reload()
                         }, 500);
@@ -360,6 +550,48 @@
                 },
                 error: function (xhr) {
                     toastr.error("Error");
+                }
+            });
+        });
+
+        $('#ProposalTable').on('click', '.btn_approved', function () {
+            var proposalId = $(this).data('id');
+            var permis = $(this).data('permission');
+            var position = $(this).data('position');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to approve this proposal ?",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('approve-proposal', ['id' => ':id', 'permission' => ':permission', 'position'=>':position']) }}'
+                            .replace(':id', proposalId)
+                            .replace(':permission', permis)
+                            .replace(':position', position),
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                toastr.success(response.message, "Approved successfully");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 250);
+                            } else {
+                                toastr.error("Failed to approve the proposal application.",
+                                    "Operation Failed");
+                            }
+                        },
+                        error: function (xhr) {
+                            toastr.error("An error occurred.", "Operation Failed");
+                        }
+                    });
                 }
             });
         });

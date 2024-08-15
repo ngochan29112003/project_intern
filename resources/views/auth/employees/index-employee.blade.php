@@ -160,20 +160,30 @@
                         </div>
                         <div class="mb-3">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="status" class="form-label">Status</label>
                                     <select class="form-select" aria-label="Default" name="status" id="status">
                                         <option value="0">No longer employed</option>
                                         <option value="1">Currently employed</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="type_employee_id" class="form-label">Employee type</label>
                                     <select class="form-select" aria-label="Default" name="type_employee_id"
                                             id="type_employee_id">
                                         @foreach ($type_employee_list as $item)
                                             <option
                                                 value="{{ $item->type_employee_id}}">{{ $item->type_employee_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="department_id" class="form-label">Department</label>
+                                    <select class="form-select" aria-label="Default" name="department_id"
+                                            id="department_id">
+                                        @foreach ($department_list as $item)
+                                            <option
+                                                value="{{ $item->department_id}}">{{ $item->department_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -329,20 +339,30 @@
                         </div>
                         <div class="mb-3">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="status" class="form-label">Status</label>
                                     <select class="form-select" aria-label="Default" name="status" id="edit_status">
                                         <option value="0">No longer employed</option>
                                         <option value="1">Currently employed</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="type_employee_id" class="form-label">Employee type</label>
                                     <select class="form-select" aria-label="Default" name="type_employee_id"
                                             id="edit_type_employee_id">
                                         @foreach ($type_employee_list as $item)
                                             <option
                                                 value="{{ $item->type_employee_id }}">{{ $item->type_employee_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="edit_department_id" class="form-label">Department</label>
+                                    <select class="form-select" aria-label="Default" name="department_id"
+                                            id="edit_department_id">
+                                        @foreach ($department_list as $item)
+                                            <option
+                                                value="{{ $item->department_id}}">{{ $item->department_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -505,6 +525,7 @@
                     $('#edit_job_position_id').val(data.job_position_id);
                     $('#edit_status').val(data.status);
                     $('#edit_type_employee_id').val(data.type_employee_id);
+                    $('#edit_department_id').val(data.department_id);
                     $('#editEmployeeModal').modal('show');
                 },
                 error: function (xhr) {

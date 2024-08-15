@@ -42,6 +42,11 @@ class EmployeeModel extends Model
     {
         return DB::table('job_positions')->get();
     }
+
+    function getDepartment()
+    {
+        return DB::table('departments')->get();
+    }
     function getEmployeeInfo()
     {
         return DB::table('employees')
