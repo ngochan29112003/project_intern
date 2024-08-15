@@ -15,8 +15,8 @@ class ProposalModel extends Model
     protected $fillable=[
         'employee_id',
         'type_proposal_id',
-        'proposal_date',
-        'status',
+        'proposal_description',
+        'proposal_status',
     ];
 
     public $timestamps = false;
@@ -30,11 +30,14 @@ class ProposalModel extends Model
     {
         return DB::table('type_proposals')->get();
     }
-    function getProposal()
+
+    public function files()
     {
-        return DB::table('proposals')
-            ->join('employees','employees.employee_id','=','proposals.employee_id')
-            ->join('type_proposals','type_proposals.type_proposal_id','=','proposals.type_proposal_id')
-            ->get();
+        return $this->hasMany(ProposalFileModel::class, 'proposal_id', 'proposal_id');
+    }
+
+    function getProposal($employee_id)
+    {
+
     }
 }

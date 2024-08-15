@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountModel;
+use App\Models\EmployeeModel;
+use App\Models\ProposalFileModel;
 use App\Models\ProposalModel;
 use Illuminate\Http\Request;
 
@@ -9,31 +12,48 @@ class ProposalController extends Controller
 {
     function getView()
     {
+        $account_id = \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID);
         $model = new ProposalModel();
-        $proposal_list = $model->getProposal();
-        $employee_list = $model->getEmployee();
+        $model_account = new AccountModel();
+        $model_employee = new EmployeeModel();
+        $employee_id = $model_account->getIdEmployee($account_id);
+        $current_employee = $model_employee->getOneEmployee($employee_id);
         $type_proposal_list = $model->getTypeProposal();
         return view('auth.proposals.index-proposal',
-            compact('proposal_list', 'employee_list', 'type_proposal_list'));
+            compact( 'current_employee', 'type_proposal_list'));
     }
 
     public function add(Request $request)
     {
         $validated = $request->validate([
-            'add_employee_id' => 'int',
-            'add_type_proposal_id' => 'required|string',
-            'add_proposal_date' => 'required|string',
-            'add_status' => 'int',
+            'employee_id' => 'int',
+            'type_proposal_id' => 'int',
+            'proposal_description' => 'string',
+            'files.*' => 'nullable|mimes:jpg,jpeg,png,pdf,doc,docx,ppt,pptx,txt|max:10000'
         ]);
 
-        $validated['add_status'] = 0;
-        ProposalModel::create([
-            'employee_id' =>$validated['add_employee_id'],
-            'type_proposal_id' =>$validated['add_type_proposal_id'],
-            'proposal_date' =>$validated['add_proposal_date'],
-            'status' =>$validated['add_status'],
-        ]);
+        $validated['proposal_status'] = 0;
+        $proposalApplicaiton = ProposalModel::create($validated);
 
+        if ($request->hasFile('files')) {
+            $folderName = $request->employee_id;
+
+            $folderPath = public_path('proposal_files/' . $folderName);
+
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+
+            foreach ($request->file('files') as $file) {
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move($folderPath, $fileName);
+
+                ProposalFileModel::create([
+                    'proposal_file_name' => $fileName,
+                    'proposal_id' => $proposalApplicaiton->proposal_id
+                ]);
+            }
+        }
         return response()->json([
             'success' => true,
             'status' => 200,
