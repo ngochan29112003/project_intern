@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 15, 2024 at 04:31 PM
+-- Generation Time: Aug 15, 2024 at 10:15 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,6 +65,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
+(0, 'None Dep\'t', 'None department'),
 (6, 'Acc Dep’t', 'Accounting department'),
 (7, 'Aud Dep\'t', 'Audit department'),
 (8, 'Sale Dept\'t', 'Sales department'),
@@ -150,11 +151,11 @@ INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gende
 (6, 'Hân', 'Ngọc', '1723482309_alo.jfif', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3, 0),
 (8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3, 0),
 (10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3, 0),
-(11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8, 0),
+(11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8, 10),
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9, 0),
 (13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 0),
 (14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 0),
-(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 3, 7, 0);
+(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 1, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +276,7 @@ CREATE TABLE `proposals` (
 --
 
 INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_description`, `proposal_status`, `created_at`) VALUES
-(10, 8, 2, 'abc', 0, '2024-08-15 04:42:42');
+(10, 8, 3, 'abcde', 2, '2024-08-15 15:13:54');
 
 -- --------------------------------------------------------
 
@@ -288,15 +289,6 @@ CREATE TABLE `proposal_file` (
   `proposal_id` int(11) NOT NULL,
   `proposal_file_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `proposal_file`
---
-
-INSERT INTO `proposal_file` (`proposal_file_id`, `proposal_id`, `proposal_file_name`) VALUES
-(1, 10, '1723696962_canhbao.png'),
-(2, 10, '1723696962_canhbao-none.png'),
-(3, 10, '1723696962_cuadong.png');
 
 -- --------------------------------------------------------
 
@@ -407,9 +399,12 @@ CREATE TABLE `type_employees` (
 --
 
 INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
-(1, 'Part time'),
-(2, 'Intern'),
-(3, 'official staff');
+(1, 'Full-time employees'),
+(2, 'Part-time employees'),
+(3, 'Temporary employees'),
+(4, 'Seasonal employees'),
+(5, 'Leased employees'),
+(6, 'At-will employees');
 
 -- --------------------------------------------------------
 
@@ -608,7 +603,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
@@ -662,7 +657,7 @@ ALTER TABLE `proposals`
 -- AUTO_INCREMENT for table `proposal_file`
 --
 ALTER TABLE `proposal_file`
-  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `rewards`
@@ -692,7 +687,7 @@ ALTER TABLE `type_disciplines`
 -- AUTO_INCREMENT for table `type_employees`
 --
 ALTER TABLE `type_employees`
-  MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `type_employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `type_leaves`
