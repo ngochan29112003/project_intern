@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 14, 2024 at 04:32 PM
+-- Generation Time: Aug 15, 2024 at 04:31 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.1.25
 
@@ -44,7 +44,9 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee
 (7, 'admin', '$2y$10$5BulCzwUQ0IJX2H7OPZBi.H5nIPT7.AVVZVhE18QXTBweDhndtaoO', 2, 8),
 (8, 'hr', '$2y$10$1MhowbbF6NRiBuLQ9wxHKeGwljYBI1qGiEtA3nAl7dDF7Q9cxO2Cm', 2, 11),
 (9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12),
-(10, 'em', '$2y$10$TrsjKovFpwGV/4j680Ic.uaUQq98oFg6VVWpL0Ap6fiyb/vy5fZY2', 3, 13);
+(10, 'em', '$2y$10$TrsjKovFpwGV/4j680Ic.uaUQq98oFg6VVWpL0Ap6fiyb/vy5fZY2', 3, 13),
+(11, 'dir', '$2y$10$a8AwaJo0hwDonyzZi/b7ZuiR6peI.C6rOqhNH/2gT2F9IJ4Rb1ahO', 2, 15),
+(12, 'dm', '$2y$10$ZqrBsxjKKjYguSiSIWyLmufx.KR5kkczo6urIWGixJZrAcya6WYjS', 2, 14);
 
 -- --------------------------------------------------------
 
@@ -63,7 +65,15 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(5, 'NE', 'Network Engineering');
+(6, 'Acc Dep’t', 'Accounting department'),
+(7, 'Aud Dep\'t', 'Audit department'),
+(8, 'Sale Dept\'t', 'Sales department'),
+(9, 'Admin Dept\'t', 'Administration department'),
+(10, 'HR Dep\'t', 'Human Resources department'),
+(11, 'CS Dep\'t', 'Customer Service department'),
+(12, 'Finan Dep\'t', 'Financial department'),
+(13, 'Re&Dev Dep\'t', 'Research & Development department'),
+(14, 'Qual Dep\'t', 'Quality department');
 
 -- --------------------------------------------------------
 
@@ -128,20 +138,23 @@ CREATE TABLE `employees` (
   `education_level_id` int(11) NOT NULL,
   `status` int(11) DEFAULT NULL,
   `type_employee_id` int(11) DEFAULT NULL,
-  `job_position_id` int(11) DEFAULT NULL
+  `job_position_id` int(11) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`) VALUES
-(6, 'Hân', 'Ngọc', '1723482309_alo.jfif', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3),
-(8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3),
-(10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3),
-(11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8),
-(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9),
-(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10);
+INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`) VALUES
+(6, 'Hân', 'Ngọc', '1723482309_alo.jfif', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3, 0),
+(8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3, 0),
+(10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3, 0),
+(11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8, 0),
+(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9, 0),
+(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 0),
+(14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 0),
+(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 3, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -162,10 +175,10 @@ CREATE TABLE `job_positions` (
 --
 
 INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `job_position_salary`, `description`) VALUES
-(3, 'NIS', 'Network Infrastructure Specialist', '999999999', 'không có'),
-(6, 'DM', 'Department Manager', '999999999', 'không có'),
-(7, 'Dir', 'Director', '999999999', 'không có'),
-(8, 'HR', 'Human Resources', '999999999', 'không có'),
+(3, 'NIS', 'Network Infrastructure Specialist', '999999999', 'none'),
+(6, 'DM', 'Department Manager', '999999999', 'none'),
+(7, 'Dir', 'Director', '999999999', 'none'),
+(8, 'HR', 'Human Resources', '999999999', 'none'),
 (9, 'NONE', 'NONE', '000000000', 'NONE'),
 (10, 'Staff', 'Staff', '999999999', 'none');
 
@@ -252,20 +265,17 @@ CREATE TABLE `proposals` (
   `proposal_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `type_proposal_id` int(11) NOT NULL,
-  `proposal_date` text NOT NULL,
-  `status` int(11) NOT NULL
+  `proposal_description` text NOT NULL,
+  `proposal_status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `proposals`
 --
 
-INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_date`, `status`) VALUES
-(1, 4, 2, '2024-08-12', 0),
-(2, 6, 3, '2024-08-02', 0),
-(4, 3, 1, '2024-08-08', 0),
-(5, 8, 2, '2024-08-10', 0),
-(6, 10, 3, '2024-08-23', 0);
+INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_description`, `proposal_status`, `created_at`) VALUES
+(10, 8, 2, 'abc', 0, '2024-08-15 04:42:42');
 
 -- --------------------------------------------------------
 
@@ -278,6 +288,15 @@ CREATE TABLE `proposal_file` (
   `proposal_id` int(11) NOT NULL,
   `proposal_file_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `proposal_file`
+--
+
+INSERT INTO `proposal_file` (`proposal_file_id`, `proposal_id`, `proposal_file_name`) VALUES
+(1, 10, '1723696962_canhbao.png'),
+(2, 10, '1723696962_canhbao-none.png'),
+(3, 10, '1723696962_cuadong.png');
 
 -- --------------------------------------------------------
 
@@ -583,13 +602,13 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
@@ -607,7 +626,7 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `job_positions`
@@ -619,7 +638,7 @@ ALTER TABLE `job_positions`
 -- AUTO_INCREMENT for table `leave_application`
 --
 ALTER TABLE `leave_application`
-  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payroll`
@@ -637,13 +656,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `proposal_file`
 --
 ALTER TABLE `proposal_file`
-  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rewards`
