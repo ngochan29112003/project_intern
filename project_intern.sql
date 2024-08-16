@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 15, 2024 at 10:15 PM
+-- Generation Time: Aug 16, 2024 at 09:10 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -150,11 +150,11 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`) VALUES
 (6, 'Hân', 'Ngọc', '1723482309_alo.jfif', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3, 0),
 (8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3, 0),
-(10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 0, 3, 3, 0),
+(10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 1, 3, 3, 8),
 (11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8, 10),
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9, 0),
-(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 0),
-(14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 0),
+(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 8),
+(14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 8),
 (15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 1, 7, 0);
 
 -- --------------------------------------------------------
@@ -276,7 +276,8 @@ CREATE TABLE `proposals` (
 --
 
 INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_description`, `proposal_status`, `created_at`) VALUES
-(10, 8, 3, 'abcde', 2, '2024-08-15 15:13:54');
+(10, 8, 3, 'abcde', 2, '2024-08-15 15:13:54'),
+(11, 10, 3, 'hoc ngu dua di hoc them', 2, '2024-08-16 01:49:33');
 
 -- --------------------------------------------------------
 
@@ -603,7 +604,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
@@ -651,13 +652,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `proposal_file`
 --
 ALTER TABLE `proposal_file`
-  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `proposal_file_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rewards`
