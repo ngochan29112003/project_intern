@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeModel;
+use App\Models\SalaryModel;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -51,8 +52,10 @@ class EmployeeController extends Controller
             $file->move(public_path('assets/employee_img/'), $imagePath);
         }
 
-        EmployeeModel::create(array_merge($validated, ['img' => $imagePath]));
+        $employee = EmployeeModel::create(array_merge($validated, ['img' => $imagePath]));
 
+        // Thêm bản ghi trong bảng lương cho nhân viên mới
+        SalaryModel::create(['employee_id' => $employee->employee_id]);
         return response()->json([
             'success' => true,
             'status'  => 200,

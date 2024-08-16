@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class PayrollModel extends Model
 {
     use HasFactory;
-    protected $table ='payroll';
+    protected $table ='salaries';
     protected $primaryKey ='payroll_id';
     protected $fillable=[
         'payroll_code',
@@ -33,9 +33,9 @@ class PayrollModel extends Model
 
     function getPayroll()
     {
-        return DB::table('payroll')
-            ->join('employees','employees.employee_id','=','payroll.employee_id')
-            ->join('job_positions','job_positions.job_position_id','=','payroll.job_position_id')
+        return DB::table('salaries')
+            ->join('employees','employees.employee_id','=','salaries.employee_id')
+            ->join('job_positions','job_positions.job_position_id','=','salaries.job_position_id')
             ->get();
     }
 }

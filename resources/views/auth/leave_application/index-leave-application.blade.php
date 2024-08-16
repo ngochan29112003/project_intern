@@ -135,7 +135,7 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Your leave application</h3>
         <div class="table-responsive">
-            <table id="LeaveApplicationTable" class="table table-hover table-borderless">
+            <table id="LeaveApplicationTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>

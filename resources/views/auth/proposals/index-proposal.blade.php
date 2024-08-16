@@ -204,7 +204,7 @@
             <h3 class="text-left mb-4">Your proposal</h3>
         @endif
         <div class="table-responsive">
-            <table id="ProposalTable" class="table table-hover table-borderless">
+            <table id="ProposalTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>

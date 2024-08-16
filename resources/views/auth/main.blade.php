@@ -199,17 +199,17 @@ $token = 'position';
                aria-expanded="false">
                 <i class="bi bi-bank"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
+{{--            <ul id="salaries-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
+{{--                <li>--}}
+{{--                    <a href="{{route('index-salaries')}}">--}}
+{{--                        <i class="bi bi-circle"></i><span>Payroll list</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
             <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{route('index-payroll')}}">
-                        <i class="bi bi-circle"></i><span>Payroll list</span>
-                    </a>
-                </li>
-            </ul>
-            <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-salary-calculation')}}">
-                        <i class="bi bi-circle"></i><span>Salary calculation</span>
+                    <a href="{{route('index-salary')}}">
+                        <i class="bi bi-circle"></i><span>Salary list</span>
                     </a>
                 </li>
             </ul>

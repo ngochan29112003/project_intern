@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 16, 2024 at 09:10 PM
+-- Generation Time: Aug 17, 2024 at 04:52 AM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -155,7 +155,8 @@ INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gende
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9, 0),
 (13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 8),
 (14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 8),
-(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 1, 7, 0);
+(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 1, 7, 0),
+(16, 'anh', 'tuan', 'avt.png', 0, '2000-02-22', 'Bắc Ninh', 'abc', 'ta@gmail.com', 'abc', 123, 2, 1, 1, 11, 6);
 
 -- --------------------------------------------------------
 
@@ -165,9 +166,10 @@ INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gende
 
 CREATE TABLE `job_positions` (
   `job_position_id` int(11) NOT NULL,
-  `job_position_code` varchar(50) NOT NULL,
-  `job_position_name` varchar(100) NOT NULL,
-  `job_position_salary` text NOT NULL,
+  `job_position_code` text NOT NULL,
+  `job_position_name` text NOT NULL,
+  `position_level` text,
+  `salary_code` text,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -175,13 +177,15 @@ CREATE TABLE `job_positions` (
 -- Dumping data for table `job_positions`
 --
 
-INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `job_position_salary`, `description`) VALUES
-(3, 'NIS', 'Network Infrastructure Specialist', '999999999', 'none'),
-(6, 'DM', 'Department Manager', '999999999', 'none'),
-(7, 'Dir', 'Director', '999999999', 'none'),
-(8, 'HR', 'Human Resources', '999999999', 'none'),
-(9, 'NONE', 'NONE', '000000000', 'NONE'),
-(10, 'Staff', 'Staff', '999999999', 'none');
+INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `position_level`, `salary_code`, `description`) VALUES
+(3, 'NIS', 'Network Infrastructure Specialist', '2', NULL, 'none'),
+(6, 'DM', 'Department Manager', '2', NULL, 'none'),
+(7, 'Dir', 'Director', '2', NULL, 'none'),
+(8, 'HR', 'Human Resources', '2', NULL, 'none'),
+(9, 'NONE', 'NONE', '1', NULL, 'NONE'),
+(10, 'Staff', 'Staff', '2', NULL, 'none'),
+(11, 'CNTT', 'Công nghệ thông tin', '3', 'V11.06.14', 'none'),
+(12, 'ATTT', 'An toàn thông tin', '3', 'V11.05.11', 'none');
 
 -- --------------------------------------------------------
 
@@ -310,6 +314,39 @@ CREATE TABLE `rewards` (
 INSERT INTO `rewards` (`rewards_id`, `type_reward_id`, `employee_id`) VALUES
 (6, 5, 8),
 (7, 3, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salaries`
+--
+
+CREATE TABLE `salaries` (
+  `salary_id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `salary_coefficient` float DEFAULT NULL,
+  `allowance_salary_coefficient` float DEFAULT NULL,
+  `gross_salary` float DEFAULT NULL,
+  `social_insurance` float DEFAULT NULL,
+  `health_insurance` float DEFAULT NULL,
+  `accident_insurance` float DEFAULT NULL,
+  `net_salary` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `salaries`
+--
+
+INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`) VALUES
+(1, 16, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
+(2, 15, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
+(3, 14, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
+(4, 13, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760),
+(5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
+(6, 11, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
+(7, 10, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
+(8, 8, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
+(9, 6, 3.66, NULL, 8564400, 685152, 128466, 85644, 7665140);
 
 -- --------------------------------------------------------
 
@@ -549,6 +586,12 @@ ALTER TABLE `rewards`
   ADD PRIMARY KEY (`rewards_id`);
 
 --
+-- Indexes for table `salaries`
+--
+ALTER TABLE `salaries`
+  ADD PRIMARY KEY (`salary_id`);
+
+--
 -- Indexes for table `salary_calculation`
 --
 ALTER TABLE `salary_calculation`
@@ -622,13 +665,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `job_positions`
 --
 ALTER TABLE `job_positions`
-  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `leave_application`
@@ -665,6 +708,12 @@ ALTER TABLE `proposal_file`
 --
 ALTER TABLE `rewards`
   MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `salaries`
+--
+ALTER TABLE `salaries`
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
