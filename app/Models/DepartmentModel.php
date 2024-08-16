@@ -20,4 +20,18 @@ class DepartmentModel extends Model
     {
         return DB::table('departments')->get();
     }
+
+    function getInfoDepartment($id)
+    {
+        return DB::table('departments')
+            ->where('department_id',$id)
+            ->first();
+    }
+
+    function getEmployeeInDepartment($id)
+    {
+        return DB::table('employees')
+            ->where('department_id',$id)
+            ->get();
+    }
 }

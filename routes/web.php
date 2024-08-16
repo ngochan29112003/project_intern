@@ -141,6 +141,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('//add', [DepartmentController::class, 'add'])->name('add-department');
         Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit-department');
         Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('update-department');
+        Route::get('/employee-of-department/{id}', [DepartmentController::class, 'listEmployeeOfDepart'])->name('employee-of-department-index');
+
     });
 
     //PROPOSAL

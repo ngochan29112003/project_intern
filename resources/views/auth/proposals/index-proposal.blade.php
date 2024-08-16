@@ -58,9 +58,23 @@
                                     <label for="add_employee_id" class="form-label">Employee name</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="employee_id">
-                                        <option
-                                            value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
-                                        </option>
+                                        @if(($data->permission === 2 && $data->job_position_id === 6))
+                                            @foreach($employee_list_dm as $item)
+                                                <option
+                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                </option>
+                                            @endforeach
+                                        @elseif(($data->permission === 2 && $data->job_position_id === 7))
+                                            @foreach($employee_list_dir as $item)
+                                                <option
+                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            <option
+                                                value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                            </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -114,9 +128,23 @@
                                     <label for="edit_employee_id" class="form-label">Employee name</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="edit_employee_id">
-                                        <option
-                                            value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
-                                        </option>
+                                        @if(($data->permission === 2 && $data->job_position_id === 6))
+                                            @foreach($employee_list_dm as $item)
+                                                <option
+                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                </option>
+                                            @endforeach
+                                        @elseif(($data->permission === 2 && $data->job_position_id === 7))
+                                            @foreach($employee_list_dir as $item)
+                                                <option
+                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            <option
+                                                value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                            </option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
