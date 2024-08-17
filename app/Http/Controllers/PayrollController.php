@@ -13,7 +13,7 @@ class PayrollController extends Controller
         $payroll_list = $model->getPayroll();
         $employee_list = $model->getEmployee();
         $position_list = $model->getPosition();
-        return view('auth.payroll.index-payroll',
+        return view('auth.salaries.index-salaries',
             compact('payroll_list','employee_list','position_list'));
     }
 
@@ -60,7 +60,7 @@ class PayrollController extends Controller
     {
         $payroll = PayrollModel::findOrFail($id);
         return response()->json([
-            'payroll' => $payroll
+            'salaries' => $payroll
         ]);
 
     }
@@ -80,7 +80,7 @@ class PayrollController extends Controller
 
         return response()->json([
             'success' => true,
-            'payroll' => $payroll,
+            'salaries' => $payroll,
         ]);
     }
 }

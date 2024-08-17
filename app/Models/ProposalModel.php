@@ -46,6 +46,21 @@ class ProposalModel extends Model
         return $this->hasMany(ProposalFileModel::class, 'proposal_id', 'proposal_id');
     }
 
+    public function getEmployeeOfDepartment()
+    {
+        $account_id = \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID); //get account_id from session
+        $model_account = new AccountModel();
+        $employee_id = $model_account->getIdEmployee($account_id); //Get employee_id
+        $department_id = DB::table('employees')
+            ->join('departments', 'employees.department_id','=','departments.department_id')
+            ->where('employees.employee_id',$employee_id)
+            ->value('employees.department_id');
+
+        return DB::table('employees')
+            ->where('department_id',$department_id)
+            ->get();
+    }
+
     function getProposalList()
     {
 //        permission = 3 -> nhân viên bth

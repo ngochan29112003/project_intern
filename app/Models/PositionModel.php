@@ -12,13 +12,14 @@ class PositionModel extends Model
     use HasFactory;
     protected $table = "job_positions";
     protected $primaryKey = "job_position_id";
-    public $timestamps = false;
     protected $fillable=[
         'job_position_code',
         'job_position_name',
-        'job_position_salary',
+        'position_level',
+        'salary_code',
         'description',
     ];
+    public $timestamps = false;
 
     function getPosition()
     {

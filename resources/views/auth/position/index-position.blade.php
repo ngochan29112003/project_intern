@@ -32,27 +32,43 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add position</h4>
+                    <h4 class="modal-title">Add new position</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addPositionForm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="add_job_position_code" class="form-label">Job Position Code</label>
-                            <input type="text" class="form-control" id="add_job_position_code" name="add_job_position_code" required>
+                            <input type="text" class="form-control" id="job_position_code" name="job_position_code" required>
                         </div>
                         <div class="mb-3">
                             <label for="add_job_position_name" class="form-label">Job Position Name</label>
-                            <input type="text" class="form-control" id="add_job_position_name" name="add_job_position_name" required>
+                            <input type="text" class="form-control" id="job_position_name" name="job_position_name" required>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_position_level" class="form-label">Position Level</label>
+{{--                                    <input type="text" class="form-control" id="position_level" name="position_level" required>--}}
+                                    <select class="form-select" aria-label="Default" name="position_level"
+                                            id="position_level">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
 
-                        <div class="mb-3">
-                            <label for="add_job_position_salary" class="form-label">Job Position Salary</label>
-                            <input type="text" class="form-control" id="add_job_position_salary" name="add_job_position_salary" required>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_job_position_salary" class="form-label">Job Position Salary</label>
+                                    <input type="text" class="form-control" id="salary_code" name="salary_code">
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="add_description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="add_description" name="add_description" required>
+                            <input type="text" class="form-control" id="description" name="description">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add</button>
@@ -73,20 +89,35 @@
                         @csrf
                         <div class="mb-3">
                             <label for="job_position_code" class="form-label">Job Position Code</label>
-                            <input type="text" class="form-control" id="job_position_code" name="job_position_code" required>
+                            <input type="text" class="form-control" id="edit_job_position_code" name="job_position_code" required>
                         </div>
                         <div class="mb-3">
                             <label for="job_position_name" class="form-label">Job Position Name</label>
-                            <input type="text" class="form-control" id="job_position_name" name="job_position_name" required>
+                            <input type="text" class="form-control" id="edit_job_position_name" name="job_position_name" required>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_position_level" class="form-label">Position Level</label>
+                                    <select class="form-select" aria-label="Default" name="position_level"
+                                            id="edit_position_level">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
 
-                        <div class="mb-3">
-                            <label for="job_position_salary" class="form-label">Job Position Salary</label>
-                            <input type="text" class="form-control" id="job_position_salary" name="job_position_salary" required>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="add_job_position_salary" class="form-label">Job Position Salary</label>
+                                    <input type="text" class="form-control" id="edit_salary_code" name="salary_code">
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <input type="text" class="form-control" id="edit_description" name="description">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save change</button>
@@ -99,12 +130,13 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Position</h3>
         <div class="table-responsive">
-            <table id="positionTable" class="table table-hover table-borderless">
+            <table id="positionTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
                     <th>Job Position Code</th>
                     <th>Job Position Name</th>
+                    <th class="text-start">Position Level</th>
                     <th>Job Position Salary</th>
                     <th>Description</th>
                     <th class="text-center">Action</th>
@@ -117,7 +149,8 @@
                         <td>{{$stt++}}</td>
                         <td>{{$item->job_position_code}}</td>
                         <td>{{$item->job_position_name}}</td>
-                        <td>{{$item->job_position_salary}}</td>
+                        <td class="text-start">{{$item->position_level}}</td>
+                        <td>{{$item->salary_code}}</td>
                         <td>{{$item->description}}</td>
                         <td class="text-center">
                             <button
@@ -228,10 +261,11 @@
                 method: 'GET',
                 success: function (response) {
                     var data = response.position;
-                    $('#job_position_code').val(data.job_position_code);
-                    $('#job_position_name').val(data.job_position_name);
-                    $('#job_position_salary').val(data.job_position_salary);
-                    $('#description').val(data.description);
+                    $('#edit_job_position_code').val(data.job_position_code);
+                    $('#edit_job_position_name').val(data.job_position_name);
+                    $('#edit_position_level').val(data.position_level);
+                    $('#edit_salary_code').val(data.salary_code);
+                    $('#edit_description').val(data.description);
                     $('#editPositionModal').modal('show');
                 },
                 error: function (xhr) {

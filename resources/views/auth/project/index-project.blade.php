@@ -84,7 +84,7 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">project</h3>
-        <table id="projectTable" class="table table-hover table-borderless">
+        <table id="projectTable" class="table table-hover table-bordered">
             <thead class="table-light">
 {{--            <tr>--}}
 {{--                <th>No</th>--}}

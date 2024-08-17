@@ -54,3 +54,10 @@ php artisan make:model DemoModel
 ```
 php artisan ser
 ```
+
+#### 9. cài đặt thư viện im/export excel
+```
+composer require "ext-gd:*" --ignore-platform-reqs
+composer require "ext-fileinfo:*" --ignore-platform-reqs
+composer require phpoffice/phpspreadsheet --ignore-platform-reqs
+```

@@ -20,9 +20,12 @@ class ProposalController extends Controller
         $current_employee = $model_employee->getOneEmployee($employee_id);
         $type_proposal_list = $model->getTypeProposal();
         $proposal_list = $model->getProposalList();
+        $employee_list_dir = $model->getEmployee();
+        $employee_list_dm = $model->getEmployeeOfDepartment();
+
 //        dd($proposal_list);
         return view('auth.proposals.index-proposal',
-            compact( 'current_employee', 'type_proposal_list', 'proposal_list'));
+            compact( 'current_employee', 'type_proposal_list', 'proposal_list', 'employee_list_dir', 'employee_list_dm'));
     }
 
     public function add(Request $request)

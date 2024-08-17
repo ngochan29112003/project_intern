@@ -20,12 +20,6 @@
                     Add a new department
                 </div>
             </div>
-            <div class="btn btn-success mx-2 btn-export">
-                <a href="" class="d-flex align-items-center text-white">
-                    <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
-                </a>
-            </div>
         </div>
     </div>
 
@@ -88,7 +82,7 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Department</h3>
         <div class="table-responsive">
-            <table id="departmentTable" class="table table-hover table-borderless">
+            <table id="departmentTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
                     <th>No</th>
@@ -116,8 +110,15 @@
                                 data-id="{{ $item->department_id }}">
                                 <i class="bi bi-trash3"></i>
                             </button>
+                            |
+                            <a
+                                class="btn p-0 btn-primary border-0 bg-transparent text-success shadow-none details-depart-btn"
+                                href="{{route('employee-of-department-index', $item->department_id)}}">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
                         </td>
                     </tr>
+
                 @endforeach
                 </tbody>
             </table>
@@ -129,25 +130,25 @@
     <script>
         var table = $('#departmentTable').DataTable();
 
-        $('#addDepartmentForm').submit(function(e) {
+        $('#addDepartmentForm').submit(function (e) {
             e.preventDefault();
 
             $.ajax({
                 url: '{{ route('add-department') }}',
                 method: 'POST',
                 data: $(this).serialize(),
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         $('#addDepartmentModal').modal('hide');
                         toastr.success(response.message, "Successful");
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload()
                         }, 500);
                     } else {
                         toastr.error(response.message, "Error");
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     toastr.error(response.message, "Error");
                     if (xhr.status === 400) {
                         var response = xhr.responseJSON;
@@ -247,5 +248,6 @@
                 }
             });
         });
+
     </script>
 @endsection

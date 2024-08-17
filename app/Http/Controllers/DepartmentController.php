@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DepartmentModel;
+use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -68,5 +69,16 @@ class DepartmentController extends Controller
             'success' => true,
             'department' => $department,
         ]);
+    }
+
+    public function listEmployeeOfDepart($id)
+    {
+        $model = new DepartmentModel();
+        $deparmentInfo = $model->getInfoDepartment($id);
+        $employee_list_in_depart = $model->getEmployeeInDepartment($id);
+
+        $model_employee = new EmployeeModel();
+        $employee_list = $model_employee->getEmployeeInfo();
+        return view('auth.department.employee-of-department', compact('deparmentInfo','employee_list_in_depart','employee_list'));
     }
 }

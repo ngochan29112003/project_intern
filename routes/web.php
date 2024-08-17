@@ -16,6 +16,7 @@ use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\PositionCotroller;
 use App\Http\Controllers\SalaryCalculationController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -81,12 +82,12 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     });
 
     //PAYROLL
-    Route::group(['prefix' => '/payroll'], function () {
-        Route::get('/index', [PayrollController::class, 'getView'])->name('index-payroll');
-        Route::post('/add', [PayrollController::class, 'add'])->name('add-payroll');
-        Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete-payroll');
-        Route::get('/edit/{id}', [PayrollController::class, 'edit'])->name('edit-payroll');
-        Route::post('/update/{id}', [PayrollController::class, 'update'])->name('update-payroll');
+    Route::group(['prefix' => '/salaries'], function () {
+        Route::get('/index', [PayrollController::class, 'getView'])->name('index-salaries');
+        Route::post('/add', [PayrollController::class, 'add'])->name('add-salaries');
+        Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete-salaries');
+        Route::get('/edit/{id}', [PayrollController::class, 'edit'])->name('edit-salaries');
+        Route::post('/update/{id}', [PayrollController::class, 'update'])->name('update-salaries');
     });
 
     //POSITION
@@ -99,12 +100,12 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     });
 
     //SALARY CALCULATION
-    Route::group(['prefix' => '/salary-calculation'], function () {
-        Route::get('/index', [SalaryCalculationController::class, 'getView'])->name('index-salary-calculation');
-        Route::post('/add', [SalaryCalculationController::class, 'add'])->name('add-salary-calculation');
-        Route::delete('/delete/{id}', [SalaryCalculationController::class, 'delete'])->name('delete-salary-calculation');
-        Route::get('/edit/{id}', [SalaryCalculationController::class, 'edit'])->name('edit-salary-calculation');
-        Route::post('/update/{id}', [SalaryCalculationController::class, 'update'])->name('update-salary-calculation');
+    Route::group(['prefix' => '/salary'], function () {
+        Route::get('/index', [SalaryController::class, 'getView'])->name('index-salary');
+        Route::get('/edit/{id}', [SalaryController::class, 'edit'])->name('edit-salary');
+        Route::post('/update/{id}', [SalaryController::class, 'update'])->name('update-salary');
+        Route::get('/export', [SalaryController::class, 'exportExcel'])->name('export-salary');
+
     });
 
     //DISCIPLINE
@@ -114,6 +115,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [DisciplineController::class, 'delete'])->name('delete-discipline');
         Route::get('/edit/{id}', [DisciplineController::class, 'edit'])->name('edit-discipline');
         Route::post('/update/{id}', [DisciplineController::class, 'update'])->name('update-discipline');
+
     });
 
     //PERMISSION
@@ -141,6 +143,8 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('//add', [DepartmentController::class, 'add'])->name('add-department');
         Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit-department');
         Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('update-department');
+        Route::get('/employee-of-department/{id}', [DepartmentController::class, 'listEmployeeOfDepart'])->name('employee-of-department-index');
+
     });
 
     //PROPOSAL
