@@ -18,15 +18,16 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>Kevin Anderson</h2>
-                        <h3>Web Designer</h3>
-                        <div class="social-links mt-2">
-                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
+                        <img src="{{asset('assets/employee_img/'.$profile_info_list->img)}}" alt="Profile" class="rounded-circle object-fit-cover" width="100" height="100">
+                        <h2>{{$profile_info_list->first_name.' '.$profile_info_list->last_name}}</h2>
+
+                        <h3>{{$profile_info_list->job_position_name}}</h3>
+{{--                        <div class="social-links mt-2">--}}
+{{--                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>--}}
+{{--                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>--}}
+{{--                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>--}}
+{{--                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
 
@@ -59,44 +60,51 @@
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview" role="tabpanel">
-                                <h5 class="card-title">About</h5>
-                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
-
                                 <h5 class="card-title">Profile Details</h5>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_employees_name">{{$profile_info_list->first_name.' '.$profile_info_list->last_name}}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Company</div>
-                                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                    <div class="col-lg-9 col-md-8">Trung tâm CNTT và truyền thông (Sở thông tin)</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Job</div>
-                                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                                    <div class="col-lg-9 col-md-8">{{$profile_info_list->job_position_name}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Country</div>
-                                    <div class="col-lg-9 col-md-8">USA</div>
+                                    <div class="col-lg-3 col-md-4 label">Department</div>
+                                    <div class="col-lg-9 col-md-8">{{$profile_info_list->department_name}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Address</div>
-                                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                    <div class="col-lg-3 col-md-4 label">Birth date</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_birth_date">{{$profile_info_list->birth_date}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Phone</div>
-                                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                                    <div class="col-lg-3 col-md-4 label">Birth place</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_birth_place">{{$profile_info_list->birth_place}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Place of resident</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_place_of_resident">{{$profile_info_list->place_of_resident}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Permanent address</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_permanent_address">{{$profile_info_list->permanent_address}}</div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Email</div>
-                                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                                    <div class="col-lg-9 col-md-8" id="edit_email">{{$profile_info_list->email}}</div>
                                 </div>
 
                             </div>
@@ -108,7 +116,7 @@
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="assets/img/profile-img.jpg" alt="Profile">
+                                            <img src="{{asset('assets/employee_img/'.$profile_info_list->img)}}" alt="Profile" class="rounded-circle object-fit-cover" width="100" height="100">
                                             <div class="pt-2">
                                                 <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                                 <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -119,84 +127,63 @@
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                                            <input name="employees_name" type="text" class="form-control" id="employees_name" value="{{$profile_info_list->first_name.' '.$profile_info_list->last_name}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                                            <input name="company" type="text" class="form-control" id="company" value="Trung tâm CNTT và truyền thông (Sở thông tin)">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
+                                            <input name="job_position_name" type="text" class="form-control" id="job_position_name" value="{{$profile_info_list->job_position_name}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Department</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="country" type="text" class="form-control" id="Country" value="USA">
+                                            <input name="department_name" type="text" class="form-control" id="department_name" value="{{$profile_info_list->department_name}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                                            <input name="birth_date" type="text" class="form-control" id="birth_date" value="{{$profile_info_list->birth_date}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Birth place</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
+                                            <input name="birth_place" type="text" class="form-control" id="birth_place" value="{{$profile_info_list->birth_place}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Place of resident</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="place_of_resident" type="text" class="form-control" id="place_of_resident" value="{{$profile_info_list->place_of_resident}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Permanent address</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="permanent_address" type="text" class="form-control" id="permanent_address" value="{{$profile_info_list->permanent_address}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                                            <input name="email" type="email" class="form-control" id="email" value="{{$profile_info_list->email}}">
                                         </div>
                                     </div>
 

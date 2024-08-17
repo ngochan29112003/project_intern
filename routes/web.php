@@ -172,6 +172,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
 
     Route::group(['prefix' => '/profile'], function () {
         Route::get('', [ProfileController::class, 'getView'])->name('index-profile');
+        Route::post('/update/{id}', [ProfileController::class, 'update'])->name('update-profile');
     });
 
     //
