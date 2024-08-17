@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\RewardModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class RewardController extends Controller
 {
@@ -71,5 +74,50 @@ class RewardController extends Controller
             'success' => true,
             'reward' => $reward,
         ]);
+    }
+
+    public function exportExcel()
+    {
+        $inputFileName = public_path('excel-example/bangkhenthuongexport.xlsx');
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new RewardModel();
+        $leave_report = $model->getReward();
+        $num_row = 3;
+
+        foreach ($leave_report as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++);
+            $cell->setCellValue('B' . $num_row, $row->type_reward_name);
+            $cell->setCellValue('C' . $num_row, $row->first_name . ' ' . $row->last_name);
+
+            $borderStyle = $cell->getStyle('A' . $num_row . ':C' . $num_row)->getBorders();
+            $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+            $cell->getStyle('A' . $num_row . ':C' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+            $num_row++;
+        }
+        foreach (range('A', 'C') as $columnID) {
+            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-khen-thuong" . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
     }
 }

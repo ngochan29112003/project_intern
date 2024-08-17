@@ -53,6 +53,7 @@ class EmployeeModel extends Model
             ->join('education_level','employees.education_level_id','=','education_level.education_level_id')
             ->join('type_employees','employees.type_employee_id','=','type_employees.type_employee_id')
             ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
+            ->join('departments', 'employees.department_id','=','departments.department_id')
             ->get();
     }
 

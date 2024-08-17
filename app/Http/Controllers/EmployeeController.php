@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\EmployeeModel;
 use App\Models\SalaryModel;
+use App\Models\TaskModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class EmployeeController extends Controller
 {
@@ -135,5 +139,69 @@ class EmployeeController extends Controller
         return response()->json([
            'employee' =>  $employee
         ]);
+    }
+
+    public function exportExcel()
+    {
+        $inputFileName = public_path('excel-example/dsthongtinnhanvienexport.xlsx');
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new EmployeeModel();
+        $leave_report = $model->getEmployeeInfo();
+        $num_row = 3;
+
+        foreach ($leave_report as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++);
+            $cell->setCellValue('B' . $num_row, $row->first_name . ' ' . $row->last_name);
+            if($row->gender===0){
+                $cell->setCellValue('C' . $num_row, 'Nam');
+            }else{
+                $cell->setCellValue('C' . $num_row, 'Nữ');
+            }
+            $cell->setCellValue('D' . $num_row, $row->birth_date);
+            $cell->setCellValue('E' . $num_row, $row->birth_place);
+            $cell->setCellValue('F' . $num_row, $row->place_of_resident);
+            $cell->setCellValue('G' . $num_row, $row->permanent_address);
+            $cell->setCellValue('H' . $num_row, $row->education_level_name);
+            $cell->setCellValue('I' . $num_row, $row->cic_number);
+            $cell->setCellValue('J' . $num_row, $row->job_position_name);
+            $cell->setCellValue('K' . $num_row, $row->type_employee_name);
+            $cell->setCellValue('L' . $num_row, $row->department_name);
+            $cell->setCellValue('M' . $num_row, $row->email);
+            if($row->status===0){
+                $cell->setCellValue('N' . $num_row, 'Đã nghỉ việc');
+            }else{
+                $cell->setCellValue('N' . $num_row, 'Đang làm việc');
+            }
+
+            $borderStyle = $cell->getStyle('A' . $num_row . ':N' . $num_row)->getBorders();
+            $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+            $cell->getStyle('A' . $num_row . ':N' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+            $num_row++;
+        }
+        foreach (range('A', 'N') as $columnID) {
+            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-thong-tin-nhan-vien" . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
     }
 }

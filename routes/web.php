@@ -54,6 +54,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('edit-employees');
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
+        Route::get('/export', [EmployeeController::class, 'exportExcel'])->name('export-employees');
     });
 
     //DEPARTMENT
@@ -79,6 +80,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [RewardController::class, 'delete'])->name('delete-reward');
         Route::get('/edit/{id}', [RewardController::class, 'edit'])->name('edit-reward');
         Route::post('/update/{id}', [RewardController::class, 'update'])->name('update-reward');
+        Route::get('/export', [RewardController::class, 'exportExcel'])->name('export-reward');
     });
 
     //PAYROLL
@@ -97,6 +99,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [PositionCotroller::class, 'delete'])->name('delete-position');
         Route::get('/edit/{id}', [PositionCotroller::class, 'edit'])->name('edit-position');
         Route::post('/update/{id}', [PositionCotroller::class, 'update'])->name('update-position');
+        Route::get('/export', [PositionCotroller::class, 'exportExcel'])->name('export-position');
     });
 
     //SALARY CALCULATION
@@ -115,6 +118,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [DisciplineController::class, 'delete'])->name('delete-discipline');
         Route::get('/edit/{id}', [DisciplineController::class, 'edit'])->name('edit-discipline');
         Route::post('/update/{id}', [DisciplineController::class, 'update'])->name('update-discipline');
+        Route::get('/export', [DisciplineController::class, 'exportExcel'])->name('export-discipline');
 
     });
 
@@ -135,6 +139,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete-task');
         Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit-task');
         Route::post('/update/{id}', [TaskController::class, 'update'])->name('update-task');
+        Route::get('/export', [TaskController::class, 'exportExcel'])->name('export-task');
     });
 
     //DEPARTMENT
@@ -168,6 +173,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/update/{id}', [LeaveApplicationController::class, 'update'])->name('update-leave-application');
         Route::get('/report', [LeaveApplicationController::class, 'getViewReport'])->name('report-leave-application');
         Route::post('/approve/{id}', [LeaveApplicationController::class, 'approve'])->name('approve-leave-application');
+        Route::get('/export', [LeaveApplicationController::class, 'exportExcel'])->name('export-leave-application');
     });
 
     Route::group(['prefix' => '/profile'], function () {

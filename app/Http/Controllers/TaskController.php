@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RewardModel;
 use App\Models\TaskModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class TaskController extends Controller
 {
@@ -80,5 +84,54 @@ class TaskController extends Controller
             'success' => true,
             'task' => $task,
         ]);
+    }
+
+    public function exportExcel()
+    {
+        $inputFileName = public_path('excel-example/bangcongviecexport.xlsx');
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new TaskModel();
+        $leave_report = $model->getTask();
+        $num_row = 3;
+
+        foreach ($leave_report as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++);
+            $cell->setCellValue('B' . $num_row, $row->task_code);
+            $cell->setCellValue('C' . $num_row, $row->first_name . ' ' . $row->last_name);
+            $cell->setCellValue('D' . $num_row, $row->start_date);
+            $cell->setCellValue('E' . $num_row, $row->end_date);
+            $cell->setCellValue('F' . $num_row, $row->location);
+            $cell->setCellValue('G' . $num_row, $row->purpose);
+
+            $borderStyle = $cell->getStyle('A' . $num_row . ':G' . $num_row)->getBorders();
+            $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+            $cell->getStyle('A' . $num_row . ':G' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+            $num_row++;
+        }
+        foreach (range('A', 'G') as $columnID) {
+            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-cong-viec" . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
     }
 }

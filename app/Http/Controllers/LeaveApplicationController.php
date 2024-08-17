@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\AccountModel;
 use App\Models\EmployeeModel;
 use App\Models\LeaveApplicationModel;
+use App\Models\SalaryModel;
 use Illuminate\Http\Request;
 use App\StaticString;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class LeaveApplicationController extends Controller
 {
@@ -110,5 +114,60 @@ class LeaveApplicationController extends Controller
             'success' => true,
             'message' => 'Leave application approved successfully'
         ]);
+    }
+
+    public function exportExcel()
+    {
+        $inputFileName = public_path('excel-example/danhsachnghiphepexport.xlsx');
+
+        $inputFileType = IOFactory::identify($inputFileName);
+
+        $objReader = IOFactory::createReader($inputFileType);
+
+        $excel = $objReader->load($inputFileName);
+
+        $excel->setActiveSheetIndex(0);
+        $excel->getDefaultStyle()->getFont()->setName('Times New Roman');
+
+        $stt = 1;
+        $cell = $excel->getActiveSheet();
+
+        $model = new LeaveApplicationModel();
+        $leave_report = $model->getAllLeaveAppReport();
+        $num_row = 3;
+
+        foreach ($leave_report as $row) {
+            $cell->setCellValue('A' . $num_row, $stt++);
+            $cell->setCellValue('B' . $num_row, $row->first_name.' '.$row->last_name);
+            $cell->setCellValue('C' . $num_row, $row->type_leave_name);
+            $cell->setCellValue('D' . $num_row, $row->start_date);
+            $cell->setCellValue('E' . $num_row, $row->end_date);
+            if($row->leave_status===0){
+                $cell->setCellValue('F' . $num_row, 'Chưa duyệt nghỉ phép');
+            }else{
+                $cell->setCellValue('F' . $num_row, 'Đã duyệt nghỉ phép');
+            }
+
+
+
+            $borderStyle = $cell->getStyle('A'.$num_row.':F' . $num_row)->getBorders();
+            $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+            $cell->getStyle('A'.$num_row.':F' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+
+            $num_row++;
+        }
+        foreach (range('A', 'F') as $columnID) {
+            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $filename = "danh-sach-nghi-phep" . '.xlsx';
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // Xóa tất cả buffer trước khi xuất dữ liệu
+        ob_end_clean();
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        $writer->save('php://output');
     }
 }
