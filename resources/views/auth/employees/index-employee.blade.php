@@ -152,7 +152,7 @@
                                             id="job_position_id">
                                         @foreach ($position_list as $item)
                                             <option
-                                                value="{{ $item->job_position_id }}">{{ $item->job_position_code . ' - ' . $item->job_position_name	}}</option>
+                                                value="{{ $item->job_position_id }}">{{ $item->job_position_name . ' - ' . $item->position_level}}</option>
                                         @endforeach
                                     </select>
                                 </div>
