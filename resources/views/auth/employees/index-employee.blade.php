@@ -7,11 +7,11 @@
         }
     </style>
     <div class="pagetitle">
-        <h1>Employee</h1>
+        <h1>Nhân sự</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Employee</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Nhân sự</li>
             </ol>
         </nav>
     </div>
@@ -21,13 +21,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new employee
+                    Thêm nhân sự mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="{{route('export-employees')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Add employee</h5>
+                    <h5 class="modal-title fw-bold">Thêm nhân sự</h5>
                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -48,13 +48,13 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="add_employee_name" class="form-label">First Name</label>
+                                    <label for="add_employee_name" class="form-label">Họ</label>
                                     <input type="text" class="form-control" id="first_name"
                                            name="first_name"
                                            required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="add_employee_name" class="form-label">Last Name</label>
+                                    <label for="add_employee_name" class="form-label">Tên</label>
                                     <input type="text" class="form-control" id="last_name"
                                            name="last_name"
                                            required>
@@ -65,25 +65,25 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="img" class="form-label">Image</label>
+                                    <label for="img" class="form-label">Hình ảnh</label>
                                     <input type="file" class="form-control" id="img" name="img">
                                 </div>
                                 <div class="col-6">
                                     <fieldset class="row">
-                                        <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                        <legend class="col-form-label col-sm-4 pt-0">Giới tính</legend>
                                         <div class="d-flex">
                                             <div class="form-check me-3">
                                                 <input class="form-check-input" type="radio" name="gender" id="male"
                                                        value="0" checked>
                                                 <label class="form-check-label" for="male">
-                                                    Male
+                                                    Nam
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" id="female"
                                                        value="1">
                                                 <label class="form-check-label" for="female">
-                                                    Female
+                                                    Nữ
                                                 </label>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                                     <input type="email" class="form-control" id="email" name="email">
                                 </div>
                                 <div class="col-6">
-                                    <label for="add_idcard" class="form-label">Citizen identity Card Number</label>
+                                    <label for="add_idcard" class="form-label">CMND/CCCD</label>
                                     <input type="number" class="form-control" id="cic_number" name="cic_number"
                                            required>
                                 </div>
@@ -108,12 +108,12 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="birth_date" class="form-label">Birth day</label>
+                                    <label for="birth_date" class="form-label">Ngày sinh</label>
                                     <input type="date" class="form-control" id="birth_date" name="birth_date"
                                            required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="birth_place" class="form-label">Birth place</label>
+                                    <label for="birth_place" class="form-label">Nơi sinh</label>
                                     <select class="form-select" aria-label="Default" name="birth_place"
                                             id="birth_place">
                                     </select>
@@ -123,12 +123,12 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="place_of_resident" class="form-label">Place of Residence</label>
+                                    <label for="place_of_resident" class="form-label">Nơi cư trú</label>
                                     <input type="text" class="form-control" id="place_of_resident"
                                            name="place_of_resident" required>
                                 </div>
                                 <div class="col-6">
-                                    <label for="permanent_address" class="form-label">Permanent Address</label>
+                                    <label for="permanent_address" class="form-label">Địa chỉ thường trú</label>
                                     <input type="text" class="form-control" id="permanent_address"
                                            name="permanent_address" required>
                                 </div>
@@ -137,7 +137,7 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="education_level_id" class="form-label">Education level</label>
+                                    <label for="education_level_id" class="form-label">Trình độ học vấn</label>
                                     <select class="form-select" aria-label="Default" name="education_level_id"
                                             id="education_level_id">
                                         @foreach ($edu_level_list as $item)
@@ -147,7 +147,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label for="job_position_id" class="form-label">Job position</label>
+                                    <label for="job_position_id" class="form-label">Vị trí công việc</label>
                                     <select class="form-select" aria-label="Default" name="job_position_id"
                                             id="job_position_id">
                                         @foreach ($position_list as $item)
@@ -161,14 +161,14 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-4">
-                                    <label for="status" class="form-label">Status</label>
+                                    <label for="status" class="form-label">Trạng thái</label>
                                     <select class="form-select" aria-label="Default" name="status" id="status">
-                                        <option value="0">No longer employed</option>
-                                        <option value="1">Currently employed</option>
+                                        <option value="0">Đã nghỉ việc</option>
+                                        <option value="1">Đang làm việc</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <label for="type_employee_id" class="form-label">Employee type</label>
+                                    <label for="type_employee_id" class="form-label">Loại nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="type_employee_id"
                                             id="type_employee_id">
                                         @foreach ($type_employee_list as $item)
@@ -178,7 +178,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <label for="department_id" class="form-label">Department</label>
+                                    <label for="department_id" class="form-label">Phòng ban</label>
                                     <select class="form-select" aria-label="Default" name="department_id"
                                             id="department_id">
                                         @foreach ($department_list as $item)
@@ -189,7 +189,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
             </div>
@@ -201,7 +201,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Edit employee</h5>
+                    <h5 class="modal-title fw-bold">Chỉnh sửa thông tin nhân sự</h5>
                     <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -217,7 +217,7 @@
                                 <div class="col-9">
                                     <div class="row mb-3">
                                         <div class="col-3">
-                                            <label for="add_employee_name" class="form-label">First Name</label>
+                                            <label for="add_employee_name" class="form-label">Họ</label>
                                         </div>
                                         <div class="col-9">
                                             <input type="text" class="form-control" id="edit_first_name"
@@ -227,7 +227,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-3">
-                                            <label for="add_employee_name" class="form-label">Last Name</label>
+                                            <label for="add_employee_name" class="form-label">Tên</label>
                                         </div>
                                         <div class="col-9">
                                             <input type="text" class="form-control" id="edit_last_name"
@@ -238,7 +238,7 @@
                                     <div class="row">
                                         <fieldset class="row">
                                             <div class="col-3">
-                                                <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                                <legend class="col-form-label col-sm-4 pt-0">Giới tính</legend>
                                             </div>
                                             <div class="col-9">
                                                 <div class="d-flex">
@@ -247,7 +247,7 @@
                                                                id="male"
                                                                value="0" checked>
                                                         <label class="form-check-label" for="male">
-                                                            Male
+                                                            Nam
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
@@ -255,7 +255,7 @@
                                                                id="female"
                                                                value="1">
                                                         <label class="form-check-label" for="female">
-                                                            Female
+                                                            Nữ
                                                         </label>
                                                     </div>
                                                 </div>
@@ -269,7 +269,7 @@
                             <div class="col-12">
                                 <input type="file" id="edit_img" name="img" class="d-none">
                                 <label for="edit_img" class="btn btn-primary">
-                                    <i class="bi bi-upload"></i> New image
+                                    <i class="bi bi-upload"></i> Hình ảnh mới
                                 </label>
                             </div>
                         </div>
@@ -280,7 +280,7 @@
                                     <input type="email" class="form-control" id="edit_email" name="email">
                                 </div>
                                 <div class="col-6">
-                                    <label for="edit_cic_number" class="form-label">Citizen identity Card Number</label>
+                                    <label for="edit_cic_number" class="form-label">CMND/CCCD</label>
                                     <input type="number" class="form-control" id="edit_cic_number" name="cic_number">
                                 </div>
                             </div>
@@ -288,11 +288,11 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="birth_date" class="form-label">Birth day</label>
+                                    <label for="birth_date" class="form-label">Ngày sinh</label>
                                     <input type="date" class="form-control" id="edit_birth_date" name="birth_date">
                                 </div>
                                 <div class="col-6">
-                                    <label for="birth_place" class="form-label">Birth place</label>
+                                    <label for="birth_place" class="form-label">Nơi sinh</label>
                                     <select class="form-select" aria-label="Default" id="edit_birth_place"
                                             name="birth_place">
                                     </select>
@@ -302,12 +302,12 @@
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="place_of_resident" class="form-label">Place of Residence</label>
+                                    <label for="place_of_resident" class="form-label">Nơi cư trú</label>
                                     <input type="text" class="form-control" id="edit_place_of_resident"
                                            name="place_of_resident">
                                 </div>
                                 <div class="col-6">
-                                    <label for="permanent_address" class="form-label">Permanent Address</label>
+                                    <label for="permanent_address" class="form-label">Địa chỉ thường trú</label>
                                     <input type="text" class="form-control" id="edit_permanent_address"
                                            name="permanent_address">
                                 </div>
@@ -316,7 +316,7 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="education_level_id" class="form-label">Education level</label>
+                                    <label for="education_level_id" class="form-label">Trình độ học vấn</label>
                                     <select class="form-select" aria-label="Default" name="education_level_id"
                                             id="edit_education_level_id">
                                         @foreach ($edu_level_list as $item)
@@ -326,7 +326,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6">
-                                    <label for="job_position_id" class="form-label">Job position</label>
+                                    <label for="job_position_id" class="form-label">Vị trí công việc</label>
                                     <select class="form-select" aria-label="Default" name="job_position_id"
                                             id="edit_job_position_id">
                                         @foreach ($position_list as $item)
@@ -340,14 +340,14 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-4">
-                                    <label for="status" class="form-label">Status</label>
+                                    <label for="status" class="form-label">Trạng thái</label>
                                     <select class="form-select" aria-label="Default" name="status" id="edit_status">
-                                        <option value="0">No longer employed</option>
-                                        <option value="1">Currently employed</option>
+                                        <option value="0">Đã nghỉ việc</option>
+                                        <option value="1">Đang làm việc</option>
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <label for="type_employee_id" class="form-label">Employee type</label>
+                                    <label for="type_employee_id" class="form-label">Loại nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="type_employee_id"
                                             id="edit_type_employee_id">
                                         @foreach ($type_employee_list as $item)
@@ -357,7 +357,7 @@
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <label for="edit_department_id" class="form-label">Department</label>
+                                    <label for="edit_department_id" class="form-label">Phòng ban</label>
                                     <select class="form-select" aria-label="Default" name="department_id"
                                             id="edit_department_id">
                                         @foreach ($department_list as $item)
@@ -368,7 +368,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
             </div>
@@ -378,18 +378,18 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Employee</h3>
+        <h3 class="text-left mb-4">Danh sách nhân sự</h3>
         <div class="table-responsive">
             <table id="employeeTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>img</th>
-                    <th>Gender</th>
-                    <th>Birth Day</th>
-                    <th>Status</th>
+                    <th>STT</th>
+                    <th>Họ</th>
+                    <th>Tên</th>
+                    <th>Hình ảnh</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Trạng thái</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -404,16 +404,16 @@
                                                      src="{{asset('assets/employee_img/'.$item->img)}}" alt=""
                                                      width="75"
                                                      height="75"></td>
-                        <td>{{ $item->gender === 0 ? 'Male' : 'Female' }}</td>
+                        <td>{{ $item->gender === 0 ? 'Nam' : 'Nữ' }}</td>
                         <td>{{$item->birth_date}}</td>
                         <td>
                             @if($item->status === 0)
                                 <span class="badge rounded-pill bg-danger">
-                                    No longer employed
+                                    Đã nghỉ việc
                                 </span>
                             @else
                                 <span class="badge rounded-pill bg-success">
-                                    Currently employed
+                                    Đang làm việc
                                 </span>
                             @endif
                         </td>

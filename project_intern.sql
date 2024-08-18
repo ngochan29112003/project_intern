@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 17, 2024 at 04:52 AM
+-- Generation Time: Aug 19, 2024 at 02:15 AM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,16 +65,16 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(0, 'None Dep\'t', 'None department'),
-(6, 'Acc Dep’t', 'Accounting department'),
-(7, 'Aud Dep\'t', 'Audit department'),
-(8, 'Sale Dept\'t', 'Sales department'),
-(9, 'Admin Dept\'t', 'Administration department'),
-(10, 'HR Dep\'t', 'Human Resources department'),
-(11, 'CS Dep\'t', 'Customer Service department'),
-(12, 'Finan Dep\'t', 'Financial department'),
-(13, 'Re&Dev Dep\'t', 'Research & Development department'),
-(14, 'Qual Dep\'t', 'Quality department');
+(0, 'None Dep\'t', 'Không Có Phòng Ban Nào'),
+(6, 'Acc Dep’t', 'Phòng Kế Toán'),
+(7, 'Aud Dep\'t', 'Phòng Kiểm Toán'),
+(8, 'Sale Dept\'t', 'Phòng Kinh Doanh'),
+(9, 'Admin Dept\'t', 'Phòng Hành Chính'),
+(10, 'HR Dep\'t', 'Phòng Nhân Sự'),
+(11, 'CS Dep\'t', 'Phòng Dịch Vụ Khách Hàng'),
+(12, 'Finan Dep\'t', 'Phòng Tài Chính'),
+(13, 'Re&Dev Dep\'t', 'Phòng Nghiên Cứu & Phát Triển'),
+(14, 'Qual Dep\'t', 'Phòng Đảm Bảo Chất Lượng');
 
 -- --------------------------------------------------------
 
@@ -112,11 +112,11 @@ CREATE TABLE `education_level` (
 --
 
 INSERT INTO `education_level` (`education_level_id`, `education_level_name`) VALUES
-(1, 'College'),
-(2, 'University'),
-(3, 'High School'),
-(4, 'Secondary School'),
-(5, 'Primary School');
+(1, 'Cao Đẳng '),
+(2, 'Đại Học'),
+(3, 'THPT'),
+(4, 'THCS'),
+(5, 'Tiểu Học');
 
 -- --------------------------------------------------------
 
@@ -148,14 +148,14 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`) VALUES
-(6, 'Hân', 'Ngọc', '1723482309_alo.jfif', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3, 0),
+(6, 'Hân', 'Ngọc', '1723909873_310066267_184130727510201_3026934422886984661_n.jpg', 1, '2003-11-29', 'Vĩnh Long', NULL, 'ngochan@gmail.com', 'VL', 1234567890, 2, 1, 1, 3, 0),
 (8, 'Admin', 'Account', '1723384561_jichangwook_1618310272_2550893909509181281_550618621.jpg', 0, '2003-09-24', 'Kiên Giang', NULL, 'account@gmail.com', 'RG', 123, 2, 1, 1, 3, 0),
-(10, 'Trần', 'Danh', 'avt.png', 1, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 1, 3, 3, 8),
+(10, 'Trần', 'Danh', 'avt.png', 0, '2024-08-01', 'Kiên Giang', NULL, 'tuananh@gmail.com', 'abc', 123, 2, 1, 3, 3, 8),
 (11, 'Resource', 'Human', 'avt.png', 1, '2003-11-11', 'Hải Phòng', '123', 'hr@gmail.com', '123', 123, 2, 1, 3, 8, 10),
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 3, 9, 0),
-(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 1, 3, 10, 8),
+(13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 0, 3, 10, 8),
 (14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 8),
-(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 1, 1, 7, 0),
+(15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 0, 1, 7, 0),
 (16, 'anh', 'tuan', 'avt.png', 0, '2000-02-22', 'Bắc Ninh', 'abc', 'ta@gmail.com', 'abc', 123, 2, 1, 1, 11, 6);
 
 -- --------------------------------------------------------
@@ -210,7 +210,9 @@ CREATE TABLE `leave_application` (
 INSERT INTO `leave_application` (`application_id`, `employee_id`, `type_leave_id`, `start_date`, `end_date`, `duration`, `leave_status`) VALUES
 (1, 6, 6, '2024-08-10', '2024-08-15', NULL, 1),
 (2, 8, 4, '2024-08-08', '2024-08-16', NULL, 1),
-(3, 8, 5, '2024-08-07', '2024-08-30', NULL, 1);
+(3, 8, 5, '2024-08-07', '2024-08-30', NULL, 1),
+(4, 14, 1, '2024-08-17', '2024-08-18', 2, 1),
+(5, 13, 1, '2024-08-19', '2024-08-21', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -281,7 +283,8 @@ CREATE TABLE `proposals` (
 
 INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_description`, `proposal_status`, `created_at`) VALUES
 (10, 8, 3, 'abcde', 2, '2024-08-15 15:13:54'),
-(11, 10, 3, 'hoc ngu dua di hoc them', 2, '2024-08-16 01:49:33');
+(11, 10, 3, 'hoc ngu dua di hoc them', 2, '2024-08-16 01:49:33'),
+(12, 13, 2, 'Toi muon duoc tang luong', 0, '2024-08-18 18:45:45');
 
 -- --------------------------------------------------------
 
@@ -313,7 +316,10 @@ CREATE TABLE `rewards` (
 
 INSERT INTO `rewards` (`rewards_id`, `type_reward_id`, `employee_id`) VALUES
 (6, 5, 8),
-(7, 3, 8);
+(7, 3, 8),
+(8, 3, 6),
+(9, 2, 10),
+(10, 5, 16);
 
 -- --------------------------------------------------------
 
@@ -415,11 +421,11 @@ CREATE TABLE `type_disciplines` (
 --
 
 INSERT INTO `type_disciplines` (`action_id`, `disciplinary_action`) VALUES
-(1, 'Warning'),
-(2, 'Reprimand'),
-(3, 'Suspension'),
-(4, 'Demotion'),
-(5, 'Termination');
+(1, 'Cảnh cáo'),
+(2, 'Khiển trách'),
+(3, 'Đình chỉ'),
+(4, 'Giáng chức'),
+(5, 'Sa thải');
 
 -- --------------------------------------------------------
 
@@ -437,12 +443,12 @@ CREATE TABLE `type_employees` (
 --
 
 INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
-(1, 'Full-time employees'),
-(2, 'Part-time employees'),
-(3, 'Temporary employees'),
-(4, 'Seasonal employees'),
-(5, 'Leased employees'),
-(6, 'At-will employees');
+(1, 'Nhân viên chính thức'),
+(2, 'Nhân viên bán thời gian'),
+(3, 'Nhân viên tạm thời'),
+(4, 'Nhân viên thời vụ'),
+(5, 'Nhân viên cho thuê'),
+(6, 'Nhân viên tự do');
 
 -- --------------------------------------------------------
 
@@ -460,12 +466,12 @@ CREATE TABLE `type_leaves` (
 --
 
 INSERT INTO `type_leaves` (`type_leave_id`, `type_leave_name`) VALUES
-(1, 'Sick Leave'),
-(2, 'Casual Leave'),
-(3, 'Maternity Leave'),
-(4, 'Paternity Leave'),
-(5, 'Unpaid Leave'),
-(6, 'Other');
+(1, 'Nghỉ bệnh'),
+(2, 'Nghỉ phép thông thường'),
+(3, 'Nghỉ thai sản'),
+(4, 'Nghỉ thai sản nam'),
+(5, 'Nghỉ không lương'),
+(6, 'Khác');
 
 -- --------------------------------------------------------
 
@@ -483,9 +489,9 @@ CREATE TABLE `type_proposals` (
 --
 
 INSERT INTO `type_proposals` (`type_proposal_id`, `proposal_name`) VALUES
-(1, 'Leave Request'),
-(2, 'Salary Increase'),
-(3, 'Position Change');
+(1, 'Yêu cầu nghỉ phép'),
+(2, 'Đề xuất tăng lương'),
+(3, 'Đề xuất đổi vị trí làm việc');
 
 -- --------------------------------------------------------
 
@@ -503,11 +509,11 @@ CREATE TABLE `type_rewards` (
 --
 
 INSERT INTO `type_rewards` (`type_reward_id`, `type_reward_name`) VALUES
-(1, 'Employee of the Month'),
-(2, 'Outstanding Performance'),
-(3, 'Team Achievement'),
-(4, 'Long Service'),
-(5, 'Innovation Award');
+(1, 'Nhân viên của tháng'),
+(2, 'Hiệu suất vượt trội'),
+(3, 'Thành tựu của đội'),
+(4, 'Giải thưởng thâm niên'),
+(5, 'Giải thưởng sáng tạo');
 
 --
 -- Indexes for dumped tables
@@ -671,13 +677,13 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `job_positions`
 --
 ALTER TABLE `job_positions`
-  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `leave_application`
 --
 ALTER TABLE `leave_application`
-  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payroll`
@@ -695,7 +701,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `proposal_file`
@@ -707,7 +713,7 @@ ALTER TABLE `proposal_file`
 -- AUTO_INCREMENT for table `rewards`
 --
 ALTER TABLE `rewards`
-  MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `rewards_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `salaries`

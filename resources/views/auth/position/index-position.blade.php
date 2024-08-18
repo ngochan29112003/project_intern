@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Position</h1>
+        <h1>Chức vụ</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Position</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Chức vụ</li>
             </ol>
         </nav>
     </div>
@@ -16,13 +16,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPositionModal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new position
+                    Thêm chức vụ mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                     <a href="{{route('export-position')}}" class="d-flex align-items-center text-white">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                        Export file excel
+                       Xuất file excel
                     </a>
             </div>
         </div>
@@ -32,23 +32,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add new position</h4>
+                    <h4 class="modal-title">Thêm chức vụ mới</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addPositionForm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="add_job_position_code" class="form-label">Job Position Code</label>
+                            <label for="add_job_position_code" class="form-label">Mã chức vụ</label>
                             <input type="text" class="form-control" id="job_position_code" name="job_position_code" required>
                         </div>
                         <div class="mb-3">
-                            <label for="add_job_position_name" class="form-label">Job Position Name</label>
+                            <label for="add_job_position_name" class="form-label">Tên chức vụ</label>
                             <input type="text" class="form-control" id="job_position_name" name="job_position_name" required>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_position_level" class="form-label">Position Level</label>
+                                    <label for="add_position_level" class="form-label">Cấp độ</label>
 {{--                                    <input type="text" class="form-control" id="position_level" name="position_level" required>--}}
                                     <select class="form-select" aria-label="Default" name="position_level"
                                             id="position_level">
@@ -61,17 +61,17 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_job_position_salary" class="form-label">Job Position Salary</label>
+                                    <label for="add_job_position_salary" class="form-label">Mã số ngạch lương</label>
                                     <input type="text" class="form-control" id="salary_code" name="salary_code">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="add_description" class="form-label">Description</label>
+                            <label for="add_description" class="form-label">Ghi chú</label>
                             <input type="text" class="form-control" id="description" name="description">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
             </div>
@@ -82,23 +82,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit position</h4>
+                    <h4 class="modal-title">Chỉnh sửa chức vụ</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editPositionForm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="job_position_code" class="form-label">Job Position Code</label>
+                            <label for="job_position_code" class="form-label">Mã chức vụ</label>
                             <input type="text" class="form-control" id="edit_job_position_code" name="job_position_code" required>
                         </div>
                         <div class="mb-3">
-                            <label for="job_position_name" class="form-label">Job Position Name</label>
+                            <label for="job_position_name" class="form-label">Tên chức vụ</label>
                             <input type="text" class="form-control" id="edit_job_position_name" name="job_position_name" required>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_position_level" class="form-label">Position Level</label>
+                                    <label for="add_position_level" class="form-label">Cấp độ</label>
                                     <select class="form-select" aria-label="Default" name="position_level"
                                             id="edit_position_level">
                                         <option value="1">1</option>
@@ -110,17 +110,17 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_job_position_salary" class="form-label">Job Position Salary</label>
+                                    <label for="add_job_position_salary" class="form-label">Mã số ngạch lương</label>
                                     <input type="text" class="form-control" id="edit_salary_code" name="salary_code">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
+                            <label for="description" class="form-label">Ghi chú</label>
                             <input type="text" class="form-control" id="edit_description" name="description">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
             </div>
@@ -128,17 +128,17 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Position</h3>
+        <h3 class="text-left mb-4">Danh sách chức vụ</h3>
         <div class="table-responsive">
             <table id="positionTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Job Position Code</th>
-                    <th>Job Position Name</th>
-                    <th class="text-start">Position Level</th>
-                    <th>Job Position Salary</th>
-                    <th>Description</th>
+                    <th>STT</th>
+                    <th>Mã chức vụ</th>
+                    <th>Tên chức vụ</th>
+                    <th class="text-start">Cấp độ</th>
+                    <th>Mã số ngạch lương</th>
+                    <th>Ghi chú</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>

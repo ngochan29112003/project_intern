@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Leave Application</h1>
+        <h1>Đơn xin nghỉ phép</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Leave Application Report</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Báo cáo đơn xin nghỉ phép</li>
             </ol>
         </nav>
     </div>
@@ -17,7 +17,7 @@
             <div class="btn btn-success mx-2 btn-export">
                 <a href="{{route('export-leave-application')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -25,17 +25,17 @@
 
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Leave application report</h3>
+        <h3 class="text-left mb-4">Báo cáo đơn xin nghỉ phép</h3>
         <div class="table-responsive">
             <table id="LeaveApplicationReportTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Employee name</th>
-                    <th>Leave type</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Status</th>
+                    <th>STT</th>
+                    <th>Nhân viên</th>
+                    <th>Loại nghỉ phép</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Trạng thái</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>

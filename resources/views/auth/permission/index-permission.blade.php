@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Permission</h1>
+        <h1>Quyền</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">System</a></li>
-                <li class="breadcrumb-item active">Permission</li>
+                <li class="breadcrumb-item"><a href="/">Hệ thống</a></li>
+                <li class="breadcrumb-item active">Quyền</li>
             </ol>
         </nav>
     </div>
@@ -17,13 +17,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPermission">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new permission
+                    Thêm quyền mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -34,17 +34,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add permission</h4>
+                    <h4 class="modal-title">Thêm quyền</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addPermissionForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_permission_name" class="form-label">Permission name</label>
+                            <label for="edit_permission_name" class="form-label">Tên quyền</label>
                             <input type="text" class="form-control" id="add_permission_name" name="add_permission_name"
                                    required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
 
@@ -57,16 +57,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit permission</h4>
+                    <h4 class="modal-title">Sửa quyền</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editPermissionForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="permission_name" class="form-label">Permission Name</label>
+                            <label for="permission_name" class="form-label">Tên quyền</label>
                             <input type="text" class="form-control" id="permission_name" name="permission_name" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
             </div>
@@ -74,12 +74,12 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Permission</h3>
+        <h3 class="text-left mb-4">Danh sách quyền</h3>
         <table id="PermissionTable" class="table table-hover table-bordered">
             <thead class="table-light">
             <tr>
-                <th>No</th>
-                <th>Permission name</th>
+                <th>STT</th>
+                <th>Tên quyền</th>
                 <th class="text-center">Action</th>
             </tr>
             </thead>

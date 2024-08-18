@@ -86,7 +86,7 @@ $token = 'position';
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{route('index-profile')}}">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Hồ sơ của bạn</span>
                         </a>
                     </li>
                     <li>
@@ -96,7 +96,7 @@ $token = 'position';
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
+                            <span>Cài đặt</span>
                         </a>
                     </li>
                     <li>
@@ -106,7 +106,7 @@ $token = 'position';
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                             <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>Bạn cần hỗ trợ?</span>
                         </a>
                     </li>
                     <li>
@@ -116,7 +116,7 @@ $token = 'position';
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{route('logout')}}">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
+                            <span>Đăng xuất</span>
                         </a>
                     </li>
 
@@ -129,24 +129,24 @@ $token = 'position';
 
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-heading">Home</li>
+        <li class="nav-heading">Trang chủ</li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('index-dashboard')}}">
                 <i class="bi bi-house"></i>
-                <span>Dashboard</span>
+                <span>Tổng quan</span>
             </a>
         </li>
         @if(($data->permission === 2 && $data->job_position_id === 8) || $data->permission === 1)
             <!-- ======= Chỉ có super admin và người quản lý nhân sự mới truy cập được system ======= -->
-            <li class="nav-heading">System</li>
+            <li class="nav-heading">Hệ thống</li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-person-fill-gear"></i></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-person-fill-gear"></i></i><span>Tài khoản</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="account-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{route('index-account')}}">
-                            <i class="bi bi-circle"></i><span>Account list</span>
+                            <i class="bi bi-circle"></i><span>Danh sách tài khoản</span>
                         </a>
                     </li>
                 </ul>
@@ -154,28 +154,28 @@ $token = 'position';
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#permission-nav" data-bs-toggle="collapse" href="#"
                    aria-expanded="false">
-                    <i class="bi bi-key"></i><span>Permission</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-key"></i><span>Quyền</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="permission-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{route('index-permission')}}">
-                            <i class="bi bi-circle"></i><span>Permission list</span>
+                            <i class="bi bi-circle"></i><span>Danh sách quyền</span>
                         </a>
                     </li>
                 </ul>
             </li>
         @endif
-        <li class="nav-heading">Management</li>
+        <li class="nav-heading">Quản lý</li>
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-person-fill"></i><span>Employee</span><i
+                <i class="bi bi-person-fill"></i><span>Nhân sự</span><i
                         class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-employees')}}">
-                        <i class="bi bi-circle"></i><span>Employee list</span>
+                        <i class="bi bi-circle"></i><span>Danh sách nhân sự</span>
                     </a>
                 </li>
             </ul>
@@ -183,13 +183,13 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-building-fill"></i><span>Department</span><i
+                <i class="bi bi-building-fill"></i><span>Phòng ban</span><i
                         class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-department')}}">
-                        <i class="bi bi-circle"></i><span>Department list</span>
+                        <i class="bi bi-circle"></i><span>Danh sách phòng ban</span>
                     </a>
                 </li>
             </ul>
@@ -197,7 +197,7 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#payroll-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-bank"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-bank"></i><span>Tiền lương</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
 {{--            <ul id="salaries-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
 {{--                <li>--}}
@@ -209,7 +209,7 @@ $token = 'position';
             <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{route('index-salary')}}">
-                        <i class="bi bi-circle"></i><span>Salary list</span>
+                        <i class="bi bi-circle"></i><span>Bảng lương</span>
                     </a>
                 </li>
             </ul>
@@ -218,12 +218,12 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#position-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-clipboard2-fill"></i><span>Job position</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-clipboard2-fill"></i><span>Chức vụ</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{route('index-position')}}">
-                        <i class="bi bi-circle"></i><span>List of positions</span>
+                        <i class="bi bi-circle"></i><span>Danh sách chức vụ</span>
                     </a>
                 </li>
             </ul>
@@ -232,13 +232,13 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-book-fill"></i><span>Task</span><i
+                <i class="bi bi-book-fill"></i><span>Nhiệm vụ</span><i
                         class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-task')}}">
-                        <i class="bi bi-circle"></i><span>Task list</span>
+                        <i class="bi bi-circle"></i><span>Danh sách nhiệm vụ</span>
                     </a>
                 </li>
             </ul>
@@ -247,20 +247,20 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#other-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-star-fill"></i><span>Reward & Discipline</span><i
+                <i class="bi bi-star-fill"></i><span>Khen thương & kỷ luật</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="other-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-reward')}}">
-                        <i class="bi bi-circle"></i><span>Reward</span>
+                        <i class="bi bi-circle"></i><span>Khen thưởng</span>
                     </a>
                 </li>
             </ul>
             <ul id="other-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                 <li>
                     <a href="{{route('index-discipline')}}">
-                        <i class="bi bi-circle"></i><span>Discipline</span>
+                        <i class="bi bi-circle"></i><span>Kỷ luật</span>
                     </a>
                 </li>
             </ul>
@@ -269,14 +269,14 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#proposal-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-mailbox"></i><span>Proposals</span><i
+                <i class="bi bi-mailbox"></i><span>Đề xuất</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
                 <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{route('index-proposal')}}">
-                            <i class="bi bi-circle"></i><span>Proposal report</span>
+                            <i class="bi bi-circle"></i><span>Báo cáo đề xuất</span>
                         </a>
                     </li>
                 </ul>
@@ -284,7 +284,7 @@ $token = 'position';
                 <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{route('index-proposal')}}">
-                            <i class="bi bi-circle"></i><span>Proposal list</span>
+                            <i class="bi bi-circle"></i><span>Danh sách đề xuất</span>
                         </a>
                     </li>
                 </ul>
@@ -295,14 +295,14 @@ $token = 'position';
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#leave-application-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
-                <i class="bi bi-envelope-exclamation"></i><span>Leave Application</span><i
+                <i class="bi bi-envelope-exclamation"></i><span>Đơn xin nghỉ phép</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             @if(($data->permission === 2 && $data->job_position_id === 8))
                 <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{route('report-leave-application')}}">
-                            <i class="bi bi-circle"></i><span>Leave Application Report</span>
+                            <i class="bi bi-circle"></i><span>Báo cáo đơn xin nghỉ phép</span>
                         </a>
                     </li>
                 </ul>
@@ -310,7 +310,7 @@ $token = 'position';
                 <ul id="leave-application-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{route('index-leave-application')}}">
-                            <i class="bi bi-circle"></i><span>Leave Application list</span>
+                            <i class="bi bi-circle"></i><span>Danh sách đơn xin nghỉ phép</span>
                         </a>
                     </li>
                 </ul>

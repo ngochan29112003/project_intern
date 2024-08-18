@@ -1,11 +1,11 @@
 @extends('auth.main')
 @section('contents')
     <div class="pagetitle">
-        <h1>Account</h1>
+        <h1>Tài khoản</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">System</a></li>
-                <li class="breadcrumb-item active">Account</li>
+                <li class="breadcrumb-item"><a href="/">Hệ thống</a></li>
+                <li class="breadcrumb-item active">Tài khoản</li>
             </ol>
         </nav>
     </div>
@@ -16,13 +16,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addAccountModal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new account
+                    Thêm tài khoản mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -33,13 +33,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add account</h4>
+                    <h4 class="modal-title">Thêm tài khoản</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addAccountForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="employee_name" class="form-label">Employee name</label>
+                            <label for="employee_name" class="form-label">Tên nhân viên</label>
                             <select class="form-select" aria-label="Default" name="id_employee" id="id_employee">
                                 @foreach ($employee_list as $item)
                                     <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
@@ -47,27 +47,27 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Tài khoản</label>
                             <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Mật khẩu</label>
                             <input type="text" class="form-control" id="password" name="password">
                         </div>
                         <div class="mb-3">
-                            <label for="repassword" class="form-label">Re-password</label>
+                            <label for="repassword" class="form-label">Nhập lại mật khẩu</label>
                             <input type="text" class="form-control" id="repassword" name="repassword">
                         </div>
 
                         <div class="mb-3">
-                            <label for="permission" class="form-label">Permission</label>
+                            <label for="permission" class="form-label">Quyền</label>
                             <select class="form-select" aria-label="Default" name="permission" id="permission">
                                 @foreach ($permis_list as $item)
                                     <option value="{{ $item->permission_id }}">{{ $item->permission_name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
             </div>
@@ -115,14 +115,14 @@
 {{--    </div>--}}
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Account</h3>
+        <h3 class="text-left mb-4">Danh sách tài khoản</h3>
         <div class="table-responsive">
             <table id="accountTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Username</th>
-                    <th>Permission</th>
+                    <th>STT</th>
+                    <th>Tài khoản</th>
+                    <th>Quyền</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>

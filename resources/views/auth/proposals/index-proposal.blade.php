@@ -9,14 +9,14 @@
                 ->first();
     @endphp
     <div class="pagetitle">
-        <h1>Proposal</h1>
+        <h1>Đề xuất</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
                 @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
-                    <li class="breadcrumb-item active">Proposal report</li>
+                    <li class="breadcrumb-item active">Báo cáo đề xuất</li>
                 @else
-                    <li class="breadcrumb-item active">Proposal list</li>
+                    <li class="breadcrumb-item active">Danh sách đề xuất</li>
                 @endif
             </ol>
         </nav>
@@ -28,14 +28,14 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addProposal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new proposal
+                    Thêm đề xuất mới
                 </div>
             </div>
             @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
                 <div class="btn btn-success mx-2 btn-export">
                     <a href="" class="d-flex align-items-center text-white">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                        Export file excel
+                        Xuất file excel
                     </a>
                 </div>
             @endif
@@ -47,7 +47,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add proposal</h4>
+                    <h4 class="modal-title">Thêm đề xuất</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addProposalForm" enctype="multipart/form-data">
@@ -55,7 +55,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_employee_id" class="form-label">Employee name</label>
+                                    <label for="add_employee_id" class="form-label">Nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="employee_id">
                                         @if(($data->permission === 2 && $data->job_position_id === 6))
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="add_type_proposal_id" class="form-label">Type proposal</label>
+                                    <label for="add_type_proposal_id" class="form-label">Loại đề xuất</label>
                                     <select class="form-select" aria-label="Default" name="type_proposal_id"
                                             id="type_proposal_id">
                                         @foreach ($type_proposal_list as $item)
@@ -92,18 +92,18 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="proposal_description" class="form-label">Description</label>
+                            <label for="proposal_description" class="form-label">Ghi chú</label>
                             <textarea class="form-control" placeholder="Proposal a description here"
                                       id="add_proposal_description"
                                       name="proposal_description" style="height: 200px"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="file" class="form-label">Upload your files</label>
+                            <label for="file" class="form-label">Tải lên tệp của bạn</label>
                             <input class="form-control" type="file" id="file" name="files[]" multiple>
                             <ul id="fileList" class="list-unstyled mt-2"></ul>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
             </div>
@@ -115,7 +115,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Proposal</h4>
+                    <h4 class="modal-title">Chỉnh sửa đề xuất</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editProposalForm" enctype="multipart/form-data">
@@ -125,7 +125,7 @@
                             <input type="hidden" id="edit_proposal_id" name="proposal_id">
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="edit_employee_id" class="form-label">Employee name</label>
+                                    <label for="edit_employee_id" class="form-label">Nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="edit_employee_id">
                                         @if(($data->permission === 2 && $data->job_position_id === 6))
@@ -150,7 +150,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="mb-3">
-                                    <label for="edit_type_proposal_id" class="form-label">Type proposal</label>
+                                    <label for="edit_type_proposal_id" class="form-label">Loại đề xuất</label>
                                     <select class="form-select" aria-label="Default" name="type_proposal_id"
                                             id="edit_type_proposal_id">
                                         @foreach ($type_proposal_list as $item)
@@ -162,19 +162,19 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_proposal_description" class="form-label">Description</label>
+                            <label for="edit_proposal_description" class="form-label">Ghi chú</label>
                             <textarea class="form-control" placeholder="Proposal a description here"
                                       id="edit_proposal_description"
                                       name="proposal_description" style="height: 200px"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="proposal_files">Proposal File Uploaded</label>
+                            <label for="proposal_files">Tải lên tệp của bạn</label>
                             <div class="mb-3 table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Proposal File Name</th>
+                                        <th>Tải lên tệp của bạn</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -183,13 +183,13 @@
                                 </table>
                             </div>
                             <div class="mb-3">
-                                <label for="edit_files" class="form-label">Add more files</label>
+                                <label for="edit_files" class="form-label">Thêm tệp tin</label>
                                 <input class="form-control" type="file" id="edit_files" name="files[]" multiple>
                                 <ul id="editFileList" class="list-unstyled mt-2"></ul>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
 
@@ -199,19 +199,19 @@
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
-            <h3 class="text-left mb-4">Proposal report</h3>
+            <h3 class="text-left mb-4">Báo cáo đề xuất</h3>
         @else
-            <h3 class="text-left mb-4">Your proposal</h3>
+            <h3 class="text-left mb-4">Đề xuất của bạn</h3>
         @endif
         <div class="table-responsive">
             <table id="ProposalTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Employee name</th>
-                    <th>Type proposal</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th>STT</th>
+                    <th>Nhân viên</th>
+                    <th>Loại đề xuất</th>
+                    <th>Ghi chú</th>
+                    <th>Trạng thái</th>
                     <th>
                         @if(($data->permission === 2 && $data->job_position_id === 6))
                             Direct Manager

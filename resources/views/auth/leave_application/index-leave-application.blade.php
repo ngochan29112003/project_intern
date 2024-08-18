@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Leave Application</h1>
+        <h1>Đơn xin nghỉ phép</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Leave Application</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Đơn xin nghỉ phép</li>
             </ol>
         </nav>
     </div>
@@ -17,13 +17,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addLeaveApplication">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new leave application
+                    Thêm đơn xin nghỉ phép mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -34,13 +34,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Leave Application</h4>
+                    <h4 class="modal-title">Thêm đơn xin nghỉ phép</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addLeaveApplicationForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee name</label>
+                            <label for="edit_employee_id" class="form-label">Nhân viên</label>
                             <select class="form-select" aria-label="Default" name="add_employee_id"
                                     id="add_employee_id">
                                 <option
@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_leave_type" class="form-label">Leave Type</label>
+                            <label for="edit_leave_type" class="form-label">Loại nghỉ phép</label>
                             <select class="form-select" aria-label="Default" name="add_leave_type" id="add_leave_type">
                                 @foreach ($leave_types as $item)
                                     <option value="{{ $item->type_leave_id}}">{{ $item->type_leave_name}}</option>
@@ -57,24 +57,24 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="start_date" class="form-label">Start date</label>
+                            <label for="start_date" class="form-label">Ngày bắt đầu</label>
                             <input type="date" class="form-control" id="start_date" name="add_start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="end_date" class="form-label">End date</label>
+                            <label for="end_date" class="form-label">Ngày kết thúc</label>
                             <input type="date" class="form-control" id="end_date" name="add_end_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="duration" class="form-label">Duration</label>
+                            <label for="duration" class="form-label">Khoảng thời gian</label>
                             <input type="text" class="form-control" id="duration" name="duration" style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Status</label>
+                            <label for="edit_status" class="form-label">Trạng thái</label>
                             <input type="text" class="form-control" id="add_status" name="add_status"
                                    style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
             </div>
@@ -86,20 +86,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Leave Application</h4>
+                    <h4 class="modal-title">Chỉnh sửa đơn xin nghỉ phép</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editLeaveApplicationForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee id</label>
+                            <label for="employee_id" class="form-label">Nhân viên</label>
                             <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
                                 <option
                                     value="{{ $current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="type_leave_id" class="form-label">Type Leave Application</label>
+                            <label for="type_leave_id" class="form-label">Loại đơn xin nghỉ phép</label>
                             <select class="form-select" aria-label="Default" name="type_leave_id" id="type_leave_id">
                                 @foreach ($leave_types as $item)
                                     <option value="{{ $item->type_leave_id}}">{{ $item->type_leave_name}}</option>
@@ -107,24 +107,24 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_start_date" class="form-label">Start date</label>
+                            <label for="edit_start_date" class="form-label">Ngày bắt đầu</label>
                             <input type="date" class="form-control" id="edit_start_date" name="start_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_end_date" class="form-label">End date</label>
+                            <label for="edit_end_date" class="form-label">Ngày kết thúc</label>
                             <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_duration" class="form-label">Duration</label>
+                            <label for="edit_duration" class="form-label">Khoảng thời gian</label>
                             <input type="text" class="form-control" id="edit_duration" name="duration"
                                    style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_status" class="form-label">Status</label>
+                            <label for="edit_status" class="form-label">Trạng thái</label>
                             <input type="text" class="form-control" id="edit_status" name="status"
                                    style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu trạng thái</button>
                     </form>
                 </div>
 
@@ -133,17 +133,17 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Your leave application</h3>
+        <h3 class="text-left mb-4">Đơn xin nghỉ phép của bạn</h3>
         <div class="table-responsive">
             <table id="LeaveApplicationTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Employee name</th>
-                    <th>Leave type</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Status</th>
+                    <th>STT</th>
+                    <th>Nhân viên</th>
+                    <th>Loại nghỉ phép</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Trạng thái</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -159,11 +159,11 @@
                         <td>
                             @if($item->leave_status === 0)
                                 <span class="badge rounded-pill bg-danger">
-                                    Not approved
+                                    Chưa phê duyệt
                                 </span>
                             @else
                                 <span class="badge rounded-pill bg-success">
-                                    Approved
+                                    Đã phê duyệt
                                 </span>
                             @endif
                         </td>

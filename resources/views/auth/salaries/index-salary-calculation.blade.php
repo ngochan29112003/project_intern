@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Salary Calculation</h1>
+        <h1>Bảng tính lương</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Salary Calculation</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Bảng tính lương</li>
             </ol>
         </nav>
     </div>
@@ -16,7 +16,7 @@
             <div class="btn btn-success mx-2 btn-export">
                 <a href="{{route('export-salary')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -103,7 +103,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Salary calculation</h3>
+        <h3 class="text-left mb-4">Bảng tính lương</h3>
         <div class="table-responsive">
             <table id="salarycalculationTable" class="table table-hover table-bordered">
                 <thead class="table-light">

@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Department</h1>
+        <h1>Phòng ban</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Department</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Phòng ban</li>
             </ol>
         </nav>
     </div>
@@ -17,7 +17,7 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new department
+                    Thêm phòng ban mới
                 </div>
             </div>
         </div>
@@ -28,22 +28,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add department</h4>
+                    <h4 class="modal-title">Thêm phòng ban</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addDepartmentForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_department_name" class="form-label">Department Code</label>
+                            <label for="edit_department_name" class="form-label">Mã phòng ban</label>
                             <input type="text" class="form-control" id="add_department_code" name="add_department_code"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_department_name" class="form-label">Department Name</label>
+                            <label for="edit_department_name" class="form-label">Tên phòng ban</label>
                             <input type="text" class="form-control" id="add_department_name" name="add_department_name"
                                    required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
 
@@ -56,22 +56,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit department</h4>
+                    <h4 class="modal-title">Chỉnh sửa phòng ban</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editDepartmentForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="department_code" class="form-label">Department Code</label>
+                            <label for="department_code" class="form-label">Mã phòng ban</label>
                             <input type="text" class="form-control" id="department_code" name="department_code"
                                    required>
                         </div>
                         <div class="mb-3">
-                            <label for="department_name" class="form-label">Department Name</label>
+                            <label for="department_name" class="form-label">Tên phòng ban</label>
                             <input type="text" class="form-control" id="department_name" name="department_name"
                                    required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
 
@@ -80,14 +80,14 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Department</h3>
+        <h3 class="text-left mb-4">Danh sách phòng ban</h3>
         <div class="table-responsive">
             <table id="departmentTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Department Code</th>
-                    <th>Department Name</th>
+                    <th>STT</th>
+                    <th>Mã phòng ban</th>
+                    <th>Tên phòng ban</th>
                     <th>Action</th>
                 </tr>
                 </thead>

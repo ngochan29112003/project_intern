@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Reward</h1>
+        <h1>Khen thưởng</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Reward</li>
+                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item active">Khen thưởng</li>
             </ol>
         </nav>
     </div>
@@ -17,13 +17,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addReward">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new reward
+                    Thêm khen thưởng mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="{{route('export-reward')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -34,13 +34,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add reward</h4>
+                    <h4 class="modal-title">Thêm khen thưởng</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addRewardForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="edit_reward_type" class="form-label">Reward type</label>
+                            <label for="edit_reward_type" class="form-label">Khen thưởng</label>
                             <select class="form-select" aria-label="Default" name="add_reward_type" id="add_reward_type">
                                 @foreach ($reward_type_list as $item)
                                     <option value="{{$item->type_reward_id}}">{{$item->type_reward_name}}</option>
@@ -48,7 +48,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_employee_id" class="form-label">Employee name</label>
+                            <label for="edit_employee_id" class="form-label">Nhân viên</label>
                             <select class="form-select" aria-label="Default" name="add_employee_id" id="add_employee_id">
                                 @foreach ($employee_list as $item)
                                     <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
@@ -56,7 +56,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </form>
                 </div>
 
@@ -69,13 +69,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit reward</h4>
+                    <h4 class="modal-title">Chỉnh sửa khen thưởng</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editRewardForm" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="type_reward_id" class="form-label">Reward type</label>
+                            <label for="type_reward_id" class="form-label">Khen thưởng</label>
 {{--                            <input type="text" class="form-control" id="type_reward_id" name="type_reward_id"--}}
 {{--                                   required>--}}
                             <select class="form-select" aria-label="Default" name="type_reward_id" id="type_reward_id">
@@ -85,7 +85,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee name</label>
+                            <label for="employee_id" class="form-label">Nhân viên</label>
                             <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
                                 @foreach ($employee_list as $item)
                                     <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
@@ -93,7 +93,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save change</button>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
                 </div>
             </div>
@@ -101,14 +101,14 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        <h3 class="text-left mb-4">Reward</h3>
+        <h3 class="text-left mb-4">Danh sách khen thưởng</h3>
         <div class="table-responsive">
             <table id="rewardTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Reward type</th>
-                    <th>Employee</th>
+                    <th>STT</th>
+                    <th>Khen thưởng</th>
+                    <th>Nhân viên</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
