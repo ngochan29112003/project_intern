@@ -1,3 +1,10 @@
+## NOTE. progress
+````
+    - Người dùng tài chính mới vào được bảng lương 
+    - Nếu loại nhân viên là tâp su thì mặc định sẽ có hsl là 2.34
+````
+
+
 #### 1. Cấu hình Laravel
 
 Laravel là một PHP Framework mã nguồn mở miễn phí, được phát triển bởi Taylor Otwell với phiên bản đầu tiên được ra mắt vào tháng 6 năm 2011. Laravel ra đời nhằm mục đích hỗ trợ phát triển các ứng dụng web, dựa trên mô hình MVC (Model – View – Controller).
@@ -61,3 +68,5 @@ composer require "ext-gd:*" --ignore-platform-reqs
 composer require "ext-fileinfo:*" --ignore-platform-reqs
 composer require phpoffice/phpspreadsheet --ignore-platform-reqs
 ```
+
+
