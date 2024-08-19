@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 19, 2024 at 02:15 AM
+-- Generation Time: Aug 19, 2024 at 07:46 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,7 +46,8 @@ INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee
 (9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12),
 (10, 'em', '$2y$10$TrsjKovFpwGV/4j680Ic.uaUQq98oFg6VVWpL0Ap6fiyb/vy5fZY2', 3, 13),
 (11, 'dir', '$2y$10$a8AwaJo0hwDonyzZi/b7ZuiR6peI.C6rOqhNH/2gT2F9IJ4Rb1ahO', 2, 15),
-(12, 'dm', '$2y$10$ZqrBsxjKKjYguSiSIWyLmufx.KR5kkczo6urIWGixJZrAcya6WYjS', 2, 14);
+(12, 'dm', '$2y$10$ZqrBsxjKKjYguSiSIWyLmufx.KR5kkczo6urIWGixJZrAcya6WYjS', 2, 14),
+(13, 'u_taichinh', '$2y$10$obJIQc0greChxik3.czGKu2Ep0ePYT1Zgo3ZynkBtn2TWukjlNrxy', 2, 17);
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(0, 'None Dep\'t', 'Không Có Phòng Ban Nào'),
+(0, 'None Dep\'t', 'Chưa thuộc phòng ban nào'),
 (6, 'Acc Dep’t', 'Phòng Kế Toán'),
 (7, 'Aud Dep\'t', 'Phòng Kiểm Toán'),
 (8, 'Sale Dept\'t', 'Phòng Kinh Doanh'),
@@ -156,7 +157,8 @@ INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gende
 (13, 'test', 'employee', 'avt.png', 0, '2003-11-11', 'Hà Tĩnh', 'abc', 'employee@gmail.com', 'abc', 123, 2, 0, 3, 10, 8),
 (14, 'Manager', 'Direct', 'avt.png', 0, '2000-11-11', 'Cao Bằng', 'abc', 'dm@gmail.com', 'acb', 123, 2, 1, 3, 6, 8),
 (15, '.', 'Director', 'avt.png', 0, '2000-11-11', 'Cà Mau', 'abc', 'dir@gmail.com', 'abc', 123, 2, 0, 1, 7, 0),
-(16, 'anh', 'tuan', 'avt.png', 0, '2000-02-22', 'Bắc Ninh', 'abc', 'ta@gmail.com', 'abc', 123, 2, 1, 1, 11, 6);
+(16, 'anh', 'tuan', 'avt.png', 0, '2000-02-22', 'Bắc Ninh', 'abc', 'ta@gmail.com', 'abc', 123, 2, 1, 1, 11, 6),
+(17, 'tài chính', 'Người dùng', 'avt.png', 1, '2024-08-08', 'Hà Nội', 'abc', 'tc@gmail.com', 'abc', 123, 2, 1, 1, 11, 12);
 
 -- --------------------------------------------------------
 
@@ -336,23 +338,25 @@ CREATE TABLE `salaries` (
   `social_insurance` float DEFAULT NULL,
   `health_insurance` float DEFAULT NULL,
   `accident_insurance` float DEFAULT NULL,
-  `net_salary` float DEFAULT NULL
+  `net_salary` float DEFAULT NULL,
+  `description_salary` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `salaries`
 --
 
-INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`) VALUES
-(1, 16, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
-(2, 15, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
-(3, 14, 3, NULL, 7020000, 561600, 105300, 70200, 6282900),
-(4, 13, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760),
-(5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
-(6, 11, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
-(7, 10, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
-(8, 8, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660),
-(9, 6, 3.66, NULL, 8564400, 685152, 128466, 85644, 7665140);
+INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`, `description_salary`) VALUES
+(1, 16, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
+(2, 15, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
+(3, 14, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
+(4, 13, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760, NULL),
+(5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
+(6, 11, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
+(7, 10, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
+(8, 8, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
+(9, 6, 3.66, NULL, 8564400, 685152, 128466, 85644, 7665140, NULL),
+(10, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -445,7 +449,7 @@ CREATE TABLE `type_employees` (
 INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
 (1, 'Nhân viên chính thức'),
 (2, 'Nhân viên bán thời gian'),
-(3, 'Nhân viên tạm thời'),
+(3, 'Nhân viên tập sự'),
 (4, 'Nhân viên thời vụ'),
 (5, 'Nhân viên cho thuê'),
 (6, 'Nhân viên tự do');
@@ -647,7 +651,7 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -671,7 +675,7 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `job_positions`
@@ -719,7 +723,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
