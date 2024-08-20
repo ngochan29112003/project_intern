@@ -2,6 +2,8 @@
 ````
     - Người dùng tài chính mới vào được bảng lương 
     - Nếu loại nhân viên là tâp su thì mặc định sẽ có hsl là 2.34
+    - https://api.nosomovo.xyz/ethnic/getalllist?_gl=1*1guycdt*_ga*MTI1NDMyMjUzNS4xNzI0MTcwMTI0*_ga_XW6CMNCYH8*MTcyNDE3MDEyMy4xLjEuMTcyNDE3MDE0OC4wLjAuMA..
+    - 
 ````
 
 
