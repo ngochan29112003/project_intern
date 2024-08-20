@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 19, 2024 at 07:46 PM
+-- Generation Time: Aug 20, 2024 at 03:05 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,16 +66,11 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`department_id`, `department_code`, `department_name`) VALUES
-(0, 'None Dep\'t', 'Chưa thuộc phòng ban nào'),
-(6, 'Acc Dep’t', 'Phòng Kế Toán'),
-(7, 'Aud Dep\'t', 'Phòng Kiểm Toán'),
-(8, 'Sale Dept\'t', 'Phòng Kinh Doanh'),
-(9, 'Admin Dept\'t', 'Phòng Hành Chính'),
-(10, 'HR Dep\'t', 'Phòng Nhân Sự'),
-(11, 'CS Dep\'t', 'Phòng Dịch Vụ Khách Hàng'),
-(12, 'Finan Dep\'t', 'Phòng Tài Chính'),
-(13, 'Re&Dev Dep\'t', 'Phòng Nghiên Cứu & Phát Triển'),
-(14, 'Qual Dep\'t', 'Phòng Đảm Bảo Chất Lượng');
+(0, 'None', 'Chưa thuộc phòng ban nào'),
+(9, 'HC', 'Phòng Hành Chính'),
+(12, 'TC', 'Phòng Tài Chính'),
+(13, 'NCTVPT', 'Phòng Nghiên Cứu, Tư Vấn và Chuyển Giao Công Nghệ'),
+(15, 'VHHT', 'Phòng Vận Hành Hệ Thống');
 
 -- --------------------------------------------------------
 
@@ -180,14 +175,16 @@ CREATE TABLE `job_positions` (
 --
 
 INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `position_level`, `salary_code`, `description`) VALUES
-(3, 'NIS', 'Network Infrastructure Specialist', '2', NULL, 'none'),
-(6, 'DM', 'Department Manager', '2', NULL, 'none'),
-(7, 'Dir', 'Director', '2', NULL, 'none'),
-(8, 'HR', 'Human Resources', '2', NULL, 'none'),
+(6, 'TP', 'Trưởng phòng', '3', NULL, 'none'),
+(7, 'GD', 'Giám đốc', '3', NULL, 'none'),
+(8, 'HR', 'Kế toán', '2', NULL, 'none'),
 (9, 'NONE', 'NONE', '1', NULL, 'NONE'),
-(10, 'Staff', 'Staff', '2', NULL, 'none'),
+(10, 'NV', 'Nhân viên', '2', NULL, 'none'),
 (11, 'CNTT', 'Công nghệ thông tin', '3', 'V11.06.14', 'none'),
-(12, 'ATTT', 'An toàn thông tin', '3', 'V11.05.11', 'none');
+(12, 'ATTT', 'An toàn thông tin', '3', 'V11.05.11', 'none'),
+(13, 'PGD', 'Phó giám đốc', '3', NULL, 'none'),
+(14, 'TP', 'Phó trưởng phòng', '3', NULL, 'none'),
+(15, 'TP', 'Thủ quỹ', '3', NULL, 'none');
 
 -- --------------------------------------------------------
 
@@ -448,11 +445,7 @@ CREATE TABLE `type_employees` (
 
 INSERT INTO `type_employees` (`type_employee_id`, `type_employee_name`) VALUES
 (1, 'Nhân viên chính thức'),
-(2, 'Nhân viên bán thời gian'),
-(3, 'Nhân viên tập sự'),
-(4, 'Nhân viên thời vụ'),
-(5, 'Nhân viên cho thuê'),
-(6, 'Nhân viên tự do');
+(2, 'Nhân viên tập sự');
 
 -- --------------------------------------------------------
 
@@ -473,7 +466,6 @@ INSERT INTO `type_leaves` (`type_leave_id`, `type_leave_name`) VALUES
 (1, 'Nghỉ bệnh'),
 (2, 'Nghỉ phép thông thường'),
 (3, 'Nghỉ thai sản'),
-(4, 'Nghỉ thai sản nam'),
 (5, 'Nghỉ không lương'),
 (6, 'Khác');
 
@@ -657,7 +649,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `disciplines`
@@ -681,7 +673,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT for table `job_positions`
 --
 ALTER TABLE `job_positions`
-  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `job_position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `leave_application`
