@@ -265,14 +265,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <input type="file" id="edit_img" name="img" class="d-none">
-                                <label for="edit_img" class="btn btn-primary">
-                                    <i class="bi bi-upload"></i> Hình ảnh mới
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <input type="file" id="edit_img" name="img" class="d-none">
+                                    <label for="edit_img" class="btn btn-primary">
+                                        <i class="bi bi-upload"></i> Hình ảnh mới
+                                    </label>
+                                </div>
                             </div>
-                        </div>
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
@@ -418,11 +418,11 @@
                             @endif
                         </td>
                         <td>
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                data-id="{{ $item->employee_id }}">
+                            <a
+                                href="{{route('details-employees', $item->employee_id)}}"
+                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn">
                                 <i class="bi bi-pencil-square"></i>
-                            </button>
+                            </a>
                             |
                             <button
                                 class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"

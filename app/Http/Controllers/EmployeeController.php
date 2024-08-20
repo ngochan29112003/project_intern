@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeModel;
+use App\Models\JobDetailsModel;
 use App\Models\SalaryModel;
 use App\Models\TaskModel;
 use Illuminate\Http\Request;
@@ -27,6 +28,11 @@ class EmployeeController extends Controller
                 'edu_level_list',
                 'type_employee_list',
                 'department_list'));
+    }
+
+    public function detailEmployee()
+    {
+        return view('auth.employees.details-employee');
     }
 
     public function add(Request $request)
@@ -60,6 +66,10 @@ class EmployeeController extends Controller
 
         // Thêm bản ghi trong bảng lương cho nhân viên mới
         SalaryModel::create(['employee_id' => $employee->employee_id]);
+        JobDetailsModel::create([
+            'employee_id' => $employee->employee_id,
+            'job_position_id' => $employee->job_position_id,
+        ]);
         return response()->json([
             'success' => true,
             'status'  => 200,
