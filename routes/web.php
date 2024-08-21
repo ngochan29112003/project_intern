@@ -56,6 +56,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
         Route::get('/export', [EmployeeController::class, 'exportExcel'])->name('export-employees');
         Route::get('/details-employee/{id}', [EmployeeController::class, 'detailEmployee'])->name('details-employees');
+        Route::get('/add-employee-index', [EmployeeController::class, 'getViewAddEmployee'])->name('add-employees-index');
 
     });
 

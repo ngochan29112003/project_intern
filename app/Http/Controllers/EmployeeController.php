@@ -214,4 +214,9 @@ class EmployeeController extends Controller
         $writer = IOFactory::createWriter($excel, 'Xlsx');
         $writer->save('php://output');
     }
+
+    public function getViewAddEmployee()
+    {
+        return view('auth.employees.add-employee-index');
+    }
 }

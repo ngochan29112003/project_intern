@@ -1,13 +1,30 @@
 @extends('auth.main')
 
 @section('contents')
+    <style>
+        .img-container img {
+            width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng vùng chứa */
+            height: auto; /* Đảm bảo tỉ lệ ảnh không bị thay đổi */
+            max-height: 500px; /* Giới hạn chiều cao tối đa nếu cần */
+            display: block;
+            margin: 0 auto;
+        }
+        .img-container {
+            max-width: 100%;
+            height: auto; /* Cho phép chiều cao tự điều chỉnh theo chiều rộng */
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+    </style>
     <div class="pagetitle">
         <h1>Nhân sự</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
                 <li class="breadcrumb-item active">Nhân sự</li>
-                <li class="breadcrumb-item active">Thông tin nhân sự</li>
+                <li class="breadcrumb-item active">Thêm mới nhân sự</li>
             </ol>
         </nav>
     </div>
@@ -18,26 +35,12 @@
                 <div class="card-header bg-light fw-semibold text-primary fs-5 text-primary">Thông tin cá nhân</div>
                 <div class="card-body p-3">
                     <div class="row gx-3">
-                        <div class="col-lg-2">
-                            <div class="row mb-3">
-                                <div class="col-3">
-                                    <img class="border rounded-pill object-fit-cover" width="150px" height="150px"
-                                         id="current_img" src="">
-                                </div>
-                                <div class="col-12">
-                                    <input type="file" id="edit_img" name="img" class="d-none">
-                                    <label for="edit_img" class="btn btn-primary" style="width: 150px;">
-                                        <i class="bi bi-upload"></i> Hình ảnh mới
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-6 d-inline-grid">
                             <div class="row mb-3">
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-2">
-                                            <label for="add_employee_name" class="form-label fw-bold">Họ</label>
+                                            <label for="add_employee_name" class="form-label fw-bold">Họ<span class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-10">
                                             <input type="text" class="form-control" id="edit_first_name"
@@ -49,7 +52,7 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-2">
-                                            <label for="add_employee_name" class="form-label fw-bold">Tên</label>
+                                            <label for="add_employee_name" class="form-label fw-bold">Tên<span class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-10">
                                             <input type="text" class="form-control" id="edit_last_name"
@@ -63,7 +66,7 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-5">
-                                            <label for="birth_date" class="form-label fw-bold">Ngày sinh</label>
+                                            <label for="birth_date" class="form-label fw-bold">Ngày sinh<span class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
                                             <input type="date" class="form-control" id="birth_date" name="birth_date"
@@ -74,7 +77,7 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-5">
-                                            <label for="birth_place" class="form-label fw-bold">Nơi sinh</label>
+                                            <label for="birth_place" class="form-label fw-bold">Nơi sinh<span class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
                                             <select class="form-select" aria-label="Default" name="birth_place"
@@ -183,7 +186,18 @@
                                     </select>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="row mb-3">
+                                <div class="col-12 text-center">
+                                    <label for="img" class="form-label fw-bold">Hình ảnh</label>
+                                    <input type="file" class="form-control d-none" id="img" name="img">
+                                    <div class="previewIMG mb-2 d-none">
+                                        <img id="previewImage" class="rounded-pill object-fit-cover border" src="" alt="Preview" width="100" height="100">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="imgButton">Chọn ảnh</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +259,8 @@
                         <div class="col-lg-6 d-inline-grid">
                             <div class="mb-3">
                                 <label for="job_position_code" class="form-label fw-bold">Mã chức vụ</label>
-                                <input type="text" class="form-control" id="job_position_code" name="job_position_code" required>
+                                <input type="text" class="form-control" id="job_position_code" name="job_position_code"
+                                       required>
                             </div>
                             <div class="mb-3">
                                 <label for="job_position_id" class="form-label fw-bold">Vị trí công việc</label>
@@ -261,6 +276,7 @@
                                 <label for="position_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
                                 <select class="form-select" aria-label="Default" name="position_level"
                                         id="position_level">
+                                    <option value=""></option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -283,7 +299,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="type_employee_id" class="form-label fw-bold">Loại nhân viên</label>
+                                <label for="type_employee_id" class="form-label fw-bold">Loại nhân viên<span class="text-danger fs-6 fw-lighter">*</span></label>
                                 <select class="form-select" aria-label="Default" name="type_employee_id"
                                         id="type_employee_id">
                                     {{--                            @foreach ($type_employee_list as $item)--}}
@@ -293,7 +309,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="status" class="form-label fw-bold">Trạng thái</label>
+                                <label for="status" class="form-label fw-bold">Trạng thái<span class="text-danger fs-6 fw-lighter">*</span></label>
                                 <select class="form-select" aria-label="Default" name="status" id="edit_status">
                                     <option value="0">Đã nghỉ việc</option>
                                     <option value="1">Đang làm việc</option>
@@ -318,12 +334,116 @@
             </div>
         </form>
     </div>
-
-
+    <div class="modal fade" id="cropImageModal" tabindex="-1" aria-labelledby="cropImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cropImageModalLabel">Chỉnh sửa hình ảnh</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img id="imageToCrop" src="" alt="Image to Crop" style="max-width: 100%;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="cropButton">Cắt và chọn</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
 @section('scripts')
+    <script>
+        // document.getElementById('imgButton').addEventListener('click', function() {
+        //     document.getElementById('img').click();
+        // });
+        //
+        // document.getElementById('img').addEventListener('change', function() {
+        //     if (this.files && this.files.length > 0) {
+        //         var file = this.files[0];
+        //         var fileType = file.type;
+        //         var validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        //
+        //         if (validImageTypes.includes(fileType)) {
+        //             var reader = new FileReader();
+        //             reader.onload = function(e) {
+        //                 var previewImage = document.getElementById('previewImage');
+        //                 previewImage.src = e.target.result;
+        //                 document.querySelector('.previewIMG').classList.remove('d-none');
+        //             };
+        //             reader.readAsDataURL(file);
+        //             toastr.success('Ảnh đã được chọn thành công!');
+        //         } else {
+        //             toastr.error('File không phải là hình ảnh. Vui lòng chọn file định dạng .jpg, .png, .gif, hoặc .webp.');
+        //             this.value = ''; // Reset input
+        //             document.querySelector('.previewIMG').classList.add('d-none'); // Hide the preview if not an image
+        //         }
+        //     }
+        // });
+        document.getElementById('imgButton').addEventListener('click', function() {
+            document.getElementById('img').click();
+        });
+
+        var cropper;
+        document.getElementById('img').addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                var file = this.files[0];
+                var fileType = file.type;
+                var validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+                if (validImageTypes.includes(fileType)) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var imageToCrop = document.getElementById('imageToCrop');
+                        imageToCrop.src = e.target.result;
+
+                        // Hiển thị modal và khởi tạo Cropper sau khi modal hiển thị
+                        var cropImageModal = new bootstrap.Modal(document.getElementById('cropImageModal'), {
+                            keyboard: false
+                        });
+
+                        $('#cropImageModal').on('shown.bs.modal', function () {
+                            cropper = new Cropper(imageToCrop, {
+                                aspectRatio: 1,
+                                viewMode: 2,
+                                autoCropArea: 1,
+                                responsive: true,
+                                restore: true,
+                            });
+                        });
+
+                        cropImageModal.show();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    toastr.error('File không phải là hình ảnh. Vui lòng chọn file định dạng .jpg, .png, .gif, hoặc .webp.');
+                    this.value = ''; // Reset input
+                }
+            }
+        });
+
+        document.getElementById('cropButton').addEventListener('click', function() {
+            var canvas = cropper.getCroppedCanvas({
+                width: 100,
+                height: 100,
+            });
+
+            // Chuyển đổi canvas thành base64 và hiển thị ảnh
+            var previewImage = document.getElementById('previewImage');
+            previewImage.src = canvas.toDataURL();
+            document.querySelector('.previewIMG').classList.remove('d-none');
+
+            // Đóng modal sau khi crop
+            var cropImageModal = bootstrap.Modal.getInstance(document.getElementById('cropImageModal'));
+            cropImageModal.hide();
+        });
+
+
+    </script>
 
 @endsection
 

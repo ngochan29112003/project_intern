@@ -15,9 +15,10 @@ $token = 'position';
     <meta content="" name="description">
     <meta content="" name="keywords">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+{{--    <link rel="icon" href="/upload/public/106/icon.ico" type="image/x-icon">--}}
+{{--    <link rel="shortcut icon" href="/upload/public/106/icon.ico" type="image/x-icon">--}}
     <!-- ======= Các thư viện khác thì dán vào đây ======= -->
-    <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('assets/img/icon.ico')}}" rel="icon">
     <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -38,6 +39,7 @@ $token = 'position';
     {{--    <link href="{{asset('assets/css/datatables.min.css')}}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 
 
     @yield('head')
@@ -54,8 +56,8 @@ $token = 'position';
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
         <a href="" class="logo d-flex align-items-center">
-            <img src="{{asset('assets/img/logo.png')}}" alt="">
-            <span class="d-none d-lg-block">HRM</span>
+            <img src="{{asset('assets/img/article.png')}}" alt="">
+            <span class="d-none d-lg-block ">HRM</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
@@ -339,6 +341,8 @@ $token = 'position';
 <script src="{{asset('assets/js/toastr.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
 
 </html>
 @yield('scripts')
