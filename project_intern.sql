@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 21, 2024 at 11:33 AM
+-- Generation Time: Aug 21, 2024 at 07:04 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -132,20 +132,28 @@ CREATE TABLE `employees` (
   `email` text,
   `permanent_address` text,
   `cic_number` int(20) DEFAULT NULL,
-  `education_level_id` int(11) NOT NULL,
+  `education_level_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `type_employee_id` int(11) DEFAULT NULL,
   `job_position_id` int(11) DEFAULT NULL,
   `department_id` int(11) DEFAULT NULL,
-  `job_detail_id` int(11) DEFAULT NULL
+  `job_detail_id` int(11) DEFAULT NULL,
+  `ethnic` text,
+  `religion` text,
+  `marital_status` int(11) DEFAULT NULL,
+  `nation` text,
+  `phone_number` text,
+  `place_of_issue` text,
+  `date_of_issue` date DEFAULT NULL,
+  `date_of_exp` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`, `job_detail_id`) VALUES
-(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 9, 0, NULL);
+INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
+(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 9, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
