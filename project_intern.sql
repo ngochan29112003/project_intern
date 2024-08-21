@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 21, 2024 at 07:04 PM
+-- Generation Time: Aug 21, 2024 at 10:50 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -135,7 +135,6 @@ CREATE TABLE `employees` (
   `education_level_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `type_employee_id` int(11) DEFAULT NULL,
-  `job_position_id` int(11) DEFAULT NULL,
   `department_id` int(11) DEFAULT NULL,
   `job_detail_id` int(11) DEFAULT NULL,
   `ethnic` text,
@@ -152,8 +151,9 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `job_position_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
-(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 9, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
+(12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 'Tuấn', 'Trịnh', 'avt.png', 0, '1997-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, 'Kinh', 'Không', 0, 'Vietnam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -165,8 +165,16 @@ CREATE TABLE `job_details` (
   `id_job_detail` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `job_position_id` int(11) DEFAULT NULL,
-  `job_level` int(11) DEFAULT NULL
+  `job_level` int(11) DEFAULT NULL,
+  `salary_code` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `job_details`
+--
+
+INSERT INTO `job_details` (`id_job_detail`, `employee_id`, `job_position_id`, `job_level`, `salary_code`) VALUES
+(3, 16, 10, 3, 'vv');
 
 -- --------------------------------------------------------
 
@@ -198,7 +206,6 @@ CREATE TABLE `job_positions` (
   `job_position_id` int(11) NOT NULL,
   `job_position_code` text NOT NULL,
   `job_position_name` text NOT NULL,
-  `position_level` text,
   `salary_code` text,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -207,17 +214,16 @@ CREATE TABLE `job_positions` (
 -- Dumping data for table `job_positions`
 --
 
-INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `position_level`, `salary_code`, `description`) VALUES
-(6, 'TP', 'Trưởng phòng', '3', NULL, 'none'),
-(7, 'GD', 'Giám đốc', '3', NULL, 'none'),
-(8, 'HR', 'Kế toán', '2', NULL, 'none'),
-(9, 'NONE', 'NONE', '1', NULL, 'NONE'),
-(10, 'NV', 'Nhân viên', '2', NULL, 'none'),
-(11, 'CNTT', 'Công nghệ thông tin', '3', 'V11.06.14', 'none'),
-(12, 'ATTT', 'An toàn thông tin', '3', 'V11.05.11', 'none'),
-(13, 'PGD', 'Phó giám đốc', '3', NULL, 'none'),
-(14, 'TP', 'Phó trưởng phòng', '3', NULL, 'none'),
-(15, 'TP', 'Thủ quỹ', '3', NULL, 'none');
+INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `salary_code`, `description`) VALUES
+(6, 'TP', 'Trưởng phòng', NULL, 'none'),
+(7, 'GD', 'Giám đốc', NULL, 'none'),
+(8, 'HR', 'Kế toán', NULL, 'none'),
+(10, 'NV', 'Nhân viên', NULL, 'none'),
+(11, 'CNTT', 'Công nghệ thông tin', 'V11.06.14', 'none'),
+(12, 'ATTT', 'An toàn thông tin', 'V11.05.11', 'none'),
+(13, 'PGD', 'Phó giám đốc', NULL, 'none'),
+(14, 'TP', 'Phó trưởng phòng', NULL, 'none'),
+(15, 'TP', 'Thủ quỹ', NULL, 'none');
 
 -- --------------------------------------------------------
 
@@ -377,16 +383,8 @@ CREATE TABLE `salaries` (
 --
 
 INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`, `description_salary`) VALUES
-(1, 16, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
-(2, 15, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
-(3, 14, 3, NULL, 7020000, 561600, 105300, 70200, 6282900, NULL),
-(4, 13, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760, NULL),
 (5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(6, 11, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(7, 10, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(8, 8, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(9, 6, 3.66, NULL, 8564400, 685152, 128466, 85644, 7665140, NULL),
-(10, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(14, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -712,13 +710,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `job_details`
 --
 ALTER TABLE `job_details`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `job_level`
@@ -772,7 +770,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
