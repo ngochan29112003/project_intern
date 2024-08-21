@@ -9,6 +9,7 @@
             display: block;
             margin: 0 auto;
         }
+
         .img-container {
             max-width: 100%;
             height: auto; /* Cho phép chiều cao tự điều chỉnh theo chiều rộng */
@@ -22,14 +23,14 @@
         <h1>Nhân sự</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item">Quản lý</li>
                 <li class="breadcrumb-item active">Nhân sự</li>
                 <li class="breadcrumb-item active">Thêm mới nhân sự</li>
             </ol>
         </nav>
     </div>
     <div class="container-fluid p-0 m-0">
-        <form id="editEmployeeForm" method="post" enctype="multipart/form-data">
+        <form id="addEmployeeForm" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card mb-0 shadow-none">
                 <div class="card-header bg-light fw-semibold text-primary fs-5 text-primary">Thông tin cá nhân</div>
@@ -40,7 +41,8 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-2">
-                                            <label for="add_employee_name" class="form-label fw-bold">Họ<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                            <label for="add_employee_name" class="form-label fw-bold">Họ<span
+                                                    class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-10">
                                             <input type="text" class="form-control" id="edit_first_name"
@@ -52,7 +54,8 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-2">
-                                            <label for="add_employee_name" class="form-label fw-bold">Tên<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                            <label for="add_employee_name" class="form-label fw-bold">Tên<span
+                                                    class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-10">
                                             <input type="text" class="form-control" id="edit_last_name"
@@ -66,7 +69,8 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-5">
-                                            <label for="birth_date" class="form-label fw-bold">Ngày sinh<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                            <label for="birth_date" class="form-label fw-bold">Ngày sinh<span
+                                                    class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
                                             <input type="date" class="form-control" id="birth_date" name="birth_date"
@@ -77,7 +81,8 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-5">
-                                            <label for="birth_place" class="form-label fw-bold">Nơi sinh<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                            <label for="birth_place" class="form-label fw-bold">Nơi sinh<span
+                                                    class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
                                             <select class="form-select" aria-label="Default" name="birth_place"
@@ -94,9 +99,9 @@
                                             <label for="ethnic" class="form-label fw-bold">Dân tộc</label>
                                         </div>
                                         <div class="col-7">
-                                            <input type="text" class="form-control" id="ethnic"
-                                                   name="ethnic"
-                                                   required>
+                                            <select class="form-select" aria-label="Default" name="ethnic"
+                                                    id="ethnic">
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +112,7 @@
                                         </div>
                                         <div class="col-7">
                                             <input type="text" class="form-control" id="religion"
-                                                   name="religion"
-                                                   required>
+                                                   name="religion">
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +185,6 @@
                                 <div class="col-9">
                                     <select class="form-select" aria-label="Default" name="nation"
                                             id="nation">
-                                        <option
-                                            value=""></option>
                                     </select>
                                 </div>
                             </div>
@@ -193,7 +195,8 @@
                                     <label for="img" class="form-label fw-bold">Hình ảnh</label>
                                     <input type="file" class="form-control d-none" id="img" name="img">
                                     <div class="previewIMG mb-2 d-none">
-                                        <img id="previewImage" class="rounded-pill object-fit-cover border" src="" alt="Preview" width="100" height="100">
+                                        <img id="previewImage" class="rounded-pill object-fit-cover border" src=""
+                                             alt="Preview" width="100" height="100">
                                     </div>
                                     <button type="button" class="btn btn-primary" id="imgButton">Chọn ảnh</button>
                                 </div>
@@ -230,8 +233,7 @@
                         <div class="col-lg-6 d-inline-grid">
                             <div class="mb-3">
                                 <label for="cic_number" class="form-label fw-bold">CMND/CCCD</label>
-                                <input type="number" class="form-control" id="cic_number" name="cic_number"
-                                       required>
+                                <input type="number" class="form-control" id="cic_number" name="cic_number">
                             </div>
                             <div class="mb-3">
                                 <label for="place_of_issue" class="form-label fw-bold">Nơi cấp</label>
@@ -239,13 +241,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="date_of_issue" class="form-label fw-bold">Ngày cấp</label>
-                                <input type="date" class="form-control" id="date_of_issue" name="date_of_issue"
-                                       required>
+                                <input type="date" class="form-control" id="date_of_issue" name="date_of_issue">
                             </div>
                             <div class="mb-3">
                                 <label for="date_of_exp" class="form-label fw-bold">Ngày hết hạn</label>
-                                <input type="date" class="form-control" id="date_of_exp" name="date_of_exp"
-                                       required>
+                                <input type="date" class="form-control" id="date_of_exp" name="date_of_exp">
                             </div>
                         </div>
                     </div>
@@ -259,23 +259,23 @@
                         <div class="col-lg-6 d-inline-grid">
                             <div class="mb-3">
                                 <label for="job_position_code" class="form-label fw-bold">Mã chức vụ</label>
-                                <input type="text" class="form-control" id="job_position_code" name="job_position_code"
-                                       required>
+                                <input type="text" class="form-control" id="job_position_code" name="job_position_code" style="color: #6c757d; background-color: #e9ecef;" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="job_position_id" class="form-label fw-bold">Vị trí công việc</label>
                                 <select class="form-select" aria-label="Default" name="job_position_id"
                                         id="job_position_id">
-                                    {{--                            @foreach ($position_list as $item)--}}
-                                    {{--                                <option--}}
-                                    {{--                                    value="{{ $item->job_position_id }}">{{$item->job_position_name . ' - ' . $item->position_level}}</option>--}}
-                                    {{--                            @endforeach--}}
+                                        <option value="">None</option>
+                                    @foreach ($position_list as $item)
+                                        <option
+                                            value="{{ $item->job_position_id }}">{{$item->job_position_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="position_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
-                                <select class="form-select" aria-label="Default" name="position_level"
-                                        id="position_level">
+                                <label for="job_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
+                                <select class="form-select" aria-label="Default" name="job_level"
+                                        id="job_level">
                                     <option value=""></option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -292,24 +292,26 @@
                                 <label for="department_id" class="form-label fw-bold">Phòng ban</label>
                                 <select class="form-select" aria-label="Default" name="department_id"
                                         id="department_id">
-                                    {{--                            @foreach ($department_list as $item)--}}
-                                    {{--                                <option--}}
-                                    {{--                                    value="{{ $item->department_id}}">{{ $item->department_name}}</option>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach ($department_list as $item)
+                                        <option
+                                            value="{{ $item->department_id}}">{{ $item->department_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="type_employee_id" class="form-label fw-bold">Loại nhân viên<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                <label for="type_employee_id" class="form-label fw-bold">Loại nhân viên<span
+                                        class="text-danger fs-6 fw-lighter">*</span></label>
                                 <select class="form-select" aria-label="Default" name="type_employee_id"
                                         id="type_employee_id">
-                                    {{--                            @foreach ($type_employee_list as $item)--}}
-                                    {{--                                <option--}}
-                                    {{--                                    value="{{ $item->type_employee_id }}">{{ $item->type_employee_name }}</option>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach ($type_employee_list as $item)
+                                        <option
+                                            value="{{ $item->type_employee_id }}">{{ $item->type_employee_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="status" class="form-label fw-bold">Trạng thái<span class="text-danger fs-6 fw-lighter">*</span></label>
+                                <label for="status" class="form-label fw-bold">Trạng thái<span
+                                        class="text-danger fs-6 fw-lighter">*</span></label>
                                 <select class="form-select" aria-label="Default" name="status" id="edit_status">
                                     <option value="0">Đã nghỉ việc</option>
                                     <option value="1">Đang làm việc</option>
@@ -319,17 +321,17 @@
                                 <label for="education_level_id" class="form-label fw-bold">Trình độ học vấn</label>
                                 <select class="form-select" aria-label="Default" name="education_level_id"
                                         id="edit_education_level_id">
-                                    {{--                            @foreach ($edu_level_list as $item)--}}
-                                    {{--                                <option--}}
-                                    {{--                                    value="{{ $item->education_level_id }}">{{ $item->education_level_name }}</option>--}}
-                                    {{--                            @endforeach--}}
+                                    @foreach ($edu_level_list as $item)
+                                        <option
+                                            value="{{ $item->education_level_id }}">{{ $item->education_level_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
                 </div>
             </div>
         </form>
@@ -358,38 +360,12 @@
 
 @section('scripts')
     <script>
-        // document.getElementById('imgButton').addEventListener('click', function() {
-        //     document.getElementById('img').click();
-        // });
-        //
-        // document.getElementById('img').addEventListener('change', function() {
-        //     if (this.files && this.files.length > 0) {
-        //         var file = this.files[0];
-        //         var fileType = file.type;
-        //         var validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        //
-        //         if (validImageTypes.includes(fileType)) {
-        //             var reader = new FileReader();
-        //             reader.onload = function(e) {
-        //                 var previewImage = document.getElementById('previewImage');
-        //                 previewImage.src = e.target.result;
-        //                 document.querySelector('.previewIMG').classList.remove('d-none');
-        //             };
-        //             reader.readAsDataURL(file);
-        //             toastr.success('Ảnh đã được chọn thành công!');
-        //         } else {
-        //             toastr.error('File không phải là hình ảnh. Vui lòng chọn file định dạng .jpg, .png, .gif, hoặc .webp.');
-        //             this.value = ''; // Reset input
-        //             document.querySelector('.previewIMG').classList.add('d-none'); // Hide the preview if not an image
-        //         }
-        //     }
-        // });
-        document.getElementById('imgButton').addEventListener('click', function() {
+        document.getElementById('imgButton').addEventListener('click', function () {
             document.getElementById('img').click();
         });
 
         var cropper;
-        document.getElementById('img').addEventListener('change', function() {
+        document.getElementById('img').addEventListener('change', function () {
             if (this.files && this.files.length > 0) {
                 var file = this.files[0];
                 var fileType = file.type;
@@ -397,7 +373,7 @@
 
                 if (validImageTypes.includes(fileType)) {
                     var reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function (e) {
                         var imageToCrop = document.getElementById('imageToCrop');
                         imageToCrop.src = e.target.result;
 
@@ -426,7 +402,7 @@
             }
         });
 
-        document.getElementById('cropButton').addEventListener('click', function() {
+        document.getElementById('cropButton').addEventListener('click', function () {
             var canvas = cropper.getCroppedCanvas({
                 width: 100,
                 height: 100,
@@ -442,6 +418,143 @@
             cropImageModal.hide();
         });
 
+        $.ajax({
+            url: 'https://esgoo.net/api-tinhthanh/1/0.htm',
+            method: 'GET',
+            success: function (response) {
+                if (response.error === 0) {
+                    var provinces = response.data;
+                    $.each(provinces, function (index, province) {
+                        $('#birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
+                    });
+                } else {
+                    console.log('Không thể tải dữ liệu tỉnh thành.');
+                }
+            },
+            error: function () {
+                console.log('Có lỗi xảy ra khi gọi API.');
+            }
+        });
+
+        function populateCountrySelect(selectElementId, countrySelete) {
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://restcountries.com/v3.1/all',
+                    method: 'GET',
+                    success: function (data) {
+                        $.each(data, function (index, country) {
+                            const $option = $('<option></option>')
+                                .val(country.name.common)
+                                .text(country.name.common);
+                            if (country.name.common === countrySelete) {
+                                $option.prop('selected', true);
+                            }
+
+                            $(`#${selectElementId}`).append($option);
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error fetching countries:', textStatus, errorThrown);
+                    }
+                });
+            });
+        }
+
+        populateCountrySelect('nation', 'Vietnam');
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://api.nosomovo.xyz/ethnic/getalllist",
+                method: "GET",
+                success: function (data) {
+                    // Kiểm tra nếu data là chuỗi, cần parse thành JSON
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
+                    }
+
+                    var ethnicSelect = $('#ethnic');
+                    ethnicSelect.empty(); // Xóa các option cũ nếu có
+                    $.each(data, function (index, item) {
+                        var option = $('<option>', {
+                            value: item.name,
+                            text: item.name
+                        });
+
+                        // Nếu id là 2 (dân tộc Kinh), thì chọn option này mặc định
+                        if (item.id === "2") {
+                            option.attr('selected', 'selected');
+                        }
+
+                        ethnicSelect.append(option);
+                    });
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi khi lấy danh sách dân tộc:", error);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#job_position_id').change(function() {
+                var jobPositionId = $(this).val();
+                var url = "{{ route('getPositionCode', ':id') }}";
+                url = url.replace(':id', jobPositionId);
+                if (jobPositionId) {
+                    $.ajax({
+                        url: url,
+                        type: 'GET',
+                        success: function(response) {
+                            console.log(response);
+                            if (response.job_position_code) {
+                                $('#job_position_code').val(response.job_position_code);
+                            } else {
+                                $('#job_position_code').val('');
+                            }
+                        },
+                        error: function() {
+                            console.error('Đã xảy ra lỗi khi lấy mã chức vụ.');
+                            $('#job_position_code').val('');
+                        }
+                    });
+                } else {
+                    $('#job_position_code').val('');
+                }
+            });
+        });
+
+
+        // JS Add employee
+        $('#addEmployeeForm').submit(function (e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: '{{ route('add-employees') }}',
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message, "Successful");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 500);
+                    } else {
+                        toastr.error(response.message, "Error");
+                    }
+                },
+                error: function (xhr) {
+                    if (xhr.status === 400) {
+                        var response = xhr.responseJSON;
+                        toastr.error(response.message, "Error");
+                    } else {
+                        toastr.error("An error occurred", "Error");
+                    }
+                }
+            });
+        });
 
     </script>
 

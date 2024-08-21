@@ -17,42 +17,46 @@ class EmployeeController extends Controller
     {
         $model = new EmployeeModel();
         $employee_list = $model->getEmployeeInfo();
-        $position_list = $model->getPosition();
-        $edu_level_list = $model->getEdulevel();
-        $type_employee_list = $model->getTypeEmployees();
-        $department_list = $model->getDepartment();
-//        dd($employee_list);
         return view('auth.employees.index-employee',
             compact('employee_list',
-                'position_list',
-                'edu_level_list',
-                'type_employee_list',
-                'department_list'));
+            ));
     }
 
     public function detailEmployee()
     {
+
         return view('auth.employees.details-employee');
     }
 
     public function add(Request $request)
     {
+//        dd($request);
         $validated = $request->validate([
+            'img'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
             'first_name'         => 'required|string',
             'last_name'          => 'required|string',
-            'img'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
-            'gender'             => 'required|string',
-            'email'              => 'required|string',
-            'cic_number'         => 'required|string',
             'birth_date'         => 'required|date',
-            'birth_place'        => 'string',
-            'place_of_resident' => 'required|string',
-            'permanent_address'  => 'required|string',
-            'education_level_id' => 'int',
-            'status'             => 'int',
-            'type_employee_id'   => 'int',
-            'job_position_id'    => 'int',
-            'department_id'      => 'int',
+            'birth_place'        => 'nullable|string',
+            'ethnic'             => 'nullable|string',
+            'religion'           => 'nullable|string',
+            'gender'             => 'nullable|int',
+            'marital_status'     => 'nullable|int',
+            'nation'             => 'nullable|string',
+            'email'              => 'nullable|string',
+            'phone_number'       => 'nullable|string',
+            'place_of_resident'  => 'nullable|string',
+            'permanent_address'  => 'nullable|string',
+            'cic_number'         => 'nullable|string',
+            'place_of_issue'     => 'nullable|string',
+            'date_of_issue'      => 'nullable|date',
+            'job_position_code'  => 'nullable|string',
+            'job_position_id'    => 'nullable|int',
+            'job_level'          => 'nullable|int',
+            'salary_code'        => 'nullable|string',
+            'department_id'      => 'nullable|int',
+            'type_employee_id'   => 'nullable|int',
+            'education_level_id' => 'nullable|int',
+            'status'             => 'nullable|int',
         ]);
 
         $imagePath = 'avt.png';
@@ -62,18 +66,21 @@ class EmployeeController extends Controller
             $file->move(public_path('assets/employee_img/'), $imagePath);
         }
 
-        $employee = EmployeeModel::create(array_merge($validated, ['img' => $imagePath]));
+        $employee = EmployeeModel::create(array_merge($validated,
+            ['img' => $imagePath]));
 
         // Thêm bản ghi trong bảng lương cho nhân viên mới
         SalaryModel::create(['employee_id' => $employee->employee_id]);
         JobDetailsModel::create([
-            'employee_id' => $employee->employee_id,
-            'job_position_id' => $employee->job_position_id,
+            'employee_id'     => $employee->employee_id,
+            'job_position_id' => $validated['job_position_id'],
+            'job_level'       => $validated['job_level'],   // Thêm job_level
+            'salary_code'     => $validated['salary_code'], // Thêm salary_code
         ]);
         return response()->json([
             'success' => true,
             'status'  => 200,
-            'message' => 'Employee added successfully',
+            'message' => 'Thêm nhân viên mới thành công',
         ]);
     }
 
@@ -113,7 +120,7 @@ class EmployeeController extends Controller
             'status'             => 'int',
             'type_employee_id'   => 'int',
             'job_position_id'    => 'int',
-            'department_id'    => 'int',
+            'department_id'      => 'int',
         ]);
 
         $employee = EmployeeModel::findOrFail($id);
@@ -128,7 +135,9 @@ class EmployeeController extends Controller
             $file->move(public_path('assets/employee_img/'), $imagePath);
 
             // Xóa hình ảnh cũ nếu có
-            if ($imageOld && file_exists(public_path('assets/employee_img/' . $imageOld))) {
+            if ($imageOld
+                && file_exists(public_path('assets/employee_img/' . $imageOld))
+            ) {
                 unlink(public_path('assets/employee_img/' . $imageOld));
             }
         }
@@ -137,7 +146,7 @@ class EmployeeController extends Controller
         $employee->update(array_merge($validated, ['img' => $imagePath]));
 
         return response()->json([
-            'success' => true,
+            'success'  => true,
             'employee' => $employee,
         ]);
     }
@@ -147,13 +156,14 @@ class EmployeeController extends Controller
 //        dd($id);
         $employee = EmployeeModel::findOrFail($id);
         return response()->json([
-           'employee' =>  $employee
+            'employee' => $employee
         ]);
     }
 
     public function exportExcel()
     {
-        $inputFileName = public_path('excel-example/dsthongtinnhanvienexport.xlsx');
+        $inputFileName
+            = public_path('excel-example/dsthongtinnhanvienexport.xlsx');
 
         $inputFileType = IOFactory::identify($inputFileName);
 
@@ -173,10 +183,11 @@ class EmployeeController extends Controller
 
         foreach ($leave_report as $row) {
             $cell->setCellValue('A' . $num_row, $stt++);
-            $cell->setCellValue('B' . $num_row, $row->first_name . ' ' . $row->last_name);
-            if($row->gender===0){
+            $cell->setCellValue('B' . $num_row,
+                $row->first_name . ' ' . $row->last_name);
+            if ($row->gender === 0) {
                 $cell->setCellValue('C' . $num_row, 'Nam');
-            }else{
+            } else {
                 $cell->setCellValue('C' . $num_row, 'Nữ');
             }
             $cell->setCellValue('D' . $num_row, $row->birth_date);
@@ -189,20 +200,23 @@ class EmployeeController extends Controller
             $cell->setCellValue('K' . $num_row, $row->type_employee_name);
             $cell->setCellValue('L' . $num_row, $row->department_name);
             $cell->setCellValue('M' . $num_row, $row->email);
-            if($row->status===0){
+            if ($row->status === 0) {
                 $cell->setCellValue('N' . $num_row, 'Đã nghỉ việc');
-            }else{
+            } else {
                 $cell->setCellValue('N' . $num_row, 'Đang làm việc');
             }
 
-            $borderStyle = $cell->getStyle('A' . $num_row . ':N' . $num_row)->getBorders();
+            $borderStyle = $cell->getStyle('A' . $num_row . ':N' . $num_row)
+                ->getBorders();
             $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-            $cell->getStyle('A' . $num_row . ':N' . $num_row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+            $cell->getStyle('A' . $num_row . ':N' . $num_row)->getAlignment()
+                ->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $num_row++;
         }
         foreach (range('A', 'N') as $columnID) {
-            $excel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+            $excel->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
         }
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         $filename = "danh-sach-thong-tin-nhan-vien" . '.xlsx';
@@ -217,6 +231,13 @@ class EmployeeController extends Controller
 
     public function getViewAddEmployee()
     {
-        return view('auth.employees.add-employee-index');
+        $model = new EmployeeModel();
+        $edu_level_list = $model->getEdulevel();
+        $position_list = $model->getPosition();
+        $type_employee_list = $model->getTypeEmployees();
+        $department_list = $model->getDepartment();
+        return view('auth.employees.add-employee-index',
+            compact('edu_level_list', 'position_list', 'type_employee_list',
+                'department_list'));
     }
 }

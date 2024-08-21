@@ -137,4 +137,14 @@ class PositionCotroller extends Controller
         $writer->save('php://output');
     }
 
+    public function getJobPositionCode($id) {
+        $jobPosition = PositionModel::find($id);
+
+        if ($jobPosition) {
+            return response()->json(['job_position_code' => $jobPosition->job_position_code]);
+        } else {
+            return response()->json(['error' => 'Không tìm thấy mã chức vụ'], 404);
+        }
+    }
+
 }

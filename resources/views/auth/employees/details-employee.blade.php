@@ -5,7 +5,7 @@
         <h1>Nhân sự</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item">Quản lý</li>
                 <li class="breadcrumb-item active">Nhân sự</li>
                 <li class="breadcrumb-item active">Thông tin nhân sự</li>
             </ol>

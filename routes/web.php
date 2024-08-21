@@ -50,13 +50,14 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //EMPLOYEE
     Route::group(['prefix' => '/employees'], function () {
         Route::get('/index', [EmployeeController::class, 'getView'])->name('index-employees');
-        Route::post('/add', [EmployeeController::class, 'add'])->name('add-employees');
         Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete-employees');
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('edit-employees');
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('update-employees');
         Route::get('/export', [EmployeeController::class, 'exportExcel'])->name('export-employees');
         Route::get('/details-employee/{id}', [EmployeeController::class, 'detailEmployee'])->name('details-employees');
         Route::get('/add-employee-index', [EmployeeController::class, 'getViewAddEmployee'])->name('add-employees-index');
+        Route::post('/add', [EmployeeController::class, 'add'])->name('add-employees');
+        Route::get('/get-job-position-code/{id}', [PositionCotroller::class, 'getJobPositionCode'])->name('getPositionCode');
 
     });
 

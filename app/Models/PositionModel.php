@@ -15,7 +15,6 @@ class PositionModel extends Model
     protected $fillable=[
         'job_position_code',
         'job_position_name',
-        'position_level',
         'salary_code',
         'description',
     ];

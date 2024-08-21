@@ -16,17 +16,25 @@ class EmployeeModel extends Model
         'last_name',
         'img',
         'gender',
-        'email',
-        'cic_number',
         'birth_date',
         'birth_place',
         'place_of_resident',
+        'email',
         'permanent_address',
+        'cic_number',
         'education_level_id',
         'status',
         'type_employee_id',
-        'job_position_id',
-        'department_id'
+        'department_id',
+        'job_detail_id',
+        'ethnic',
+        'religion',
+        'marital_status',
+        'nation',
+        'phone_number',
+        'place_of_issue',
+        'date_of_issue',
+        'date_of_exp',
     ];
     public $timestamps = false;
 
@@ -50,10 +58,7 @@ class EmployeeModel extends Model
     function getEmployeeInfo()
     {
         return DB::table('employees')
-            ->join('education_level','employees.education_level_id','=','education_level.education_level_id')
             ->join('type_employees','employees.type_employee_id','=','type_employees.type_employee_id')
-            ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
-            ->join('departments', 'employees.department_id','=','departments.department_id')
             ->get();
     }
 

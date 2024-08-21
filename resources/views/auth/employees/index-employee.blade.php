@@ -10,7 +10,7 @@
         <h1>Nhân sự</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
+                <li class="breadcrumb-item">Quản lý</li>
                 <li class="breadcrumb-item active">Nhân sự</li>
             </ol>
         </nav>
@@ -19,7 +19,7 @@
     <div class="row gx-3 my-3">
         <div class="col-md-6 m-0">
             <div class="btn btn-primary mx-2">
-                <a href="{{route('add-employees-index')}}" class="d-flex align-items-center at1">
+                <a href="{{route('add-employees-index')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
                     Thêm nhân sự mới
                 </a>
@@ -441,58 +441,7 @@
     <script>
         var table = $('#employeeTable').DataTable();
 
-        $.ajax({
-            url: 'https://esgoo.net/api-tinhthanh/1/0.htm',
-            method: 'GET',
-            success: function (response) {
-                if (response.error === 0) {
-                    var provinces = response.data;
-                    $.each(provinces, function (index, province) {
-                        $('#birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
-                        $('#edit_birth_place').append('<option value="' + province.name + '">' + province.name + '</option>');
-                    });
-                } else {
-                    console.log('Không thể tải dữ liệu tỉnh thành.');
-                }
-            },
-            error: function () {
-                console.log('Có lỗi xảy ra khi gọi API.');
-            }
-        });
 
-        // JS Add employee
-        $('#addEmployeeForm').submit(function (e) {
-            e.preventDefault();
-
-            var formData = new FormData(this);
-
-            $.ajax({
-                url: '{{ route('add-employees') }}',
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    if (response.success) {
-                        $('#addEmployeeModal').modal('hide');
-                        toastr.success(response.message, "Successful");
-                        setTimeout(function () {
-                            location.reload();
-                        }, 500);
-                    } else {
-                        toastr.error(response.message, "Error");
-                    }
-                },
-                error: function (xhr) {
-                    if (xhr.status === 400) {
-                        var response = xhr.responseJSON;
-                        toastr.error(response.message, "Error");
-                    } else {
-                        toastr.error("An error occurred", "Error");
-                    }
-                }
-            });
-        });
 
         //Fill dữ liệu lên Modal edit
         $('#employeeTable').on('click', '.edit-btn', function () {
