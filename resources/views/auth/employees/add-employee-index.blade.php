@@ -20,7 +20,7 @@
 
     </style>
     <div class="pagetitle">
-        <h1>Nhân sự</h1>
+        <h1><a href="{{ route('index-employees') }}">Nhân sự</a></h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Quản lý</li>
@@ -73,8 +73,8 @@
                                                     class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date"
-                                                   required>
+                                            <input type="text" class="form-control" id="birth_date" name="birth_date" required>
+
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +265,6 @@
                                 <label for="job_position_id" class="form-label fw-bold">Vị trí công việc</label>
                                 <select class="form-select" aria-label="Default" name="job_position_id"
                                         id="job_position_id">
-                                        <option value="">None</option>
                                     @foreach ($position_list as $item)
                                         <option
                                             value="{{ $item->job_position_id }}">{{$item->job_position_name}}</option>
@@ -276,7 +275,6 @@
                                 <label for="job_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
                                 <select class="form-select" aria-label="Default" name="job_level"
                                         id="job_level">
-                                    <option value=""></option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -403,20 +401,28 @@
         });
 
         document.getElementById('cropButton').addEventListener('click', function () {
-            var canvas = cropper.getCroppedCanvas({
-                width: 100,
-                height: 100,
-            });
+            var canvas = cropper.getCroppedCanvas();
 
-            // Chuyển đổi canvas thành base64 và hiển thị ảnh
+            // Chuyển đổi canvas thành blob để gửi trong form, với chất lượng gốc (1 là giữ nguyên chất lượng)
+            canvas.toBlob(function(blob) {
+                var formData = new FormData();
+                formData.append('cropped_image', blob, 'cropped_image.png');
+
+                // Gán blob vào một biến toàn cục hoặc gắn vào form data trong hàm submit
+                window.croppedImageBlob = blob;
+            }, 'image/png', 1); // 'image/png' định dạng ảnh và 1 là giữ nguyên chất lượng
+
+            // Hiển thị preview ảnh đã crop (không ảnh hưởng đến chất lượng)
             var previewImage = document.getElementById('previewImage');
-            previewImage.src = canvas.toDataURL();
+            previewImage.src = canvas.toDataURL('image/png');
+
             document.querySelector('.previewIMG').classList.remove('d-none');
 
             // Đóng modal sau khi crop
             var cropImageModal = bootstrap.Modal.getInstance(document.getElementById('cropImageModal'));
             cropImageModal.hide();
         });
+
 
         $.ajax({
             url: 'https://esgoo.net/api-tinhthanh/1/0.htm',
@@ -462,43 +468,84 @@
 
         populateCountrySelect('nation', 'Vietnam');
 
-        $(document).ready(function () {
-            $.ajax({
-                url: "https://api.nosomovo.xyz/ethnic/getalllist",
-                method: "GET",
-                success: function (data) {
-                    // Kiểm tra nếu data là chuỗi, cần parse thành JSON
-                    if (typeof data === 'string') {
-                        data = JSON.parse(data);
-                    }
-
-                    var ethnicSelect = $('#ethnic');
-                    ethnicSelect.empty(); // Xóa các option cũ nếu có
-                    $.each(data, function (index, item) {
-                        var option = $('<option>', {
-                            value: item.name,
-                            text: item.name
-                        });
-
-                        // Nếu id là 2 (dân tộc Kinh), thì chọn option này mặc định
-                        if (item.id === "2") {
-                            option.attr('selected', 'selected');
+        function populateEthnicSelect(selectElementId, ethnicSelete) {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "https://api.nosomovo.xyz/ethnic/getalllist",
+                    method: "GET",
+                    success: function (data) {
+                        // Kiểm tra nếu data là chuỗi, cần parse thành JSON
+                        if (typeof data === 'string') {
+                            data = JSON.parse(data);
                         }
 
-                        ethnicSelect.append(option);
-                    });
-                },
-                error: function (error) {
-                    console.error("Đã xảy ra lỗi khi lấy danh sách dân tộc:", error);
-                }
+                        var $ethnicSelect = $(`#${selectElementId}`);
+                        $ethnicSelect.empty(); // Xóa các option cũ nếu có
+
+                        $.each(data, function (index, item) {
+                            var $option = $('<option></option>')
+                                .val(item.name)
+                                .text(item.name);
+
+                            // Nếu tên dân tộc trùng với ethnicSelete thì chọn option này mặc định
+                            if (item.name === ethnicSelete) {
+                                $option.prop('selected', true);
+                            }
+
+                            $ethnicSelect.append($option);
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("Đã xảy ra lỗi khi lấy danh sách dân tộc:", textStatus, errorThrown);
+                    }
+                });
             });
-        });
+        }
+
+        // Gọi hàm với ID của select element và tên dân tộc bạn muốn chọn mặc định
+        populateEthnicSelect('ethnic', 'Kinh');
+
 
         $(document).ready(function() {
-            $('#job_position_id').change(function() {
-                var jobPositionId = $(this).val();
+            // Định nghĩa ngôn ngữ tiếng Việt cho Datepicker
+            $.datepicker.regional['vi'] = {
+                closeText: 'Đóng',
+                prevText: '&#x3C;Trước',
+                nextText: 'Tiếp&#x3E;',
+                currentText: 'Hôm nay',
+                monthNames: ['Tháng Giêng','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu',
+                    'Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'],
+                monthNamesShort: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+                    'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+                dayNames: ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'],
+                dayNamesShort: ['CN','T2','T3','T4','T5','T6','T7'],
+                dayNamesMin: ['CN','T2','T3','T4','T5','T6','T7'],
+                weekHeader: 'Tu',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['vi']);
+
+            // Thiết lập Datepicker cho trường "Ngày sinh"
+            $("#birth_date").datepicker({
+                dateFormat: "dd/mm/yy", // Định dạng ngày tháng năm
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:+nn", // Phạm vi năm, có thể điều chỉnh theo nhu cầu
+                onSelect: function(dateText) {
+                    $(this).val(dateText);
+                }
+            });
+
+            // Hàm để cập nhật job_position_code dựa trên job_position_id hiện tại
+            function updateJobPositionCode() {
+                var jobPositionId = $('#job_position_id').val();
                 var url = "{{ route('getPositionCode', ':id') }}";
                 url = url.replace(':id', jobPositionId);
+
                 if (jobPositionId) {
                     $.ajax({
                         url: url,
@@ -519,6 +566,14 @@
                 } else {
                     $('#job_position_code').val('');
                 }
+            }
+
+            // Gọi hàm updateJobPositionCode khi trang vừa tải xong
+            updateJobPositionCode();
+
+            // Gọi hàm updateJobPositionCode mỗi khi job_position_id thay đổi
+            $('#job_position_id').change(function() {
+                updateJobPositionCode();
             });
         });
 
@@ -529,6 +584,11 @@
 
             var formData = new FormData(this);
 
+            // Kiểm tra nếu đã crop ảnh và thêm vào form data
+            if (window.croppedImageBlob) {
+                formData.append('img', window.croppedImageBlob, 'cropped_image.png');
+            }
+
             $.ajax({
                 url: '{{ route('add-employees') }}',
                 method: 'POST',
@@ -537,10 +597,25 @@
                 processData: false,
                 success: function (response) {
                     if (response.success) {
-                        toastr.success(response.message, "Successful");
-                        setTimeout(function () {
-                            location.reload();
-                        }, 500);
+                        Swal.fire({
+                            title: 'Thêm nhân viên mới thành công!',
+                            text: "Bạn có muốn thêm nhân viên khác hay quay về danh sách?",
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Thêm nhân viên khác',
+                            cancelButtonText: 'Quay về danh sách'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Người dùng chọn "Thêm nhân viên khác"
+                                // Reset form để chuẩn bị cho việc thêm nhân viên mới
+                                $('#addEmployeeForm')[0].reset();
+                                $('.previewIMG').addClass('d-none');
+                                cropper.destroy(); // Để đảm bảo cropper được khởi tạo lại nếu cần
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // Người dùng chọn "Quay về danh sách"
+                                window.location.href = '{{ route('index-employees') }}';
+                            }
+                        });
                     } else {
                         toastr.error(response.message, "Error");
                     }
@@ -555,6 +630,7 @@
                 }
             });
         });
+
 
     </script>
 

@@ -15,7 +15,6 @@ class PositionModel extends Model
     protected $fillable=[
         'job_position_code',
         'job_position_name',
-        'salary_code',
         'description',
     ];
     public $timestamps = false;

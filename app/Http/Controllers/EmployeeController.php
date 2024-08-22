@@ -22,41 +22,47 @@ class EmployeeController extends Controller
             ));
     }
 
-    public function detailEmployee()
+    public function detailEmployee($id)
     {
-
-        return view('auth.employees.details-employee');
+        $model = new EmployeeModel();
+        $employee_current = $model->getOneEmployee($id);
+        $position_list = $model->getPosition();
+        $department_list = $model->getDepartment();
+        $type_employee_list = $model->getTypeEmployees();
+        $edu_level_list = $model->getEdulevel();
+//        dd($position_list);
+        return view('auth.employees.details-employee', compact('employee_current', 'position_list', 'department_list', 'type_employee_list', 'edu_level_list'));
     }
 
     public function add(Request $request)
     {
 //        dd($request);
         $validated = $request->validate([
-            'img'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
-            'first_name'         => 'required|string',
-            'last_name'          => 'required|string',
-            'birth_date'         => 'required|date',
-            'birth_place'        => 'nullable|string',
-            'ethnic'             => 'nullable|string',
-            'religion'           => 'nullable|string',
-            'gender'             => 'nullable|int',
-            'marital_status'     => 'nullable|int',
-            'nation'             => 'nullable|string',
-            'email'              => 'nullable|string',
-            'phone_number'       => 'nullable|string',
-            'place_of_resident'  => 'nullable|string',
-            'permanent_address'  => 'nullable|string',
-            'cic_number'         => 'nullable|string',
-            'place_of_issue'     => 'nullable|string',
-            'date_of_issue'      => 'nullable|date',
-            'job_position_code'  => 'nullable|string',
-            'job_position_id'    => 'nullable|int',
-            'job_level'          => 'nullable|int',
-            'salary_code'        => 'nullable|string',
-            'department_id'      => 'nullable|int',
-            'type_employee_id'   => 'nullable|int',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'birth_date' => 'required|date',
+            'birth_place' => 'nullable|string',
+            'ethnic' => 'nullable|string',
+            'religion' => 'nullable|string',
+            'gender' => 'nullable|int',
+            'marital_status' => 'nullable|int',
+            'nation' => 'nullable|string',
+            'email' => 'nullable|string',
+            'phone_number' => 'nullable|string',
+            'place_of_resident' => 'nullable|string',
+            'permanent_address' => 'nullable|string',
+            'cic_number' => 'nullable|string',
+            'place_of_issue' => 'nullable|string',
+            'date_of_issue' => 'nullable|date',
+            'job_position_code' => 'nullable|string',
+            'job_position_id' => 'nullable|int',
+            'job_level' => 'nullable|int',
+            'salary_code' => 'nullable|string',
+            'department_id' => 'nullable|int',
+            'type_employee_id' => 'nullable|int',
             'education_level_id' => 'nullable|int',
-            'status'             => 'nullable|int',
+            'status' => 'nullable|int',
         ]);
 
         $imagePath = 'avt.png';
@@ -64,63 +70,61 @@ class EmployeeController extends Controller
             $file = $request->file('img');
             $imagePath = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/employee_img/'), $imagePath);
+        } elseif ($request->hasFile('cropped_image')) {
+            // Lưu ảnh đã crop nếu có
+            $file = $request->file('cropped_image');
+            $imagePath = time() . '_cropped_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/employee_img/'), $imagePath);
         }
 
-        $employee = EmployeeModel::create(array_merge($validated,
-            ['img' => $imagePath]));
+        $employee = EmployeeModel::create(array_merge($validated, ['img' => $imagePath]));
 
         // Thêm bản ghi trong bảng lương cho nhân viên mới
         SalaryModel::create(['employee_id' => $employee->employee_id]);
         JobDetailsModel::create([
-            'employee_id'     => $employee->employee_id,
+            'employee_id' => $employee->employee_id,
             'job_position_id' => $validated['job_position_id'],
-            'job_level'       => $validated['job_level'],   // Thêm job_level
-            'salary_code'     => $validated['salary_code'], // Thêm salary_code
+            'job_level' => $validated['job_level'],   // Thêm job_level
+            'salary_code' => $validated['salary_code'], // Thêm salary_code
         ]);
+
         return response()->json([
             'success' => true,
-            'status'  => 200,
+            'status' => 200,
             'message' => 'Thêm nhân viên mới thành công',
         ]);
     }
 
-    public function delete($id)
-    {
-        $employee = EmployeeModel::findOrFail($id);
-
-        $directoryPath = public_path('assets/employee_img/');
-        $filePath = $directoryPath . $employee->img;
-
-        if (file_exists($filePath) && $employee->img !== 'avt.png') {
-            unlink($filePath);
-        }
-
-        $employee->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Employee deleted successfully'
-        ]);
-    }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'first_name'         => 'string',
-            'last_name'          => 'string',
-            'gender'             => 'string',
-            'img'                => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
-            'email'              => 'string',
-            'cic_number'         => 'string',
-            'birth_date'         => 'date',
-            'birth_place'        => 'string',
-            'place_of_residencs' => 'string',
-            'permanent_address'  => 'string',
-            'education_level_id' => 'int',
-            'status'             => 'int',
-            'type_employee_id'   => 'int',
-            'job_position_id'    => 'int',
-            'department_id'      => 'int',
+            'employee_id' => 'int',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048576',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'birth_date' => 'required|date',
+            'birth_place' => 'nullable|string',
+            'ethnic' => 'nullable|string',
+            'religion' => 'nullable|string',
+            'gender' => 'nullable|int',
+            'marital_status' => 'nullable|int',
+            'nation' => 'nullable|string',
+            'email' => 'nullable|string',
+            'phone_number' => 'nullable|string',
+            'place_of_resident' => 'nullable|string',
+            'permanent_address' => 'nullable|string',
+            'cic_number' => 'nullable|string',
+            'place_of_issue' => 'nullable|string',
+            'date_of_issue' => 'nullable|date',
+            'job_position_code' => 'nullable|string',
+            'job_position_id' => 'nullable|int',
+            'job_level' => 'nullable|int',
+            'salary_code' => 'nullable|string',
+            'department_id' => 'nullable|int',
+            'type_employee_id' => 'nullable|int',
+            'education_level_id' => 'nullable|int',
+            'status' => 'nullable|int',
         ]);
 
         $employee = EmployeeModel::findOrFail($id);
@@ -135,19 +139,48 @@ class EmployeeController extends Controller
             $file->move(public_path('assets/employee_img/'), $imagePath);
 
             // Xóa hình ảnh cũ nếu có
-            if ($imageOld
-                && file_exists(public_path('assets/employee_img/' . $imageOld))
-            ) {
+            if ($imageOld && file_exists(public_path('assets/employee_img/' . $imageOld))) {
                 unlink(public_path('assets/employee_img/' . $imageOld));
             }
         }
 
         // Cập nhật thông tin nhân viên
-        $employee->update(array_merge($validated, ['img' => $imagePath]));
+        $employee->update($validated, ['img' => $imagePath]);
+
+        // Cập nhật thông tin trong bảng JobDetailsModel
+        $jobDetails = JobDetailsModel::where('employee_id', $id)->first();
+        if ($jobDetails) {
+            $jobDetails->update([
+                'job_position_id' => $validated['job_position_id'] ?? $jobDetails->job_position_id,
+                'job_level'       => $validated['job_level'] ?? $jobDetails->job_level,
+                'salary_code'     => $validated['salary_code'] ?? $jobDetails->salary_code,
+            ]);
+        }
 
         return response()->json([
             'success'  => true,
             'employee' => $employee,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $employee = EmployeeModel::findOrFail($id);
+        // Xóa các bản ghi liên quan trong các bảng khác
+        SalaryModel::where('employee_id', $employee->employee_id)->delete();
+        JobDetailsModel::where('employee_id', $employee->employee_id)->delete();
+        $directoryPath = public_path('assets/employee_img/');
+        $filePath = $directoryPath . $employee->img;
+
+        if (file_exists($filePath) && $employee->img !== 'avt.png') {
+            unlink($filePath);
+        }
+
+        $employee->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Employee deleted successfully'
         ]);
     }
 

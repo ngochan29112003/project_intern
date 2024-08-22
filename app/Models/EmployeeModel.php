@@ -72,7 +72,9 @@ class EmployeeModel extends Model
     function getOneEmployee($id)
     {
         return DB::table('employees')
-            ->where('employee_id', $id)
+            ->join('job_details','employees.employee_id','=','job_details.employee_id')
+            ->join('job_positions','job_details.job_position_id','=','job_positions.job_position_id')
+            ->where('employees.employee_id', $id)
             ->first();
     }
 }
