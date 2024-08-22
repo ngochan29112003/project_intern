@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 21, 2024 at 10:50 PM
+-- Generation Time: Aug 22, 2024 at 03:17 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -153,7 +153,10 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 'Tuấn', 'Trịnh', 'avt.png', 0, '1997-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, 'Kinh', 'Không', 0, 'Vietnam', NULL, NULL, NULL, NULL);
+(16, 'Tuấn', 'Trịnh', 'avt.png', 0, '1997-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, 'Kinh', 'Không', 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(23, 'aaa', 'aaa', '1724307064_cropped_image.png', 0, '2003-02-04', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(25, '97', 'JACKY', '1724314047_jacklon.jpg', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
+(26, 'tuấn', 'trịnh t', '1724312638_cropped_image.png', 1, '2003-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, NULL, 'bocon', 0, 'Vietnam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,7 +177,10 @@ CREATE TABLE `job_details` (
 --
 
 INSERT INTO `job_details` (`id_job_detail`, `employee_id`, `job_position_id`, `job_level`, `salary_code`) VALUES
-(3, 16, 10, 3, 'vv');
+(3, 16, 10, 3, 'vv'),
+(10, 23, 6, NULL, NULL),
+(12, 25, 6, 1, '123'),
+(13, 26, 6, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +212,6 @@ CREATE TABLE `job_positions` (
   `job_position_id` int(11) NOT NULL,
   `job_position_code` text NOT NULL,
   `job_position_name` text NOT NULL,
-  `salary_code` text,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -214,16 +219,16 @@ CREATE TABLE `job_positions` (
 -- Dumping data for table `job_positions`
 --
 
-INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `salary_code`, `description`) VALUES
-(6, 'TP', 'Trưởng phòng', NULL, 'none'),
-(7, 'GD', 'Giám đốc', NULL, 'none'),
-(8, 'HR', 'Kế toán', NULL, 'none'),
-(10, 'NV', 'Nhân viên', NULL, 'none'),
-(11, 'CNTT', 'Công nghệ thông tin', 'V11.06.14', 'none'),
-(12, 'ATTT', 'An toàn thông tin', 'V11.05.11', 'none'),
-(13, 'PGD', 'Phó giám đốc', NULL, 'none'),
-(14, 'TP', 'Phó trưởng phòng', NULL, 'none'),
-(15, 'TP', 'Thủ quỹ', NULL, 'none');
+INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `description`) VALUES
+(6, 'NV', 'Nhân viên', 'none'),
+(7, 'GD', 'Giám đốc', 'none'),
+(8, 'HR', 'Kế toán', 'none'),
+(10, 'TP', 'Trưởng phòng', 'none'),
+(11, 'CNTT', 'Công nghệ thông tin', 'none'),
+(12, 'ATTT', 'An toàn thông tin', 'none'),
+(13, 'PGD', 'Phó giám đốc', 'none'),
+(14, 'TP', 'Phó trưởng phòng', 'none'),
+(15, 'TP', 'Thủ quỹ', 'none');
 
 -- --------------------------------------------------------
 
@@ -384,7 +389,10 @@ CREATE TABLE `salaries` (
 
 INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`, `description_salary`) VALUES
 (5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(14, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(14, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -710,13 +718,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `job_details`
 --
 ALTER TABLE `job_details`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `job_level`
@@ -770,7 +778,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
