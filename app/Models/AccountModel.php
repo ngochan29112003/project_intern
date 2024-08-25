@@ -28,4 +28,12 @@ class AccountModel extends Model
             ->where('id', $id)
             ->value('id_employee');
     }
+
+    function getEmployeesWithoutAccount()
+    {
+        return DB::table('employees')
+            ->leftJoin('accounts', 'employees.employee_id', '=', 'accounts.id_employee')
+            ->whereNull('accounts.id_employee')
+            ->get();
+    }
 }

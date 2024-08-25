@@ -79,13 +79,24 @@ class EmployeeController extends Controller
 
         $employee = EmployeeModel::create(array_merge($validated, ['img' => $imagePath]));
 
-        // Thêm bản ghi trong bảng lương cho nhân viên mới
-        SalaryModel::create(['employee_id' => $employee->employee_id]);
         JobDetailsModel::create([
             'employee_id' => $employee->employee_id,
             'job_position_id' => $validated['job_position_id'],
             'job_level' => $validated['job_level'],   // Thêm job_level
             'salary_code' => $validated['salary_code'], // Thêm salary_code
+        ]);
+
+        // Thêm bản ghi trong bảng lương cho nhân viên mới
+        $salaryEntitlement = 0;
+        if ($validated['type_employee_id'] == 1) {
+            $salaryEntitlement = 100;
+        } elseif ($validated['type_employee_id'] == 2) {
+            $salaryEntitlement = 85;
+        }
+
+        SalaryModel::create([
+            'employee_id' => $employee->employee_id,
+            'salary_entitlement' => $salaryEntitlement,
         ]);
 
         return response()->json([

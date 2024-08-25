@@ -14,10 +14,10 @@ class AccountController extends Controller
     {
         $model_account = new AccountModel();
         $model_employee = new EmployeeModel();
-        $employee_list = $model_employee->getEmployeeInfo();
+        $employee_list_none_acc = $model_account->getEmployeesWithoutAccount();
         $account_list = $model_account->getAccountInfo();
         $permis_list = $model_account->getPermis();
-        return view('auth.account.index-account', compact('account_list','permis_list','employee_list'));
+        return view('auth.account.index-account', compact('account_list','permis_list','employee_list_none_acc'));
     }
 
     function add(Request $request)

@@ -45,27 +45,6 @@
                             <label for="add_job_position_name" class="form-label">Tên chức vụ</label>
                             <input type="text" class="form-control" id="job_position_name" name="job_position_name" required>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="add_position_level" class="form-label">Cấp độ</label>
-{{--                                    <input type="text" class="form-control" id="position_level" name="position_level" required>--}}
-                                    <select class="form-select" aria-label="Default" name="position_level"
-                                            id="position_level">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="add_job_position_salary" class="form-label">Mã số ngạch lương</label>
-                                    <input type="text" class="form-control" id="salary_code" name="salary_code">
-                                </div>
-                            </div>
-                        </div>
                         <div class="mb-3">
                             <label for="add_description" class="form-label">Ghi chú</label>
                             <input type="text" class="form-control" id="description" name="description">
@@ -95,26 +74,6 @@
                             <label for="job_position_name" class="form-label">Tên chức vụ</label>
                             <input type="text" class="form-control" id="edit_job_position_name" name="job_position_name" required>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="add_position_level" class="form-label">Cấp độ</label>
-                                    <select class="form-select" aria-label="Default" name="position_level"
-                                            id="edit_position_level">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="mb-3">
-                                    <label for="add_job_position_salary" class="form-label">Mã số ngạch lương</label>
-                                    <input type="text" class="form-control" id="edit_salary_code" name="salary_code">
-                                </div>
-                            </div>
-                        </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Ghi chú</label>
                             <input type="text" class="form-control" id="edit_description" name="description">
@@ -136,8 +95,6 @@
                     <th>STT</th>
                     <th>Mã chức vụ</th>
                     <th>Tên chức vụ</th>
-                    <th class="text-start">Cấp độ</th>
-                    <th>Mã số ngạch lương</th>
                     <th>Ghi chú</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -149,8 +106,6 @@
                         <td>{{$stt++}}</td>
                         <td>{{$item->job_position_code}}</td>
                         <td>{{$item->job_position_name}}</td>
-                        <td class="text-start">{{$item->position_level}}</td>
-                        <td>{{$item->salary_code}}</td>
                         <td>{{$item->description}}</td>
                         <td class="text-center">
                             <button
@@ -263,8 +218,6 @@
                     var data = response.position;
                     $('#edit_job_position_code').val(data.job_position_code);
                     $('#edit_job_position_name').val(data.job_position_name);
-                    $('#edit_position_level').val(data.position_level);
-                    $('#edit_salary_code').val(data.salary_code);
                     $('#edit_description').val(data.description);
                     $('#editPositionModal').modal('show');
                 },

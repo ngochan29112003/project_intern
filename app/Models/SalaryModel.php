@@ -21,6 +21,7 @@ class SalaryModel extends Model
         'accident_insurance',
         'gross_salary',
         'net_salary',
+        'salary_entitlement',
     ];
     public $timestamps = false;
 
@@ -28,24 +29,26 @@ class SalaryModel extends Model
     {
         $salaries = DB::table('salaries')
             ->join('employees', 'salaries.employee_id', '=', 'employees.employee_id')
-            ->join('job_positions', 'employees.job_position_id', '=', 'job_positions.job_position_id')
+            ->join('job_details', 'employees.employee_id', '=', 'job_details.employee_id')
+            ->join('job_positions', 'job_details.job_position_id', '=', 'job_positions.job_position_id')
+            ->join('type_employees', 'employees.type_employee_id', '=', 'type_employees.type_employee_id')
             ->where('employees.status', 1)
-            ->select(
-                'employees.first_name',
-                'employees.last_name',
-                'job_positions.job_position_code',
-                'job_positions.job_position_name',
-                'job_positions.position_level',
-                'job_positions.salary_code',
-                'salaries.salary_coefficient',
-                'salaries.allowance_salary_coefficient',
-                'salaries.social_insurance',
-                'salaries.health_insurance',
-                'salaries.accident_insurance',
-                'salaries.gross_salary',
-                'salaries.net_salary',
-                'salaries.salary_id'
-            )
+//            ->select(
+//                'employees.first_name',
+//                'employees.last_name',
+//                'job_positions.job_position_code',
+//                'job_positions.job_position_name',
+//                'job_details.salary_code',
+//                'job_details.job_level',
+//                'salaries.salary_coefficient',
+//                'salaries.allowance_salary_coefficient',
+//                'salaries.social_insurance',
+//                'salaries.health_insurance',
+//                'salaries.accident_insurance',
+//                'salaries.gross_salary',
+//                'salaries.net_salary',
+//                'salaries.salary_id'
+//            )
             ->get();
 
         return $salaries;
@@ -55,25 +58,27 @@ class SalaryModel extends Model
     {
         return DB::table('salaries')
             ->join('employees', 'salaries.employee_id', '=', 'employees.employee_id')
-            ->join('job_positions', 'employees.job_position_id', '=', 'job_positions.job_position_id')
+            ->join('job_details', 'employees.employee_id', '=', 'job_details.employee_id')
+            ->join('job_positions', 'job_details.job_position_id', '=', 'job_positions.job_position_id')
+            ->join('type_employees', 'employees.type_employee_id', '=', 'type_employees.type_employee_id')
             ->where('employees.status', 1)
             ->where('salaries.salary_id', $id)
-            ->select(
-                'employees.first_name',
-                'employees.last_name',
-                'job_positions.job_position_code',
-                'job_positions.job_position_name',
-                'job_positions.position_level',
-                'job_positions.salary_code',
-                'salaries.salary_coefficient',
-                'salaries.allowance_salary_coefficient',
-                'salaries.social_insurance',
-                'salaries.health_insurance',
-                'salaries.accident_insurance',
-                'salaries.gross_salary',
-                'salaries.net_salary',
-                'salaries.salary_id'
-            )
+//            ->select(
+//                'employees.first_name',
+//                'employees.last_name',
+//                'job_positions.job_position_code',
+//                'job_positions.job_position_name',
+//                'job_positions.position_level',
+//                'job_positions.salary_code',
+//                'salaries.salary_coefficient',
+//                'salaries.allowance_salary_coefficient',
+//                'salaries.social_insurance',
+//                'salaries.health_insurance',
+//                'salaries.accident_insurance',
+//                'salaries.gross_salary',
+//                'salaries.net_salary',
+//                'salaries.salary_id'
+//            )
             ->first();
     }
 
@@ -85,7 +90,8 @@ class SalaryModel extends Model
 
         if ($salary && $salary->salary_coefficient !== null) {
             $base_salary = 2340000; // Lương cứng
-            $gross_salary = ($salary->salary_coefficient + $salary->allowance_salary_coefficient) * $base_salary;
+            $salary_entitlement_percentage = $salary->salary_entitlement / 100; // Quy đổi thành tỷ lệ phần trăm
+            $gross_salary = ($salary->salary_coefficient + $salary->allowance_salary_coefficient) * $base_salary * $salary_entitlement_percentage;
             $social_insurance = $gross_salary * 0.08;
             $health_insurance = $gross_salary * 0.015;
             $accident_insurance = $gross_salary * 0.01;
@@ -103,4 +109,5 @@ class SalaryModel extends Model
                 ]);
         }
     }
+
 }

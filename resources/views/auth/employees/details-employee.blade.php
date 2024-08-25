@@ -260,8 +260,8 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="position_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
-                                <select class="form-select" aria-label="Default" name="position_level" id="position_level">
+                                <label for="job_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
+                                <select class="form-select" aria-label="Default" name="job_level" id="job_level">
                                     <option value="1" {{ $employee_current->job_level == 1 ? 'selected' : '' }}>1</option>
                                     <option value="2" {{ $employee_current->job_level == 2 ? 'selected' : '' }}>2</option>
                                     <option value="3" {{ $employee_current->job_level == 3 ? 'selected' : '' }}>3</option>

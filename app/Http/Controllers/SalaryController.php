@@ -14,7 +14,7 @@ class SalaryController extends Controller
     {
         $model = new SalaryModel();
         $salaries = $model->getSalaryEmployee();
-
+//        dd($salaries->toArray());
         return view('auth.salaries.index-salary-calculation', compact('salaries'));
     }
 
@@ -33,6 +33,7 @@ class SalaryController extends Controller
         $validated = $request->validate([
             'salary_coefficient' => 'nullable|numeric',
             'allowance_salary_coefficient' => 'nullable|numeric',
+            'salary_entitlement' => 'nullable|numeric',
         ]);
 
         $salary = SalaryModel::findOrFail($id);

@@ -31,45 +31,58 @@
                     <form id="editSalaryForm" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="employee_name" class="form-label">Họ và tên</label>
                                     <input type="text" class="form-control" id="employee_name"
                                            style="color: #6c757d; background-color: #e9ecef;" readonly>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="job_level" class="form-label">Cấp bậc chức vụ</label>
                                     <input type="text" class="form-control" id="job_level"
                                            style="color: #6c757d; background-color: #e9ecef;" readonly>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <div class="mb-3">
                                     <label for="salary_code" class="form-label">Mã số ngạch lương</label>
                                     <input type="text" class="form-control" id="salary_code"
                                            style="color: #6c757d; background-color: #e9ecef;" readonly>
                                 </div>
                             </div>
+                            <div class="col-3">
+                                <div class="mb-3">
+                                    <label for="type_employee_id" class="form-label">Loại nhân viên</label>
+                                    <input type="text" class="form-control" id="type_employee_id"
+                                           style="color: #6c757d; background-color: #e9ecef;" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="mb-3">
-                                    <label for="salary_coefficient" class="form-label">Hệ số lương <span class="text-danger fs-6 fw-light fst-italic">(trường này rỗng sẽ không tính được lương)</span></label>
+                                    <label for="salary_coefficient" class="form-label">Hệ số lương <span class="text-danger fw-light fst-italic" style="font-size: 12px">(trường này rỗng sẽ không tính được lương)</span></label>
                                     <input type="number" class="form-control" id="salary_coefficient" name="salary_coefficient" step="0.01">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="mb-3">
                                     <label for="allowance_salary_coefficient" class="form-label">HSPCCV</label>
                                     <input type="number" class="form-control" id="allowance_salary_coefficient" name="allowance_salary_coefficient" step="0.01">
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="gross_salary" class="form-label">Thành tiền <span class="text-danger fs-6 fw-light fst-italic">(HSL + HSPCCV x 2.340.000đ)</span></label>
-                                <input type="number" class="form-control" id="gross_salary" name="gross_salary" style="color: #6c757d; background-color: #e9ecef;" readonly>
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="salary_entitlement" class="form-label">Hưởng lương<span class="text-danger fs-6 fw-light fst-italic"> (%)</span></label>
+                                    <input type="number" class="form-control" id="salary_entitlement" name="salary_entitlement">
+                                </div>
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gross_salary" class="form-label">Thành tiền <span class="text-danger fs-6 fw-light fst-italic">(HSL + HSPCCV x 2.340.000đ x Hưởng lương)</span></label>
+                            <input type="number" class="form-control" id="gross_salary" name="gross_salary" style="color: #6c757d; background-color: #e9ecef;" readonly>
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -127,7 +140,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $salary->first_name }} {{ $salary->last_name }}</td>
-                        <td>{{ $salary->job_position_name.' - '.$salary->position_level }}</td>
+                        <td>{{ $salary->job_position_name.' - '.$salary->job_level }}</td>
                         <td>{{ $salary->salary_code}}</td>
                         <td>{{ $salary->salary_coefficient}}</td>
                         <td>{{ $salary->allowance_salary_coefficient }}</td>
@@ -178,8 +191,10 @@
                     var data = response.salary;
                     console.log(data)
                     $('#employee_name').val(data.first_name + ' ' + data.last_name);
-                    $('#job_level').val(data.job_position_name + ' - ' + data.position_level);
+                    $('#job_level').val(data.job_position_name + ' - ' + data.job_level);
+                    $('#type_employee_id').val(data.type_employee_name);
                     $('#salary_code').val(data.salary_code);
+                    $('#salary_entitlement').val(data.salary_entitlement);
                     $('#salary_coefficient').val(data.salary_coefficient || ''); // Xử lý trường hợp null
                     $('#allowance_salary_coefficient').val(data.allowance_salary_coefficient || ''); // Xử lý trường hợp null
                     $('#gross_salary').val(data.gross_salary);

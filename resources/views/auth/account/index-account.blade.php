@@ -41,7 +41,7 @@
                         <div class="mb-3">
                             <label for="employee_name" class="form-label">Tên nhân viên</label>
                             <select class="form-select" aria-label="Default" name="id_employee" id="id_employee">
-                                @foreach ($employee_list as $item)
+                                @foreach ($employee_list_none_acc as $item)
                                     <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>
                                 @endforeach
                             </select>
@@ -52,11 +52,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="text" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="mb-3">
                             <label for="repassword" class="form-label">Nhập lại mật khẩu</label>
-                            <input type="text" class="form-control" id="repassword" name="repassword">
+                            <input type="password" class="form-control" id="repassword" name="repassword">
                         </div>
 
                         <div class="mb-3">
@@ -74,45 +74,7 @@
         </div>
     </div>
     <!-- ======= Modal sửa ======= -->
-{{--    <div class="modal fade" id="editAccountModal">--}}
-{{--        <div class="modal-dialog">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h4 class="modal-title">Edit account</h4>--}}
-{{--                </div>--}}
-{{--                <div class="modal-body">--}}
-{{--                    <form id="editAccountForm" enctype="multipart/form-data">--}}
-{{--                        @csrf--}}
-{{--                        <div class="mb-3">--}}
-{{--                            <label for="edit_id_employee" class="form-label">Id Employee</label>--}}
-{{--                            <select class="form-select" aria-label="Default" name="edit_id_employee" id="edit_id_employee">--}}
-{{--                                @foreach ($employee_list as $item)--}}
-{{--                                    <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-{{--                        <div class="mb-3">--}}
-{{--                            <label for="edit_username" class="form-label">Username</label>--}}
-{{--                            <input type="text" class="form-control" id="edit_username" name="edit_username" required>--}}
-{{--                        </div>--}}
-{{--                        <div class="mb-3">--}}
-{{--                            <label for="edit_password" class="form-label">Password</label>--}}
-{{--                            <input type="text" class="form-control" id="edit_password" name="edit_password" required>--}}
-{{--                        </div>--}}
-{{--                        <div class="mb-3">--}}
-{{--                            <label for="edit_permission" class="form-label">Permission</label>--}}
-{{--                            <select class="form-select" aria-label="Default" name="edit_permission" id="edit_permission">--}}
-{{--                                @foreach ($permis_list as $item)--}}
-{{--                                    <option value="{{ $item->permission_id }}">{{ $item->permission_name}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-{{--                        <button type="submit" class="btn btn-primary">Save change</button>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
         <h3 class="text-left mb-4">Danh sách tài khoản</h3>
