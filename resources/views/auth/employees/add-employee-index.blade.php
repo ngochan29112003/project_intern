@@ -73,7 +73,7 @@
                                                     class="text-danger fs-6 fw-lighter">*</span></label>
                                         </div>
                                         <div class="col-7">
-                                            <input type="text" class="form-control" id="birth_date" name="birth_date" required>
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
 
                                         </div>
                                     </div>
@@ -507,38 +507,38 @@
 
 
         $(document).ready(function() {
-            // Định nghĩa ngôn ngữ tiếng Việt cho Datepicker
-            $.datepicker.regional['vi'] = {
-                closeText: 'Đóng',
-                prevText: '&#x3C;Trước',
-                nextText: 'Tiếp&#x3E;',
-                currentText: 'Hôm nay',
-                monthNames: ['Tháng Giêng','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu',
-                    'Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'],
-                monthNamesShort: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
-                    'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
-                dayNames: ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'],
-                dayNamesShort: ['CN','T2','T3','T4','T5','T6','T7'],
-                dayNamesMin: ['CN','T2','T3','T4','T5','T6','T7'],
-                weekHeader: 'Tu',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 0,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['vi']);
-
-            // Thiết lập Datepicker cho trường "Ngày sinh"
-            $("#birth_date").datepicker({
-                dateFormat: "dd/mm/yy", // Định dạng ngày tháng năm
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "1900:+nn", // Phạm vi năm, có thể điều chỉnh theo nhu cầu
-                onSelect: function(dateText) {
-                    $(this).val(dateText);
-                }
-            });
+            // // Định nghĩa ngôn ngữ tiếng Việt cho Datepicker
+            // $.datepicker.regional['vi'] = {
+            //     closeText: 'Đóng',
+            //     prevText: '&#x3C;Trước',
+            //     nextText: 'Tiếp&#x3E;',
+            //     currentText: 'Hôm nay',
+            //     monthNames: ['Tháng Giêng','Tháng Hai','Tháng Ba','Tháng Tư','Tháng Năm','Tháng Sáu',
+            //         'Tháng Bảy','Tháng Tám','Tháng Chín','Tháng Mười','Tháng Mười Một','Tháng Mười Hai'],
+            //     monthNamesShort: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+            //         'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+            //     dayNames: ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'],
+            //     dayNamesShort: ['CN','T2','T3','T4','T5','T6','T7'],
+            //     dayNamesMin: ['CN','T2','T3','T4','T5','T6','T7'],
+            //     weekHeader: 'Tu',
+            //     dateFormat: 'dd/mm/yy',
+            //     firstDay: 0,
+            //     isRTL: false,
+            //     showMonthAfterYear: false,
+            //     yearSuffix: ''
+            // };
+            // $.datepicker.setDefaults($.datepicker.regional['vi']);
+            //
+            // // Thiết lập Datepicker cho trường "Ngày sinh"
+            // $("#birth_date").datepicker({
+            //     dateFormat: "dd/mm/yy", // Định dạng ngày tháng năm
+            //     changeMonth: true,
+            //     changeYear: true,
+            //     yearRange: "1900:+nn", // Phạm vi năm, có thể điều chỉnh theo nhu cầu
+            //     onSelect: function(dateText) {
+            //         $(this).val(dateText);
+            //     }
+            // });
 
             // Hàm để cập nhật job_position_code dựa trên job_position_id hiện tại
             function updateJobPositionCode() {
