@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 22, 2024 at 06:26 PM
+-- Generation Time: Aug 26, 2024 at 11:16 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.25
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,14 +40,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(6, 'ngochan', '$2y$10$iRR0RHFnkm.3K1R5FO3ZDeC6iygS0fjNYXW1hLv0Wf9.GJCtuv3Z.', 1, 6),
-(7, 'admin', '$2y$10$5BulCzwUQ0IJX2H7OPZBi.H5nIPT7.AVVZVhE18QXTBweDhndtaoO', 2, 8),
-(8, 'hr', '$2y$10$1MhowbbF6NRiBuLQ9wxHKeGwljYBI1qGiEtA3nAl7dDF7Q9cxO2Cm', 2, 11),
-(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12),
-(10, 'em', '$2y$10$TrsjKovFpwGV/4j680Ic.uaUQq98oFg6VVWpL0Ap6fiyb/vy5fZY2', 3, 13),
-(11, 'dir', '$2y$10$a8AwaJo0hwDonyzZi/b7ZuiR6peI.C6rOqhNH/2gT2F9IJ4Rb1ahO', 2, 15),
-(12, 'dm', '$2y$10$ZqrBsxjKKjYguSiSIWyLmufx.KR5kkczo6urIWGixJZrAcya6WYjS', 2, 14),
-(13, 'u_taichinh', '$2y$10$obJIQc0greChxik3.czGKu2Ep0ePYT1Zgo3ZynkBtn2TWukjlNrxy', 2, 17);
+(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12);
 
 -- --------------------------------------------------------
 
@@ -153,10 +146,10 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 'Tuấn', 'Trịnh', 'avt.png', 0, '1997-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, 'Kinh', 'Không', 0, 'Vietnam', NULL, NULL, NULL, NULL),
 (23, 'aaa', 'aaa', '1724307064_cropped_image.png', 0, '2003-02-04', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(25, '97', 'JACKY', '1724314047_jacklon.jpg', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
-(26, 'tuấn', 'trịnh t', '1724312638_cropped_image.png', 1, '2003-04-12', 'Bến Tre', NULL, NULL, NULL, NULL, 4, 0, 2, 0, NULL, NULL, 'bocon', 0, 'Vietnam', NULL, NULL, NULL, NULL);
+(25, '97', 'JACKY', '1724688166_cropped_image.png', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
+(28, '97j', 'j97', '1724688723_cropped_image.png', 0, '2024-08-07', 'Bạc Liêu', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, '-', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(32, '123123', '123123', '1724688860_cropped_image.png', 0, '2024-07-30', 'An Giang', NULL, NULL, NULL, NULL, 1, 0, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -177,10 +170,11 @@ CREATE TABLE `job_details` (
 --
 
 INSERT INTO `job_details` (`id_job_detail`, `employee_id`, `job_position_id`, `job_level`, `salary_code`) VALUES
-(3, 16, 10, 3, 'vv'),
-(10, 23, 6, NULL, NULL),
+(10, 23, 6, 3, NULL),
 (12, 25, 6, 1, '123'),
-(13, 26, 6, 1, NULL);
+(15, 28, 6, 1, 'aaaa'),
+(17, 32, 6, 1, NULL),
+(18, 12, 6, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -380,19 +374,20 @@ CREATE TABLE `salaries` (
   `health_insurance` float DEFAULT NULL,
   `accident_insurance` float DEFAULT NULL,
   `net_salary` float DEFAULT NULL,
-  `description_salary` text
+  `description_salary` text,
+  `salary_entitlement` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `salaries`
 --
 
-INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`, `description_salary`) VALUES
-(5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL),
-(14, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allowance_salary_coefficient`, `gross_salary`, `social_insurance`, `health_insurance`, `accident_insurance`, `net_salary`, `description_salary`, `salary_entitlement`) VALUES
+(5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL, NULL),
+(21, 23, 2, 2, 7956000, 636480, 119340, 79560, 7120620, NULL, 85),
+(23, 25, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760, NULL, 100),
+(26, 28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 85),
+(28, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -694,7 +689,7 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -718,13 +713,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `job_details`
 --
 ALTER TABLE `job_details`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `job_level`
@@ -778,7 +773,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`

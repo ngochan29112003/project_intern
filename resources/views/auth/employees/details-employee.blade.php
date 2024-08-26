@@ -497,6 +497,11 @@
             url = url.replace(':id', employee_id);
             var formData = new FormData(this);
 
+            // Kiểm tra nếu có croppedImageBlob, thì thêm nó vào formData
+            if (window.croppedImageBlob) {
+                formData.append('img', window.croppedImageBlob, 'cropped_image.png');
+            }
+
             $.ajax({
                 url: url,
                 method: 'POST',
@@ -505,10 +510,21 @@
                 processData: false,
                 success: function (response) {
                     if (response.success) {
-                        toastr.success(response.response, "Edit successful");
-                        setTimeout(function () {
-                            location.reload();
-                        }, 500);
+                        Swal.fire({
+                            title: 'Chỉnh sửa thành công!',
+                            text: 'Bạn có muốn tiếp tục chỉnh sửa hay quay về danh sách nhân viên?',
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Tiếp tục chỉnh sửa',
+                            cancelButtonText: 'Quay về danh sách'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Người dùng chọn tiếp tục chỉnh sửa, không làm gì
+                            } else {
+                                // Người dùng chọn quay về danh sách nhân viên
+                                window.location.href = '{{ route('index-employees') }}';
+                            }
+                        });
                     }
                 },
                 error: function (xhr) {
@@ -516,6 +532,8 @@
                 }
             });
         });
+
+
 
     </script>
 @endsection

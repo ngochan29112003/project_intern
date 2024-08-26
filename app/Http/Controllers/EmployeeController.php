@@ -144,19 +144,29 @@ class EmployeeController extends Controller
         $imageOld = $employee->img;
 
         $imagePath = $imageOld;
+
         if ($request->hasFile('img')) {
             $file = $request->file('img');
             $imagePath = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/employee_img/'), $imagePath);
 
-            // Xóa hình ảnh cũ nếu có
-            if ($imageOld && file_exists(public_path('assets/employee_img/' . $imageOld))) {
+            // Xóa hình ảnh cũ nếu nó không phải là "avt.png"
+            if ($imageOld && $imageOld !== 'avt.png' && file_exists(public_path('assets/employee_img/' . $imageOld))) {
+                unlink(public_path('assets/employee_img/' . $imageOld));
+            }
+        } elseif ($request->hasFile('cropped_image')) {
+            $file = $request->file('cropped_image');
+            $imagePath = time() . '_cropped_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/employee_img/'), $imagePath);
+
+            // Xóa hình ảnh cũ nếu nó không phải là "avt.png"
+            if ($imageOld && $imageOld !== 'avt.png' && file_exists(public_path('assets/employee_img/' . $imageOld))) {
                 unlink(public_path('assets/employee_img/' . $imageOld));
             }
         }
 
         // Cập nhật thông tin nhân viên
-        $employee->update($validated, ['img' => $imagePath]);
+        $employee->update(array_merge($validated, ['img' => $imagePath]));
 
         // Cập nhật thông tin trong bảng JobDetailsModel
         $jobDetails = JobDetailsModel::where('employee_id', $id)->first();
@@ -173,6 +183,8 @@ class EmployeeController extends Controller
             'employee' => $employee,
         ]);
     }
+
+
 
     public function delete($id)
     {
