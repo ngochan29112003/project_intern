@@ -2,11 +2,11 @@
 
 @section('contents')
     <div class="pagetitle">
-        <h1>Discipline</h1>
+        <h1>Kỷ luật</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Management</a></li>
-                <li class="breadcrumb-item active">Discipline</li>
+                <li class="breadcrumb-item"><a href="/">Tổng quan</a></li>
+                <li class="breadcrumb-item active">Kỷ luật</li>
             </ol>
         </nav>
     </div>
@@ -17,13 +17,13 @@
             <div class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addDiscipline">
                 <div class="d-flex align-items-center at1">
                     <i class="bi bi-file-earmark-plus pe-2"></i>
-                    Add a new discipline
+                    Thêm kỷ luật mới
                 </div>
             </div>
             <div class="btn btn-success mx-2 btn-export">
                 <a href="{{route('export-discipline')}}" class="d-flex align-items-center text-white">
                     <i class="bi bi-file-earmark-arrow-down pe-2"></i>
-                    Export file excel
+                    Xuất file excel
                 </a>
             </div>
         </div>
@@ -104,9 +104,9 @@
             <table id="DisciplineTable" class="table table-hover table-bordered">
                 <thead class="table-light">
                 <tr>
-                    <th>No</th>
-                    <th>Disciplinary type</th>
-                    <th>Employee id</th>
+                    <th>STT</th>
+                    <th>Tên kỷ luật</th>
+                    <th>Nhân sự</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>

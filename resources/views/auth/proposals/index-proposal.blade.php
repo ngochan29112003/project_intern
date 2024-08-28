@@ -4,7 +4,7 @@
     @php
         $data = \Illuminate\Support\Facades\DB::table('employees')
                 ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
-                ->join('job_positions', 'employees.job_position_id','=','job_positions.job_position_id')
+                ->join('job_details','employees.employee_id','=','job_details.employee_id')
                 ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID))
                 ->first();
     @endphp
@@ -61,18 +61,18 @@
                                         @if(($data->permission === 2 && $data->job_position_id === 6))
                                             @foreach($employee_list_dm as $item)
                                                 <option
-                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                        value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
                                                 </option>
                                             @endforeach
                                         @elseif(($data->permission === 2 && $data->job_position_id === 7))
                                             @foreach($employee_list_dir as $item)
                                                 <option
-                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                        value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
                                                 </option>
                                             @endforeach
                                         @else
                                             <option
-                                                value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                                    value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
                                             </option>
                                         @endif
                                     </select>
@@ -85,7 +85,7 @@
                                             id="type_proposal_id">
                                         @foreach ($type_proposal_list as $item)
                                             <option
-                                                value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
+                                                    value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -131,18 +131,18 @@
                                         @if(($data->permission === 2 && $data->job_position_id === 6))
                                             @foreach($employee_list_dm as $item)
                                                 <option
-                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                        value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
                                                 </option>
                                             @endforeach
                                         @elseif(($data->permission === 2 && $data->job_position_id === 7))
                                             @foreach($employee_list_dir as $item)
                                                 <option
-                                                    value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
+                                                        value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
                                                 </option>
                                             @endforeach
                                         @else
                                             <option
-                                                value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
+                                                    value="{{$current_employee->employee_id}}">{{$current_employee->first_name.' '.$current_employee->last_name}}
                                             </option>
                                         @endif
                                     </select>
@@ -155,7 +155,7 @@
                                             id="edit_type_proposal_id">
                                         @foreach ($type_proposal_list as $item)
                                             <option
-                                                value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
+                                                    value="{{ $item->type_proposal_id}}">{{ $item->proposal_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -257,25 +257,25 @@
                             @if(($data->permission === 2 && $data->job_position_id === 6))
                                 @if ( $item->proposal_status === 0)
                                     <button
-                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
-                                        data-id="{{ $item->proposal_id }}"
-                                        data-permission="{{$data->permission}}"
-                                        data-position="{{$data->job_position_id}}">
+                                            class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                            data-id="{{ $item->proposal_id }}"
+                                            data-permission="{{$data->permission}}"
+                                            data-position="{{$data->job_position_id}}">
                                         <i class="bi bi-check-circle"></i>
                                         Not approved
                                     </button>
                                 @elseif($item->proposal_status === 1)
                                     <button
-                                        class="text-warning btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none"
-                                        data-id="{{ $item->proposal_id }}" disabled>
+                                            class="text-warning btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none"
+                                            data-id="{{ $item->proposal_id }}" disabled>
                                         <i class="bi bi-check-circle-fill"></i>
                                         Direct Manager approved
                                     </button>
                                 @elseif($item->proposal_status === 2)
                                     <button
-                                        class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
-                                        data-id="{{ $item->proposal_id }}"
-                                        disabled>
+                                            class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                            data-id="{{ $item->proposal_id }}"
+                                            disabled>
                                         <i class="bi bi-check-circle-fill"></i>
                                         Done
                                     </button>
@@ -283,25 +283,25 @@
                             @elseif(($data->permission === 2 && $data->job_position_id === 7))
                                 @if ( $item->proposal_status === 0)
                                     <button
-                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
-                                        data-id="{{ $item->proposal_id }}" disabled>
+                                            class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                            data-id="{{ $item->proposal_id }}" disabled>
                                         <i class="bi bi-check-circle"></i>
                                         Direct Manager not approve
                                     </button>
                                 @elseif($item->proposal_status === 1)
                                     <button
-                                        class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
-                                        data-id="{{ $item->proposal_id }}"
-                                        data-permission="{{$data->permission}}"
-                                        data-position="{{$data->job_position_id}}">
+                                            class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                            data-id="{{ $item->proposal_id }}"
+                                            data-permission="{{$data->permission}}"
+                                            data-position="{{$data->job_position_id}}">
                                         <i class="bi bi-check-circle"></i>
                                         Not approve
                                     </button>
                                 @elseif($item->proposal_status === 2)
                                     <button
-                                        class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
-                                        data-id="{{ $item->proposal_id }}"
-                                        disabled>
+                                            class="text-success btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
+                                            data-id="{{ $item->proposal_id }}"
+                                            disabled>
                                         <i class="bi bi-check-circle-fill"></i>
                                         Done
                                     </button>
@@ -311,14 +311,14 @@
                         <td class="text-center">
                             @if ($item->proposal_status === 0)
                                 <button
-                                    class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                    data-id="{{ $item->proposal_id}}">
+                                        class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
+                                        data-id="{{ $item->proposal_id}}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                                 |
                                 <button
-                                    class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                    data-id="{{ $item->proposal_id}}">
+                                        class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
+                                        data-id="{{ $item->proposal_id}}">
                                     <i class="bi bi-trash3"></i>
                                 </button>
                             @endif

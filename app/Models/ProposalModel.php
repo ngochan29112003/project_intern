@@ -75,8 +75,9 @@ class ProposalModel extends Model
             ->value('permission');
 
         $job_position_id = DB::table('employees')
-            ->where('employee_id',$employee_id)
-            ->value('job_position_id');
+            ->join('job_details','employees.employee_id','=','job_details.employee_id')
+            ->where('employees.employee_id',$employee_id)
+            ->value('job_details.job_position_id');
 
         $department_id = DB::table('employees')
             ->join('departments', 'employees.department_id','=','departments.department_id')

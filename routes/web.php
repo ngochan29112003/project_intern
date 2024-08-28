@@ -180,10 +180,17 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
         Route::get('/export', [LeaveApplicationController::class, 'exportExcel'])->name('export-leave-application');
     });
 
+    //BHXH
+    Route::group(['prefix' => '/bhxh'], function () {
+        Route::get('/index', [BhxhController::class, 'getView'])->name('index-bhxh');
+    });
+
     Route::group(['prefix' => '/profile'], function () {
         Route::get('', [ProfileController::class, 'getView'])->name('index-profile');
         Route::post('/update/{id}', [ProfileController::class, 'update'])->name('update-profile');
     });
+
+
 
     //
 });

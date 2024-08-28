@@ -214,6 +214,13 @@ $token = 'position';
                     </a>
                 </li>
             </ul>
+            <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('index-bhxh')}}">
+                        <i class="bi bi-circle"></i><span>Bảng tính BHXH</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="nav-item">

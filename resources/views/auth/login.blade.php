@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>HRM - Login</title>
+    <title>Quản lý nhân sự - Đăng nhập</title>
     <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
@@ -28,7 +28,7 @@
             <div class="p-4 mt-4 bg-white rounded">
                 <div class="text-center py-3">
                     <img src="" alt="">
-                    <h4 class="fw-semibold py-3">Human Resource Management</h4>
+                    <h4 class="fw-semibold py-3">Đăng nhập</h4>
                 </div>
                 <form action="{{route('post-login')}}" method="post" id="login-form">
                     {{ csrf_field() }}
