@@ -184,6 +184,7 @@ Route::group(['prefix' => '/', 'middleware' => 'isLogin'], function () {
     //BHXH
     Route::group(['prefix' => '/bhxh'], function () {
         Route::get('/index', [BhxhController::class, 'getView'])->name('index-bhxh');
+        Route::get('/export', [BhxhController::class, 'exportExcel'])->name('export-bhxh');
     });
 
     Route::group(['prefix' => '/profile'], function () {

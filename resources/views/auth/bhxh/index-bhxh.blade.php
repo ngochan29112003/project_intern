@@ -61,24 +61,24 @@
                 </thead>
                 <tbody id="BHXHTableBody">
                 @php($stt = 0)
-                @foreach ($bhxh_list as $item)
-                    <tr>
-                        <td>{{ $stt++ }}</td>
-                        <td class="text-center">
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"
-                                data-id="{{ $item->bhxh_id}}">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            |
-                            <button
-                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"
-                                data-id="{{ $item->bhxh_id}}">
-                                <i class="bi bi-trash3"></i>
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
+{{--                @foreach ($bhxh_list as $item)--}}
+{{--                    <tr>--}}
+{{--                        <td>{{ $stt++ }}</td>--}}
+{{--                        <td class="text-center">--}}
+{{--                            <button--}}
+{{--                                class="btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none edit-btn"--}}
+{{--                                data-id="{{ $item->bhxh_id}}">--}}
+{{--                                <i class="bi bi-pencil-square"></i>--}}
+{{--                            </button>--}}
+{{--                            |--}}
+{{--                            <button--}}
+{{--                                class="btn p-0 btn-primary border-0 bg-transparent text-danger shadow-none delete-btn"--}}
+{{--                                data-id="{{ $item->bhxh_id}}">--}}
+{{--                                <i class="bi bi-trash3"></i>--}}
+{{--                            </button>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                @endforeach--}}
                 </tbody>
             </table>
         </div>
