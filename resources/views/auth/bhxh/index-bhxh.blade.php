@@ -87,6 +87,6 @@
 
 @section('scripts')
     <script>
-        var table = $('#BHXHTable').DataTable();
+        var table = $('#BhxhTable').DataTable();
     </script>
 @endsection
