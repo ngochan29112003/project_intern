@@ -71,7 +71,7 @@ class SalaryController extends Controller
         foreach ($salaries as $row) {
             $cell->setCellValue('A' . $num_row, $stt++);
             $cell->setCellValue('B' . $num_row, $row->first_name.' '.$row->last_name);
-            $cell->setCellValue('C' . $num_row, $row->job_position_name . ' - ' . $row->position_level);
+            $cell->setCellValue('C' . $num_row, $row->job_position_name . ' - ' . $row->job_level);
             $cell->setCellValue('D' . $num_row, $row->salary_code);
             $cell->setCellValue('E' . $num_row, $row->salary_coefficient);
             $cell->setCellValue('F' . $num_row, $row->allowance_salary_coefficient);

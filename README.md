@@ -64,7 +64,7 @@ php artisan make:model DemoModel
 php artisan ser
 ```
 
-#### 9. cài đặt thư viện im/export excel
+#### 9. cài đặt composer (có sẵn thư viện im/export excel)
 ```
 composer require "ext-gd:*" --ignore-platform-reqs
 composer require "ext-fileinfo:*" --ignore-platform-reqs
