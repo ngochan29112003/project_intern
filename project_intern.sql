@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 26, 2024 at 11:16 PM
+-- Generation Time: Aug 30, 2024 at 09:34 PM
 -- Server version: 5.7.24
--- PHP Version: 8.1.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,35 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12);
+(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12),
+(10, 'ngochan', '$2y$10$qtw76.WeZjnfxKBFc/77h.BWwIcjR2M/BuCEP4pmCjNQdDIIXdTNi', 1, 33),
+(11, 'aaa', '$2y$10$xl5ISi4OSJTbdAaDAHZmZ.lrNpukd1gYfqX8rcqO5s10bYFRzHmrm', 3, 23),
+(12, 'hr', '$2y$10$85jYesN2aJKSGuE67x.RzOIgs9jg6oG9h5t6ZgrAOWURQ1IedJayC', 2, 32);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bao_hiem_xh`
+--
+
+CREATE TABLE `bao_hiem_xh` (
+  `bhxh_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `luong_theo_hs` text NOT NULL,
+  `luong_theo_hspc` text NOT NULL,
+  `bhxh_capbac` text NOT NULL,
+  `bhyt_capbac` text NOT NULL,
+  `bhtn_capbac` text NOT NULL,
+  `bhxh_hscv` text NOT NULL,
+  `bhyt_hscv` text NOT NULL,
+  `bhtn_hscv` text NOT NULL,
+  `tong_tru_luong` text NOT NULL,
+  `bhxh_to_chuc` text NOT NULL,
+  `bhyt_to_chuc` text NOT NULL,
+  `bhtn_to_chuc` text NOT NULL,
+  `bhnn_to_chuc` text NOT NULL,
+  `tong_to_chuc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -147,9 +175,10 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (23, 'aaa', 'aaa', '1724307064_cropped_image.png', 0, '2003-02-04', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(25, '97', 'JACKY', '1724688166_cropped_image.png', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
-(28, '97j', 'j97', '1724688723_cropped_image.png', 0, '2024-08-07', 'Bạc Liêu', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, '-', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(32, '123123', '123123', '1724688860_cropped_image.png', 0, '2024-07-30', 'An Giang', NULL, NULL, NULL, NULL, 1, 0, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL);
+(25, 'Nguyễn', 'Lucy', '1724688166_cropped_image.png', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
+(28, 'Hoa', 'Mai', '1724688723_cropped_image.png', 1, '2024-08-07', 'Bạc Liêu', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, '-', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(32, '123123', '123123', '1724689176_cropped_image.png', 0, '2024-07-30', 'An Giang', NULL, NULL, NULL, NULL, 1, 0, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(33, 'Hân', 'Ngọc', '1724733069_cropped_image.png', 1, '2003-11-29', 'Vĩnh Long', NULL, NULL, NULL, NULL, 2, 1, 1, 0, NULL, NULL, NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,7 +203,8 @@ INSERT INTO `job_details` (`id_job_detail`, `employee_id`, `job_position_id`, `j
 (12, 25, 6, 1, '123'),
 (15, 28, 6, 1, 'aaaa'),
 (17, 32, 6, 1, NULL),
-(18, 12, 6, 1, NULL);
+(18, 12, 6, 1, NULL),
+(19, 33, 6, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -386,8 +416,9 @@ INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allow
 (5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL, NULL),
 (21, 23, 2, 2, 7956000, 636480, 119340, 79560, 7120620, NULL, 85),
 (23, 25, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760, NULL, 100),
-(26, 28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 85),
-(28, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100);
+(26, 28, 0.01, 0.01, 39780, 3182.4, 596.7, 397.8, 35603.1, NULL, 85),
+(28, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100),
+(29, 33, 3, 3, 14040000, 1123200, 210600, 140400, 12565800, NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -438,7 +469,8 @@ INSERT INTO `tasks` (`id_task`, `task_code`, `employee_id`, `start_date`, `end_d
 (2, '32312', 3213, '2024-08-15', '2024-08-21', '3213', '21323'),
 (3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe'),
 (4, '1', 4, '2024-08-16', '2024-08-31', 'dsa', 'fdsfasd'),
-(5, 'CIR', 8, '2024-08-17', '2024-08-30', 'ds', 'dsad');
+(5, 'CIR', 8, '2024-08-17', '2024-08-30', 'ds', 'dsad'),
+(6, 'IT_1', 12, '2024-07-31', '2024-08-28', 'Trưởng Phòng', 'None');
 
 -- --------------------------------------------------------
 
@@ -554,6 +586,12 @@ INSERT INTO `type_rewards` (`type_reward_id`, `type_reward_name`) VALUES
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bao_hiem_xh`
+--
+ALTER TABLE `bao_hiem_xh`
+  ADD PRIMARY KEY (`bhxh_id`);
 
 --
 -- Indexes for table `departments`
@@ -689,7 +727,13 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `bao_hiem_xh`
+--
+ALTER TABLE `bao_hiem_xh`
+  MODIFY `bhxh_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -713,13 +757,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `job_details`
 --
 ALTER TABLE `job_details`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `job_level`
@@ -773,7 +817,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
@@ -785,7 +829,7 @@ ALTER TABLE `salary_calculation`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `type_disciplines`
