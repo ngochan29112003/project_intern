@@ -86,13 +86,13 @@ class ProposalModel extends Model
 
         $list_proposal = [];
 
-        if (($permission === 3 || $permission === 1 || $permission === 2) && $job_position_id !== 6 && $job_position_id !== 7){
+        if (($permission === 3 || $permission === 1 || $permission === 2) && $job_position_id !== 10 && $job_position_id !== 7){
             $list_proposal = DB::table('proposals')
                 ->join('employees','proposals.employee_id', '=','employees.employee_id')
                 ->join('type_proposals','proposals.type_proposal_id', '=','type_proposals.type_proposal_id')
                 ->where('proposals.employee_id', $employee_id)
                 ->get();
-        }else if ($permission === 2 && $job_position_id === 6){
+        }else if ($permission === 2 && $job_position_id === 10){
             $list_proposal = DB::table('proposals')
                 ->join('employees','proposals.employee_id', '=','employees.employee_id')
                 ->join('type_proposals','proposals.type_proposal_id', '=','type_proposals.type_proposal_id')

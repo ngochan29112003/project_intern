@@ -13,7 +13,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Quản lý</a></li>
-                @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+                @if(($data->permission === 2 && $data->job_position_id === 10) || ($data->permission === 2 && $data->job_position_id === 7))
                     <li class="breadcrumb-item active">Báo cáo đề xuất</li>
                 @else
                     <li class="breadcrumb-item active">Danh sách đề xuất</li>
@@ -31,7 +31,7 @@
                     Thêm đề xuất mới
                 </div>
             </div>
-            @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+            @if(($data->permission === 2 && $data->job_position_id === 10) || ($data->permission === 2 && $data->job_position_id === 7))
                 <div class="btn btn-success mx-2 btn-export">
                     <a href="" class="d-flex align-items-center text-white">
                         <i class="bi bi-file-earmark-arrow-down pe-2"></i>
@@ -58,7 +58,7 @@
                                     <label for="add_employee_id" class="form-label">Nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="employee_id">
-                                        @if(($data->permission === 2 && $data->job_position_id === 6))
+                                        @if(($data->permission === 2 && $data->job_position_id === 10))
                                             @foreach($employee_list_dm as $item)
                                                 <option
                                                         value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
@@ -128,7 +128,7 @@
                                     <label for="edit_employee_id" class="form-label">Nhân viên</label>
                                     <select class="form-select" aria-label="Default" name="employee_id"
                                             id="edit_employee_id">
-                                        @if(($data->permission === 2 && $data->job_position_id === 6))
+                                        @if(($data->permission === 2 && $data->job_position_id === 10))
                                             @foreach($employee_list_dm as $item)
                                                 <option
                                                         value="{{$item->employee_id}}">{{$item->first_name.' '.$item->last_name}}
@@ -198,7 +198,7 @@
     </div>
 
     <div class="card shadow-sm p-3 mb-5 bg-white rounded-4">
-        @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+        @if(($data->permission === 2 && $data->job_position_id === 10) || ($data->permission === 2 && $data->job_position_id === 7))
             <h3 class="text-left mb-4">Báo cáo đề xuất</h3>
         @else
             <h3 class="text-left mb-4">Đề xuất của bạn</h3>
@@ -213,10 +213,10 @@
                     <th>Ghi chú</th>
                     <th>Trạng thái</th>
                     <th>
-                        @if(($data->permission === 2 && $data->job_position_id === 6))
-                            Direct Manager
+                        @if(($data->permission === 2 && $data->job_position_id === 10))
+                            Trưởng phòng
                         @elseif(($data->permission === 2 && $data->job_position_id === 7))
-                            Director
+                            Giám đốc
                         @endif
                     </th>
                     <th class="text-center">Action</th>
@@ -236,25 +236,25 @@
                                     <div class="progress-bar bg-danger text-white fw-bold" role="progressbar"
                                          style="width: 33%;"
                                          aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                        Not approved
+                                        Chưa duyệt
                                     </div>
                                 @elseif($item->proposal_status === 1)
                                     <div class="progress-bar bg-warning text-white fw-bold" role="progressbar"
                                          style="width: 66%;"
                                          aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
-                                        Direct Manager approved
+                                        Trưởng phòng đã duyệt
                                     </div>
                                 @elseif($item->proposal_status === 2)
                                     <div class="progress-bar bg-success text-white fw-bold" role="progressbar"
                                          style="width: 100%;"
                                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                        Director approved
+                                        Giám đốc đã duyệt
                                     </div>
                                 @endif
                             </div>
                         </td>
                         <td>
-                            @if(($data->permission === 2 && $data->job_position_id === 6))
+                            @if(($data->permission === 2 && $data->job_position_id === 10))
                                 @if ( $item->proposal_status === 0)
                                     <button
                                             class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
@@ -262,14 +262,14 @@
                                             data-permission="{{$data->permission}}"
                                             data-position="{{$data->job_position_id}}">
                                         <i class="bi bi-check-circle"></i>
-                                        Not approved
+                                        Chưa duyệt
                                     </button>
                                 @elseif($item->proposal_status === 1)
                                     <button
                                             class="text-warning btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none"
                                             data-id="{{ $item->proposal_id }}" disabled>
                                         <i class="bi bi-check-circle-fill"></i>
-                                        Direct Manager approved
+                                        Trưởng phòng đã duyệt
                                     </button>
                                 @elseif($item->proposal_status === 2)
                                     <button
@@ -277,7 +277,7 @@
                                             data-id="{{ $item->proposal_id }}"
                                             disabled>
                                         <i class="bi bi-check-circle-fill"></i>
-                                        Done
+                                        Đã duỵệt xong
                                     </button>
                                 @endif
                             @elseif(($data->permission === 2 && $data->job_position_id === 7))
@@ -286,7 +286,7 @@
                                             class="text-secondary btn p-0 btn-primary border-0 bg-transparent text-primary shadow-none btn_approved"
                                             data-id="{{ $item->proposal_id }}" disabled>
                                         <i class="bi bi-check-circle"></i>
-                                        Direct Manager not approve
+                                        Trưởng phòng chưa duyệt
                                     </button>
                                 @elseif($item->proposal_status === 1)
                                     <button
@@ -295,7 +295,7 @@
                                             data-permission="{{$data->permission}}"
                                             data-position="{{$data->job_position_id}}">
                                         <i class="bi bi-check-circle"></i>
-                                        Not approve
+                                        Chưa duyệt
                                     </button>
                                 @elseif($item->proposal_status === 2)
                                     <button
@@ -303,7 +303,7 @@
                                             data-id="{{ $item->proposal_id }}"
                                             disabled>
                                         <i class="bi bi-check-circle-fill"></i>
-                                        Done
+                                        Đã duỵệt xong
                                     </button>
                                 @endif
                             @endif

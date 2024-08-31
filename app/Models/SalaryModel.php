@@ -33,22 +33,6 @@ class SalaryModel extends Model
             ->join('job_positions', 'job_details.job_position_id', '=', 'job_positions.job_position_id')
             ->join('type_employees', 'employees.type_employee_id', '=', 'type_employees.type_employee_id')
             ->where('employees.status', 1)
-//            ->select(
-//                'employees.first_name',
-//                'employees.last_name',
-//                'job_positions.job_position_code',
-//                'job_positions.job_position_name',
-//                'job_details.salary_code',
-//                'job_details.job_level',
-//                'salaries.salary_coefficient',
-//                'salaries.allowance_salary_coefficient',
-//                'salaries.social_insurance',
-//                'salaries.health_insurance',
-//                'salaries.accident_insurance',
-//                'salaries.gross_salary',
-//                'salaries.net_salary',
-//                'salaries.salary_id'
-//            )
             ->get();
 
         return $salaries;
@@ -63,22 +47,6 @@ class SalaryModel extends Model
             ->join('type_employees', 'employees.type_employee_id', '=', 'type_employees.type_employee_id')
             ->where('employees.status', 1)
             ->where('salaries.salary_id', $id)
-//            ->select(
-//                'employees.first_name',
-//                'employees.last_name',
-//                'job_positions.job_position_code',
-//                'job_positions.job_position_name',
-//                'job_positions.position_level',
-//                'job_positions.salary_code',
-//                'salaries.salary_coefficient',
-//                'salaries.allowance_salary_coefficient',
-//                'salaries.social_insurance',
-//                'salaries.health_insurance',
-//                'salaries.accident_insurance',
-//                'salaries.gross_salary',
-//                'salaries.net_salary',
-//                'salaries.salary_id'
-//            )
             ->first();
     }
 

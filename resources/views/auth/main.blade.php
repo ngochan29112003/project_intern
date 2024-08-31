@@ -49,6 +49,7 @@ $token = 'position';
 @php
     $data = \Illuminate\Support\Facades\DB::table('employees')
             ->join('accounts', 'accounts.id_employee','=','employees.employee_id')
+            ->join('job_details', 'employees.employee_id','=','job_details.employee_id')
             ->where('accounts.id', \Illuminate\Support\Facades\Request::session()->get(\App\StaticString::ACCOUNT_ID))
             ->first();
 @endphp
@@ -165,48 +166,72 @@ $token = 'position';
                     </li>
                 </ul>
             </li>
+
+            <!-- ======= Chỉ có super admin và người quản lý nhân sự mới truy cập được quản ly ======= -->
+            <li class="nav-heading">Quản lý</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
+                   aria-expanded="false">
+                    <i class="bi bi-person-fill"></i><span>Nhân sự</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-employees')}}">
+                            <i class="bi bi-circle"></i><span>Danh sách nhân sự</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
+                   aria-expanded="false">
+                    <i class="bi bi-building-fill"></i><span>Phòng ban</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-department')}}">
+                            <i class="bi bi-circle"></i><span>Danh sách phòng ban</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#position-nav" data-bs-toggle="collapse" href="#"
+                   aria-expanded="false">
+                    <i class="bi bi-clipboard2-fill"></i><span>Chức vụ</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{route('index-position')}}">
+                            <i class="bi bi-circle"></i><span>Danh sách chức vụ</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#"
+                   aria-expanded="false">
+                    <i class="bi bi-book-fill"></i><span>Nhiệm vụ</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{route('index-task')}}">
+                            <i class="bi bi-circle"></i><span>Danh sách nhiệm vụ</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endif
-        <li class="nav-heading">Quản lý</li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#employee-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-person-fill"></i><span>Nhân sự</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="employee-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-employees')}}">
-                        <i class="bi bi-circle"></i><span>Danh sách nhân sự</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#department-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-building-fill"></i><span>Phòng ban</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="department-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-department')}}">
-                        <i class="bi bi-circle"></i><span>Danh sách phòng ban</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
+        @if(($data->permission === 2 && $data->job_position_id === 15) || $data->permission === 1)
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#payroll-nav" data-bs-toggle="collapse" href="#"
                aria-expanded="false">
                 <i class="bi bi-bank"></i><span>Tiền lương</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-{{--            <ul id="salaries-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="{{route('index-salaries')}}">--}}
-{{--                        <i class="bi bi-circle"></i><span>Payroll list</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
             <ul id="payroll-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{route('index-salary')}}">
@@ -222,35 +247,10 @@ $token = 'position';
                 </li>
             </ul>
         </li>
+        @endif
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#position-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-clipboard2-fill"></i><span>Chức vụ</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="position-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="{{route('index-position')}}">
-                        <i class="bi bi-circle"></i><span>Danh sách chức vụ</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#task-nav" data-bs-toggle="collapse" href="#"
-               aria-expanded="false">
-                <i class="bi bi-book-fill"></i><span>Nhiệm vụ</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="task-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
-                <li>
-                    <a href="{{route('index-task')}}">
-                        <i class="bi bi-circle"></i><span>Danh sách nhiệm vụ</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#other-nav" data-bs-toggle="collapse" href="#"
@@ -280,7 +280,7 @@ $token = 'position';
                 <i class="bi bi-mailbox"></i><span>Đề xuất</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            @if(($data->permission === 2 && $data->job_position_id === 6) || ($data->permission === 2 && $data->job_position_id === 7))
+            @if(($data->permission === 2 && $data->job_position_id === 7) || ($data->permission === 2 && $data->job_position_id === 10))
                 <ul id="proposal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{route('index-proposal')}}">

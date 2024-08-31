@@ -152,7 +152,7 @@ class ProposalController extends Controller
 
     public function approve($id,$permission,$postion)
     {
-        if($permission == 2 && $postion == 6){
+        if($permission == 2 && $postion == 10){
             $proposalApp = ProposalModel::findOrFail($id);
             $proposalApp->proposal_status = 1;
             $proposalApp->save();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BhxhModel;
 use App\Models\EmployeeModel;
 use App\Models\JobDetailsModel;
 use App\Models\SalaryModel;
@@ -97,6 +98,10 @@ class EmployeeController extends Controller
         SalaryModel::create([
             'employee_id' => $employee->employee_id,
             'salary_entitlement' => $salaryEntitlement,
+        ]);
+
+        BhxhModel::create([
+            'employee_id' => $employee->employee_id,
         ]);
 
         return response()->json([

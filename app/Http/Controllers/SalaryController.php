@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BhxhModel;
 use App\Models\SalaryModel;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -39,14 +40,19 @@ class SalaryController extends Controller
         $salary = SalaryModel::findOrFail($id);
         $salary->update($validated);
 
-        // Tính toán và cập nhật lương ngay sau khi cập nhật
+        // Tính toán và cập nhật Salary
         $salaryModel = new SalaryModel();
         $salaryModel->calculateAndUpdateSalary($id);
+
+        // Tính toán và cập nhật BHXH
+        $bhxhModel = new BhxhModel();
+        $bhxhModel->calculateAndUpdateBHXH($salary->salary_id);
 
         return response()->json([
             'success' => true,
         ]);
     }
+
 
     public function exportExcel()
     {
