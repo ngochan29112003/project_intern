@@ -16,7 +16,7 @@ Laravel là một PHP Framework mã nguồn mở miễn phí, được phát tri
 ##### 2. Cấu hình ban đầu
 Chạy lệnh `php composer.phar install`
 
-Copy file `.env.example` -> `.env` sau đó chạy lệnh `php artisan key:generate`
+Copy file `.env.example` -> `.env` 
 
 
 ##### 3. Quy định về kiến trúc
