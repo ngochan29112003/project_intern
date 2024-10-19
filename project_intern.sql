@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 31, 2024 at 04:59 PM
+-- Generation Time: Oct 19, 2024 at 05:12 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -40,58 +40,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `permission`, `id_employee`) VALUES
-(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12),
-(10, 'ngochan', '$2y$10$qtw76.WeZjnfxKBFc/77h.BWwIcjR2M/BuCEP4pmCjNQdDIIXdTNi', 1, 33),
-(11, 'aaa', '$2y$10$xl5ISi4OSJTbdAaDAHZmZ.lrNpukd1gYfqX8rcqO5s10bYFRzHmrm', 3, 23),
-(12, 'hr', '$2y$10$85jYesN2aJKSGuE67x.RzOIgs9jg6oG9h5t6ZgrAOWURQ1IedJayC', 2, 32),
-(13, 'acctp', '$2y$10$E5xgFTCyzzsC0p9.dVCeQ.IKlUzSE4SSBplaZBzN1nwZkM0yYcpZa', 2, 37),
-(14, 'accgd', '$2y$10$QBys8b9aO8NaNPoIGxgtN.3qxCSKlc8cyS71oOe60wxkp7aX8TAJ6', 2, 38),
-(15, 'clct', '$2y$10$vrQBbgCMeG0oGDFW3VbbFOQY0runeLp0xJn2WxC3IdGT3B/sF9Y7a', 3, 36),
-(16, 'acctq', '$2y$10$qO3ndaau84JixX8vvSmWr.C5Wm/ACQrwt.98cdHMuAYMw5pXw1Nj.', 2, 39);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bao_hiem_xh`
---
-
-CREATE TABLE `bao_hiem_xh` (
-  `bhxh_id` int(11) NOT NULL,
-  `employee_id` int(11) DEFAULT NULL,
-  `luong_theo_hs` float DEFAULT NULL,
-  `luong_theo_hspc` float DEFAULT NULL,
-  `bhxh_capbac` float DEFAULT NULL,
-  `bhyt_capbac` float DEFAULT NULL,
-  `bhtn_capbac` float DEFAULT NULL,
-  `bhxh_hscv` float DEFAULT NULL,
-  `bhyt_hscv` float DEFAULT NULL,
-  `bhtn_hscv` float DEFAULT NULL,
-  `tong_tru_luong` float DEFAULT NULL,
-  `bhxh_to_chuc` float DEFAULT NULL,
-  `bhyt_to_chuc` float DEFAULT NULL,
-  `bhtn_to_chuc` float DEFAULT NULL,
-  `bhnn_to_chuc` float DEFAULT NULL,
-  `tong_to_chuc` float DEFAULT NULL,
-  `tong_hs` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `bao_hiem_xh`
---
-
-INSERT INTO `bao_hiem_xh` (`bhxh_id`, `employee_id`, `luong_theo_hs`, `luong_theo_hspc`, `bhxh_capbac`, `bhyt_capbac`, `bhtn_capbac`, `bhxh_hscv`, `bhyt_hscv`, `bhtn_hscv`, `tong_tru_luong`, `bhxh_to_chuc`, `bhyt_to_chuc`, `bhtn_to_chuc`, `bhnn_to_chuc`, `tong_to_chuc`, `tong_hs`) VALUES
-(1, 34, 7020000, 7020000, 561600, 105300, 70200, 561600, 105300, 70200, 1474200, 2386800, 421200, 140400, 70200, 3018600, 14040000),
-(2, 33, 7020000, 7020000, 561600, 105300, 70200, 561600, 105300, 70200, 1474200, 2386800, 421200, 140400, 70200, 3018600, 14040000),
-(3, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 28, 23400, 23400, 1872, 351, 234, 1872, 351, 234, 4914, 7956, 1404, 468, 234, 10062, 46800),
-(5, 25, 7020000, 468000, 561600, 105300, 70200, 37440, 7020, 4680, 786240, 1272960, 224640, 74880, 37440, 1609920, 7488000),
-(6, 23, 4680000, 4680000, 374400, 70200, 46800, 374400, 70200, 46800, 982800, 1591200, 280800, 93600, 46800, 2012400, 9360000),
-(7, 12, 5475600, 0, 438048, 82134, 54756, 0, 0, 0, 574938, 930852, 164268, 54756, 27378, 1177250, 5475600),
-(8, 35, 4680000, 4680000, 374400, 70200, 46800, 374400, 70200, 46800, 982800, 1591200, 280800, 93600, 46800, 2012400, 9360000),
-(9, 36, 4680000, 4680000, 374400, 70200, 46800, 374400, 70200, 46800, 982800, 1591200, 280800, 93600, 46800, 2012400, 9360000),
-(10, 37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(9, 'super', '$2y$10$SC.3L/CyVF2RPQ9.1u6UbeIxHW86mP4LOKU7LODDtVmQ91lS1QULy', 1, 12);
 
 -- --------------------------------------------------------
 
@@ -198,15 +147,9 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`employee_id`, `last_name`, `first_name`, `img`, `gender`, `birth_date`, `birth_place`, `place_of_resident`, `email`, `permanent_address`, `cic_number`, `education_level_id`, `status`, `type_employee_id`, `department_id`, `job_detail_id`, `ethnic`, `religion`, `marital_status`, `nation`, `phone_number`, `place_of_issue`, `date_of_issue`, `date_of_exp`) VALUES
 (12, 'admin', 'super', 'avt.png', 0, '2000-11-11', 'Hà Nam', 'abc', 'superad@gmail.com', 'abc', 123, 2, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (23, 'aaa', 'aaa', '1724307064_cropped_image.png', 0, '2003-02-04', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(25, 'Nguyễn', 'Lucy', '1724688166_cropped_image.png', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
-(28, 'Hoa', 'Mai', '1724688723_cropped_image.png', 1, '2024-08-07', 'Bạc Liêu', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, '-', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(32, 'HR', 'Account', '1724689176_cropped_image.png', 0, '2024-07-30', 'An Giang', NULL, NULL, NULL, NULL, 1, 0, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(33, 'Hân', 'Ngọc', '1724733069_cropped_image.png', 1, '2003-11-29', 'Vĩnh Long', NULL, NULL, NULL, NULL, 2, 1, 1, 0, NULL, NULL, NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(34, 'test', 'test', 'avt.png', 0, '2024-08-22', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(36, 'cá trê', 'cá lóc', 'avt.png', 0, '2024-08-17', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(37, 'Account', 'Trưởng phòng', 'avt.png', 0, '2024-08-08', 'An Giang', NULL, NULL, NULL, NULL, 2, 1, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
-(38, 'Account', 'Giám đốc', 'avt.png', 0, '2024-08-14', 'An Giang', NULL, NULL, NULL, NULL, 1, 1, 1, 0, NULL, '-', NULL, 0, 'South Georgia', NULL, NULL, NULL, NULL),
-(39, 'Account', 'Thủ quỷ', 'avt.png', 0, '2024-08-27', 'An Giang', NULL, NULL, NULL, NULL, 2, 1, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL);
+(25, '97', 'JACKY', '1724688166_cropped_image.png', 3, '2024-08-15', 'Bắc Ninh', 'Bến tre', 'j97@gmail.com', 'Bến tre', 123, 2, 1, 1, 0, NULL, 'Mường', 'không', 1, 'Bahrain', '09797979797', 'Bến tre', '2024-08-14', NULL),
+(28, '97j', 'j97', '1724688723_cropped_image.png', 0, '2024-08-07', 'Bạc Liêu', NULL, NULL, NULL, NULL, 1, 1, 2, 0, NULL, '-', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL),
+(32, '123123', '123123', '1729332696_cropped_image.png', 0, '2024-07-30', 'An Giang', NULL, NULL, NULL, NULL, 1, 0, 1, 0, NULL, 'Kinh', NULL, 0, 'Vietnam', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,14 +173,8 @@ INSERT INTO `job_details` (`id_job_detail`, `employee_id`, `job_position_id`, `j
 (10, 23, 6, 3, NULL),
 (12, 25, 6, 1, '123'),
 (15, 28, 6, 1, 'aaaa'),
-(17, 32, 8, 1, NULL),
-(18, 12, 6, 1, NULL),
-(19, 33, 6, 1, NULL),
-(20, 34, 6, 1, NULL),
-(22, 36, 6, 1, NULL),
-(23, 37, 10, 1, NULL),
-(24, 38, 7, 1, NULL),
-(25, 39, 15, 1, NULL);
+(17, 32, 6, 1, NULL),
+(18, 12, 6, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -279,13 +216,13 @@ CREATE TABLE `job_positions` (
 INSERT INTO `job_positions` (`job_position_id`, `job_position_code`, `job_position_name`, `description`) VALUES
 (6, 'NV', 'Nhân viên', 'none'),
 (7, 'GD', 'Giám đốc', 'none'),
-(8, 'HR', 'QL Nhân sự', 'none'),
+(8, 'HR', 'Kế toán', 'none'),
 (10, 'TP', 'Trưởng phòng', 'none'),
 (11, 'CNTT', 'Công nghệ thông tin', 'none'),
 (12, 'ATTT', 'An toàn thông tin', 'none'),
 (13, 'PGD', 'Phó giám đốc', 'none'),
-(14, 'PTP', 'Phó trưởng phòng', 'none'),
-(15, 'TQ', 'Thủ quỹ', 'none');
+(14, 'TP', 'Phó trưởng phòng', 'none'),
+(15, 'TP', 'Thủ quỹ', 'none');
 
 -- --------------------------------------------------------
 
@@ -312,8 +249,7 @@ INSERT INTO `leave_application` (`application_id`, `employee_id`, `type_leave_id
 (2, 8, 4, '2024-08-08', '2024-08-16', NULL, 1),
 (3, 8, 5, '2024-08-07', '2024-08-30', NULL, 1),
 (4, 14, 1, '2024-08-17', '2024-08-18', 2, 1),
-(5, 13, 1, '2024-08-19', '2024-08-21', 3, 0),
-(6, 23, 1, '2024-08-31', '2024-09-01', 2, 1);
+(5, 13, 1, '2024-08-19', '2024-08-21', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -385,9 +321,7 @@ CREATE TABLE `proposals` (
 INSERT INTO `proposals` (`proposal_id`, `employee_id`, `type_proposal_id`, `proposal_description`, `proposal_status`, `created_at`) VALUES
 (10, 8, 3, 'abcde', 2, '2024-08-15 15:13:54'),
 (11, 10, 3, 'hoc ngu dua di hoc them', 2, '2024-08-16 01:49:33'),
-(12, 13, 2, 'Toi muon duoc tang luong', 0, '2024-08-18 18:45:45'),
-(13, 23, 2, 'aaaaa', 2, '2024-08-31 08:52:52'),
-(14, 36, 3, 'âsdasdasd', 0, '2024-08-31 08:53:56');
+(12, 13, 2, 'Toi muon duoc tang luong', 0, '2024-08-18 18:45:45');
 
 -- --------------------------------------------------------
 
@@ -452,14 +386,8 @@ INSERT INTO `salaries` (`salary_id`, `employee_id`, `salary_coefficient`, `allow
 (5, 12, 2.34, NULL, 5475600, 438048, 82134, 54756, 4900660, NULL, NULL),
 (21, 23, 2, 2, 7956000, 636480, 119340, 79560, 7120620, NULL, 85),
 (23, 25, 3, 0.2, 7488000, 599040, 112320, 74880, 6701760, NULL, 100),
-(26, 28, 0.01, 0.01, 39780, 3182.4, 596.7, 397.8, 35603.1, NULL, 85),
-(28, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100),
-(29, 33, 3, 3, 14040000, 1123200, 210600, 140400, 12565800, NULL, 100),
-(30, 34, 3, 3, 14040000, 1123200, 210600, 140400, 12565800, NULL, 100),
-(32, 36, 2, 2, 9360000, 748800, 140400, 93600, 8377200, NULL, 100),
-(33, 37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100),
-(34, 38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100),
-(35, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100);
+(26, 28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 85),
+(28, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -510,8 +438,7 @@ INSERT INTO `tasks` (`id_task`, `task_code`, `employee_id`, `start_date`, `end_d
 (2, '32312', 3213, '2024-08-15', '2024-08-21', '3213', '21323'),
 (3, 'edwqew', 3213, '2024-08-10', '2024-08-29', 'ưqew', 'eqwe'),
 (4, '1', 4, '2024-08-16', '2024-08-31', 'dsa', 'fdsfasd'),
-(5, 'CIR', 8, '2024-08-17', '2024-08-30', 'ds', 'dsad'),
-(6, 'IT_1', 12, '2024-07-31', '2024-08-28', 'Trưởng Phòng', 'None');
+(5, 'CIR', 8, '2024-08-17', '2024-08-30', 'ds', 'dsad');
 
 -- --------------------------------------------------------
 
@@ -627,12 +554,6 @@ INSERT INTO `type_rewards` (`type_reward_id`, `type_reward_name`) VALUES
 --
 ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bao_hiem_xh`
---
-ALTER TABLE `bao_hiem_xh`
-  ADD PRIMARY KEY (`bhxh_id`);
 
 --
 -- Indexes for table `departments`
@@ -768,13 +689,7 @@ ALTER TABLE `type_rewards`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `bao_hiem_xh`
---
-ALTER TABLE `bao_hiem_xh`
-  MODIFY `bhxh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -798,13 +713,13 @@ ALTER TABLE `education_level`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `job_details`
 --
 ALTER TABLE `job_details`
-  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_job_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `job_level`
@@ -822,7 +737,7 @@ ALTER TABLE `job_positions`
 -- AUTO_INCREMENT for table `leave_application`
 --
 ALTER TABLE `leave_application`
-  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payroll`
@@ -840,7 +755,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `proposal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `proposal_file`
@@ -858,7 +773,7 @@ ALTER TABLE `rewards`
 -- AUTO_INCREMENT for table `salaries`
 --
 ALTER TABLE `salaries`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `salary_calculation`
@@ -870,7 +785,7 @@ ALTER TABLE `salary_calculation`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_task` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `type_disciplines`
