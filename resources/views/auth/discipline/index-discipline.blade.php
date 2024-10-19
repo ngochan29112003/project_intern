@@ -34,7 +34,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add discipline</h4>
+                    <h4 class="modal-title">Thêm kỷ luật</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addDisciplineForm" enctype="multipart/form-data">
@@ -68,7 +68,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Discipline</h4>
+                    <h4 class="modal-title">Sửa kỷ luật</h4>
                 </div>
                 <div class="modal-body">
                     <form id="editDisciplineForm" enctype="multipart/form-data">
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="employee_id" class="form-label">Employee id</label>
+                            <label for="employee_id" class="form-label">Nhân sự</label>
                             <select class="form-select" aria-label="Default" name="employee_id" id="employee_id">
                                 @foreach ($employee_list as $item)
                                     <option value="{{ $item->employee_id}}">{{$item->first_name.' '.$item->last_name}}</option>

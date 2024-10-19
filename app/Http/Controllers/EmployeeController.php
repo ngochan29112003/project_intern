@@ -31,7 +31,7 @@ class EmployeeController extends Controller
         $department_list = $model->getDepartment();
         $type_employee_list = $model->getTypeEmployees();
         $edu_level_list = $model->getEdulevel();
-//        dd($position_list);
+//        dd($model);
         return view('auth.employees.details-employee', compact('employee_current', 'position_list', 'department_list', 'type_employee_list', 'edu_level_list'));
     }
 
@@ -240,6 +240,7 @@ class EmployeeController extends Controller
 
         $model = new EmployeeModel();
         $leave_report = $model->getEmployeeInfo();
+//        dd($leave_report);
         $num_row = 3;
 
         foreach ($leave_report as $row) {
@@ -254,28 +255,40 @@ class EmployeeController extends Controller
             $cell->setCellValue('D' . $num_row, $row->birth_date);
             $cell->setCellValue('E' . $num_row, $row->birth_place);
             $cell->setCellValue('F' . $num_row, $row->place_of_resident);
-            $cell->setCellValue('G' . $num_row, $row->permanent_address);
-            $cell->setCellValue('H' . $num_row, $row->education_level_name);
+            $cell->setCellValue('G' . $num_row, $row->email);
+            $cell->setCellValue('H' . $num_row, $row->permanent_address);
             $cell->setCellValue('I' . $num_row, $row->cic_number);
-            $cell->setCellValue('J' . $num_row, $row->job_position_name);
-            $cell->setCellValue('K' . $num_row, $row->type_employee_name);
-            $cell->setCellValue('L' . $num_row, $row->department_name);
-            $cell->setCellValue('M' . $num_row, $row->email);
-            if ($row->status === 0) {
-                $cell->setCellValue('N' . $num_row, 'Đã nghỉ việc');
+            $cell->setCellValue('J' . $num_row, $row->place_of_issue);
+            $cell->setCellValue('K' . $num_row, $row->date_of_issue);
+            $cell->setCellValue('L' . $num_row, $row->date_of_exp);
+            $cell->setCellValue('M' . $num_row, $row->education_level_name);
+            $cell->setCellValue('N' . $num_row, $row->type_employee_name);
+            $cell->setCellValue('O' . $num_row, $row->department_name);
+            $cell->setCellValue('P' . $num_row, $row->job_position_name);
+            $cell->setCellValue('Q' . $num_row, $row->ethnic);
+            $cell->setCellValue('R' . $num_row, $row->religion);
+            if ($row->marital_status === 0) {
+                $cell->setCellValue('S' . $num_row, 'Đã kết hôn');
             } else {
-                $cell->setCellValue('N' . $num_row, 'Đang làm việc');
+                $cell->setCellValue('S' . $num_row, 'Chưa kết hôn');
+            }
+            $cell->setCellValue('T' . $num_row, $row->nation);
+            $cell->setCellValue('U' . $num_row, $row->phone_number);
+            if ($row->status === 0) {
+                $cell->setCellValue('V' . $num_row, 'Đã nghỉ việc');
+            } else {
+                $cell->setCellValue('V' . $num_row, 'Đang làm việc');
             }
 
-            $borderStyle = $cell->getStyle('A' . $num_row . ':N' . $num_row)
+            $borderStyle = $cell->getStyle('A' . $num_row . ':V' . $num_row)
                 ->getBorders();
             $borderStyle->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-            $cell->getStyle('A' . $num_row . ':N' . $num_row)->getAlignment()
+            $cell->getStyle('A' . $num_row . ':V' . $num_row)->getAlignment()
                 ->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $num_row++;
         }
-        foreach (range('A', 'N') as $columnID) {
+        foreach (range('A', 'V') as $columnID) {
             $excel->getActiveSheet()->getColumnDimension($columnID)
                 ->setAutoSize(true);
         }

@@ -59,6 +59,11 @@ class EmployeeModel extends Model
     {
         return DB::table('employees')
             ->join('type_employees','employees.type_employee_id','=','type_employees.type_employee_id')
+            ->join('job_details','employees.employee_id','=','job_details.employee_id')
+            ->join('job_positions','job_details.job_position_id','=','job_positions.job_position_id')
+            ->join('job_positions','job_details.job_position_id','=','job_positions.job_position_id')
+            ->join('education_level','education_level.education_level_id','=','employees.education_level_id')
+            ->join('departments','departments.department_id','=','employees.department_id')
             ->get();
     }
 
@@ -74,6 +79,7 @@ class EmployeeModel extends Model
         return DB::table('employees')
             ->join('job_details','employees.employee_id','=','job_details.employee_id')
             ->join('job_positions','job_details.job_position_id','=','job_positions.job_position_id')
+            ->join('education_level','education_level.education_level_id','=','employees.education_level_id')
             ->where('employees.employee_id', $id)
             ->first();
     }

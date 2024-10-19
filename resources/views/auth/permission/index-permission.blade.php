@@ -204,6 +204,7 @@
             });
         });
 
+
         //Lưu lại dữ liệu khi chỉnh sửa
         $('#editPermissionForm').submit(function (e) {
             e.preventDefault();
@@ -231,6 +232,5 @@
                 }
             });
         });
-
     </script>
 @endsection
