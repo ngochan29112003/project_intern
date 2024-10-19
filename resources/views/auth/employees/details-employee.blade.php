@@ -23,11 +23,14 @@
                             <div class="row mb-3">
                                 <div class="col-3 mb-2">
                                     <img class="border rounded-pill object-fit-cover" width="150px" height="150px"
-                                         id="current_img" src="{{asset('assets/employee_img/'.$employee_current->img)}}">
+                                         id="current_img"
+                                         src="{{asset('assets/employee_img/'.$employee_current->img)}}">
                                 </div>
                                 <div class="col-12">
                                     <input type="file" class="form-control d-none" id="img" name="img">
-                                    <button type="button" class="btn btn-primary" id="imgButton"><i class="bi bi-upload"></i> Hình ảnh mới</button>
+                                    <button type="button" class="btn btn-primary" id="imgButton"><i
+                                                class="bi bi-upload"></i> Hình ảnh mới
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +68,8 @@
                                             <label for="birth_date" class="form-label fw-bold">Ngày sinh</label>
                                         </div>
                                         <div class="col-7">
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{$employee_current->birth_date}}"
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date"
+                                                   value="{{$employee_current->birth_date}}"
                                                    required>
                                         </div>
                                     </div>
@@ -177,7 +181,7 @@
                                     <select class="form-select" aria-label="Default" name="nation"
                                             id="nation">
                                         <option
-                                            value=""></option>
+                                                value=""></option>
                                     </select>
                                 </div>
                             </div>
@@ -194,11 +198,13 @@
                         <div class="col-lg-6 d-inline-grid">
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-bold">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{$employee_current->email}}">
+                                <input type="email" class="form-control" id="email" name="email"
+                                       value="{{$employee_current->email}}">
                             </div>
                             <div class="mb-3">
                                 <label for="phone_number" class="form-label fw-bold">Số điện thoại</label>
-                                <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{$employee_current->phone_number}}">
+                                <input type="number" class="form-control" id="phone_number" name="phone_number"
+                                       value="{{$employee_current->phone_number}}">
                             </div>
                             <div class="mb-3">
                                 <label for="place_of_resident" class="form-label fw-bold">Nơi cư trú</label>
@@ -244,16 +250,18 @@
                         <div class="col-lg-6 d-inline-grid">
                             <div class="mb-3">
                                 <label for="job_position_code" class="form-label fw-bold">Mã chức vụ</label>
-                                <input type="text" class="form-control" id="job_position_code" name="job_position_code" style="color: #6c757d; background-color: #e9ecef;"
+                                <input type="text" class="form-control" id="job_position_code" name="job_position_code"
+                                       style="color: #6c757d; background-color: #e9ecef;"
                                        readonly
-                                        value="{{$employee_current->job_position_code}}">
+                                       value="{{$employee_current->job_position_code}}">
                             </div>
                             <div class="mb-3">
                                 <label for="job_position_id" class="form-label fw-bold">Vị trí công việc</label>
-                                <select class="form-select" aria-label="Default" name="job_position_id" id="job_position_id">
+                                <select class="form-select" aria-label="Default" name="job_position_id"
+                                        id="job_position_id">
                                     @foreach ($position_list as $item)
                                         <option
-                                            value="{{ $item->job_position_id }}" {{ $item->job_position_id == $employee_current->job_position_id ? 'selected' : '' }}>
+                                                value="{{ $item->job_position_id }}" {{ $item->job_position_id == $employee_current->job_position_id ? 'selected' : '' }}>
                                             {{ $item->job_position_name }}
                                         </option>
                                     @endforeach
@@ -262,15 +270,19 @@
                             <div class="mb-3">
                                 <label for="job_level" class="form-label fw-bold">Cấp bậc chức vụ</label>
                                 <select class="form-select" aria-label="Default" name="job_level" id="job_level">
-                                    <option value="1" {{ $employee_current->job_level == 1 ? 'selected' : '' }}>1</option>
-                                    <option value="2" {{ $employee_current->job_level == 2 ? 'selected' : '' }}>2</option>
-                                    <option value="3" {{ $employee_current->job_level == 3 ? 'selected' : '' }}>3</option>
+                                    <option value="1" {{ $employee_current->job_level == 1 ? 'selected' : '' }}>1
+                                    </option>
+                                    <option value="2" {{ $employee_current->job_level == 2 ? 'selected' : '' }}>2
+                                    </option>
+                                    <option value="3" {{ $employee_current->job_level == 3 ? 'selected' : '' }}>3
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="salary_code" class="form-label fw-bold">Mã số ngạch lương</label>
-                                <input type="text" class="form-control" id="salary_code" name="salary_code" value="{{$employee_current->salary_code}}">
+                                <input type="text" class="form-control" id="salary_code" name="salary_code"
+                                       value="{{$employee_current->salary_code}}">
                             </div>
                         </div>
                         <div class="col-lg-6 d-inline-grid">
@@ -280,7 +292,7 @@
                                         id="department_id">
                                     @foreach ($department_list as $item)
                                         <option
-                                            value="{{ $item->department_id}}" {{ $item->department_id == $employee_current->department_id ? 'selected' : '' }}>{{ $item->department_name}}</option>
+                                                value="{{ $item->department_id}}" {{ $item->department_id == $employee_current->department_id ? 'selected' : '' }}>{{ $item->department_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -290,15 +302,19 @@
                                         id="type_employee_id">
                                     @foreach ($type_employee_list as $item)
                                         <option
-                                            value="{{ $item->type_employee_id }}" {{ $item->type_employee_id == $employee_current->type_employee_id ? 'selected' : '' }}>{{ $item->type_employee_name }}</option>
+                                                value="{{ $item->type_employee_id }}" {{ $item->type_employee_id == $employee_current->type_employee_id ? 'selected' : '' }}>{{ $item->type_employee_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label fw-bold">Trạng thái</label>
                                 <select class="form-select" aria-label="Default" name="status" id="edit_status">
-                                    <option value="0" {{ $employee_current->status == 0 ? 'selected' : '' }}>Đã nghỉ việc</option>
-                                    <option value="1" {{ $employee_current->status == 1 ? 'selected' : '' }}>Đang làm việc</option>
+                                    <option value="0" {{ $employee_current->status == 0 ? 'selected' : '' }}>Đã nghỉ
+                                        việc
+                                    </option>
+                                    <option value="1" {{ $employee_current->status == 1 ? 'selected' : '' }}>Đang làm
+                                        việc
+                                    </option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -307,7 +323,7 @@
                                         id="edit_education_level_id">
                                     @foreach ($edu_level_list as $item)
                                         <option
-                                            value="{{ $item->education_level_id }}" {{ $item->education_level_id == $employee_current->education_level_id ? 'selected' : '' }}>{{ $item->education_level_name }}</option>
+                                                value="{{ $item->education_level_id }}" {{ $item->education_level_id == $employee_current->education_level_id ? 'selected' : '' }}>{{ $item->education_level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -340,7 +356,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 
@@ -395,7 +410,7 @@
             var canvas = cropper.getCroppedCanvas();
 
             // Chuyển đổi canvas thành blob để gửi trong form, với chất lượng gốc (1 là giữ nguyên chất lượng)
-            canvas.toBlob(function(blob) {
+            canvas.toBlob(function (blob) {
                 var formData = new FormData();
                 formData.append('cropped_image', blob, 'cropped_image.png');
 
@@ -532,7 +547,6 @@
                 }
             });
         });
-
 
 
     </script>

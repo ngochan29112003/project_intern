@@ -17,23 +17,24 @@ class AccountController extends Controller
         $employee_list_none_acc = $model_account->getEmployeesWithoutAccount();
         $account_list = $model_account->getAccountInfo();
         $permis_list = $model_account->getPermis();
-        return view('auth.account.index-account', compact('account_list','permis_list','employee_list_none_acc'));
+        return view('auth.account.index-account',
+            compact('account_list', 'permis_list', 'employee_list_none_acc'));
     }
 
     function add(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255',
-            'password' => 'required|string',
-            'repassword' => 'required|string',
-            'permission' => 'int',
+            'username'    => 'required|string|max:255',
+            'password'    => 'required|string',
+            'repassword'  => 'required|string',
+            'permission'  => 'int',
             'id_employee' => 'int'
         ]);
 
-        if($request->password != $request->repassword){
+        if ($request->password != $request->repassword) {
             return response()->json([
                 'success' => false,
-                'status' => 400,
+                'status'  => 400,
                 'message' => 'Re-password not match with password',
             ]);
         }
@@ -50,8 +51,9 @@ class AccountController extends Controller
 
         return response()->json([
             'success' => true,
-            'status' => 200,
-            'message' => 'Account added successfully']);
+            'status'  => 200,
+            'message' => 'Account added successfully'
+        ]);
     }
 
     public function delete($id)
